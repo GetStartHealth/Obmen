@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Relax</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      margin: 0;
+      padding: 20px;
+      color: #374151;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    #main {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(15px);
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+      max-width: 800px;
+      width: 100%;
+      padding: 30px 40px 40px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #111827;
+      font-weight: 700;
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      letter-spacing: -0.03em;
+    }
+
+    h2 {
+      color: #764ba2;
+      font-weight: 700;
+      font-size: 1.8em;
+      margin-bottom: 30px;
+      letter-spacing: -0.02em;
+    }
+
+    .cards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 25px;
+      margin-bottom: 35px;
+    }
+
+    .card {
+      background: linear-gradient(135deg, #fcd34d 0%, #fde68a 100%);
+      border-radius: 15px;
+      padding: 25px 20px 70px;
+      box-shadow: 0 6px 15px rgba(118, 75, 162, 0.3);
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      color: #92400e;
+      font-weight: 600;
+      font-size: 1.3em;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      user-select: none;
+    }
+
+    .card:hover {
+      transform: scale(1.07);
+      box-shadow: 0 12px 30px rgba(118, 75, 162, 0.5);
+    }
+
+    .small-button {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+      border: none;
+      border-radius: 10px;
+      padding: 12px 25px;
+      color: white;
+      font-size: 1.1em;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(102, 123, 234, 0.7);
+      transition: background 0.3s ease, transform 0.2s ease;
+      user-select: none;
+      text-align: center;
+      line-height: 1;
+    }
+
+    .small-button:hover {
+      background: linear-gradient(135deg, #5a3a9e 0%, #4e63c7 100%);
+      transform: translateX(-50%) scale(1.1);
+      box-shadow: 0 6px 18px rgba(78, 99, 199, 0.8);
+    }
+
+    #selectedItems {
+      min-height: 60px;
+      font-size: 1.25em;
+      color: #4b5563;
+      background-color: #e0e7ff;
+      border: 2px solid #8b5cf6;
+      border-radius: 12px;
+      padding: 20px 25px;
+      box-shadow: inset 0 2px 6px rgba(139, 92, 246, 0.3);
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      user-select: text;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    /* Адаптив для мобильных */
+    @media (max-width: 480px) {
+      #main {
+        padding: 20px 15px 30px;
+      }
+      h1 {
+        font-size: 2em;
+      }
+      h2 {
+        font-size: 1.4em;
+        margin-bottom: 20px;
+      }
+      .cards-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        margin-bottom: 25px;
+      }
+      .card {
+        font-size: 1.1em;
+        padding: 20px 15px 60px;
+      }
+      .small-button {
+        font-size: 1em;
+        padding: 10px 20px;
+        bottom: 15px;
+      }
+      #selectedItems {
+        font-size: 1.1em;
+        padding: 15px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="main">
+    <h1>Город: Мунчанг</h1>
+    <h2>Обменник</h2>
+    
+    <div class="cards-container">
+      <div class="card" id="card_vegetables" onclick="location.href='vegetabls.html'" role="button" tabindex="0" aria-label="Перейти к курсу ru 1₽ - 0,012$ usd">
+        ru 1₽ - 0,012$ usd
+        <button class="small-button" aria-hidden="true" tabindex="-1">Перейти</button>
+      </div>
+
+      <div class="card" id="card_drinks" onclick="location.href='drinks.html'" role="button" tabindex="0" aria-label="Перейти к курсу usd 1$ - 80₽">
+        usd 1$ - 80₽
+        <button class="small-button" aria-hidden="true" tabindex="-1">Перейти</button>
+      </div>
+    </div>
+
+    <div id="selectedItems" aria-live="polite" aria-label="Выбранные элементы">Выбранных элементов нет</div>
+  </div>
+
+  <script>
+    
+  </script>
+</body>
+</html>
