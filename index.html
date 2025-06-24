@@ -116,7 +116,7 @@
       letter-spacing: 0.02em;
     }
 
-    /* Адаптив для мобильных */
+
     @media (max-width: 480px) {
       #main {
         padding: 20px 15px 30px;
@@ -151,22 +151,22 @@
 </head>
 <body>
   <div id="main">
-    <h1>Город: Мунчанг</h1>
-    <h2>Обменник</h2>
+    <h1>Город: Введите</h1> <input type="text">
+    <h2>Знакомства</h2>
     
     <div class="cards-container">
       <div class="card" id="card_vegetables" onclick="location.href='vegetabls.html'" role="button" tabindex="0" aria-label="Перейти к курсу ru 1₽ - 0,012$ usd">
-        ru 1₽ - 0,012$ usd
+        Возраст: <input type="text">
         <button class="small-button" aria-hidden="true" tabindex="-1">Перейти</button>
       </div>
 
       <div class="card" id="card_drinks" onclick="location.href='drinks.html'" role="button" tabindex="0" aria-label="Перейти к курсу usd 1$ - 80₽">
-        usd 1$ - 80₽
+        Пол: <input type="text">
         <button class="small-button" aria-hidden="true" tabindex="-1">Перейти</button>
       </div>
     </div>
 
-    <div id="selectedItems" aria-live="polite" aria-label="Выбранные элементы">Выбранных элементов нет</div>
+    <div id="selectedItems" aria-live="polite" aria-label="Выбранные элементы">Найденные пользователи: </div>
   </div>
 
   <script>
