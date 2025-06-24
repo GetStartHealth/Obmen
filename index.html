@@ -98,7 +98,7 @@
       user-select: none;
       text-align: center;
       line-height: 1;
-      pointer-events: none; /* чтобы кнопка не мешала клику по карточке */
+      pointer-events: none;
     }
 
     .small-button:hover {
@@ -124,7 +124,7 @@
       transition: background-color 0.3s ease, color 0.3s ease;
     }
 
-    /* Стили для input внутри карточек */
+ 
     .card input.input_text {
       width: 80%;
       padding: 8px 10px;
@@ -145,7 +145,7 @@
       outline-color: #667eea;
     }
 
-    /* Для инпута города */
+  
     #main > input.input_text {
       width: 250px;
       font-size: 1.2em;
@@ -165,12 +165,12 @@
       outline: none;
     }
 
-    /* Убираем outline у карточек при клике, но сохраняем для клавиатурной навигации */
+   
     .card:focus {
       outline: none;
     }
 
-    /* Курсор для input */
+    
     input.input_text {
       cursor: text;
     }
@@ -214,13 +214,17 @@
     
     <div class="cards-container">
       <div class="card" id="card_vegetables" onclick="location.href='vegetabls.html'" role="button" tabindex="0" aria-label="Перейти к курсу ru 1₽ - 0,012$ usd">
-        Возраст: <input type="text" class="input_text" />
-        <button class="small-button" aria-hidden="true" tabindex="-1">Перейти</button>
+        Возраст: <input type="text" if="age" class="input_text" />
       </div>
 
       <div class="card" id="card_drinks" onclick="location.href='drinks.html'" role="button" tabindex="0" aria-label="Перейти к курсу usd 1$ - 80₽">
-        Пол: <input type="text" class="input_text" />
-        <button class="small-button" aria-hidden="true" tabindex="-1">Перейти</button>
+        Город: <input type="text" class="input_text" id="city" />
+        <button class="small-button" aria-hidden="true" tabindex="-1" onclick="get_search()">Задать</button>
+      </div>
+
+      <div class="card" id="card_drinks" onclick="location.href='drinks.html'" role="button" tabindex="0" aria-label="Перейти к курсу usd 1$ - 80₽">
+        Пол: <input type="text" class="input_text" id="gender"/>
+        <button class="small-button" aria-hidden="true" tabindex="-1" on_click="get_search()">Задать</button>
       </div>
     </div>
 
@@ -228,8 +232,15 @@
   </div>
 
   <script>
-    // Здесь можно добавить JS логику при необходимости
+    function get_search() {
+      const city = document.getElementById('city').value.trim();
+      const age = document.getElementById('age').value.trim();
+      const gender = document.getElementById('gender').value.trim();
+
+      data =  JSON.stringify({ city, age, gender });
+
+      Telegram.WebApp.sendData(data);
+    }
   </script>
 </body>
 </html>
-
