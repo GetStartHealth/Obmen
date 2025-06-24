@@ -72,6 +72,12 @@
     .card:hover {
       transform: scale(1.07);
       box-shadow: 0 12px 30px rgba(118, 75, 162, 0.5);
+      color: #5b2e91;
+    }
+
+    .card:focus-visible {
+      outline: 3px solid #5b2e91;
+      outline-offset: 4px;
     }
 
     .small-button {
@@ -92,6 +98,7 @@
       user-select: none;
       text-align: center;
       line-height: 1;
+      pointer-events: none; /* чтобы кнопка не мешала клику по карточке */
     }
 
     .small-button:hover {
@@ -114,8 +121,59 @@
       user-select: text;
       font-weight: 600;
       letter-spacing: 0.02em;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
+    /* Стили для input внутри карточек */
+    .card input.input_text {
+      width: 80%;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1.5px solid #764ba2;
+      font-size: 1em;
+      font-weight: 600;
+      color: #374151;
+      background-color: #fff;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      outline-offset: 2px;
+      outline-color: transparent;
+    }
+
+    .card input.input_text:focus {
+      border-color: #667eea;
+      box-shadow: 0 0 6px #667eeaaa;
+      outline-color: #667eea;
+    }
+
+    /* Для инпута города */
+    #main > input.input_text {
+      width: 250px;
+      font-size: 1.2em;
+      padding: 8px 12px;
+      border-radius: 12px;
+      border: 2px solid #764ba2;
+      margin-left: 10px;
+      vertical-align: middle;
+      font-weight: 600;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      cursor: text;
+    }
+
+    #main > input.input_text:focus {
+      border-color: #667eea;
+      box-shadow: 0 0 8px #667eeaaa;
+      outline: none;
+    }
+
+    /* Убираем outline у карточек при клике, но сохраняем для клавиатурной навигации */
+    .card:focus {
+      outline: none;
+    }
+
+    /* Курсор для input */
+    input.input_text {
+      cursor: text;
+    }
 
     @media (max-width: 480px) {
       #main {
@@ -151,17 +209,17 @@
 </head>
 <body>
   <div id="main">
-    <h1>Город: Введите</h1> <input type="text">
+    <h1>Город: </h1> <input type="text" class="input_text" />
     <h2>Знакомства</h2>
     
     <div class="cards-container">
       <div class="card" id="card_vegetables" onclick="location.href='vegetabls.html'" role="button" tabindex="0" aria-label="Перейти к курсу ru 1₽ - 0,012$ usd">
-        Возраст: <input type="text">
+        Возраст: <input type="text" class="input_text" />
         <button class="small-button" aria-hidden="true" tabindex="-1">Перейти</button>
       </div>
 
       <div class="card" id="card_drinks" onclick="location.href='drinks.html'" role="button" tabindex="0" aria-label="Перейти к курсу usd 1$ - 80₽">
-        Пол: <input type="text">
+        Пол: <input type="text" class="input_text" />
         <button class="small-button" aria-hidden="true" tabindex="-1">Перейти</button>
       </div>
     </div>
@@ -170,7 +228,8 @@
   </div>
 
   <script>
-    
+    // Здесь можно добавить JS логику при необходимости
   </script>
 </body>
 </html>
+
