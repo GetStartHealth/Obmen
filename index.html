@@ -45,7 +45,7 @@
       letter-spacing: -0.02em;
     }
 
-    .cards-container {
+    .cards-container { 
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
       gap: 25px;
@@ -53,7 +53,7 @@
     }
 
     .card {
-      background: linear-gradient(50deg, #fcd34d 0%, #fde68a 100%);
+      background: linear-gradient(135deg, #fcd34d 0%, #fde68a 100%);
       border-radius: 15px;
       padding: 25px 20px 70px;
       box-shadow: 0 6px 15px rgba(118, 75, 162, 0.3);
@@ -217,17 +217,14 @@
 
 <body>
   <div id="main">
-    <h1>Город: </h1> <input type="text" class="input_text" />
-    <h2>Знакомства</h2>
-
     <div class="cards-container">
       <div class="card" id="card_vegetables" role="button" tabindex="0" aria-label="Перейти к курсу ru 1₽ - 0,012$ usd">
-        Музыка: <input type="text" if="age" class="input_text" />
+        Музыка:
       </div>
 
       <div class="card" id="card_drinks" role="button" tabindex="0" aria-label="Перейти к курсу usd 1$ - 80₽">
-        Заказ: <input type="text" class="input_text" id="city" />
-        <button class="small-button" aria-hidden="true" tabindex="-1" onclick="get_search()">Задать</button>
+        Заказ:
+        <button aria-hidden="true" tabindex="-1" onclick="get_search()"></button>
       </div>
 
       <div id="selectedItems" aria-live="polite" aria-label="Выбранные элементы">Ваши заказы: </div>
