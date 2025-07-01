@@ -134,11 +134,14 @@
   <div id="main">
 
     <div class="cards-container">
-      <div class="card" data-item="music">Музыка<button class="small-button" onclick="location.href='music.html'">Переход</button></div>
-      <div class="card" data-item="Заказ">Заказ<button class="small-button" onclick="location.href='cash.html'">Переход</button></div>
+      <div class="card" data-item="music">Музыка<button class="small-button" onclick="link('music.html')">Переход</button></div>
+      <div class="card" data-item="Заказ">Заказ<button class="small-button" onclick="link('cash.html')">Переход</button></div>
     </div>
   </div>
   <script>
+    function link(url) {
+      window.location.href = url;
+    }
 
   </script>
 </body>
