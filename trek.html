@@ -45,6 +45,7 @@
     .cards-container {
       display: flex;
       justify-content: center;
+      flex-wrap: wrap; /* Разрешаем перенос карточек на новую строку */
       gap: 30px;
     }
 
@@ -62,9 +63,12 @@
       text-transform: uppercase;
       letter-spacing: 1px;
       outline: none;
-      /* Убираем стандартную обводку */
       position: relative;
       overflow: hidden;
+      width: 150px; /* Фиксированная ширина для кнопок */
+      white-space: nowrap; /* Запрещаем перенос текста */
+      overflow: hidden; /* Скрываем переполнение */
+      text-overflow: ellipsis; /* Добавляем многоточие */
     }
 
     .small-button:hover {
@@ -80,7 +84,6 @@
       width: 100%;
       height: 100%;
       background: rgba(255, 255, 255, 0.2);
-      /* Светлый полупрозрачный слой */
       opacity: 0;
       transition: opacity 0.3s ease;
     }
@@ -96,6 +99,22 @@
 
     .small-button:focus {
       outline: none;
+    }
+        /* Поле ввода поиска */
+    #search-input {
+      padding: 12px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      width: 70%;
+      max-width: 400px;
+      margin-bottom: 20px;
+      font-size: 1.1em;
+    }
+
+    #search-input:focus {
+      outline: none;
+      border-color: #ff758c;
+      box-shadow: 0 0 8px rgba(255, 120, 140, 0.3);
     }
 
     /* Адаптивный дизайн */
@@ -113,8 +132,9 @@
       }
 
       .cards-container {
-        flex-direction: column;
-        align-items: above;
+        flex-direction: row; /* Исправлено на row */
+        align-items: center; /* центрирование элементов по вертикали */
+        justify-content: center; /* центрирование элементов по горизонтали */
       }
 
       .small-button {
@@ -128,13 +148,72 @@
 <body>
   <div id="main">
     <h3>Треки</h3>
-    <div class="cards-container">
-      <script>
-        TOKEN="y0__xCUjKLHBhje-AYg68Oe2hPd7KekU4k8ALSNzbJQAAjMgnig3w"
-      </script>
-    
+    <input type="text" id="search-input" placeholder="Введите название трека">
+    <div class="cards-container" id="results-container">
+      <!-- Здесь будут результаты поиска -->
     </div>
   </div>
+
+  <script>
+    const TOKEN = "y0__xCUjKLHBhje-AYg68Oe2hPd7KekU4k8ALSNzbJQAAjMgnig3w"; // Замените на ваш токен
+    const searchInput = document.getElementById("search-input");
+    const resultsContainer = document.getElementById("results-container");
+
+    searchInput.addEventListener("input", function() {
+      const query = this.value.trim(); // Получаем поисковый запрос и удаляем лишние пробелы
+      if (query.length > 2) { // Начинаем поиск, когда введено минимум 3 символа
+        searchTracks(query);
+      } else {
+        // Очищаем результаты, если запрос слишком короткий
+        resultsContainer.innerHTML = "";
+      }
+    });
+
+    async function searchTracks(query) {
+      try {
+        const response = await fetch(`https://api.music.yandex.net/search?text=${query}&type=track`, {
+          headers: {
+            'Authorization': `OAuth ${TOKEN}`
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        displayResults(data.result.tracks.items); // Отображаем только треки
+      } catch (error) {
+        console.error("Ошибка при поиске:", error);
+        resultsContainer.innerHTML = `<p>Ошибка при поиске: ${error.message}</p>`;
+      }
+    }
+
+    function displayResults(tracks) {
+      resultsContainer.innerHTML = ""; // Очищаем предыдущие результаты
+
+      if (tracks.length === 0) {
+        resultsContainer.innerHTML = "<p>Ничего не найдено.</p>";
+        return;
+      }
+
+      tracks.forEach(track => {
+        const button = document.createElement("button");
+        button.classList.add("small-button");
+        button.textContent = track.artists[0].name + " - " + track.title; // Отображаем "Исполнитель - Название"
+
+        button.addEventListener("click", function() {
+          // TODO: Здесь будет отправка данных трека в бота (реализуем позже)
+          console.log(`Отправка в бота: ${track.artists[0].name} - ${track.title}`);
+          // Пример:  sendMessageToBot(track.artists[0].name, track.title);
+        });
+
+        resultsContainer.appendChild(button);
+      });
+    }
+
+  </script>
 </body>
 
 </html>
+
