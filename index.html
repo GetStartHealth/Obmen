@@ -126,77 +126,48 @@
     }
 
 
-
-
-
-
-
-
-    .card:focus {
-      outline: none;
+    .card input.input_text {
+      width: 80%;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1.5px solid #764ba2;
+      font-size: 1em;
+      font-weight: 600;
+      color: #374151;
+      background-color: #fff;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      outline-offset: 2px;
+      outline-color: transparent;
     }
 
-    @media (max-width: 480px) {
-      #main {
-        padding: 20px 15px 30px;
-      }
-
-      h1 {
-        font-size: 2em;
-      }
-
-      h2 {
-        font-size: 1.4em;
-        margin-bottom: 20px;
-      }
-
-      .cards-container {
-        grid-template-columns: 1fr;
-        gap: 20px;
-        margin-bottom: 25px;
-      }
-
-      .card {
-        font-size: 1.1em;
-        padding: 20px 15px 60px;
-      }
-
-      .small-button {
-        font-size: 1em;
-        padding: 10px 20px;
-        bottom: 15px;
-      }
-
-      #selectedItems {
-        font-size: 1.1em;
-        padding: 15px 20px;
-      }
+    .card input.input_text:focus {
+      border-color: #667eea;
+      box-shadow: 0 0 6px #667eeaaa;
+      outline-color: #667eea;
     }
   </style>
 </head>
 
 <body>
   <div id="main">
+    <h1>Выберите элементы для релаксации</h1>
+    <h2>Персонализируйте свой опыт</h2>
+
     <div class="cards-container">
-      <div class="card" id="card_vegetables" role="button" tabindex="0" aria-label="Перейти к курсу ru 1₽ - 0,012$ usd">
-        Музыка:
-      </div>
-
-      <div class="card" id="card_drinks" role="button" tabindex="0" aria-label="Перейти к курсу usd 1$ - 80₽">
-        Заказ:
-        <button aria-hidden="true" tabindex="-1" onclick="get_search()"></button>
-      </div>
-
-      <div id="selectedItems" aria-live="polite" aria-label="Выбранные элементы">Ваши заказы: </div>
+      <div class="card" data-item="nature">Природа<button class="small-button">Выбрать</button></div>
+      <div class="card" data-item="music">Музыка<button class="small-button">Выбрать</button></div>
+      <div class="card" data-item="meditation">Медитация<button class="small-button">Выбрать</button></div>
+      <div class="card" data-item="books">Книги<button class="small-button">Выбрать</button></div>
+      <div class="card" data-item="games">Игры<button class="small-button">Выбрать</button></div>
+      <div class="card" data-item="films">Фильмы<button class="small-button">Выбрать</button></div>
     </div>
 
-    <script>
-      function get_search() {
-        const city = document.getElementById('city').value.trim();
-        const age = document.getElementById('age').value.trim();
-        const gender = document.getElementById('gender').value.trim();
-      }
-    </script>
+    <h3>Выбранные элементы:</h3>
+    <div id="selectedItems">Ничего не выбрано</div>
+  </div>
+  <script>
+
+  </script>
 </body>
 
 </html>
