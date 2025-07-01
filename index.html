@@ -45,14 +45,6 @@
       letter-spacing: -0.02em;
     }
 
-    h3 {
-      color: #764ba2;
-      font-weight: 700;
-      font-size: 1.8em;
-      margin-bottom: 30px;
-      letter-spacing: -0.02em;
-    }
-
     .cards-container {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -71,6 +63,32 @@
       outline-offset: 4px;
     }
 
+    .small-button {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+      border: none;
+      border-radius: 10px;
+      padding: 12px 25px;
+      color: white;
+      font-size: 1.1em;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(102, 123, 234, 0.7);
+      transition: background 0.3s ease, transform 0.2s ease;
+      user-select: none;
+      text-align: center;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .small-button:hover {
+      background: linear-gradient(135deg, #5a3a9e 0%, #4e63c7 100%);
+      transform: translateX(-50%) scale(1.1);
+      box-shadow: 0 6px 18px rgba(78, 99, 199, 0.8);
+    }
 
     #selectedItems {
       min-height: 60px;
@@ -117,12 +135,12 @@
 
     <div class="cards-container">
       <div class="card">
-        <h3>Музыка</h3>
-        <button class="small-button" onclick="location.href='music.html'" aria-label="Сахарное"></button>
+        <h3>Заказ</h3>
+        <button class="small-button" onclick="location.href='cash.html'" aria-label="Сахарное"></button>
       </div>
       <div class="card">
-        <h3>Заказы</h3>
-        <button class="small-button" onclick="location.href='cash.html'" aria-label="Сахарное"></button>
+        <h3>Музыка</h3>
+        <button class="small-button" onclick="location.href='music.html'" aria-label="Сахарное"></button>
       </div>
 
     </div>
