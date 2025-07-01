@@ -2,155 +2,137 @@
 <html lang="ru">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Relax</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>МузЧат</title>
   <style>
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
       margin: 0;
-      padding: 20px;
-      color: #374151;
-      min-height: 100vh;
+      padding: 0;
       display: flex;
       justify-content: center;
-      align-items: flex-start;
+      align-items: center;
+      min-height: 100vh;
     }
 
     #main {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(15px);
-      border-radius: 12px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-      max-width: 800px;
-      width: 100%;
-      padding: 30px 40px 40px;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      padding: 40px;
       text-align: center;
+      max-width: 600px;
+      width: 90%;
     }
 
     h1 {
-      color: #111827;
-      font-weight: 700;
-      font-size: 2.5em;
+      color: #333;
+      font-size: 2.8em;
       margin-bottom: 20px;
-      letter-spacing: -0.03em;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
     }
 
-    h2 {
-      color: #764ba2;
-      font-weight: 700;
-      font-size: 1.8em;
+    h3 {
+      color: #666;
+      font-size: 1.6em;
       margin-bottom: 30px;
-      letter-spacing: -0.02em;
+      font-weight: normal;
     }
 
     .cards-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 25px;
-      margin-bottom: 35px;
-    }
-
-    .card:hover {
-      transform: scale(1.07);
-      box-shadow: 0 12px 30px rgba(118, 75, 162, 0.5);
-      color: #5b2e91;
-    }
-
-    .card:focus-visible {
-      outline: 3px solid #5b2e91;
-      outline-offset: 4px;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
     }
 
     .small-button {
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+      background: linear-gradient(to right, #ff758c, #ff7eb3);
       border: none;
-      border-radius: 10px;
-      padding: 12px 25px;
+      border-radius: 15px;
+      padding: 15px 30px;
       color: white;
-      font-size: 1.1em;
-      font-weight: 700;
+      font-size: 1.2em;
+      font-weight: bold;
       cursor: pointer;
-      box-shadow: 0 4px 12px rgba(102, 123, 234, 0.7);
-      transition: background 0.3s ease, transform 0.2s ease;
-      user-select: none;
-      text-align: center;
-      line-height: 1;
-      pointer-events: none;
+      box-shadow: 0 5px 15px rgba(255, 120, 140, 0.4);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      outline: none;
+      /* Убираем стандартную обводку */
+      position: relative;
+      overflow: hidden;
     }
 
     .small-button:hover {
-      background: linear-gradient(135deg, #5a3a9e 0%, #4e63c7 100%);
-      transform: translateX(-50%) scale(1.1);
-      box-shadow: 0 6px 18px rgba(78, 99, 199, 0.8);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(255, 120, 140, 0.5);
     }
 
-    #selectedItems {
-      min-height: 60px;
-      font-size: 1.25em;
-      color: #4b5563;
-      background-color: #e0e7ff;
-      border: 2px solid #8b5cf6;
-      border-radius: 12px;
-      padding: 20px 25px;
-      box-shadow: inset 0 2px 6px rgba(139, 92, 246, 0.3);
-      white-space: pre-wrap;
-      word-wrap: break-word;
-      user-select: text;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      transition: background-color 0.3s ease, color 0.3s ease;
+    .small-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .small-button:hover::before {
+      opacity: 1;
+    }
+
+    .small-button:active {
+      transform: translateY(0);
+      box-shadow: 0 5px 15px rgba(255, 120, 140, 0.4);
+    }
+
+    .small-button:focus {
+      outline: none;
     }
 
 
-    .card input.input_text {
-      width: 80%;
-      padding: 8px 10px;
-      border-radius: 8px;
-      border: 1.5px solid #764ba2;
-      font-size: 1em;
-      font-weight: 600;
-      color: #374151;
-      background-color: #fff;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-      outline-offset: 2px;
-      outline-color: transparent;
-    }
+    @media (max-width: 768px) {
+      #main {
+        padding: 30px;
+      }
 
-    .card input.input_text:focus {
-      border-color: #667eea;
-      box-shadow: 0 0 6px #667eeaaa;
-      outline-color: #667eea;
+      h1 {
+        font-size: 2.2em;
+      }
+
+      h3 {
+        font-size: 1.4em;
+      }
+
+      .cards-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .small-button {
+        font-size: 1em;
+        padding: 12px 25px;
+      }
     }
   </style>
 </head>
 
 <body>
   <div id="main">
-
+    <h3>МузЧат</h3>
     <div class="cards-container">
-      <div class="card">
-        <h3>Заказ</h3>
-        <button class="small-button" onclick="location.href='cash.html'" aria-label="Сахарное"></button>
-      </div>
-      <div class="card">
-        <h3>Музыка</h3>
-        <button class="small-button" onclick="location.href='music.html'" aria-label="Сахарное"></button>
-      </div>
-
+      <button class="small-button" onclick="location.href='cash.html'" aria-label="Перейти к музыке">Музыка</button>
+      <button class="small-button" onclick="location.href='music.html'" aria-label="Перейти к оплате">Заказы</button>
     </div>
   </div>
-  <script>
-    function link(url) {
-      window.location.href = url;
-    }
-
-  </script>
 </body>
 
 </html>
