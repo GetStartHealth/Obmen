@@ -149,7 +149,7 @@
         <h3>Треки</h3>
         <input type="text" id="search-input" placeholder="Введите название трека">
         <div class="cards-container" id="results-container">
-            <!-- Здесь будут результаты поиска -->
+            
         </div>
     </div>
 
@@ -167,20 +167,18 @@
         });
 
         async function searchTracks(query) {
-            try {
-                const response = await fetch(`https://api.deezer.com/search?q=${query}&limit=10`); // Максимум 10 результатов
+                const response = await fetch(`https://api.deezer.com/search?q=${query}&limit=10`);
 
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
 
                 const data = await response.json();
-                displayResults(data.data); // Deezer API возвращает результаты в поле "data"
-            } catch (error) {
-                console.error("Ошибка при поиске:", error);
-                resultsContainer.innerHTML = `<p>Ошибка при поиске: ${error.message}</p>`;
-            }
-        }
+                displayResults(data.data);
+           
+            
+      }
+        
 
         function displayResults(tracks) {
             resultsContainer.innerHTML = "";
@@ -193,12 +191,10 @@
             tracks.forEach(track => {
                 const button = document.createElement("button");
                 button.classList.add("small-button");
-                button.textContent = track.artist.name + " - " + track.title;  // Deezer API: track.artist.name и track.title
+                button.textContent = track.artist.name + " - " + track.title;
 
                 button.addEventListener("click", function() {
-                    // TODO: Здесь будет отправка данных трека в бота (реализуем позже)
                     console.log(`Отправка в бота: ${track.artist.name} - ${track.title}`);
-                    // Пример:  sendMessageToBot(track.artist.name, track.title);
                 });
 
                 resultsContainer.appendChild(button);
@@ -206,8 +202,5 @@
         }
     </script>
 </body>
-
-</html>
-
 
 
