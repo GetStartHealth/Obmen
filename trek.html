@@ -2,205 +2,206 @@
 <html lang="ru">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Музыка (Deezer)</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Музыка (Deezer)</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
 
-        #main {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            padding: 40px;
-            text-align: center;
-            max-width: 600px;
-            width: 90%;
-        }
+    #main {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      padding: 40px;
+      text-align: center;
+      max-width: 600px;
+      width: 90%;
+    }
 
-        h1 {
-            color: #333;
-            font-size: 2.8em;
-            margin-bottom: 20px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-        }
+    h1 {
+      color: #333;
+      font-size: 2.8em;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    }
 
-        h3 {
-            color: #666;
-            font-size: 1.6em;
-            margin-bottom: 30px;
-            font-weight: normal;
-        }
+    h3 {
+      color: #666;
+      font-size: 1.6em;
+      margin-bottom: 30px;
+      font-weight: normal;
+    }
 
-        .cards-container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 30px;
-        }
+    .cards-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
 
-        .small-button {
-            background: linear-gradient(to right, #ff758c, #ff7eb3);
-            border: none;
-            border-radius: 15px;
-            padding: 15px 30px;
-            color: white;
-            font-size: 1.2em;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(255, 120, 140, 0.4);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            outline: none;
-            position: relative;
-            overflow: hidden;
-            width: 150px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
+    .small-button {
+      background: linear-gradient(to right, #ff758c, #ff7eb3);
+      border: none;
+      border-radius: 15px;
+      padding: 15px 30px;
+      color: white;
+      font-size: 1.2em;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(255, 120, 140, 0.4);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      outline: none;
+      position: relative;
+      overflow: hidden;
+      width: 150px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 
-        .small-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(255, 120, 140, 0.5);
-        }
+    .small-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(255, 120, 140, 0.5);
+    }
 
-        .small-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.2);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-                }
+    .small-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
 
-        .small-button:hover::before {
-            opacity: 1;
-        }
+    .small-button:hover::before {
+      opacity: 1;
+    }
 
-        .small-button:active {
-            transform: translateY(0);
-            box-shadow: 0 5px 15px rgba(255, 120, 140, 0.4);
-        }
+    .small-button:active {
+      transform: translateY(0);
+      box-shadow: 0 5px 15px rgba(255, 120, 140, 0.4);
+    }
 
-        .small-button:focus {
-            outline: none;
-        }
+    .small-button:focus {
+      outline: none;
+    }
 
-        #search-input {
-            padding: 12px;
-            border: 2px solid #ccc;
-            border-radius: 8px;
-            width: 70%;
-            max-width: 400px;
-            margin-bottom: 20px;
-            font-size: 1.1em;
-        }
+    #search-input {
+      padding: 12px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      width: 70%;
+      max-width: 400px;
+      margin-bottom: 20px;
+      font-size: 1.1em;
+    }
 
-        #search-input:focus {
-            outline: none;
-            border-color: #ff758c;
-            box-shadow: 0 0 8px rgba(255, 120, 140, 0.3);
-        }
+    #search-input:focus {
+      outline: none;
+      border-color: #ff758c;
+      box-shadow: 0 0 8px rgba(255, 120, 140, 0.3);
+    }
 
-        @media (max-width: 768px) {
-            #main {
-                padding: 30px;
-            }
+    @media (max-width: 768px) {
+      #main {
+        padding: 30px;
+      }
 
-            h1 {
-                font-size: 2.2em;
-            }
+      h1 {
+        font-size: 2.2em;
+      }
 
-            h3 {
-                font-size: 1.4em;
-            }
+      h3 {
+        font-size: 1.4em;
+      }
 
-            .cards-container {
-                flex-direction: row;
-                align-items: center;
-                justify-content: center;
-            }
+      .cards-container {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+      }
 
-            .small-button {
-                font-size: 1em;
-                padding: 12px 25px;
-            }
-        }
-    </style>
+      .small-button {
+        font-size: 1em;
+        padding: 12px 25px;
+      }
+    }
+  </style>
 </head>
 
 <body>
-    <div id="main">
-        <h3>Треки</h3>
-        <input type="text" id="search-input" placeholder="Введите название трека">
-        <div class="cards-container" id="results-container">
-            
-        </div>
+  <div id="main">
+    <h3>Треки</h3>
+    <input type="text" id="search-input" placeholder="Введите название трека">
+    <div class="cards-container" id="results-container">
+
     </div>
+  </div>
 
-    <script>
-        const searchInput = document.getElementById("search-input");
-        const resultsContainer = document.getElementById("results-container");
+  <script>
+    const searchInput = document.getElementById("search-input");
+    const resultsContainer = document.getElementById("results-container");
 
-        searchInput.addEventListener("input", function() {
-            const query = this.value.trim();
-            if (query.length > 2) {
-                searchTracks(query);
-            } else {
-                resultsContainer.innerHTML = "";
-            }
+    searchInput.addEventListener("input", function () {
+      const query = this.value.trim();
+      if (query.length > 2) {
+        searchTracks(query);
+      } else {
+        resultsContainer.innerHTML = "";
+      }
+    });
+
+    async function searchTracks(query) {
+      const response = await fetch(`https://api.deezer.com/search?q=${query}&limit=10`);
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      console.log(query);
+
+      const data = await response.json();
+      displayResults(data.data);
+
+
+    }
+
+
+    function displayResults(tracks) {
+      resultsContainer.innerHTML = "";
+
+      if (tracks.length === 0) {
+        resultsContainer.innerHTML = "<p>Ничего не найдено.</p>";
+        return;
+      }
+
+      tracks.forEach(track => {
+        const button = document.createElement("button");
+        button.classList.add("small-button");
+        button.textContent = track.artist.name + " - " + track.title;
+
+        button.addEventListener("click", function () {
+          console.log(`Отправка в бота: ${track.artist.name} - ${track.title}`);
         });
 
-        async function searchTracks(query) {
-                const response = await fetch(`https://api.deezer.com/search?q=${query}&limit=10`);
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-
-                const data = await response.json();
-                displayResults(data.data);
-           
-            
-      }
-        
-
-        function displayResults(tracks) {
-            resultsContainer.innerHTML = "";
-
-            if (tracks.length === 0) {
-                resultsContainer.innerHTML = "<p>Ничего не найдено.</p>";
-                return;
-            }
-
-            tracks.forEach(track => {
-                const button = document.createElement("button");
-                button.classList.add("small-button");
-                button.textContent = track.artist.name + " - " + track.title;
-
-                button.addEventListener("click", function() {
-                    console.log(`Отправка в бота: ${track.artist.name} - ${track.title}`);
-                });
-
-                resultsContainer.appendChild(button);
-            });
-        }
-    </script>
+        resultsContainer.appendChild(button);
+      });
+    }
+  </script>
 </body>
 
-
+</html>
