@@ -154,65 +154,69 @@
   </div>
 
   <script>
-    const searchInput = document.getElementById("search-input");
-const searchButton = document.getElementById("search-button");
-const resultsContainer = document.getElementById("results-container");
+    <script>
+  // Функция для отображения результатов
+  function displayResults(tracks) {
+    const resultsDiv = document.getElementById('results');
+    resultsDiv.innerHTML = '';
 
-searchButton.addEventListener("click", function() {
-    const query = searchInput.value;
-    searchTracks(query);
-});
-
-searchInput.addEventListener("keyup", function(event) {
-    if (event.key === "Enter") {
-        searchButton.click();
-    }
-});
-
-async function searchTracks(query) {
-    try {
-        const encodedQuery = encodeURIComponent(query);
-        const netlifyFunctionUrl = '/.netlify/functions/deezer-proxy'; // Укажите путь к Netlify Function
-        const response = await fetch(`${netlifyFunctionUrl}?q=${encodedQuery}&limit=10`);
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        console.log("Data received:", data);
-        displayResults(data.data);
-    } catch (error) {
-        console.error("Ошибка при поиске:", error);
-        resultsContainer.innerHTML = `<p>Ошибка при поиске: ${error.message}</p>`;
-    }
-}
-
-function displayResults(tracks) {
-    resultsContainer.innerHTML = "";
-
-    if (!Array.isArray(tracks) || tracks.length === 0) {
-        resultsContainer.innerHTML = "<p>Ничего не найдено.</p>";
-        return;
+    if (!tracks || tracks.length === 0) {
+      resultsDiv.innerHTML = '<p>Ничего не найдено</p>';
+      return;
     }
 
     tracks.forEach(track => {
-        if (!track || !track.artist || typeof track.artist !== 'object' || !track.artist.name || !track.title) {
-            console.warn("Invalid track object:", track);
-            return;
-        }
+      const trackDiv = document.createElement('div');
+      trackDiv.className = 'track';
 
-        const button = document.createElement("button");
-        button.classList.add("small-button");
-        button.textContent = track.artist.name + " - " + track.title;
+      trackDiv.innerHTML = `
+        <img src="${track.album.cover_medium}" alt="${track.album.title}" />
+        <div>
+          <div><strong>${track.title}</strong></div>
+          <div>${track.artist.name}</div>
+          <audio controls src="${track.preview}"></audio>
+        </div>
+      `;
 
-        button.addEventListener("click", function() {
-            console.log(`Отправка в бота: ${track.artist.name} - ${track.title}`);
-        });
-
-        resultsContainer.appendChild(button);
+      resultsDiv.appendChild(trackDiv);
     });
-}
+  }
+
+  // Функция поиска с использованием JSONP
+  function searchTracks(query) {
+    // Удаляем предыдущий JSONP скрипт, если есть
+    const oldScript = document.getElementById('jsonpScript');
+    if (oldScript) {
+      oldScript.remove();
+    }
+
+    // Имя функции обратного вызова для JSONP
+    const callbackName = 'jsonpCallback';
+
+    // Определяем функцию обратного вызова в глобальной области
+    window[callbackName] = function(data) {
+      displayResults(data.data);
+      // Удаляем функцию обратного вызова, чтобы не засорять глобальный namespace
+      delete window[callbackName];
+    };
+
+    // Создаем новый скрипт для JSONP-запроса
+    const script = document.createElement('script');
+    script.src = `https://api.deezer.com/search?q=${encodeURIComponent(query)}&limit=10&output=jsonp&callback=${callbackName}`;
+    script.id = 'jsonpScript';
+    document.body.appendChild(script);
+  }
+
+  // Обработчик формы
+  document.getElementById('searchForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const query = document.getElementById('searchInput').value.trim();
+    if (query) {
+      searchTracks(query);
+    }
+  });
+</script>
+  
   </script>
 </body>
 
