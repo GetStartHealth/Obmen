@@ -1,0 +1,87 @@
+import asyncio
+import logging
+import sys
+from aiogram import Bot, Dispatcher
+from aiogram.filters import CommandStart
+from aiogram.types import (
+    Message,
+    InlineKeyboardMarkup,
+    InlineKeyboardButton,
+    WebAppInfo,
+    CallbackQuery,
+)
+from aiogram.fsm.state import State, StatesGroup
+from aiogram.fsm.context import FSMContext
+from aiogram import F, Router
+
+from generate import a_generate
+
+router = Router()
+
+
+class PleaseStop(StatesGroup):
+    wait = State()
+
+
+TOKEN = "7854780301:AAE2lOLnw27O6g_Vq3E9uXhxmUxMGfzH2Mg"
+TOKEN_DEEP_SEEK = (
+    "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"
+)
+
+logging.basicConfig(level=logging.INFO, stream=sys.stdout)
+
+bot = Bot(token=TOKEN)
+dp = Dispatcher()
+
+
+@dp.message(CommandStart())
+async def command_brone_handler(message: Message) -> None:
+    markup = InlineKeyboardMarkup(
+        inline_keyboard=[
+            [
+                InlineKeyboardButton(
+                    text="Открыть Муз",
+                    web_app=WebAppInfo(url="https://getstarthealth.github.io/Obmen/"),
+                ),
+                InlineKeyboardButton(text="Диалог с ИИ", callback_data="deepSeek"),
+            ]
+        ]
+    )
+    await message.answer(
+        text=(
+            "Добро пожаловать! Это приложение с музыкальными треками и клипами, "
+            "также можете заказать свою композицию. Для запросов используйте ИИ."
+        ),
+        reply_markup=markup,
+    )
+
+
+@dp.callback_query(lambda c: c.data == "deepSeek")
+async def callback_deepSeek(call: CallbackQuery):
+    await call.answer()
+    await call.message.answer("Диалог открыт, задавайте запрос")
+    generating()
+
+
+@router.message(PleaseStop.wait)
+async def stop_flood_please(message: Message):
+    await message.answer("Происходит обработка другого запроса... ")
+
+
+@router.message()
+async def generating(message: Message, state: FSMContext):
+
+    await message.answer("Компиляция запроса...⏳")
+    await state.set_state(PleaseStop.wait)
+    res = await a_generate(message.text)
+    await message.answer(res)
+    await state.clear()
+
+
+async def main() -> None:
+    dp.include_router(router)
+    await dp.start_polling(bot)
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
