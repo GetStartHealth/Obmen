@@ -155,52 +155,64 @@
 
   <script>
     const searchInput = document.getElementById("search-input");
-    const resultsContainer = document.getElementById("results-container");
+const searchButton = document.getElementById("search-button");
+const resultsContainer = document.getElementById("results-container");
 
-    searchInput.addEventListener("input", function () {
-      const query = this.value.trim();
-      if (query.length > 2) {
-        searchTracks(query);
-      } else {
-        resultsContainer.innerHTML = "";
-      }
-    });
+searchButton.addEventListener("click", function() {
+    const query = searchInput.value;
+    searchTracks(query);
+});
 
-    async function searchTracks(query) {
-      const response = await fetch(`https://api.deezer.com/search?q=${query}&limit=10`);
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      console.log(query);
-
-      const data = await response.json();
-      displayResults(data.data);
-
-
+searchInput.addEventListener("keyup", function(event) {
+    if (event.key === "Enter") {
+        searchButton.click();
     }
+});
 
+async function searchTracks(query) {
+    try {
+        const encodedQuery = encodeURIComponent(query);
+        const netlifyFunctionUrl = '/.netlify/functions/deezer-proxy'; // Укажите путь к Netlify Function
+        const response = await fetch(`${netlifyFunctionUrl}?q=${encodedQuery}&limit=10`);
 
-    function displayResults(tracks) {
-      resultsContainer.innerHTML = "";
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
 
-      if (tracks.length === 0) {
+        const data = await response.json();
+        console.log("Data received:", data);
+        displayResults(data.data);
+    } catch (error) {
+        console.error("Ошибка при поиске:", error);
+        resultsContainer.innerHTML = `<p>Ошибка при поиске: ${error.message}</p>`;
+    }
+}
+
+function displayResults(tracks) {
+    resultsContainer.innerHTML = "";
+
+    if (!Array.isArray(tracks) || tracks.length === 0) {
         resultsContainer.innerHTML = "<p>Ничего не найдено.</p>";
         return;
-      }
+    }
 
-      tracks.forEach(track => {
+    tracks.forEach(track => {
+        if (!track || !track.artist || typeof track.artist !== 'object' || !track.artist.name || !track.title) {
+            console.warn("Invalid track object:", track);
+            return;
+        }
+
         const button = document.createElement("button");
         button.classList.add("small-button");
         button.textContent = track.artist.name + " - " + track.title;
 
-        button.addEventListener("click", function () {
-          console.log(`Отправка в бота: ${track.artist.name} - ${track.title}`);
+        button.addEventListener("click", function() {
+            console.log(`Отправка в бота: ${track.artist.name} - ${track.title}`);
         });
 
         resultsContainer.appendChild(button);
-      });
-    }
+    });
+}
   </script>
 </body>
 
