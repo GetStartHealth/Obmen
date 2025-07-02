@@ -146,7 +146,7 @@
     `;
 
     const buttonLinkYoutube = document.querySelector('#playLinkToYoutubeButton')
-    button.addEventListener('click', track.artistm, track.title)
+    buttonLinkYoutube.addEventListener('click', callback_link_youtube(track.title, track.artist))
 
     function callback_link_youtube(artist, title) {
       url_link_to_youtube = "https://www.youtube.com/results?search_query=" + " " + artist + " " + title
