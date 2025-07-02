@@ -84,8 +84,8 @@ async def generating(message: Message, state: FSMContext):
 @dp.message()
 async def handle_web_app_data(message: Message):
     if message.web_app_data:
-        data = message.web_app_data.data
-        await message.answer(f"Вы выбрали трек: {data}")
+        datap = message.web_app_data.data
+        await message.answer(f"Вы выбрали трек: {datap}")
 
 async def main() -> None:
     dp.include_router(router)
