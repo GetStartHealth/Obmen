@@ -128,35 +128,33 @@
 <body>
   <div id="main">
     <h3>Слушание</h3>
-    <div class="cards-container"></div>
-    <button id="playLinkToYoutubeButton" class="small-button">Play</button>
+    <div class="cards-container">
+    </div>
+    <button id="playLinkToYoutubeButton" class="small-button" href="#">Play</button>
   </div>
-
   <script>
     const container = document.querySelector('.cards-container');
     const saved = localStorage.getItem('selectedTrack');
-    if (!saved) {
-      container.innerHTML = '<p>Трек не найден</p>';
-      throw new Error('Track not found in localStorage');
-    }
     const track = JSON.parse(saved);
-
     container.innerHTML = `
-      <img src="${track.cover}" alt="${track.artist} - ${track.title}" style="max-width:100%; border-radius:15px; margin-bottom:15px;">
-      <h2 style="margin:0 0 10px;">${track.title}</h2>
-      <p style="color:#555; margin:0;">${track.artist}</p>
+    <img src="${track.cover}" alt="${track.artist} - ${track.title}" style="max-width:100%; border-radius:15px; margin-bottom:15px;">
+    <h2 style="margin:0 0 10px;">${track.title}</h2>
+    <p style="color:#555; margin:0;">${track.artist}</p>
     `;
 
-    const buttonLinkYoutube = document.querySelector('#playLinkToYoutubeButton');
+    YOUTUBE_API = "AIzaSyAJxYdlb1yzvN5IOpyykvuxpAae_QYq_Dg"
 
-    buttonLinkYoutube.addEventListener('click', () => {
-      const query = encodeURIComponent(track.artist + ' ' + track.title);
-      const url = `https://www.youtube.com/results?search_query=${query}`;
-      const newWindow = window.open(url, '_blank');
-      if (!newWindow) {
-        alert('Пожалуйста, разрешите всплывающие окна в вашем браузере.');
-      }
-    });
+    const buttonLinkYoutube = document.querySelector('#playLinkToYoutubeButton')
+    buttonLinkYoutube.addEventListener('click', callback_link_youtube(track.title, track.artist))
+
+    async function callback_link_youtube(artist, title) {
+      query = artist + " " + title
+      const res = await fetch(`https://www.googleapis.com/youtube/v3/search?part=id&q=${encodeURIComponent(query)}&maxResults=1&type=video&key=${YOUTUBE_API}`);
+      date_key = await res.json();
+      return `https://www.youtube.com/watch?v=${date_key.items[0].id.videoId}`
+    }
   </script>
+
 </body>
+
 </html>
