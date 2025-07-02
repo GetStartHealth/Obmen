@@ -130,9 +130,6 @@
     <h3>Слушание</h3>
     <div class="cards-container">
     </div>
-    <div class="cards-container">
-      <button class="small-button" onclick="location.href='index.html'" aria-label="Перейти к оплате">Меню</button>
-    </div>
     <button id="playLinkToYoutubeButton" class="small-button">Play</button>
   </div>
   <script>
@@ -146,17 +143,12 @@
     `;
 
     const buttonLinkYoutube = document.querySelector('#playLinkToYoutubeButton')
-    buttonLinkYoutube.addEventListener('click', () => {
-      callback_link_youtube(track.artist, track.title);
-    });
+    buttonLinkYoutube.addEventListener('click', callback_link_youtube(track.title, track.artist))
 
     function callback_link_youtube(artist, title) {
-      url_link_to_youtube = "https://www.youtube.com/results?search_query=" + " " + artist + " " + title
+      url_link_to_youtube = "https://www.youtube.com/results?search_query="+artist+title
       window.open(url_link_to_youtube);
     }
-
-
-
   </script>
 
 </body>
