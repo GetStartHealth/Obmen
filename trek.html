@@ -117,6 +117,59 @@
       box-shadow: 0 0 8px rgba(255, 120, 140, 0.3);
     }
 
+    .small-button-red {
+      background: linear-gradient(to right, #ff758c, #ff7eb3);
+      border: none;
+      border-radius: 15px;
+      padding: 15px 30px;
+      color: white;
+      font-size: 0.5em;
+      font-weight: medium;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(255, 120, 140, 0.4);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      outline: none;
+      position: relative;
+      overflow: hidden;
+      width: 150px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .small-button-red:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(255, 120, 140, 0.5);
+    }
+
+    .small-button-red::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .small-button-red:hover::before {
+      opacity: 1;
+    }
+
+    .small-button-red:active {
+      transform: translateY(0);
+      box-shadow: 0 5px 15px rgba(255, 120, 140, 0.4);
+    }
+
+    .small-button-red:focus {
+      outline: none;
+    }
+
+
     @media (max-width: 768px) {
       #main {
         padding: 30px;
@@ -140,6 +193,10 @@
         font-size: 1em;
         padding: 12px 25px;
       }
+      .small-button-red {
+        font-size: 0.5em;
+        padding: 12px 25px;
+      }
     }
   </style>
 </head>
@@ -151,7 +208,6 @@
     <div class="cards-container" id="results-container">
 
     </div>
-    <button on_click=searchTracks class="small-button"></button>
   </div>
 
   <script>
@@ -193,7 +249,7 @@
 
       tracks.forEach(track => {
         const button = document.createElement("button");
-        button.classList.add("small-button");
+        button.classList.add("small-button-red");
         button.textContent = track.artist.name + " - " + track.title;
 
         button.addEventListener("click", function () {
