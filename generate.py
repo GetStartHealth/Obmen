@@ -2,7 +2,7 @@ from openai import OpenAI
 from openai import AsyncOpenAI
 
 TOKEN_DEEP_SEEK = (
-    "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"
+   "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"
 )
 client = AsyncOpenAI(
     base_url="https://openrouter.ai/api/v1",
