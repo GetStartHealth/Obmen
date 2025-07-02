@@ -146,7 +146,9 @@
     `;
 
     const buttonLinkYoutube = document.querySelector('#playLinkToYoutubeButton')
-    buttonLinkYoutube.addEventListener('click', callback_link_youtube(track.title, track.artist))
+    buttonLinkYoutube.addEventListener('click', () => {
+      callback_link_youtube(track.artist, track.title);
+    });
 
     function callback_link_youtube(artist, title) {
       url_link_to_youtube = "https://www.youtube.com/results?search_query=" + " " + artist + " " + title
