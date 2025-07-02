@@ -210,6 +210,12 @@
     </div>
   </div>
 
+  <div id="selected-track" style="display:none;">
+    <img id="track-cover" src="" alt="Обложка трека" />
+    <h4 id="track-title"></h4>
+    <p id="track-artist"></p>
+  </div>
+
   <script>
     const searchInput = document.getElementById("search-input");
 const resultsContainer = document.getElementById("results-container");
@@ -243,32 +249,26 @@ function displayResults(tracks) {
     return;
   }
 
-  if (!window.Telegram || !window.Telegram.WebApp) {
-    resultsContainer.innerHTML = "<p>Запустите WebApp из Telegram.</p>";
-    return;
-  }
-
-  const tg = window.Telegram.WebApp;
-
   tracks.forEach(track => {
-    const btn = document.createElement("button");
-    btn.textContent = track.artist.name + " - " + track.title;
-    btn.classList.add("small-button-red");
+    const button = document.createElement("button");
+    button.classList.add("small-button-red");
+    button.textContent = track.artist.name + " - " + track.title + " - " + track.album.cover_medium;
 
-    btn.addEventListener("click", () => {
+    button.addEventListener("click", function () {
       const text = `${track.artist.name} - ${track.title}`;
-      tg.MainButton.setText(`Отправить: ${text}`);
-      tg.MainButton.show();
-
-      tg.MainButton.onclick = () => {
-        tg.sendData(text);
-        tg.MainButton.hide();
-      }
+      const trackData = {
+            artist: track.artist.name,
+            title: track.title,
+            cover: track.album.cover_medium
+          };
+          localStorage.setItem('selectedTrack', JSON.stringify(trackData));
+      location.href='ber.html'
     });
 
-    resultsContainer.appendChild(btn);
+    resultsContainer.appendChild(button);
   });
 }
+
 
 
 
