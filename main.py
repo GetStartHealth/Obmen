@@ -23,10 +23,13 @@ class PleaseStop(StatesGroup):
     wait = State()
 
 
-TOKEN = "7854780301:AAE2lOLnw27O6g_Vq3E9uXhxmUxMGfzH2Mg"
-TOKEN_DEEP_SEEK = (
-    "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"
-)
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+TOKEN = os.getenv("TOKEN")
+TOKEN_DEEP_SEEK = os.getenv("TOKEN_DEEP_SEEK")
 
 logging.basicConfig(level=logging.INFO, stream=sys.stdout)
 
