@@ -211,14 +211,6 @@
   </div>
 
   <script>
-
-    if (window.Telegram && window.Telegram.WebApp) {
-  window.Telegram.WebApp.ready();
-} else {
-  console.warn("WebApp API не найден. Запустите этот WebApp из Telegram.");
-}
-
-    
     const searchInput = document.getElementById("search-input");
 const resultsContainer = document.getElementById("results-container");
 
@@ -242,6 +234,7 @@ async function searchTracks(query) {
   displayResults(data.data);
 }
 
+
 function displayResults(tracks) {
   resultsContainer.innerHTML = "";
 
@@ -250,24 +243,33 @@ function displayResults(tracks) {
     return;
   }
 
+  if (!window.Telegram || !window.Telegram.WebApp) {
+    resultsContainer.innerHTML = "<p>Запустите WebApp из Telegram.</p>";
+    return;
+  }
+
+  const tg = window.Telegram.WebApp;
+
   tracks.forEach(track => {
-    const button = document.createElement("button");
-    button.classList.add("small-button-red");
-    button.textContent = track.artist.name + " - " + track.title;
+    const btn = document.createElement("button");
+    btn.textContent = track.artist.name + " - " + track.title;
+    btn.classList.add("small-button-red");
 
-    button.addEventListener("click", function () {
+    btn.addEventListener("click", () => {
       const text = `${track.artist.name} - ${track.title}`;
+      tg.MainButton.setText(`Отправить: ${text}`);
+      tg.MainButton.show();
 
-      if (window.Telegram?.WebApp?.sendData) {
-        window.Telegram.WebApp.sendData(text);
-      } else {
-        alert("WebApp API недоступен");
+      tg.MainButton.onclick = () => {
+        tg.sendData(text);
+        tg.MainButton.hide();
       }
     });
 
-    resultsContainer.appendChild(button);
+    resultsContainer.appendChild(btn);
   });
 }
+
 
 
 
