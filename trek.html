@@ -168,7 +168,7 @@
     });
 
     async function searchTracks(query) {
-      const response = await fetch(`http://localhost:8000/search?q=${query}&limit=10`);
+      const response = await fetch(https://nextjs-boilerplate-i6pd-ds-projects-d772f088.vercel.app/api/search?q=${query}&limit=10);
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
