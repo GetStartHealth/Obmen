@@ -247,18 +247,22 @@
         return;
       }
 
-      tracks.forEach(track => {
-        const button = document.createElement("button");
-        button.classList.add("small-button-red");
-        button.textContent = track.artist.name + " - " + track.title;
-
-        button.addEventListener("click", function () {
-          console.log(`Отправка в бота: ${track.artist.name} - ${track.title}`);
-        });
-
-        resultsContainer.appendChild(button);
-      });
     }
+  tracks.forEach(track => {
+    const button = document.createElement("button");
+    button.classList.add("small-button-red");
+    button.textContent = track.artist.name + " - " + track.title;
+
+    button.addEventListener("click", function () {
+      const text = `Отправка в бота: ${track.artist.name} - ${track.title}`;
+
+      if (window.Telegram?.WebApp?.sendData) {
+        window.Telegram.WebApp.sendData(text);
+      };
+
+    resultsContainer.appendChild(button);
+    });  
+  })
   </script>
 </body>
 
