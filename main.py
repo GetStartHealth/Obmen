@@ -43,7 +43,7 @@ async def command_brone_handler(message: Message) -> None:
         inline_keyboard=[
             [
                 InlineKeyboardButton(
-                    text="Открыть Муз",
+                    text="Открыть МузЧат",
                     web_app=WebAppInfo(url="https://getstarthealth.github.io/Obmen/"),
                 ),
                 InlineKeyboardButton(text="Диалог с ИИ", callback_data="deepSeek"),
@@ -52,8 +52,9 @@ async def command_brone_handler(message: Message) -> None:
     )
     await message.answer(
         text=(
-            "Добро пожаловать! Это приложение с музыкальными треками и клипами, "
-            "также можете заказать свою композицию. Для запросов используйте ИИ."
+            "Приветствуем вас! Это музыкальное приложение предлагает вам треки и клипы."
+            "Также вы можете заказать индивидуальное музыкальное произведение."
+            "Для запросов используйте возможности искусственного интеллекта."
         ),
         reply_markup=markup,
     )
@@ -80,6 +81,11 @@ async def generating(message: Message, state: FSMContext):
     await message.answer(res)
     await state.clear()
 
+@dp.message()
+async def handle_web_app_data(message: Message):
+    if message.web_app_data:
+        data = message.web_app_data.data
+        await message.answer(f"Вы выбрали трек: {data}")
 
 async def main() -> None:
     dp.include_router(router)
