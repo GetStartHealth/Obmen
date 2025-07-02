@@ -5,7 +5,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Музыка и Клипы</title>
-  <script src="https://www.youtube.com/iframe_api"></script>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -152,65 +151,13 @@
     const buttonLinkYoutube = document.querySelector('#playLinkToYoutubeButton');
     buttonLinkYoutube.addEventListener('click', () => callback_link_youtube(track.artist, track.title));
 
-    let player; // объявляем player глобально
-    let videoId; // хранит ID текущего видео
-
     async function callback_link_youtube(artist, title) {
       const query = artist + " " + title;
       const res = await fetch(`https://www.googleapis.com/youtube/v3/search?part=id&q=${encodeURIComponent(query)}&maxResults=1&type=video&key=${YOUTUBE_API}`);
       const data = await res.json();
-      if (data.items && data.items.length > 0) {
-        videoId = data.items[0].id.videoId;
-        // Открываем видео на YouTube в новой вкладке
-        window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
-
-        // Если плеер уже создан, загружаем новое видео
-        if (player) {
-          player.loadVideoById(videoId);
-        } else {
-          // Если плеер не создан, создаём его
-          onYouTubeIframeAPIReady();
-        }
-      } else {
-        alert('Видео не найдено');
-      }
+      videoId = data.items[0].id.videoId;
+      window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
     }
-
-    // Функция вызывается YouTube API, когда он готов
-    function onYouTubeIframeAPIReady() {
-      if (!videoId) return; // если видео не задано, не создаём плеер
-
-      player = new YT.Player('player', {
-        height: '0',
-        width: '0',
-        videoId: videoId,
-        playerVars: {
-          'autoplay': 0,
-          'controls': 0,
-          'modestbranding': 1,
-          'rel': 0,
-          'showinfo': 0,
-          'iv_load_policy': 3,
-          'disablekb': 1,
-          'playsinline': 1
-        },
-        events: {
-          'onReady': onPlayerReady
-        }
-      });
-    }
-
-    function onPlayerReady(event) {
-      // Плеер готов к управлению
-    }
-
-    document.getElementById('playBtn').addEventListener('click', () => {
-      if (player && player.playVideo) {
-        player.playVideo();
-      } else {
-        alert('Сначала нажмите кнопку Play, чтобы загрузить видео');
-      }
-    });
   </script>
 </body>
 
