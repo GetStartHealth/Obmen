@@ -130,21 +130,25 @@
     <h3>Слушание</h3>
     <div class="cards-container">
     </div>
+    <div class="cards-container">
+      <button class="small-button" onclick="location.href='index.html'" aria-label="Перейти к оплате">Меню</button>
+    </div>
   </div>
   <script>
     const container = document.querySelector('.cards-container');
-const saved = localStorage.getItem('selectedTrack');
+    const saved = localStorage.getItem('selectedTrack');
 
-if (saved) {
-  const track = JSON.parse(saved);
-  container.innerHTML = `
+    if (saved) {
+      const track = JSON.parse(saved);
+      container.innerHTML = `
     <img src="${track.cover}" alt="${track.artist} - ${track.title}" style="max-width:100%; border-radius:15px; margin-bottom:15px;">
     <h2 style="margin:0 0 10px;">${track.title}</h2>
     <p style="color:#555; margin:0;">${track.artist}</p>
   `;
-} else {
-  container.innerHTML = '<p>Трек не выбран.</p>';
-}
+    } else {
+      container.innerHTML = '<p>Трек не выбран.</p>';
+    }
+
   </script>
 
 </body>
