@@ -211,6 +211,14 @@
   </div>
 
   <script>
+
+    if (window.Telegram && window.Telegram.WebApp) {
+  window.Telegram.WebApp.ready();
+} else {
+  console.warn("WebApp API не найден. Запустите этот WebApp из Telegram.");
+}
+
+    
     const searchInput = document.getElementById("search-input");
 const resultsContainer = document.getElementById("results-container");
 
