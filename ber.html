@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Музыка и Клипы</title>
+  <script src="https://www.youtube.com/iframe_api"></script>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -132,6 +133,10 @@
     </div>
     <button id="playLinkToYoutubeButton" class="small-button" href="#">Play</button>
   </div>
+  <button id="playBtn">Воспроизвести аудио</button>
+
+  <div id="player"></div>
+
   <script>
     const container = document.querySelector('.cards-container');
     const saved = localStorage.getItem('selectedTrack');
@@ -151,13 +156,44 @@
       const query = artist + " " + title;
       const res = await fetch(`https://www.googleapis.com/youtube/v3/search?part=id&q=${encodeURIComponent(query)}&maxResults=1&type=video&key=${YOUTUBE_API}`);
       const data = await res.json();
-      if (data.items && data.items[0]?.id?.videoId) {
-        const url = `https://www.youtube.com/watch?v=${data.items[0].id.videoId}`;
-        window.open(url, '_blank');
-      } else {
-        alert('Видео не найдено');
-      }
-    }
-  </script>
+      const url = `https://www.youtube.com/watch?v=${data.items[0].id.videoId}`;
+      window.open(url, '_blank');
 
+    let player;
+    let videoId = data.items[0].id.videoId; // Замените на нужный ID видео
+
+    // Функция, которую YouTube API вызывает, когда готов API
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('player', {
+        height: '0',
+        width: '0',
+        videoId: videoId,
+        playerVars: {
+          'autoplay': 0,
+          'controls': 0,
+          'modestbranding': 1,
+          'rel': 0,
+          'showinfo': 0,
+          'iv_load_policy': 3,
+          'disablekb': 1,
+          'playsinline': 1
+        },
+        events: {
+          'onReady': onPlayerReady
+        }
+      });
+    }
+
+    function onPlayerReady(event) {
+
+
+    }
+
+    document.getElementById('playBtn').addEventListener('click', () => {
+      if (player && player.playVideo) {
+        player.playVideo();
+      }
+    })}
+  </script>
+    
 </body>
