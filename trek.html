@@ -212,57 +212,54 @@
 
   <script>
     const searchInput = document.getElementById("search-input");
-    const resultsContainer = document.getElementById("results-container");
+const resultsContainer = document.getElementById("results-container");
 
-    searchInput.addEventListener("input", function () {
-      const query = this.value.trim();
-      if (query.length > 2) {
-        searchTracks(query);
+searchInput.addEventListener("input", function () {
+  const query = this.value.trim();
+  if (query.length > 2) {
+    searchTracks(query);
+  } else {
+    resultsContainer.innerHTML = "";
+  }
+});
+
+async function searchTracks(query) {
+  const response = await fetch("https://nextjs-boilerplate-i6pd-ds-projects-d772f088.vercel.app/api/search?q=" + encodeURIComponent(query) + "&limit=10");
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  const data = await response.json();
+  displayResults(data.data);
+}
+
+function displayResults(tracks) {
+  resultsContainer.innerHTML = "";
+
+  if (tracks.length === 0) {
+    resultsContainer.innerHTML = "<p>Ничего не найдено.</p>";
+    return;
+  }
+
+  tracks.forEach(track => {
+    const button = document.createElement("button");
+    button.classList.add("small-button-red");
+    button.textContent = track.artist.name + " - " + track.title;
+
+    button.addEventListener("click", function () {
+      const text = `${track.artist.name} - ${track.title}`;
+
+      if (window.Telegram?.WebApp?.sendData) {
+        window.Telegram.WebApp.sendData(text);
       } else {
-        resultsContainer.innerHTML = "";
+        alert("WebApp API недоступен");
       }
     });
 
-    async function searchTracks(query) {
-      const response = await fetch("https://nextjs-boilerplate-i6pd-ds-projects-d772f088.vercel.app/api/search?q=$" + query + "&limit=10");
-
-
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      displayResults(data.data);
-
-
-    }
-
-
-    function displayResults(tracks) {
-      resultsContainer.innerHTML = "";
-
-      if (tracks.length === 0) {
-        resultsContainer.innerHTML = "<p>Ничего не найдено.</p>";
-        return;
-      }
-
-    }
-    tracks.forEach(track => {
-      const button = document.createElement("button");
-      button.classList.add("small-button-red");
-      button.textContent = track.artist.name + " - " + track.title;
-
-      button.addEventListener("click", function () {
-        const text = `Отправка в бота: ${track.artist.name} - ${track.title}`;
-
-        if (window.Telegram?.WebApp?.sendData) {
-          window.Telegram.WebApp.sendData(text);
-        };
-
-      resultsContainer.appendChild(button);
-      });  
-    })
+    resultsContainer.appendChild(button);
+  });
+}
   </script>
 </body>
 
