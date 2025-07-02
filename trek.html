@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -252,7 +253,14 @@ function displayResults(tracks) {
   tracks.forEach(track => {
     const button = document.createElement("button");
     button.classList.add("small-button-red");
-    button.textContent = track.artist.name + " - " + track.title + " - " + track.album.cover_medium;
+    button.textContent = track.artist.name + " - " + track.title;
+    const img = document.createElement("img");
+img.src = track.album.cover_medium;
+img.alt = track.title;
+img.style.width = "40px";
+img.style.height = "40px";
+img.style.borderRadius = "5px";
+img.style.marginRight = "10px";
 
     button.addEventListener("click", function () {
       const text = `${track.artist.name} - ${track.title}`;
@@ -265,6 +273,7 @@ function displayResults(tracks) {
       location.href='ber.html'
     });
 
+    resultsContainer.appendChild(img);
     resultsContainer.appendChild(button);
   });
 }
