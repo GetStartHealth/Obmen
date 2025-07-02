@@ -133,21 +133,27 @@
     <div class="cards-container">
       <button class="small-button" onclick="location.href='index.html'" aria-label="Перейти к оплате">Меню</button>
     </div>
+    <button id="playLinkToYoutubeButton" class="small-button">Play</button>
   </div>
   <script>
     const container = document.querySelector('.cards-container');
     const saved = localStorage.getItem('selectedTrack');
-
-    if (saved) {
-      const track = JSON.parse(saved);
-      container.innerHTML = `
+    const track = JSON.parse(saved);
+    container.innerHTML = `
     <img src="${track.cover}" alt="${track.artist} - ${track.title}" style="max-width:100%; border-radius:15px; margin-bottom:15px;">
     <h2 style="margin:0 0 10px;">${track.title}</h2>
     <p style="color:#555; margin:0;">${track.artist}</p>
-  `;
-    } else {
-      container.innerHTML = '<p>Трек не выбран.</p>';
+    `;
+
+    const buttonLinkYoutube = document.querySelector('#playLinkToYoutubeButton')
+    button.addEventListener('click', track.artistm, track.title)
+
+    function callback_link_youtube(artist, title) {
+      url_link_to_youtube = "https://www.youtube.com/results?search_query=" + " " + artist + " " + title
+      window.open(url_link_to_youtube);
     }
+
+
 
   </script>
 
