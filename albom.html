@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Музыка и Клипы</title>
+  <title>Музыка (Deezer)</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -45,6 +45,7 @@
     .cards-container {
       display: flex;
       justify-content: center;
+      flex-wrap: wrap;
       gap: 30px;
     }
 
@@ -62,9 +63,12 @@
       text-transform: uppercase;
       letter-spacing: 1px;
       outline: none;
-      /* Убираем стандартную обводку */
       position: relative;
       overflow: hidden;
+      width: 150px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .small-button:hover {
@@ -80,7 +84,6 @@
       width: 100%;
       height: 100%;
       background: rgba(255, 255, 255, 0.2);
-      /* Светлый полупрозрачный слой */
       opacity: 0;
       transition: opacity 0.3s ease;
     }
@@ -98,7 +101,75 @@
       outline: none;
     }
 
-    /* Адаптивный дизайн */
+    #search-input {
+      padding: 12px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      width: 70%;
+      max-width: 400px;
+      margin-bottom: 20px;
+      font-size: 1.1em;
+    }
+
+    #search-input:focus {
+      outline: none;
+      border-color: #ff758c;
+      box-shadow: 0 0 8px rgba(255, 120, 140, 0.3);
+    }
+
+    .small-button-red {
+      background: linear-gradient(to right, #ff758c, #ff7eb3);
+      border: none;
+      border-radius: 15px;
+      padding: 15px 30px;
+      color: white;
+      font-size: 0.5em;
+      font-weight: medium;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(255, 120, 140, 0.4);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      outline: none;
+      position: relative;
+      overflow: hidden;
+      width: 150px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .small-button-red:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(255, 120, 140, 0.5);
+    }
+
+    .small-button-red::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .small-button-red:hover::before {
+      opacity: 1;
+    }
+
+    .small-button-red:active {
+      transform: translateY(0);
+      box-shadow: 0 5px 15px rgba(255, 120, 140, 0.4);
+    }
+
+    .small-button-red:focus {
+      outline: none;
+    }
+
+
     @media (max-width: 768px) {
       #main {
         padding: 30px;
@@ -113,12 +184,17 @@
       }
 
       .cards-container {
-        flex-direction: column;
-        align-items: above;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
       }
 
       .small-button {
         font-size: 1em;
+        padding: 12px 25px;
+      }
+      .small-button-red {
+        font-size: 0.5em;
         padding: 12px 25px;
       }
     }
@@ -127,13 +203,37 @@
 
 <body>
   <div id="main">
-    <h3>Музыка и Клипы</h3>
-    <div class="cards-container">
-      <button class="small-button" onclick="location.href='clips.html'" aria-label="Перейти к оплате">Клипы</button>
-      <button class="small-button" onclick="location.href='trek.html'" aria-label="Перейти к оплате">Треки</button>
-      <button class="small-button" onclick="location.href='albom.html'" aria-label="Перейти к оплате">Альбомы</button>
+    <h3>Клипы</h3>
+    <input type="text" id="search-input" placeholder="Введите название клипа">
+    <div class="cards-container" id="results-container">
+    <button id="playLinkToYoutubeButton" class="small-button">Play</button>
+
     </div>
   </div>
+
+  <script>
+    const searchInput = document.getElementById("search-input");
+const buttonLinkYoutube = document.querySelector('#playLinkToYoutubeButton');
+
+let currentQuery = "";
+
+searchInput.addEventListener("input", () => currentQuery = searchInput.value.trim());
+
+buttonLinkYoutube.addEventListener('click', () => callback_link_youtube(currentQuery));
+
+const YOUTUBE_API = "AIzaSyAJxYdlb1yzvN5IOpyykvuxpAae_QYq_Dg";
+
+async function callback_link_youtube(clip) {
+  const query = clip + "Альбом";
+  const res = await fetch(`https://www.googleapis.com/youtube/v3/search?part=id&q=${encodeURIComponent(query)}&maxResults=1&type=video&key=${YOUTUBE_API}`);
+  const data = await res.json();
+  const videoId = data.items[0].id.videoId;
+  window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
+}
+
+    </script>
+
+  
 </body>
 
 </html>
