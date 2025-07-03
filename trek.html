@@ -269,15 +269,15 @@ const tracks = [
   const container = document.getElementById('buttons-container');
   const audioPlayer = document.getElementById('audio-player');
 
-  tracks.forEach(track => {
+  tracks.forEach(tracks => {
     const btn = document.createElement('button');
-    btn.textContent = track.title;
+    btn.textContent = tracks.title;
     btn.addEventListener('click', () => {
-      if (!track.url) {
+      if (!tracks.url) {
         alert('Ссылка на аудиофайл не указана.');
         return;
       }
-      audioPlayer.src = track.url;
+      audioPlayer.src = tracks.url;
       audioPlayer.play();
     });
     container.appendChild(btn);
