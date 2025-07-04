@@ -105,6 +105,12 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      width: 100%;           /* кнопки будут занимать всю ширину контейнера */
+      max-width: 500px;      /* или любая фиксированная ширина */
+      box-sizing: border-box; /* чтобы padding учитывался в ширине */
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .small-button-red:hover {
