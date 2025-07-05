@@ -36,7 +36,6 @@
       font-weight: normal;
     }
 
-    /* Контейнер для карточек треков */
     .cards-container {
       display: flex;
       justify-content: flex-start;
@@ -46,7 +45,6 @@
       min-height: 60px;
     }
 
-    /* Кнопки локальных треков */
     #buttons-container {
       display: flex;
       flex-wrap: wrap;
@@ -55,14 +53,15 @@
       margin-top: 20px;
     }
 
+
     #buttons-container button {
       background: linear-gradient(to right, #ff758c, #ff7eb3);
       border: none;
       border-radius: 15px;
-      padding: 12px 20px;
+      padding: 8px 15px;
       color: white;
-      font-size: 1em;
-      font-weight: bold;
+      font-size: 0.85em; 
+      font-weight: 600;
       cursor: pointer;
       box-shadow: 0 5px 15px rgba(255, 120, 140, 0.4);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -71,6 +70,14 @@
       letter-spacing: 1px;
       outline: none;
       user-select: none;
+
+      width: 200px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     #buttons-container button:disabled {
@@ -84,15 +91,14 @@
       box-shadow: 0 8px 20px rgba(255, 120, 140, 0.5);
     }
 
-    /* Кнопки поиска */
     .small-button-red {
       background: linear-gradient(to right, #ff758c, #ff7eb3);
       border: none;
       border-radius: 15px;
-      padding: 8px 15px;
+      padding: 6px 12px;
       color: white;
-      font-size: 1em;
-      font-weight: bold;
+      font-size: 0.85em;
+      font-weight: 600;
       cursor: pointer;
       box-shadow: 0 5px 15px rgba(255, 120, 140, 0.4);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -101,13 +107,10 @@
       outline: none;
       display: flex;
       align-items: center;
-      max-width: 100%;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      width: 100%;           /* кнопки будут занимать всю ширину контейнера */
-      max-width: 500px;      /* или любая фиксированная ширина */
-      box-sizing: border-box; /* чтобы padding учитывался в ширине */
+      max-width: 500px;
+      width: 400px;
+      height: 50px;
+      box-sizing: border-box;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -118,7 +121,6 @@
       box-shadow: 0 8px 20px rgba(255, 120, 140, 0.5);
     }
 
-    /* Поле поиска */
     #search-input {
       padding: 15px;
       border: 2px solid #ccc;
@@ -136,7 +138,6 @@
       box-shadow: 0 0 12px rgba(255, 120, 140, 0.5);
     }
 
-    /* Адаптив */
     @media (max-width: 768px) {
       #main {
         padding: 30px;
@@ -168,83 +169,85 @@
 
   <script>
     const tracks = [
-  { title: '1 ТГК МУЗ-ЧАТ', url: '' },
-  { title: '', url: '' },
-  { title: 'Городской маршрут', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/Русская%20душа%20-%20Городской%20маршрут.mp3' },
-  { title: 'Неважно', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/tagmp3_2.-Русская-душа---Неважно.mp3' },
-  { title: 'Здесь лапы у ели', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/tagmp3_3.-Русская-душа---Здесь-лапы-у-ели.mp3' },
-  { title: 'Булгаков', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/tagmp3_4.-Русская-душа---Булгаков.mp3' },
-  { title: 'В чем сила, брат', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/5.%20Русская%20душа%20-%20В%20чем%20сила,%20брат.mp3' },
-  { title: 'Дерзкий вечер', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/tagmp3_6.-Русская-душа---Дерзкий-вечер.mp3' },
-  { title: 'Пушкин', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/tagmp3_7.-Русская-душа---Пушкин.mp3' },
-  { title: 'Санкции', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/tagmp3_8_Русская-душа_Новости_смотрю_и_плачу.mp3' },
-  { title: 'Здесь лапы у ели', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/tagmp3_9.-Русская-душа---Здесь-лапы-у-ели.mp3' },
-  { title: '2 ТГК МУЗ-ЧАТ', url: '' },
-  { title: '', url: '' },
-  { title: 'Очень', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/2.%20Русская%20душа%20-%20Очень.wav--online-audio-convert.com%20(1).mp3' },
-  { title: 'Воронье', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/воронье.mp3' },
-  { title: 'Тишина', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/тишина.mp3' },
-  { title: 'Туман', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/5.%20Русская%20душа%20-%20Туман.wav--online-audio-convert.com.mp3' },
-  { title: 'Дети 20-го века', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/6.%20Русская%20душа%20-%20Дети%2020-го%20века.wav--online-audio-convert.com.mp3' },
-  { title: 'Застава', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/7.%20Русская%20душа%20-%20Застава.wav--online-audio-convert.com.mp3' },
-  { title: '3 ТГК МУЗ-ЧАТ', url: '' },
-  { title: '', url: '' },
-  { title: 'Гафт', url: 'https://nextjs-boil-delta.vercel.app/гафт.mp3' },
-  { title: 'Читаю строки ветхого завета', url: 'https://nextjs-boil-delta.vercel.app/Читаю-строки-ветхого-завета_.mp3' },
-  { title: 'Женщина до утра', url: 'https://nextjs-boil-delta.vercel.app/женщина%20до%20утра.mp3' },
-  { title: 'Одесса', url: 'https://nextjs-boil-delta.vercel.app/4.%20Русская%20душа%20-%20Одесса%20(1).mp3' },
-  { title: 'Трепещет сердце от безумства', url: 'https://nextjs-boil-delta.vercel.app/5_Русская_душа_Трепещет_сердце_от_безумства.mp3' },
-  { title: 'Мой город', url: 'https://nextjs-boil-delta.vercel.app/мой-город.mp3' },
-  { title: 'За деньги', url: 'https://nextjs-boil-delta.vercel.app/за-деньги.mp3' },
-  { title: 'Не стыдно', url: 'https://nextjs-boil-delta.vercel.app/Не-стыдно.mp3' },
-  { title: '', url: '' },
-  { title: '', url: '' },
-  { title: 'ГЕРОИ В МУЗЫКЕ', url: '' },
-  { title: '', url: '' },
-  { title: 'Блокада Ленинграда', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Блокада-Ленинграда-(2).mp3' },
-  { title: 'Вагнера', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_РД-Вагнера.mp3' },
-  { title: 'Стрелок', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_стрелок.mp3' },
-  { title: 'Ну, здравствуй, мама!', url: 'https://nextjs-boil-delta.vercel.app/Ну,%20здравствуй,%20мама!.mp3' },
-  { title: 'Мать', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Русская-душа---мать.mp3' },
-  { title: 'Там, где маки лютуют', url: '' },
-  { title: 'Как заставить молчать', url: 'https://nextjs-boil-delta.vercel.app/3_Русская_Душа_Как_заставить_молчать.mp3' },
-  { title: 'Горит свеча', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Свеча-(2).mp3' },
-  { title: '', url: '' },
-  { title: '', url: '' },
-  { title: 'ЛИРИКА ДУШИ', url: '' },
-  { title: '', url: '' },
-  { title: 'Женщинам', url: 'https://nextjs-boil-delta.vercel.app/Русская%20душа%20-%20Женщинам%20(1).MP3' },
-  { title: 'Романс', url: 'https://nextjs-boil-delta.vercel.app/Русская%20душа%20-%20Романс%20.mp3' },
-  { title: 'Венчание', url: 'https://nextjs-boil-delta.vercel.app/Венчание%20(4).mp3' },
-  { title: 'Случайно встретились глазами', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Случайно-встретились-глазами.mp3' },
-  { title: 'Люди бывают разными', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Русская-душа-–-Одни-и-те-же-имена.mp3' },
-  { title: 'Брат', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Брат-версия.mp3' },
-  { title: 'Путник', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Русская-душа---Путник.mp3' },
-  { title: 'Недописанный стих', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Русская_душа_Недописанный_стих_.mp3' },
-  { title: 'Испачканной карандашом', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Русская_душа_Испачканной_карандашом_.mp3' },
-  { title: 'Одни и те же имена', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Русская-душа-–-Одни-и-те-же-имена.mp3' },
-  { title: 'Пройдусь по парку', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Русская-душа---Пройдусь-по-парку.mp3' },
-  { title: 'Слезы кончились', url: 'https://nextjs-boil-delta.vercel.app/Слезы%20кончились.mp3' },
-  { title: 'Не прячь, слезу мой друг', url: 'https://nextjs-boil-delta.vercel.app/Не прячь, мой друг слезу.mp3' },
-  { title: 'Там на обычном и завьюженном холме', url: 'https://nextjs-boil-delta.vercel.app/Там_на_обычном_и_завьюженном_холме.mp3' },
-  { title: 'Вечная память героям', url: 'https://nextjs-boil-delta.vercel.app/Вечная%20память%20героям!%20(2).mp3' },
-  { title: 'Вы слышите?', url: 'https://nextjs-boil-delta.vercel.app/cromulentarrangements461%20–%20Вы%20слышите_.mp3' },
-  { title: 'Уже не стало ветеранов', url: 'https://nextjs-boil-delta.vercel.app/Уже%20не%20стало%20ветеранов.mp3' },
-  { title: 'Мы часто о героях говорим', url: 'https://nextjs-boil-delta.vercel.app/Мы%20часто%20о%20героях%20говорим%20(2).mp3' },
-  { title: 'Война дошла до Сталинграда', url: 'https://nextjs-boil-delta.vercel.app/Война%20дошла%20до%20Сталинграда%20(2).mp3' },
-  { title: 'На выжженой земле', url: 'https://nextjs-boil-delta.vercel.app/На выжженной земле.mp3' },
-  { title: 'Девятый десяток', url: 'https://nextjs-boil-delta.vercel.app/Девятый_десяток_для_вечности_миг_1.mp3' }
-];
+      { title: '1 ТГК МУЗ-ЧАТ', url: '' },
+      { title: '', url: '' },
+      { title: 'Городской маршрут', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/Русская%20душа%20-%20Городской%20маршрут.mp3' },
+      { title: 'Неважно', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/tagmp3_2.-Русская-душа---Неважно.mp3' },
+      { title: 'Здесь лапы у ели', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/tagmp3_3.-Русская-душа---Здесь-лапы-у-ели.mp3' },
+      { title: 'Булгаков', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/tagmp3_4.-Русская-душа---Булгаков.mp3' },
+      { title: 'В чем сила, брат', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/5.%20Русская%20душа%20-%20В%20чем%20сила,%20брат.mp3' },
+      { title: 'Дерзкий вечер', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/tagmp3_6.-Русская-душа---Дерзкий-вечер.mp3' },
+      { title: 'Пушкин', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/tagmp3_7.-Русская-душа---Пушкин.mp3' },
+      { title: 'Санкции', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/tagmp3_8_Русская-душа_Новости_смотрю_и_плачу.mp3' },
+      { title: 'Здесь лапы у ели', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/tagmp3_9.-Русская-душа---Здесь-лапы-у-ели.mp3' },
+      { title: '2 ТГК МУЗ-ЧАТ', url: '' },
+      { title: '', url: '' },
+      { title: 'Очень', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/2.%20Русская%20душа%20-%20Очень.wav--online-audio-convert.com%20(1).mp3' },
+      { title: 'Воронье', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/воронье.mp3' },
+      { title: 'Тишина', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/тишина.mp3' },
+      { title: 'Туман', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/5.%20Русская%20душа%20-%20Туман.wav--online-audio-convert.com.mp3' },
+      { title: 'Дети 20-го века', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/6.%20Русская%20душа%20-%20Дети%2020-го%20века.wav--online-audio-convert.com.mp3' },
+      { title: 'Застава', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/7.%20Русская%20душа%20-%20Застава.wav--online-audio-convert.com.mp3' },
+      { title: '3 ТГК МУЗ-ЧАТ', url: '' },
+      { title: '', url: '' },
+      { title: 'Гафт', url: 'https://nextjs-boil-delta.vercel.app/гафт.mp3' },
+      { title: 'Читаю строки ветхого завета', url: 'https://nextjs-boil-delta.vercel.app/Читаю-строки-ветхого-завета_.mp3' },
+      { title: 'Женщина до утра', url: 'https://nextjs-boil-delta.vercel.app/женщина%20до%20утра.mp3' },
+      { title: 'Одесса', url: 'https://nextjs-boil-delta.vercel.app/4.%20Русская%20душа%20-%20Одесса%20(1).mp3' },
+      { title: 'Трепещет сердце от безумства', url: 'https://nextjs-boil-delta.vercel.app/5_Русская_душа_Трепещет_сердце_от_безумства.mp3' },
+      { title: 'Мой город', url: 'https://nextjs-boil-delta.vercel.app/мой-город.mp3' },
+      { title: 'За деньги', url: 'https://nextjs-boil-delta.vercel.app/за-деньги.mp3' },
+      { title: 'Не стыдно', url: 'https://nextjs-boil-delta.vercel.app/Не-стыдно.mp3' },
+      { title: '', url: '' },
+      { title: '', url: '' },
+      { title: 'ГЕРОИ В МУЗЫКЕ', url: '' },
+      { title: '', url: '' },
+      { title: 'Блокада Ленинграда', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Блокада-Ленинграда-(2).mp3' },
+      { title: 'Вагнера', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_РД-Вагнера.mp3' },
+      { title: 'Стрелок', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_стрелок.mp3' },
+      { title: 'Ну, здравствуй, мама!', url: 'https://nextjs-boil-delta.vercel.app/Ну,%20здравствуй,%20мама!.mp3' },
+      { title: 'Мать', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Русская-душа---мать.mp3' },
+      { title: 'Там, где маки лютуют', url: '' },
+      { title: 'Как заставить молчать', url: 'https://nextjs-boil-delta.vercel.app/3_Русская_Душа_Как_заставить_молчать.mp3' },
+      { title: 'Горит свеча', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Свеча-(2).mp3' },
+      { title: '', url: '' },
+      { title: '', url: '' },
+      { title: 'ЛИРИКА ДУШИ', url: '' },
+      { title: '', url: '' },
+      { title: 'Женщинам', url: 'https://nextjs-boil-delta.vercel.app/Русская%20душа%20-%20Женщинам%20(1).MP3' },
+      { title: 'Романс', url: 'https://nextjs-boil-delta.vercel.app/Русская%20душа%20-%20Романс%20.mp3' },
+      { title: 'Венчание', url: 'https://nextjs-boil-delta.vercel.app/Венчание%20(4).mp3' },
+      { title: 'Случайно встретились глазами', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Случайно-встретились-глазами.mp3' },
+      { title: 'Люди бывают разными', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Русская-душа-–-Одни-и-те-же-имена.mp3' },
+      { title: 'Брат', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Брат-версия.mp3' },
+      { title: 'Путник', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Русская-душа---Путник.mp3' },
+      { title: 'Недописанный стих', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Русская_душа_Недописанный_стих_.mp3' },
+      { title: 'Испачканной карандашом', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Русская_душа_Испачканной_карандашом_.mp3' },
+      { title: 'Одни и те же имена', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Русская-душа-–-Одни-и-те-же-имена.mp3' },
+      { title: 'Пройдусь по парку', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Русская-душа---Пройдусь-по-парку.mp3' },
+      { title: 'Слезы кончились', url: 'https://nextjs-boil-delta.vercel.app/Слезы%20кончились.mp3' },
+      { title: 'Не прячь, слезу мой друг', url: 'https://nextjs-boil-delta.vercel.app/Не прячь, мой друг слезу.mp3' },
+      { title: 'Там на обычном и завьюженном холме', url: 'https://nextjs-boil-delta.vercel.app/Там_на_обычном_и_завьюженном_холме.mp3' },
+      { title: 'Вечная память героям', url: 'https://nextjs-boil-delta.vercel.app/Вечная%20память%20героям!%20(2).mp3' },
+      { title: 'Вы слышите?', url: 'https://nextjs-boil-delta.vercel.app/cromulentarrangements461%20–%20Вы%20слышите_.mp3' },
+      { title: 'Уже не стало ветеранов', url: 'https://nextjs-boil-delta.vercel.app/Уже%20не%20стало%20ветеранов.mp3' },
+      { title: 'Мы часто о героях говорим', url: 'https://nextjs-boil-delta.vercel.app/Мы%20часто%20о%20героях%20говорим%20(2).mp3' },
+      { title: 'Война дошла до Сталинграда', url: 'https://nextjs-boil-delta.vercel.app/Война%20дошла%20до%20Сталинграда%20(2).mp3' },
+      { title: 'На выжженой земле', url: 'https://nextjs-boil-delta.vercel.app/На выжженной земле.mp3' },
+      { title: 'Девятый десяток', url: 'https://nextjs-boil-delta.vercel.app/Девятый_десяток_для_вечности_миг_1.mp3' }
+    ];
 
     const buttonsContainer = document.getElementById('buttons-container');
     const audioPlayer = document.getElementById('audio-player');
     const searchInput = document.getElementById('search-input');
     const resultsContainer = document.getElementById('results-container');
 
-    // Создаём кнопки для локальных треков
     function createLocalTrackButtons() {
       buttonsContainer.innerHTML = '';
       tracks.forEach(track => {
+        // Пропускаем пустые названия
+        if (!track.title.trim()) return;
+
         const btn = document.createElement('button');
         btn.textContent = track.title;
         btn.disabled = !track.url;
@@ -273,7 +276,6 @@
 
     createLocalTrackButtons();
 
-    // Поиск треков через API
     searchInput.addEventListener('input', () => {
       const query = searchInput.value.trim();
       if (query.length > 2) {
@@ -309,7 +311,6 @@
       }
 
       tracks.forEach(track => {
-        // Создаём кнопку с обложкой и названием
         const button = document.createElement("button");
         button.className = "small-button-red";
         button.title = `${track.artist.name} - ${track.title}`;
