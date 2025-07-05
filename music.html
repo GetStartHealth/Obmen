@@ -271,9 +271,27 @@
       getPost(orderType, phone, has, gen)
     }
 
-    function getPost(orderType, phone, has, gen) {
-      alert(`Тип заказа: ${orderType}\nНомер телефона: ${phone}\nЕсть текст: ${has ? 'Да' : 'Нет'}\nЖанр: ${has ? (gen || 'не выбран') : '—'}`);
+    async function getPost(orderType, phone, has, gen) {
+      const data = {
+  orderType,
+  phone,
+  hasText: has,
+  genre: gen
+};
+
+const response = await fetch('/api/sendOrder', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  });
+
+  const result = await response.json();
+  return result;
     }
+
+      
   </script>
 </body>
 
