@@ -67,7 +67,7 @@ async def callback_deepSeek(call: CallbackQuery, state: FSMContext):
 
 @router.message(PleaseStop.waiting_for_query)
 async def start_flood_please(message: Message):
-    generating(message)
+    generating(message, State)
 
 
 @router.message(PleaseStop.wait)
