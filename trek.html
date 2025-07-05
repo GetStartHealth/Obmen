@@ -230,12 +230,11 @@
         const btn = document.createElement('button');
         btn.textContent = track.title;
         btn.disabled = !track.url;
-        btn.title = track.url ? 'Воспроизвести трек' : 'Ссылка на аудиофайл отсутствует';
+        btn.title = track.url;
         btn.className = 'local-track-button';
 
         btn.addEventListener('click', async () => {
           if (!track.url) {
-            alert('Ссылка на аудиофайл не указана.');
             return;
           }
           try {
@@ -245,7 +244,6 @@
             await audioPlayer.play();
           } catch (e) {
             console.warn('Ошибка воспроизведения:', e);
-            alert('Не удалось воспроизвести аудиофайл.');
           }
         });
 
