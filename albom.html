@@ -104,7 +104,7 @@
       max-width: 100%;
       white-space: nowrap;
       overflow: hidden;
-      text-overflow: ellipsis;      
+      text-overflow: ellipsis;
       width: 100%;           /* кнопки будут занимать всю ширину контейнера */
       max-width: 500px;      /* или любая фиксированная ширина */
       box-sizing: border-box; /* чтобы padding учитывался в ширине */
@@ -117,60 +117,6 @@
       transform: translateY(-3px);
       box-shadow: 0 8px 20px rgba(255, 120, 140, 0.5);
     }
-
-    .local-track-button {
-  /* базовый стиль для всех локальных кнопок (тот, что был у вас) */
-  background: #f0f0f0;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 10px 20px;
-  font-size: 1em;
-  cursor: pointer;
-  color: #333;
-  min-width: 200px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  transition: background-color 0.3s ease;
-}
-
-.local-track-button:hover:not(:disabled) {
-  background-color: #e0e0e0;
-}
-
-.local-track-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-/* Специальный красивый стиль только для первой кнопки */
-.special-button {
-  background: linear-gradient(135deg, #ff758c, #ff7eb3);
-  border: none;
-  border-radius: 20px;
-  padding: 14px 30px;
-  color: white;
-  font-size: 1.1em;
-  font-weight: 700;
-  cursor: pointer;
-  box-shadow: 0 6px 20px rgba(255, 117, 140, 0.5);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  outline: none;
-  user-select: none;
-  min-width: 280px;
-  max-width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: inline-block;
-}
-
-.special-button:hover:not(:disabled) {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 30px rgba(255, 117, 140, 0.7);
-}
 
     /* Поле поиска */
     #search-input {
@@ -213,7 +159,7 @@
 
 <body>
   <div id="main">
-    <h3>Альбомы</h3>
+    <h3>Треки</h3>
     <input type="text" id="search-input" placeholder="Введите название трека" />
     <div class="cards-container" id="results-container"></div>
     <div id="buttons-container"></div>
@@ -290,7 +236,6 @@
   { title: 'Девятый десяток', url: 'https://nextjs-boil-delta.vercel.app/Девятый_десяток_для_вечности_миг_1.mp3' }
 ];
 
-
     const buttonsContainer = document.getElementById('buttons-container');
     const audioPlayer = document.getElementById('audio-player');
     const searchInput = document.getElementById('search-input');
@@ -299,22 +244,28 @@
     // Создаём кнопки для локальных треков
     function createLocalTrackButtons() {
       buttonsContainer.innerHTML = '';
-      tracks.forEach(track, index) => {
-
-      // Для остальных - прежний стиль, например, просто local-track-button без special
-        btn.className = 'small-button-red';
+      tracks.forEach(track => {
         const btn = document.createElement('button');
         btn.textContent = track.title;
+        btn.disabled = !track.url;
         btn.title = track.url ? 'Воспроизвести трек' : 'Ссылка на аудиофайл отсутствует';
         btn.className = 'local-track-button';
 
         btn.addEventListener('click', async () => {
-          
+          if (!track.url) {
+            alert('Ссылка на аудиофайл не указана.');
+            return;
+          }
+          try {
             if (audioPlayer.src !== track.url) {
               audioPlayer.src = track.url;
             }
             await audioPlayer.play();
-      });
+          } catch (e) {
+            console.warn('Ошибка воспроизведения:', e);
+            alert('Не удалось воспроизвести аудиофайл.');
+          }
+        });
 
         buttonsContainer.appendChild(btn);
       });
