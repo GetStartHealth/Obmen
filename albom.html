@@ -52,8 +52,7 @@
       justify-content: center;
       margin-top: 20px;
     }
-
-
+ 
     #buttons-container button {
       background: linear-gradient(to right, #ff758c, #ff7eb3);
       border: none;
@@ -245,7 +244,6 @@
     function createLocalTrackButtons() {
       buttonsContainer.innerHTML = '';
       tracks.forEach(track => {
-        // Пропускаем пустые названия
         if (!track.title.trim()) return;
 
         const btn = document.createElement('button');
