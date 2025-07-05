@@ -252,19 +252,25 @@
         </label>
       </fieldset>
 
-      <button type="submit" class="small-button">Отправить заказ</button>
+      <button type="submit" class="small-button" onclick="getAlert()">Отправить заказ</button>
     </form>
 
     <div id="selectedItems"></div>
   </div>
 
   <script>
-    const orderType = formData.get('orderType');
-    const phone = formData.get('phone');
-    const hasText = formData.get('hasText') === 'on';
-    const genre = formData.get('genre');
+    const genre = document.getElementById('genre');
+    const hasText = document.getElementById('hasText');
+    hasText.onchange = () => genre.disabled = !hasText.checked;
 
-    alert(`Тип заказа: ${orderType}\nНомер телефона: ${phone}\nЕсть текст: ${hasText ? 'Да' : 'Нет'}\nЖанр: ${hasText ? genre || 'не выбран' : '—'}`);
+    function getAlert() {
+      const f = new FormData(document.getElementById('form'));
+      const orderType = f.get('orderType');
+      const phone = f.get('phone');
+      const has = f.get('hasText') === 'on';
+      const gen = f.get('genre');
+      alert(`Тип заказа: ${orderType}\nНомер телефона: ${phone}\nЕсть текст: ${has ? 'Да' : 'Нет'}\nЖанр: ${has ? (gen || 'не выбран') : '—'}`);
+    }
   </script>
 </body>
 
