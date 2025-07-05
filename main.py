@@ -21,7 +21,7 @@ router = Router()
 
 class PleaseStop(StatesGroup):
     wait = State()
-
+    waiting_for_query = State()
 
 import os
 from dotenv import load_dotenv
@@ -63,7 +63,11 @@ async def command_brone_handler(message: Message) -> None:
 @dp.callback_query(lambda c: c.data == "deepSeek")
 async def callback_deepSeek(call: CallbackQuery, state: FSMContext):
     await call.message.answer("Диалог открыт, задавайте запрос")
-    await generating(call.message, state)
+    await state.set_state(PleaseStop.waiting_for_query)
+
+@router.message(PleaseStop.waiting_for_query)
+async def start_flood_please(message: Message):
+    generating(message)
 
 
 @router.message(PleaseStop.wait)
@@ -79,12 +83,6 @@ async def generating(message: Message, state: FSMContext):
     res = await a_generate(message.text)
     await message.answer(res)
     await state.clear()
-
-@dp.message()
-async def handle_web_app_data(message: Message):
-    if message.web_app_data:
-        datap = message.web_app_data.data
-        await message.answer(f"Вы выбрали трек: {datap}")
 
 async def main() -> None:
     dp.include_router(router)
