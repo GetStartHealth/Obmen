@@ -301,13 +301,9 @@
       buttonsContainer.innerHTML = '';
       tracks.forEach(track => {
 
-        if (index === 0) {
-      // Для первой кнопки - более красивый стиль
-      btn.className = 'local-track-button special-button';
-    } else {
       // Для остальных - прежний стиль, например, просто local-track-button без special
       btn.className = 'small-button-red';
-    }
+    
 
         const btn = document.createElement('button');
         btn.textContent = track.title;
