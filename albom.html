@@ -299,15 +299,12 @@
     // Создаём кнопки для локальных треков
     function createLocalTrackButtons() {
       buttonsContainer.innerHTML = '';
-      tracks.forEach(track => {
+      tracks.forEach(track, index) => {
 
       // Для остальных - прежний стиль, например, просто local-track-button без special
-      btn.className = 'small-button-red';
-    
-
+        btn.className = 'small-button-red';
         const btn = document.createElement('button');
         btn.textContent = track.title;
-        btn.disabled = !track.url;
         btn.title = track.url ? 'Воспроизвести трек' : 'Ссылка на аудиофайл отсутствует';
         btn.className = 'local-track-button';
 
