@@ -232,7 +232,8 @@
       <!-- Вопрос 2: номер телефона -->
       <fieldset>
         <legend>Ваш номер телефона:</legend>
-        <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" pattern="\+7\s?\(?\d{3}\)?\s?\d{3}[- ]?\d{2}[- ]?\d{2}" required aria-label="Введите ваш номер телефона" />
+        <input type="tel" name="phone" placeholder="+7 (___) ___-__-__"
+          pattern="\+7\s?\(?\d{3}\)?\s?\d{3}[- ]?\d{2}[- ]?\d{2}" required aria-label="Введите ваш номер телефона" />
       </fieldset>
 
       <fieldset>
@@ -254,8 +255,6 @@
 
       <button type="submit" class="small-button" onclick="getAlert()">Отправить заказ</button>
     </form>
-
-    <div id="selectedItems"></div>
   </div>
 
   <script>
@@ -264,11 +263,15 @@
     hasText.onchange = () => genre.disabled = !hasText.checked;
 
     function getAlert() {
-      const f = new FormData(document.getElementById('form'));
+      const f = new FormData(document.getElementById('orderForm'));
       const orderType = f.get('orderType');
       const phone = f.get('phone');
       const has = f.get('hasText') === 'on';
       const gen = f.get('genre');
+      getPost(orderType, phone, has, gen)
+    }
+
+    function getPost(orderType, phone, has, gen) {
       alert(`Тип заказа: ${orderType}\nНомер телефона: ${phone}\nЕсть текст: ${has ? 'Да' : 'Нет'}\nЖанр: ${has ? (gen || 'не выбран') : '—'}`);
     }
   </script>
