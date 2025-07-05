@@ -235,7 +235,6 @@
         <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" pattern="\+7\s?\(?\d{3}\)?\s?\d{3}[- ]?\d{2}[- ]?\d{2}" required aria-label="Введите ваш номер телефона" />
       </fieldset>
 
-      <!-- Вопрос 3: текст и жанр песни -->
       <fieldset>
         <legend>Есть ли у вас текст и жанр песни?</legend>
         <label>
@@ -260,7 +259,12 @@
   </div>
 
   <script>
-    
+    const orderType = formData.get('orderType');
+    const phone = formData.get('phone');
+    const hasText = formData.get('hasText') === 'on';
+    const genre = formData.get('genre');
+
+    alert(`Тип заказа: ${orderType}\nНомер телефона: ${phone}\nЕсть текст: ${hasText ? 'Да' : 'Нет'}\nЖанр: ${hasText ? genre || 'не выбран' : '—'}`);
   </script>
 </body>
 
