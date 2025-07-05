@@ -2,7 +2,7 @@ import asyncio
 import logging
 import sys
 from aiogram import Bot, Dispatcher
-from aiogram.filters import CommandStart
+from aiogram.filters import CommandStart, StateFilter
 from aiogram.types import (
     Message,
     InlineKeyboardMarkup,
@@ -22,6 +22,7 @@ router = Router()
 class PleaseStop(StatesGroup):
     wait = State()
 
+
 import os
 from dotenv import load_dotenv
 
@@ -34,6 +35,7 @@ logging.basicConfig(level=logging.INFO, stream=sys.stdout)
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
+dp.include_router(router) #  Подключаем роутер к диспетчеру
 
 
 @dp.message(CommandStart())
@@ -60,26 +62,32 @@ async def command_brone_handler(message: Message) -> None:
 
 
 @dp.callback_query(lambda c: c.data == "deepSeek")
-async def callback_deepSeek(call: CallbackQuery, state: FSMContext):
+async def callback_deepSeek(call: CallbackQuery):
+    await call.answer()
     await call.message.answer("Диалог открыт, задавайте запрос")
 
 
-@router.message(PleaseStop.wait)
+@router.message(StateFilter(PleaseStop.wait))
 async def stop_flood_please(message: Message):
-    await message.answer("Происходит обработка другого запроса... ")
+    await message.answer("Происходит обработка другого запроса... Пожалуйста, подождите.")
 
 
-@router.message()
+@router.message(StateFilter(None), ~CommandStart())
 async def generating(message: Message, state: FSMContext):
-
-    await message.answer("Компиляция запроса...⏳")
-    await state.set_state(PleaseStop.wait)
-    res = await a_generate(message.text)
-    await message.answer(res)
-    await state.clear()
+    if message.text:
+        await message.answer("Компиляция запроса...⏳")
+        await state.set_state(PleaseStop.wait) #  Устанавливаем состояние ожидания
+        try:
+            res = await a_generate(message.text)
+            await message.answer(res)
+        except Exception as e:
+            logging.error(f"Error during generation: {e}")
+            await message.answer("Произошла ошибка при обработке запроса.")
+        finally:
+            await state.clear()  #  Очищаем состояние после обработки
 
 async def main() -> None:
-    dp.include_router(router)
+    # dp.include_router(router)  #  Роутер уже подключен выше
     await dp.start_polling(bot)
 
 
