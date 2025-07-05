@@ -61,9 +61,9 @@ async def command_brone_handler(message: Message) -> None:
 
 
 @dp.callback_query(lambda c: c.data == "deepSeek")
-async def callback_deepSeek(call: CallbackQuery):
+async def callback_deepSeek(call: CallbackQuery, state: FSMContext):
     await call.message.answer("Диалог открыт, задавайте запрос")
-    generating()
+    await generating(call.message, state)
 
 
 @router.message(PleaseStop.wait)
