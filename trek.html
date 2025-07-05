@@ -19,24 +19,25 @@
     }
 
     #main {
-      background: rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
       border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-      padding: 40px;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18);
+      padding: 40px 35px;
       text-align: center;
-      max-width: 600px;
+      max-width: 650px;
       width: 90%;
     }
 
     h3 {
-      color: #666;
-      font-size: 1.6em;
+      color: #555;
+      font-size: 1.7em;
       margin-bottom: 30px;
-      font-weight: normal;
+      font-weight: 500;
+      letter-spacing: 0.05em;
     }
 
-    /* Контейнер для карточек треков */
+ 
     .cards-container {
       display: flex;
       justify-content: flex-start;
@@ -46,58 +47,66 @@
       min-height: 60px;
     }
 
-    /* Кнопки локальных треков */
+
     #buttons-container {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 14px;
       justify-content: center;
       margin-top: 20px;
     }
 
     #buttons-container button {
-      background: linear-gradient(to right, #ff758c, #ff7eb3);
+      background: linear-gradient(90deg, #ff758c 0%, #ff7eb3 100%);
       border: none;
-      border-radius: 15px;
-      padding: 12px 20px;
+      border-radius: 18px;
+      padding: 14px 25px;
       color: white;
-      font-size: 1em;
-      font-weight: bold;
+      font-size: 1.05em;
+      font-weight: 700;
       cursor: pointer;
-      box-shadow: 0 5px 15px rgba(255, 120, 140, 0.4);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 7px 20px rgba(255, 117, 140, 0.45);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
       white-space: nowrap;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 1.2px;
       outline: none;
       user-select: none;
+
+      width: 280px;
+      height: 55px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     #buttons-container button:disabled {
-      opacity: 0.5;
+      opacity: 0.45;
       cursor: not-allowed;
       box-shadow: none;
     }
 
     #buttons-container button:hover:not(:disabled) {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(255, 120, 140, 0.5);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(255, 117, 140, 0.6);
     }
 
-    /* Кнопки поиска */
+
     .small-button-red {
-      background: linear-gradient(to right, #ff758c, #ff7eb3);
+      background: linear-gradient(90deg, #ff758c 0%, #ff7eb3 100%);
       border: none;
-      border-radius: 15px;
-      padding: 8px 15px;
+      border-radius: 18px;
+      padding: 10px 18px;
       color: white;
       font-size: 1em;
-      font-weight: bold;
+      font-weight: 700;
       cursor: pointer;
-      box-shadow: 0 5px 15px rgba(255, 120, 140, 0.4);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 7px 20px rgba(255, 117, 140, 0.45);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 1.1px;
       outline: none;
       display: flex;
       align-items: center;
@@ -105,41 +114,50 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      width: 100%;           /* кнопки будут занимать всю ширину контейнера */
-      max-width: 500px;      /* или любая фиксированная ширина */
-      box-sizing: border-box; /* чтобы padding учитывался в ширине */
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      width: 100%;
+      max-width: 520px;
+      box-sizing: border-box;
     }
 
     .small-button-red:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(255, 120, 140, 0.5);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(255, 117, 140, 0.6);
     }
 
-    /* Поле поиска */
+
+    .small-button-red img {
+      width: 42px;
+      height: 42px;
+      border-radius: 6px;
+      margin-right: 12px;
+      flex-shrink: 0;
+      object-fit: cover;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+
     #search-input {
-      padding: 15px;
-      border: 2px solid #ccc;
-      border-radius: 25px;
-      width: 70%;
-      max-width: 400px;
-      margin-bottom: 30px;
-      font-size: 1.1em;
+      padding: 16px 20px;
+      border: 2.5px solid #ccc;
+      border-radius: 30px;
+      width: 72%;
+      max-width: 420px;
+      margin-bottom: 32px;
+      font-size: 1.15em;
       transition: border-color 0.3s ease, box-shadow 0.3s ease;
       outline: none;
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.07);
     }
 
     #search-input:focus {
       border-color: #ff758c;
-      box-shadow: 0 0 12px rgba(255, 120, 140, 0.5);
+      box-shadow: 0 0 18px rgba(255, 117, 140, 0.55);
     }
 
-    /* Адаптив */
+
     @media (max-width: 768px) {
       #main {
-        padding: 30px;
+        padding: 30px 25px;
       }
 
       h3 {
@@ -160,7 +178,7 @@
 <body>
   <div id="main">
     <h3>Треки</h3>
-    <input type="text" id="search-input" placeholder="Введите название трека" />
+    <input type="text" id="search-input" placeholder="Введите название трека" autocomplete="off" />
     <div class="cards-container" id="results-container"></div>
     <div id="buttons-container"></div>
     <audio id="audio-player" controls style="width: 100%; margin-top: 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(255, 117, 140, 0.3);"></audio>
@@ -227,14 +245,18 @@
     function createLocalTrackButtons() {
       buttonsContainer.innerHTML = '';
       tracks.forEach(track => {
+        // Пропускаем пустые названия
+        if (!track.title.trim()) return;
+
         const btn = document.createElement('button');
         btn.textContent = track.title;
         btn.disabled = !track.url;
-        btn.title = track.url;
+        btn.title = track.url ? 'Воспроизвести трек' : 'Ссылка на аудиофайл отсутствует';
         btn.className = 'local-track-button';
 
         btn.addEventListener('click', async () => {
           if (!track.url) {
+            alert('Ссылка на аудиофайл не указана.');
             return;
           }
           try {
@@ -244,6 +266,7 @@
             await audioPlayer.play();
           } catch (e) {
             console.warn('Ошибка воспроизведения:', e);
+            alert('Не удалось воспроизвести аудиофайл.');
           }
         });
 
@@ -253,7 +276,7 @@
 
     createLocalTrackButtons();
 
-    // Поиск треков через API
+
     searchInput.addEventListener('input', () => {
       const query = searchInput.value.trim();
       if (query.length > 2) {
@@ -289,7 +312,7 @@
       }
 
       tracks.forEach(track => {
-        // Создаём кнопку с обложкой и названием
+
         const button = document.createElement("button");
         button.className = "small-button-red";
         button.title = `${track.artist.name} - ${track.title}`;
@@ -297,10 +320,10 @@
         const img = document.createElement("img");
         img.src = track.album.cover_medium;
         img.alt = track.title;
-        img.style.width = "40px";
-        img.style.height = "40px";
-        img.style.borderRadius = "5px";
-        img.style.marginRight = "10px";
+        img.style.width = "42px";
+        img.style.height = "42px";
+        img.style.borderRadius = "6px";
+        img.style.marginRight = "12px";
         img.style.flexShrink = "0";
 
         button.appendChild(img);
