@@ -72,19 +72,14 @@ async def stop_flood_please(message: Message):
     await message.answer("Происходит обработка другого запроса... Пожалуйста, подождите.")
 
 
-@router.message(StateFilter(None), ~CommandStart())
+@router.message()
 async def generating(message: Message, state: FSMContext):
     if message.text:
         await message.answer("Компиляция запроса...⏳")
-        await state.set_state(PleaseStop.wait) #  Устанавливаем состояние ожидания
-        try:
-            res = await a_generate(message.text)
-            await message.answer(res)
-        except Exception as e:
-            logging.error(f"Error during generation: {e}")
-            await message.answer("Произошла ошибка при обработке запроса.")
-        finally:
-            await state.clear()  #  Очищаем состояние после обработки
+        await state.set_state(PleaseStop.wait) 
+        res = await a_generate(message.text)
+        await message.answer(res)
+        await state.clear()
 
 async def main() -> None:
     # dp.include_router(router)  #  Роутер уже подключен выше
