@@ -21,7 +21,6 @@ router = Router()
 
 class PleaseStop(StatesGroup):
     wait = State()
-    waiting_for_query = State()
 
 import os
 from dotenv import load_dotenv
@@ -63,11 +62,6 @@ async def command_brone_handler(message: Message) -> None:
 @dp.callback_query(lambda c: c.data == "deepSeek")
 async def callback_deepSeek(call: CallbackQuery, state: FSMContext):
     await call.message.answer("Диалог открыт, задавайте запрос")
-    await state.set_state(PleaseStop.waiting_for_query)
-
-@router.message(PleaseStop.waiting_for_query)
-async def start_flood_please(message: Message):
-    generating(message, State)
 
 
 @router.message(PleaseStop.wait)
