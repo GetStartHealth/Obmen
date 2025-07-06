@@ -113,7 +113,7 @@
       outline: none;
     }
 
-    /* Стили для формы */
+
     form {
       text-align: left;
       max-width: 500px;
@@ -173,7 +173,6 @@
       box-shadow: 0 0 8px rgba(139, 92, 246, 0.5);
     }
 
-    /* Адаптивный дизайн */
     @media (max-width: 768px) {
       #main {
         padding: 30px;
@@ -210,7 +209,6 @@
     <h3>Форма заказа:</h3>
 
     <form id="orderForm">
-      <!-- Вопрос 1: выбор заказа -->
       <fieldset>
         <legend>Что вы заказываете?</legend>
         <label>
@@ -227,7 +225,6 @@
         </label>
       </fieldset>
 
-      <!-- Вопрос 2: номер телефона -->
       <fieldset>
         <legend>Ваш номер телефона:</legend>
         <input type="tel" name="phone" placeholder="+7 (___) ___-__-__"
@@ -259,7 +256,7 @@
     const form = document.getElementById('orderForm');
 
     form.addEventListener('submit', function (event) {
-      event.preventDefault(); // Отменяем стандартную отправку формы
+      event.preventDefault();
 
       const f = new FormData(form);
       const orderType = f.get('orderType');
@@ -269,8 +266,7 @@
 
       getPost(orderType, phone, has, gen).then(result => {
         console.log('Ответ сервера:', result);
-        // Здесь можно добавить уведомление пользователю или очистить форму при необходимости
-        // Например: form.reset();
+  
       });
     });
 
