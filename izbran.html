@@ -6,167 +6,180 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Избранные треки</title>
   <style>
-    body {
-      margin: 0;
-      background-color: #363E6B;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      display: flex;
-      justify-content: center;
-      padding: 40px 20px;
-      min-height: 100vh;
-      color: #fff;
-      user-select: none;
-    }
+  body {
+  margin: 0;
+  background-color: #363E6B;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+  min-height: 100vh;
+  color: #fff;
+  user-select: none;
+}
 
-    #playlist-container {
-      background: #fff; /* белый фон */
-      border-radius: 24px;
-      padding: 30px 30px 40px;
-      max-width: 620px;
-      width: 100%;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-      display: flex;
-      flex-direction: column;
-      color: #363E6B; /* цвет текста */
-      user-select: none;
-      box-sizing: border-box;
-    }
+#playlist-container {
+  background: #fff; /* белый фон */
+  border-radius: 24px;
+  padding: 30px 30px 40px;
+  max-width: 620px;
+  width: 100%;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  color: #363E6B; /* цвет текста */
+  user-select: none;
+  box-sizing: border-box;
+}
 
-    #playlist-container h3 {
-      margin: 0 0 24px 10px;
-      font-weight: 700;
-      font-size: 2rem;
-      letter-spacing: 0.05em;
-      color: #363E6B; /* акцентный цвет */
-      text-shadow: none;
-    }
+#playlist-container h3 {
+  margin: 0 0 24px 10px;
+  font-weight: 700;
+  font-size: 2rem;
+  letter-spacing: 0.05em;
+  color: #363E6B; /* акцентный цвет */
+  text-shadow: none;
+}
 
-    /* Кнопка меню — белая с рамкой и текстом #363E6B */
-    .small-button {
-      align-self: flex-start;
-      margin-bottom: 20px;
-      background: #fff;
-      color: #363E6B;
-      border: 2.5px solid #363E6B;
-      border-radius: 16px;
-      padding: 10px 24px;
-      font-weight: 700;
-      font-size: 1rem;
-      cursor: pointer;
-      box-shadow: 0 5px 18px rgba(54, 62, 107, 0.25);
-      transition: box-shadow 0.3s ease, transform 0.2s ease, color 0.3s ease, border-color 0.3s ease;
-      user-select: none;
-    }
+/* Кнопка меню — белая с рамкой и текстом #363E6B */
+.small-button {
+  align-self: flex-start;
+  margin-bottom: 20px;
+  background: #fff;
+  color: #363E6B;
+  border: 2.5px solid #363E6B;
+  border-radius: 16px;
+  padding: 10px 24px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 5px 18px rgba(54, 62, 107, 0.25);
+  transition: box-shadow 0.3s ease, transform 0.2s ease, color 0.3s ease, border-color 0.3s ease;
+  user-select: none;
+}
 
-    .small-button:hover {
-      box-shadow: 0 9px 28px rgba(54, 62, 107, 0.5);
-      transform: translateY(-3px);
-      color: #2a3150;
-      border-color: #2a3150;
-    }
+.small-button:hover {
+  box-shadow: 0 9px 28px rgba(54, 62, 107, 0.5);
+  transform: translateY(-3px);
+  color: #2a3150;
+  border-color: #2a3150;
+}
 
-    .small-button:active {
-      transform: translateY(0);
-      box-shadow: 0 5px 18px rgba(54, 62, 107, 0.25);
-    }
+.small-button:active {
+  transform: translateY(0);
+  box-shadow: 0 5px 18px rgba(54, 62, 107, 0.25);
+}
 
-    #favorites-container {
-      overflow-y: auto;
-      max-height: 430px;
-      padding-right: 6px;
-      margin-bottom: 20px;
-      user-select: none;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
+#favorites-container {
+  overflow-y: auto;
+  max-height: 430px;
+  padding-right: 6px;
+  margin-bottom: 20px;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
 
-    /* Кнопки треков — фон #363E6B, текст белый */
-    .track-button {
-      background: #363E6B;
-      border: none;
-      border-radius: 16px;
-      padding: 12px 22px;
-      color: white;
-      font-size: 1rem;
-      font-weight: 700;
-      text-align: left;
-      cursor: pointer;
-      box-shadow: 0 5px 18px rgba(54, 62, 107, 0.7);
-      transition: box-shadow 0.3s ease, transform 0.2s ease;
-      user-select: none;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      outline: none;
-    }
+/* Кнопки треков — фон #363E6B, текст белый */
+.track-button {
+  background: #363E6B;
+  border: none;
+  border-radius: 16px;
+  padding: 12px 22px;
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 5px 18px rgba(54, 62, 107, 0.7);
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  user-select: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  outline: none;
+}
 
-    .track-button:hover:not(:disabled) {
-      box-shadow: 0 9px 28px rgba(54, 62, 107, 1);
-      transform: translateY(-3px);
-    }
+.track-button:hover:not(:disabled) {
+  box-shadow: 0 9px 28px rgba(54, 62, 107, 1);
+  transform: translateY(-3px);
+}
 
-    .track-button:active:not(:disabled) {
-      transform: translateY(0);
-      box-shadow: 0 5px 18px rgba(54, 62, 107, 0.7);
-    }
+.track-button:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 5px 18px rgba(54, 62, 107, 0.7);
+}
 
-    .track-button:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      box-shadow: none;
-      background: #ccc;
-      color: #666;
-    }
+.track-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+  background: #ccc;
+  color: #666;
+}
 
-    #audio-player {
-      width: 100%;
-      border-radius: 14px;
-      box-shadow: 0 6px 20px rgba(54, 62, 107, 0.3);
-      outline: none;
-      background-color: #fff;
-      height: 46px;
-      user-select: none;
-    }
+#audio-player {
+  width: 100%;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(54, 62, 107, 0.3);
+  outline: none;
+  background-color: #fff;
+  height: 46px;
+  user-select: none;
+}
 
-    #favorites-container::-webkit-scrollbar {
-      width: 8px;
-    }
+#favorites-container::-webkit-scrollbar {
+  width: 8px;
+}
 
-    #favorites-container::-webkit-scrollbar-track {
-      background: transparent;
-    }
+#favorites-container::-webkit-scrollbar-track {
+  background: transparent;
+}
 
-    #favorites-container::-webkit-scrollbar-thumb {
-      background: #363E6B;
-      border-radius: 8px;
-    }
+#favorites-container::-webkit-scrollbar-thumb {
+  background: #363E6B;
+  border-radius: 8px;
+}
 
-    @media (max-width: 640px) {
-      #playlist-container {
-        padding: 25px 20px 30px;
-      }
+@media (max-width: 640px) {
+  #playlist-container {
+    padding: 25px 20px 30px;
+  }
 
-      #playlist-container h3 {
-        font-size: 1.6rem;
-      }
+  #playlist-container h3 {
+    font-size: 1.6rem;
+  }
 
-      #favorites-container {
-        max-height: 300px;
-      }
+  #favorites-container {
+    max-height: 300px;
+  }
 
-      .track-button {
-        font-size: 0.9rem;
-        padding: 10px 16px;
-      }
+  .track-button {
+    font-size: 0.9rem;
+    padding: 10px 16px;
+  }
 
-      #audio-player {
-        height: 40px;
-      }
-    }
-  </style>
+  #audio-player {
+    height: 40px;
+  }
+}
+
+/* Добавлено: увеличиваем кнопки на очень маленьких экранах */
+@media (max-width: 480px) {
+  .small-button {
+    font-size: 1.2rem;
+    padding: 14px 28px;
+  }
+
+  .track-button {
+    font-size: 1.1rem;
+    padding: 14px 24px;
+  }
+}
+</style>
 </head>
 
 <body>
