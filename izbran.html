@@ -85,13 +85,12 @@
   <div id="main">
     <h3>Избранные треки</h3>
     <div id="favorites-container">
-      <!-- Кнопки избранных треков появятся здесь -->
     </div>
     <audio id="audio-player" controls preload="none"></audio>
   </div>
 
   <script>
-    // Массив всех треков, как в вашем примере
+
     const tracks = [
       { title: '1 ТГК МУЗ-ЧАТ', url: '' },
       { title: '', url: '' },
@@ -212,14 +211,14 @@
     const favoritesContainer = document.getElementById('favorites-container');
     const audioPlayer = document.getElementById('audio-player');
 
-    // Получаем из localStorage строки с названиями треков, разделённые переносом строки
+
     const favoriteTitlesRaw = localStorage.getItem('trek') || '';
     const favoriteTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
-    // Находим объекты треков по названиям из избранного
+
     const favoriteTracks = favoriteTitles
       .map(title => tracks.find(t => t.title === title))
-      .filter(t => t && t.url); // фильтруем только с url для воспроизведения
+      .filter(t => t && t.url); 
 
     if (favoriteTracks.length === 0) {
       favoritesContainer.textContent = 'Плейлист избранных треков пуст или не содержит доступных для воспроизведения треков.';
