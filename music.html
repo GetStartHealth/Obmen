@@ -232,6 +232,12 @@
       </fieldset>
 
       <fieldset>
+        <legend>Ваша почта:</legend>
+        <input type="el" name="elpochta" placeholder="эл.почта"
+          aria-label="Введите эл.почту" />
+      </fieldset>
+
+      <fieldset>
         <legend>Есть ли у вас текст и жанр песни?</legend>
         <label>
           <input type="checkbox" name="hasText" id="hasText" />
@@ -263,19 +269,21 @@
       const phone = f.get('phone');
       const has = f.get('hasText') === 'on';
       const gen = f.get('genre');
+      const el = f.get('elpochta');
 
-      getPost(orderType, phone, has, gen).then(result => {
+      getPost(orderType, phone, has, gen, el).then(result => {
         console.log('Ответ сервера:', result);
   
       });
     });
 
-    async function getPost(orderType, phone, has, gen) {
+    async function getPost(orderType, phone, has, gen, el) {
       const data = {
         orderType,
         phone,
         hasText: has,
-        genre: gen
+        genre: gen,
+        el,
       };
 
       const response = await fetch('https://nexboilerplate.vercel.app/api/getyears', {
