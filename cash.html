@@ -2,124 +2,114 @@
 <html lang="ru">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Музыка и Клипы</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+      background-color: #363E6B; /* темный фон */
+      color: white;
       margin: 0;
       padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Картинка сверху */
+    #top-image {
+      width: 100%;
+      max-width: 600px;
+      height: auto;
+      object-fit: cover;
+      margin-top: 20px;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
     }
 
     #main {
-      background: rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(10px);
+      background-color: white; /* белый блок */
+      color: #363E6B; /* темный текст */
+      padding: 40px 30px;
       border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-      padding: 40px;
-      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      margin: 30px 20px 40px;
       max-width: 600px;
       width: 90%;
-    }
-
-    h1 {
-      color: #333;
-      font-size: 2.8em;
-      margin-bottom: 20px;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+      text-align: center;
     }
 
     h3 {
-      color: #666;
-      font-size: 1.6em;
+      font-size: 2em;
       margin-bottom: 30px;
-      font-weight: normal;
+      font-weight: 700;
+      color: #363E6B;
+      text-shadow: none;
     }
 
     .cards-container {
       display: flex;
       justify-content: center;
-      gap: 30px;
+      gap: 25px;
+      flex-wrap: wrap;
     }
 
     .small-button {
-      background: linear-gradient(to right, #ff758c, #ff7eb3);
-      border: none;
+      background-color: #363E6B; /* акцентный темный фон */
       border-radius: 15px;
-      padding: 15px 30px;
-      color: white;
+      padding: 15px 35px;
+      color: white; /* белый текст */
       font-size: 1.2em;
       font-weight: bold;
       cursor: pointer;
-      box-shadow: 0 5px 15px rgba(255, 120, 140, 0.4);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border: none;
+      user-select: none;
       text-transform: uppercase;
       letter-spacing: 1px;
       outline: none;
-      /* Убираем стандартную обводку */
+      min-width: 120px;
+      box-shadow: 0 5px 15px rgba(54, 62, 107, 0.7);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
       position: relative;
       overflow: hidden;
     }
 
     .small-button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(255, 120, 140, 0.5);
-    }
-
-    .small-button::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(255, 255, 255, 0.2);
-      /* Светлый полупрозрачный слой */
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .small-button:hover::before {
-      opacity: 1;
+      background-color: #2f355a;
+      box-shadow: 0 8px 25px rgba(54, 62, 107, 0.9);
     }
 
     .small-button:active {
-      transform: translateY(0);
-      box-shadow: 0 5px 15px rgba(255, 120, 140, 0.4);
+      background-color: #363E6B;
+      box-shadow: 0 5px 15px rgba(54, 62, 107, 0.7);
     }
 
     .small-button:focus {
       outline: none;
+      box-shadow: 0 0 0 3px #a0a8d5;
     }
 
-    /* Адаптивный дизайн */
+    /* Адаптив */
     @media (max-width: 768px) {
       #main {
-        padding: 30px;
-      }
-
-      h1 {
-        font-size: 2.2em;
+        padding: 30px 20px;
       }
 
       h3 {
-        font-size: 1.4em;
+        font-size: 1.6em;
       }
 
       .cards-container {
         flex-direction: column;
-        align-items: above;
+        gap: 20px;
       }
 
       .small-button {
         font-size: 1em;
         padding: 12px 25px;
+        min-width: auto;
       }
     }
   </style>
