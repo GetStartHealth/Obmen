@@ -7,53 +7,91 @@
   <title>Избранные треки</title>
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
       margin: 0;
-      padding: 0;
+      background-color: #363E6B;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
       display: flex;
       justify-content: center;
-      align-items: flex-start;
+      padding: 40px 20px;
       min-height: 100vh;
-      padding-top: 40px;
+      color: #363E6B;
+      user-select: none;
     }
 
     #main {
-      background: rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(10px);
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-      padding: 40px;
-      text-align: center;
-      max-width: 600px;
-      width: 90%;
+      background: #fff;
+      border-radius: 24px;
+      padding: 30px 30px 40px;
+      max-width: 620px;
+      width: 100%;
+      box-shadow: 0 12px 30px rgba(54, 62, 107, 0.3);
+      display: flex;
+      flex-direction: column;
+      color: #363E6B;
     }
 
     h3 {
-      color: #666;
-      font-size: 1.6em;
-      margin-bottom: 30px;
-      font-weight: normal;
+      margin: 0 0 24px 10px;
+      font-weight: 700;
+      font-size: 2rem;
+      letter-spacing: 0.05em;
+      color: #363E6B;
+    }
+
+    /* Кнопка меню — белая с рамкой и текстом #363E6B */
+    .small-button {
+      align-self: flex-start;
+      margin-bottom: 20px;
+      background: #fff;
+      color: #363E6B;
+      border: 2.5px solid #363E6B;
+      border-radius: 16px;
+      padding: 10px 24px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 5px 18px rgba(54, 62, 107, 0.25);
+      transition: box-shadow 0.3s ease, transform 0.2s ease, color 0.3s ease, border-color 0.3s ease;
+      user-select: none;
+    }
+
+    .small-button:hover {
+      box-shadow: 0 9px 28px rgba(54, 62, 107, 0.5);
+      transform: translateY(-3px);
+      color: #2a3150;
+      border-color: #2a3150;
+    }
+
+    .small-button:active {
+      transform: translateY(0);
+      box-shadow: 0 5px 18px rgba(54, 62, 107, 0.25);
     }
 
     #favorites-container {
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      gap: 12px;
+      max-height: 430px;
+      overflow-y: auto;
+      padding-right: 6px;
+      user-select: none;
     }
 
+    /* Кнопки треков — фон #363E6B, текст белый */
     button.track-button {
-      background: linear-gradient(to right, #ff758c, #ff7eb3);
+      background: #363E6B;
       border: none;
-      border-radius: 15px;
-      padding: 12px 20px;
+      border-radius: 16px;
+      padding: 12px 22px;
       color: white;
-      font-size: 1em;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 5px 15px rgba(255, 120, 140, 0.4);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      font-size: 1rem;
+      font-weight: 700;
       text-align: left;
+      cursor: pointer;
+      box-shadow: 0 5px 18px rgba(54, 62, 107, 0.7);
+      transition: box-shadow 0.3s ease, transform 0.2s ease;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -61,37 +99,78 @@
       user-select: none;
     }
 
-    button.track-button:hover {
+    button.track-button:hover:not(:disabled) {
+      box-shadow: 0 9px 28px rgba(54, 62, 107, 1);
       transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(255, 120, 140, 0.5);
+    }
+
+    button.track-button:active:not(:disabled) {
+      transform: translateY(0);
+      box-shadow: 0 5px 18px rgba(54, 62, 107, 0.7);
     }
 
     button.track-button:disabled {
       opacity: 0.5;
       cursor: not-allowed;
       box-shadow: none;
+      background: #ccc;
+      color: #666;
     }
 
     audio {
       margin-top: 30px;
       width: 100%;
+      border-radius: 14px;
+      box-shadow: 0 6px 20px rgba(54, 62, 107, 0.3);
       outline: none;
-      border-radius: 10px;
+      background-color: #fff;
+      height: 46px;
+      user-select: none;
+    }
+
+    #favorites-container::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    #favorites-container::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    #favorites-container::-webkit-scrollbar-thumb {
+      background: #363E6B;
+      border-radius: 8px;
+    }
+
+    @media (max-width: 640px) {
+      #main {
+        padding: 25px 20px 30px;
+      }
+
+      h3 {
+        font-size: 1.6rem;
+      }
+
+      button.track-button {
+        font-size: 0.9rem;
+        padding: 10px 16px;
+      }
+
+      audio {
+        height: 40px;
+      }
     }
   </style>
 </head>
 
 <body>
-  <div id="main">
+  <div id="main" aria-label="Плейлист избранных треков">
     <h3>Избранные треки</h3>
-    <button class="small-button" onclick="location.href='index.html'" aria-label="Меню">Меню</button>
-    <div id="favorites-container">
-    </div>
-    <audio id="audio-player" controls preload="none"></audio>
+    <button class="small-button" onclick="location.href='index.html'" aria-label="Перейти в меню">Меню</button>
+    <div id="favorites-container" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
+    <audio id="audio-player" controls preload="none" aria-label="Аудиоплеер для избранных треков"></audio>
   </div>
 
   <script>
-
     const tracks = [
       { title: '1 ТГК МУЗ-ЧАТ', url: '' },
       { title: '', url: '' },
@@ -212,23 +291,27 @@
     const favoritesContainer = document.getElementById('favorites-container');
     const audioPlayer = document.getElementById('audio-player');
 
-
     const favoriteTitlesRaw = localStorage.getItem('trek') || '';
     const favoriteTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
-
     const favoriteTracks = favoriteTitles
       .map(title => tracks.find(t => t.title === title))
-      .filter(t => t && t.url); 
+      .filter(t => t && t.url);
 
     if (favoriteTracks.length === 0) {
       favoritesContainer.textContent = 'Плейлист избранных треков пуст или не содержит доступных для воспроизведения треков.';
+      favoritesContainer.style.color = '#363E6B';
+      favoritesContainer.style.padding = '10px';
+      favoritesContainer.style.fontWeight = '600';
+      favoritesContainer.style.userSelect = 'none';
     } else {
       favoriteTracks.forEach(track => {
         const btn = document.createElement('button');
         btn.textContent = track.title;
         btn.className = 'track-button';
         btn.disabled = !track.url;
+        btn.title = `Воспроизвести ${track.title}`;
+        btn.setAttribute('aria-label', `Воспроизвести ${track.title}`);
 
         btn.addEventListener('click', () => {
           if (track.url) {
@@ -246,4 +329,3 @@
 </body>
 
 </html>
-
