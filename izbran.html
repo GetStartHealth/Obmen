@@ -17,6 +17,7 @@
       padding: 40px 20px;
       min-height: 100vh;
       color: #fff;
+      user-select: none;
     }
 
     #playlist-container {
@@ -28,8 +29,9 @@
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
       display: flex;
       flex-direction: column;
-      color: #363E6B; /* цвет текста заголовка */
+      color: #363E6B; /* цвет текста */
       user-select: none;
+      box-sizing: border-box;
     }
 
     #playlist-container h3 {
@@ -37,7 +39,8 @@
       font-weight: 700;
       font-size: 2rem;
       letter-spacing: 0.05em;
-      color: #363E6B;
+      color: #363E6B; /* акцентный цвет */
+      text-shadow: none;
     }
 
     /* Кнопка меню — белая с рамкой и текстом #363E6B */
@@ -69,55 +72,19 @@
       box-shadow: 0 5px 18px rgba(54, 62, 107, 0.25);
     }
 
-    #buttons-container {
+    #favorites-container {
       overflow-y: auto;
       max-height: 430px;
       padding-right: 6px;
       margin-bottom: 20px;
       user-select: none;
-    }
-
-    .track-row {
       display: flex;
-      align-items: center;
-      margin-bottom: 12px;
+      flex-direction: column;
       gap: 12px;
     }
 
-    /* Кнопка добавления — акцентный цвет #363E6B */
-    .add-btn {
-      flex-shrink: 0;
-      background: #363E6B;
-      border: none;
-      border-radius: 50%;
-      width: 36px;
-      height: 36px;
-      font-size: 1.7rem;
-      line-height: 1;
-      color: white;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 5px 14px rgba(54, 62, 107, 0.7);
-      transition: box-shadow 0.3s ease, transform 0.2s ease;
-      user-select: none;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .add-btn:hover {
-      box-shadow: 0 8px 22px rgba(54, 62, 107, 0.9);
-      transform: scale(1.1);
-    }
-
-    .add-btn:active {
-      transform: scale(0.95);
-      box-shadow: 0 5px 14px rgba(54, 62, 107, 0.7);
-    }
-
     /* Кнопки треков — фон #363E6B, текст белый */
-    .local-track-button {
-      flex-grow: 1;
+    .track-button {
       background: #363E6B;
       border: none;
       border-radius: 16px;
@@ -133,19 +100,20 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      outline: none;
     }
 
-    .local-track-button:hover:not(:disabled) {
+    .track-button:hover:not(:disabled) {
       box-shadow: 0 9px 28px rgba(54, 62, 107, 1);
       transform: translateY(-3px);
     }
 
-    .local-track-button:active:not(:disabled) {
+    .track-button:active:not(:disabled) {
       transform: translateY(0);
       box-shadow: 0 5px 18px rgba(54, 62, 107, 0.7);
     }
 
-    .local-track-button:disabled {
+    .track-button:disabled {
       opacity: 0.5;
       cursor: not-allowed;
       box-shadow: none;
@@ -163,15 +131,15 @@
       user-select: none;
     }
 
-    #buttons-container::-webkit-scrollbar {
+    #favorites-container::-webkit-scrollbar {
       width: 8px;
     }
 
-    #buttons-container::-webkit-scrollbar-track {
+    #favorites-container::-webkit-scrollbar-track {
       background: transparent;
     }
 
-    #buttons-container::-webkit-scrollbar-thumb {
+    #favorites-container::-webkit-scrollbar-thumb {
       background: #363E6B;
       border-radius: 8px;
     }
@@ -185,17 +153,11 @@
         font-size: 1.6rem;
       }
 
-      .track-row {
-        gap: 10px;
+      #favorites-container {
+        max-height: 300px;
       }
 
-      .add-btn {
-        width: 32px;
-        height: 32px;
-        font-size: 1.5rem;
-      }
-
-      .local-track-button {
+      .track-button {
         font-size: 0.9rem;
         padding: 10px 16px;
       }
@@ -208,12 +170,12 @@
 </head>
 
 <body>
-  <div id="main" aria-label="Плейлист избранных треков">
+  <section id="playlist-container" aria-label="Плейлист избранных треков">
     <h3>Избранные треки</h3>
     <button class="small-button" onclick="location.href='index.html'" aria-label="Перейти в меню">Меню</button>
     <div id="favorites-container" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
     <audio id="audio-player" controls preload="none" aria-label="Аудиоплеер для избранных треков"></audio>
-  </div>
+  </section>
 
   <script>
     const tracks = [
@@ -374,3 +336,4 @@
 </body>
 
 </html>
+
