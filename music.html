@@ -3,12 +3,13 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Музыка и Клипы</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+      background-color: #363E6B; /* акцентный фон */
+      color: white; /* белый текст по умолчанию */
       margin: 0;
       padding: 0;
       display: flex;
@@ -18,159 +19,77 @@
     }
 
     #main {
-      background: rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(10px);
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
       padding: 40px;
-      text-align: center;
       max-width: 600px;
       width: 90%;
+      text-align: center;
+      /* фон оставляем прозрачным или белым, как было */
+      background-color: transparent;
     }
 
-    h1 {
-      color: #E3E4EA;
-      font-size: 2.8em;
-      margin-bottom: 20px;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    h3,
+    legend,
+    label {
+      color: white !important; /* белый текст для заголовков и подписей */
     }
 
-    h3 {
-      color: #E3E4EA;
-      font-size: 1.6em;
-      margin-bottom: 30px;
-      font-weight: normal;
+    input,
+    select {
+      color: white;
+      background-color: transparent;
+      border: 1px solid white;
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-size: 1em;
+      outline: none;
+      box-sizing: border-box;
     }
 
-    .cards-container {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
+    input:focus,
+    select:focus {
+      border-color: #e3e4ea;
+      box-shadow: 0 0 8px #e3e4ea;
+      background-color: rgba(255 255 255 / 0.1);
+      color: white;
     }
 
     .small-button {
-      background: linear-gradient(to right,#363E6B , #434d85);
-      border: none;
+      background: white;
       border-radius: 15px;
       padding: 15px 30px;
-      color: #E3E4EA;
+      color: #363E6B;
       font-size: 1.2em;
       font-weight: bold;
       cursor: pointer;
-      box-shadow: #363E6B;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border: none;
+      user-select: none;
       text-transform: uppercase;
       letter-spacing: 1px;
       outline: none;
-      position: relative;
-      overflow: hidden;
     }
 
     .small-button:hover {
-      transform: translateY(-3px);
-      box-shadow: #363E6B;
-    }
-
-    .small-button::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(255, 255, 255, 0.2);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    #selectedItems {
-      min-height: 60px;
-      font-size: 1.25em;
-      color: #4b5563;
-      background-color: #e0e7ff;
-      border: 2px solid #363E6B;
-      border-radius: 12px;
-      padding: 20px 25px;
-      box-shadow: inset 0 2px 6px rgba(139, 92, 246, 0.3);
-      white-space: pre-wrap;
-      word-wrap: break-word;
-      user-select: text;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    .small-button:hover::before {
-      opacity: 1;
-    }
-
-    .small-button:active {
-      transform: translateY(0);
-      box-shadow: #363E6B;
-    }
-
-    .small-button:focus {
-      outline: none;
-    }
-
-
-    form {
-      text-align: left;
-      max-width: 500px;
-      margin: 0 auto 30px auto;
+      background: #e3e4ea;
+      color: #363E6B;
     }
 
     fieldset {
-      border: 2px solid 363E6B;
+      border: 2px solid white;
       border-radius: 15px;
       padding: 20px 25px;
       margin-bottom: 25px;
-      background-color: #f9f7ff;
-      box-shadow: inset 0 2px 6px rgba(139, 92, 246, 0.1);
-    }
-
-    legend {
-      font-weight: 700;
-      font-size: 1.3em;
-      color: #363E6B;
-      padding: 0 10px;
-    }
-
-    label {
-      display: flex;
-      align-items: center;
-      margin-bottom: 15px;
-      font-size: 1.1em;
-      color: #4b5563;
-      cursor: pointer;
-      user-select: none;
+      background-color: transparent;
+      color: white;
+      text-align: left;
     }
 
     label input[type="radio"],
     label input[type="checkbox"] {
       margin-right: 12px;
       cursor: pointer;
-      accent-color: #363E6B;
+      accent-color: #e3e4ea;
       width: 18px;
       height: 18px;
-    }
-
-    input[type="text"],
-    input[type="tel"] {
-      width: 100%;
-      padding: 10px 12px;
-      border: 2px solid #363E6B;
-      border-radius: 12px;
-      font-size: 1em;
-      outline: none;
-      transition: border-color 0.3s ease;
-      box-sizing: border-box;
-    }
-
-    input[type="text"]:focus,
-    input[type="tel"]:focus {
-      border-color: #363E6B;
-      box-shadow: #363E6B;
     }
 
     @media (max-width: 768px) {
@@ -178,17 +97,8 @@
         padding: 30px;
       }
 
-      h1 {
-        font-size: 2.2em;
-      }
-
       h3 {
         font-size: 1.4em;
-      }
-
-      .cards-container {
-        flex-direction: column;
-        align-items: above;
       }
 
       .small-button {
@@ -203,7 +113,7 @@
   <div id="main">
     <h3>Заказы</h3>
     <button class="small-button" onclick="location.href='index.html'" aria-label="Меню">Меню</button>
-    <div class="cards-container">
+    <div class="cards-container" style="margin: 20px 0;">
       <button class="small-button" onclick="location.href='cash.html'" aria-label="Перейти к оплате">Музыка</button>
     </div>
 
@@ -228,14 +138,12 @@
 
       <fieldset>
         <legend>Ваш номер телефона:</legend>
-        <input type="tel" name="phone" placeholder="+7 (___) ___-__-__"
-          aria-label="Введите ваш номер телефона" />
+        <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" aria-label="Введите ваш номер телефона" />
       </fieldset>
 
       <fieldset>
         <legend>Ваша почта:</legend>
-        <input type="el" name="elpochta" placeholder="эл.почта"
-          aria-label="Введите эл.почту" />
+        <input type="el" name="elpochta" placeholder="эл.почта" aria-label="Введите эл.почту" />
       </fieldset>
 
       <fieldset>
@@ -274,7 +182,6 @@
 
       getPost(orderType, phone, has, gen, el).then(result => {
         console.log('Ответ сервера:', result);
-  
       });
     });
 
@@ -302,4 +209,3 @@
 </body>
 
 </html>
-
