@@ -20,15 +20,15 @@
     }
 
     #playlist-container {
-      background: rgba(255 255 255 / 0.12);
+      background: #fff; /* белый фон */
       border-radius: 24px;
       padding: 30px 30px 40px;
       max-width: 620px;
       width: 100%;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
       display: flex;
       flex-direction: column;
-      color: #fff;
+      color: #363E6B; /* цвет текста заголовка */
       user-select: none;
     }
 
@@ -37,7 +37,36 @@
       font-weight: 700;
       font-size: 2rem;
       letter-spacing: 0.05em;
-      color: #fff;
+      color: #363E6B;
+    }
+
+    /* Кнопка меню — белая с рамкой и текстом #363E6B */
+    .small-button {
+      align-self: flex-start;
+      margin-bottom: 20px;
+      background: #fff;
+      color: #363E6B;
+      border: 2.5px solid #363E6B;
+      border-radius: 16px;
+      padding: 10px 24px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 5px 18px rgba(54, 62, 107, 0.25);
+      transition: box-shadow 0.3s ease, transform 0.2s ease, color 0.3s ease, border-color 0.3s ease;
+      user-select: none;
+    }
+
+    .small-button:hover {
+      box-shadow: 0 9px 28px rgba(54, 62, 107, 0.5);
+      transform: translateY(-3px);
+      color: #2a3150;
+      border-color: #2a3150;
+    }
+
+    .small-button:active {
+      transform: translateY(0);
+      box-shadow: 0 5px 18px rgba(54, 62, 107, 0.25);
     }
 
     #buttons-container {
@@ -45,6 +74,7 @@
       max-height: 430px;
       padding-right: 6px;
       margin-bottom: 20px;
+      user-select: none;
     }
 
     .track-row {
@@ -54,9 +84,10 @@
       gap: 12px;
     }
 
+    /* Кнопка добавления — акцентный цвет #363E6B */
     .add-btn {
       flex-shrink: 0;
-      background: linear-gradient(45deg, #363E6B, #6570af);
+      background: #363E6B;
       border: none;
       border-radius: 50%;
       width: 36px;
@@ -66,7 +97,7 @@
       color: white;
       font-weight: 700;
       cursor: pointer;
-      box-shadow: 0 5px 14px #363E6B;
+      box-shadow: 0 5px 14px rgba(54, 62, 107, 0.7);
       transition: box-shadow 0.3s ease, transform 0.2s ease;
       user-select: none;
       display: flex;
@@ -75,18 +106,19 @@
     }
 
     .add-btn:hover {
-      box-shadow: 0 8px 22px #363E6B;
+      box-shadow: 0 8px 22px rgba(54, 62, 107, 0.9);
       transform: scale(1.1);
     }
 
     .add-btn:active {
       transform: scale(0.95);
-      box-shadow: 0 5px 14px #363E6B;
+      box-shadow: 0 5px 14px rgba(54, 62, 107, 0.7);
     }
 
+    /* Кнопки треков — фон #363E6B, текст белый */
     .local-track-button {
       flex-grow: 1;
-      background: linear-gradient(45deg, #363E6B, #363E6B);
+      background: #363E6B;
       border: none;
       border-radius: 16px;
       padding: 12px 22px;
@@ -95,7 +127,7 @@
       font-weight: 700;
       text-align: left;
       cursor: pointer;
-      box-shadow: 0 5px 18px #363E6B;
+      box-shadow: 0 5px 18px rgba(54, 62, 107, 0.7);
       transition: box-shadow 0.3s ease, transform 0.2s ease;
       user-select: none;
       white-space: nowrap;
@@ -104,19 +136,21 @@
     }
 
     .local-track-button:hover:not(:disabled) {
-      box-shadow: rgba;
+      box-shadow: 0 9px 28px rgba(54, 62, 107, 1);
       transform: translateY(-3px);
     }
 
     .local-track-button:active:not(:disabled) {
       transform: translateY(0);
-      box-shadow: 0 5px 18px #363E6B;
+      box-shadow: 0 5px 18px rgba(54, 62, 107, 0.7);
     }
 
     .local-track-button:disabled {
       opacity: 0.5;
       cursor: not-allowed;
       box-shadow: none;
+      background: #ccc;
+      color: #666;
     }
 
     #audio-player {
@@ -126,6 +160,7 @@
       outline: none;
       background-color: #fff;
       height: 46px;
+      user-select: none;
     }
 
     #buttons-container::-webkit-scrollbar {
@@ -175,12 +210,12 @@
 <body>
   <section id="playlist-container" aria-label="Плейлист треков">
     <h3>Треки</h3>
-    <button class="small-button" onclick="location.href='index.html'" aria-label="Перейти к оплате">Меню</button>
+    <button class="small-button" onclick="location.href='index.html'" aria-label="Перейти в меню">Меню</button>
     <div id="buttons-container" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
     <audio id="audio-player" controls preload="none" aria-label="Аудиоплеер для треков"></audio>
   </section>
 
-    <script>
+  <script>
     const tracks = [
       { title: '1 Богеме Ивлеевой', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская%20душа%20-%20Богеме%20Ивлеевой%20(5).mp3' },
       { title: '2 Я музыкант, я делаю рок', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская_душа_Я_музыкант,_я_делаю_рок,.mp3' },
@@ -232,14 +267,11 @@
       { title: '48 Красный крест', url: 'https://nextjs-boilerplate-i6pd.vercel.app/На%20поле%20боя,%20в%20вихре%20огня%20(1).mp3' }
     ];
 
-
     const buttonsContainer = document.getElementById('buttons-container');
     const audioPlayer = document.getElementById('audio-player');
 
     function addToPlaylist(trackTitle) {
-
       let current = localStorage.getItem('trek') || '';
-
       let songs = current.split('\n').filter(s => s.trim() !== '');
 
       if (songs.includes(trackTitle)) {
@@ -248,75 +280,47 @@
       }
 
       songs.push(trackTitle);
-
       localStorage.setItem('trek', songs.join('\n'));
       alert(`Песня "${trackTitle}" добавлена в плейлист.`);
     }
 
-    function createLocalTrackButtons() {
-      buttonsContainer.innerHTML = '';
-      tracks.forEach(track => {
-        if (!track.title.trim()) return;
+    function createTrackRow(track) {
+      const row = document.createElement('div');
+      row.className = 'track-row';
 
-        const trackWrapper = document.createElement('div');
-        trackWrapper.style.display = 'flex';
-        trackWrapper.style.alignItems = 'center';
-        trackWrapper.style.gap = '10px';
-        trackWrapper.style.marginBottom = '10px';
-        const addBtn = document.createElement('button');
-        addBtn.textContent = '+';
-        addBtn.style.background = 'rgba(0,0,0,0.05)';
-        addBtn.style.color = '#333';
-        addBtn.style.border = '1px solid rgba(0,0,0,0.1)';
-        addBtn.style.borderRadius = '6px';
-        addBtn.style.padding = '4px 10px';
-        addBtn.style.cursor = 'pointer';
-        addBtn.style.fontWeight = '500';
-        addBtn.style.fontSize = '0.85em';
-        addBtn.style.userSelect = 'none';
-        addBtn.style.transition = 'background-color 0.3s ease, border-color 0.3s ease';
+      const addBtn = document.createElement('button');
+      addBtn.className = 'add-btn';
+      addBtn.textContent = '+';
+      addBtn.title = `Добавить "${track.title}" в плейлист`;
+      addBtn.setAttribute('aria-label', `Добавить ${track.title} в плейлист`);
+      addBtn.onclick = () => addToPlaylist(track.title);
 
-        addBtn.addEventListener('mouseenter', () => {
-          addBtn.style.background = 'rgba(0,0,0,0.1)';
-          addBtn.style.borderColor = 'rgba(0,0,0,0.2)';
-        });
-        addBtn.addEventListener('mouseleave', () => {
-          addBtn.style.background = 'rgba(0,0,0,0.05)';
-          addBtn.style.borderColor = 'rgba(0,0,0,0.1)';
-        });
+      const trackBtn = document.createElement('button');
+      trackBtn.className = 'local-track-button';
+      trackBtn.textContent = track.title;
+      trackBtn.title = `Воспроизвести ${track.title}`;
+      trackBtn.disabled = !track.url;
+      trackBtn.onclick = () => {
+        if (track.url) {
+          audioPlayer.src = track.url;
+          audioPlayer.play();
+        }
+      };
 
-        addBtn.addEventListener('click', () => {
-          addToPlaylist(track.title);
-        });
+      row.appendChild(addBtn);
+      row.appendChild(trackBtn);
 
-        const playBtn = document.createElement('button');
-        playBtn.textContent = track.title;
-        playBtn.disabled = !track.url;
-        playBtn.className = 'local-track-button';
-        playBtn.style.flexGrow = '1';
-        playBtn.style.textAlign = 'left';
-
-        playBtn.addEventListener('click', async () => {
-          if (!track.url) return;
-          try {
-            if (audioPlayer.src !== track.url) {
-              audioPlayer.src = track.url;
-            }
-            await audioPlayer.play();
-          } catch (e) {
-            console.warn('Ошибка воспроизведения:', e);
-          }
-        });
-
-        trackWrapper.appendChild(addBtn);
-        trackWrapper.appendChild(playBtn);
-
-        buttonsContainer.appendChild(trackWrapper);
-      });
+      return row;
     }
 
-    createLocalTrackButtons();
+    tracks.forEach(track => {
+      const row = createTrackRow(track);
+      buttonsContainer.appendChild(row);
+    });
   </script>
 </body>
+
+</html>
+
 
 </html>
