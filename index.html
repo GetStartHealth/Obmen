@@ -20,6 +20,17 @@
       user-select: none;
     }
 
+    .bottom-photo {
+  width: 100%;
+  height: auto;
+  margin-top: 30px;
+  border-radius: 16px;
+  object-fit: cover;
+  user-select: none;
+  display: block;
+}
+
+
     #playlist-container {
       background: #fff; /* белый фон */
       border-radius: 24px;
@@ -109,12 +120,14 @@
 
 <body>
   <section id="playlist-container" aria-label="Главное меню МузЧат">
-    <h3>МузЧат</h3>
-    <div class="cards-container">
-      <button class="small-button" onclick="location.href='cash.html'" aria-label="Перейти к музыке">Музыка</button>
-      <button class="small-button" onclick="location.href='music.html'" aria-label="Перейти к оплате">Заказы</button>
-    </div>
-  </section>
+  <h3>МузЧат</h3>
+  <div class="cards-container">
+    <button class="small-button" onclick="location.href='cash.html'" aria-label="Перейти к музыке">Музыка</button>
+    <button class="small-button" onclick="location.href='music.html'" aria-label="Перейти к оплате">Заказы</button>
+  </div>
+  <img src="photo_2024-12-20_14-43-13.jpg" alt="Фотография" class="bottom-photo" />
+</section>
+
 </body>
 
 </html>
