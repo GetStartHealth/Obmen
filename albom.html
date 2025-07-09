@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Альбомы</title>
- <style>
+  <style>
     body {
       margin: 0;
       background-color: #363E6B;
@@ -16,12 +16,12 @@
       justify-content: center;
       padding: 40px 20px;
       min-height: 100vh;
-      color: #363E6B;
+      color: #fff;
       user-select: none;
     }
 
-    #main {
-      background: #fff;
+    #playlist-container {
+      background: #fff; /* белый фон */
       border-radius: 24px;
       padding: 30px 30px 40px;
       max-width: 620px;
@@ -29,15 +29,17 @@
       box-shadow: 0 12px 30px rgba(54, 62, 107, 0.3);
       display: flex;
       flex-direction: column;
-      color: #363E6B;
+      color: #fff; /* белый текст */
+      user-select: none;
     }
 
-    h3 {
+    #playlist-container h3 {
       margin: 0 0 24px 10px;
       font-weight: 700;
       font-size: 2rem;
       letter-spacing: 0.05em;
-      color: #363E6B;
+      color: #fff; /* белый текст */
+      text-shadow: 0 0 5px rgba(0, 0, 0, 0.7); /* тень для видимости */
     }
 
     /* Кнопка меню — белая с рамкой и текстом #363E6B */
@@ -69,18 +71,55 @@
       box-shadow: 0 5px 18px rgba(54, 62, 107, 0.25);
     }
 
-    #favorites-container {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      max-height: 430px;
+    #buttons-container {
       overflow-y: auto;
+      max-height: 430px;
       padding-right: 6px;
+      margin-bottom: 20px;
       user-select: none;
     }
 
-    /* Кнопки треков — фон #363E6B, текст белый */
-    button.track-button {
+    .track-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+      gap: 12px;
+    }
+
+    /* Кнопка "+" — круглая с градиентом и тенью */
+    .add-btn {
+      flex-shrink: 0;
+      background: linear-gradient(45deg, #363E6B, #6570af);
+      border: none;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      font-size: 1.7rem;
+      line-height: 1;
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 5px 14px #363E6B;
+      transition: box-shadow 0.3s ease, transform 0.2s ease;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      user-select: none;
+    }
+
+    .add-btn:hover {
+      box-shadow: 0 8px 22px #363E6B;
+      transform: scale(1.1);
+    }
+
+    .add-btn:active {
+      transform: scale(0.95);
+      box-shadow: 0 5px 14px #363E6B;
+    }
+
+    /* Кнопка трека — фон #363E6B, белый текст, закругления, тень */
+    .local-track-button {
+      flex-grow: 1;
       background: #363E6B;
       border: none;
       border-radius: 16px;
@@ -95,30 +134,29 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      outline: none;
       user-select: none;
+      outline: none;
     }
 
-    button.track-button:hover:not(:disabled) {
+    .local-track-button:hover:not(:disabled) {
       box-shadow: 0 9px 28px rgba(54, 62, 107, 1);
       transform: translateY(-3px);
     }
 
-    button.track-button:active:not(:disabled) {
+    .local-track-button:active:not(:disabled) {
       transform: translateY(0);
       box-shadow: 0 5px 18px rgba(54, 62, 107, 0.7);
     }
 
-    button.track-button:disabled {
+    .local-track-button:disabled {
       opacity: 0.5;
       cursor: not-allowed;
       box-shadow: none;
-      background: #ccc;
-      color: #666;
+      background: #999;
+      color: #ccc;
     }
 
-    audio {
-      margin-top: 30px;
+    #audio-player {
       width: 100%;
       border-radius: 14px;
       box-shadow: 0 6px 20px rgba(54, 62, 107, 0.3);
@@ -128,34 +166,44 @@
       user-select: none;
     }
 
-    #favorites-container::-webkit-scrollbar {
+    #buttons-container::-webkit-scrollbar {
       width: 8px;
     }
 
-    #favorites-container::-webkit-scrollbar-track {
+    #buttons-container::-webkit-scrollbar-track {
       background: transparent;
     }
 
-    #favorites-container::-webkit-scrollbar-thumb {
+    #buttons-container::-webkit-scrollbar-thumb {
       background: #363E6B;
       border-radius: 8px;
     }
 
     @media (max-width: 640px) {
-      #main {
+      #playlist-container {
         padding: 25px 20px 30px;
       }
 
-      h3 {
+      #playlist-container h3 {
         font-size: 1.6rem;
       }
 
-      button.track-button {
+      .track-row {
+        gap: 10px;
+      }
+
+      .add-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 1.5rem;
+      }
+
+      .local-track-button {
         font-size: 0.9rem;
         padding: 10px 16px;
       }
 
-      audio {
+      #audio-player {
         height: 40px;
       }
     }
@@ -164,7 +212,7 @@
 
 <body>
   <section id="playlist-container" aria-label="Плейлист треков">
-    <h3>Треки</h3>
+    <h3>Альбомы</h3>
     <button class="small-button" onclick="location.href='index.html'" aria-label="Перейти в меню">Меню</button>
     <div id="buttons-container" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
     <audio id="audio-player" controls preload="none" aria-label="Аудиоплеер для треков"></audio>
