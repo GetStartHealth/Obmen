@@ -16,23 +16,23 @@
       justify-content: center;
       padding: 40px 20px;
       min-height: 100vh;
-      color: #363E6B;
-      user-select: none;
+      color: #fff;
     }
 
-    #main {
-      background: #fff;
+    #playlist-container {
+      background: #fff; /* белый фон */
       border-radius: 24px;
       padding: 30px 30px 40px;
       max-width: 620px;
       width: 100%;
-      box-shadow: 0 12px 30px rgba(54, 62, 107, 0.3);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
       display: flex;
       flex-direction: column;
-      color: #363E6B;
+      color: #363E6B; /* цвет текста заголовка */
+      user-select: none;
     }
 
-    h3 {
+    #playlist-container h3 {
       margin: 0 0 24px 10px;
       font-weight: 700;
       font-size: 2rem;
@@ -69,18 +69,55 @@
       box-shadow: 0 5px 18px rgba(54, 62, 107, 0.25);
     }
 
-    #favorites-container {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      max-height: 430px;
+    #buttons-container {
       overflow-y: auto;
+      max-height: 430px;
       padding-right: 6px;
+      margin-bottom: 20px;
       user-select: none;
     }
 
+    .track-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+      gap: 12px;
+    }
+
+    /* Кнопка добавления — акцентный цвет #363E6B */
+    .add-btn {
+      flex-shrink: 0;
+      background: #363E6B;
+      border: none;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      font-size: 1.7rem;
+      line-height: 1;
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 5px 14px rgba(54, 62, 107, 0.7);
+      transition: box-shadow 0.3s ease, transform 0.2s ease;
+      user-select: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .add-btn:hover {
+      box-shadow: 0 8px 22px rgba(54, 62, 107, 0.9);
+      transform: scale(1.1);
+    }
+
+    .add-btn:active {
+      transform: scale(0.95);
+      box-shadow: 0 5px 14px rgba(54, 62, 107, 0.7);
+    }
+
     /* Кнопки треков — фон #363E6B, текст белый */
-    button.track-button {
+    .local-track-button {
+      flex-grow: 1;
       background: #363E6B;
       border: none;
       border-radius: 16px;
@@ -92,24 +129,23 @@
       cursor: pointer;
       box-shadow: 0 5px 18px rgba(54, 62, 107, 0.7);
       transition: box-shadow 0.3s ease, transform 0.2s ease;
+      user-select: none;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      outline: none;
-      user-select: none;
     }
 
-    button.track-button:hover:not(:disabled) {
+    .local-track-button:hover:not(:disabled) {
       box-shadow: 0 9px 28px rgba(54, 62, 107, 1);
       transform: translateY(-3px);
     }
 
-    button.track-button:active:not(:disabled) {
+    .local-track-button:active:not(:disabled) {
       transform: translateY(0);
       box-shadow: 0 5px 18px rgba(54, 62, 107, 0.7);
     }
 
-    button.track-button:disabled {
+    .local-track-button:disabled {
       opacity: 0.5;
       cursor: not-allowed;
       box-shadow: none;
@@ -117,8 +153,7 @@
       color: #666;
     }
 
-    audio {
-      margin-top: 30px;
+    #audio-player {
       width: 100%;
       border-radius: 14px;
       box-shadow: 0 6px 20px rgba(54, 62, 107, 0.3);
@@ -128,34 +163,44 @@
       user-select: none;
     }
 
-    #favorites-container::-webkit-scrollbar {
+    #buttons-container::-webkit-scrollbar {
       width: 8px;
     }
 
-    #favorites-container::-webkit-scrollbar-track {
+    #buttons-container::-webkit-scrollbar-track {
       background: transparent;
     }
 
-    #favorites-container::-webkit-scrollbar-thumb {
+    #buttons-container::-webkit-scrollbar-thumb {
       background: #363E6B;
       border-radius: 8px;
     }
 
     @media (max-width: 640px) {
-      #main {
+      #playlist-container {
         padding: 25px 20px 30px;
       }
 
-      h3 {
+      #playlist-container h3 {
         font-size: 1.6rem;
       }
 
-      button.track-button {
+      .track-row {
+        gap: 10px;
+      }
+
+      .add-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 1.5rem;
+      }
+
+      .local-track-button {
         font-size: 0.9rem;
         padding: 10px 16px;
       }
 
-      audio {
+      #audio-player {
         height: 40px;
       }
     }
