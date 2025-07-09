@@ -16,7 +16,8 @@
       justify-content: center;
       padding: 40px 20px;
       min-height: 100vh;
-      color: #fff;
+      color: #363E6B;
+      user-select: none;
     }
 
     #playlist-container {
@@ -25,11 +26,10 @@
       padding: 30px 30px 40px;
       max-width: 620px;
       width: 100%;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 12px 30px rgba(54, 62, 107, 0.3);
       display: flex;
       flex-direction: column;
-      color: #fff;
-      user-select: none;
+      color: #363E6B;
     }
 
     #playlist-container h3 {
@@ -37,6 +37,37 @@
       font-weight: 700;
       font-size: 2rem;
       letter-spacing: 0.05em;
+      color: #363E6B;
+    }
+
+    .small-button {
+      align-self: flex-start;
+      margin-bottom: 20px;
+      background: #fff;
+      color: #363E6B;
+      border: 2.5px solid #363E6B;
+      border-radius: 16px;
+      padding: 10px 24px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 5px 18px rgba(54, 62, 107, 0.25);
+      transition: box-shadow 0.3s ease, transform 0.2s ease, color 0.3s ease, border-color 0.3s ease;
+      user-select: none;
+    }
+
+    .small-button:hover {
+      box-shadow: 0 9px 28px rgba(54, 62, 107, 0.5);
+      transform: translateY(-3px);
+      color: #2a3150;
+      border-color: #2a3150;
+    }
+
+    .small-button:active {
+      transform: translateY(0);
+      box-shadow: 0 5px 18px rgba(54, 62, 107, 0.25);
+    }
+    h3 {
       color: #fff;
     }
 
@@ -45,6 +76,7 @@
       max-height: 430px;
       padding-right: 6px;
       margin-bottom: 20px;
+      user-select: none;
     }
 
     .track-row {
@@ -53,6 +85,7 @@
       margin-bottom: 12px;
       gap: 12px;
     }
+
 
     .add-btn {
       flex-shrink: 0;
@@ -68,10 +101,10 @@
       cursor: pointer;
       box-shadow: 0 5px 14px #363E6B;
       transition: box-shadow 0.3s ease, transform 0.2s ease;
-      user-select: none;
       display: flex;
       justify-content: center;
       align-items: center;
+      user-select: none;
     }
 
     .add-btn:hover {
@@ -86,7 +119,7 @@
 
     .local-track-button {
       flex-grow: 1;
-      background: linear-gradient(45deg, #363E6B, #363E6B);
+      background: #363E6B;
       border: none;
       border-radius: 16px;
       padding: 12px 22px;
@@ -95,28 +128,31 @@
       font-weight: 700;
       text-align: left;
       cursor: pointer;
-      box-shadow: 0 5px 18px #363E6B;
+      box-shadow: 0 5px 18px rgba(54, 62, 107, 0.7);
       transition: box-shadow 0.3s ease, transform 0.2s ease;
-      user-select: none;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      user-select: none;
+      outline: none;
     }
 
     .local-track-button:hover:not(:disabled) {
-      box-shadow: rgba;
+      box-shadow: 0 9px 28px rgba(54, 62, 107, 1);
       transform: translateY(-3px);
     }
 
     .local-track-button:active:not(:disabled) {
       transform: translateY(0);
-      box-shadow: 0 5px 18px #363E6B;
+      box-shadow: 0 5px 18px rgba(54, 62, 107, 0.7);
     }
 
     .local-track-button:disabled {
       opacity: 0.5;
       cursor: not-allowed;
       box-shadow: none;
+      background: #999;
+      color: #ccc;
     }
 
     #audio-player {
@@ -126,6 +162,7 @@
       outline: none;
       background-color: #fff;
       height: 46px;
+      user-select: none;
     }
 
     #buttons-container::-webkit-scrollbar {
@@ -175,12 +212,12 @@
 <body>
   <section id="playlist-container" aria-label="Плейлист треков">
     <h3>Треки</h3>
-    <button class="small-button" onclick="location.href='index.html'" aria-label="Перейти к оплате">Меню</button>
+    <button class="small-button" onclick="location.href='index.html'" aria-label="Перейти в меню">Меню</button>
     <div id="buttons-container" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
     <audio id="audio-player" controls preload="none" aria-label="Аудиоплеер для треков"></audio>
   </section>
 
-    <script>
+  <script>
     const tracks = [
       { title: '1 ТГК МУЗ-ЧАТ', url: '' },
       { title: '', url: '' },
@@ -249,17 +286,13 @@
       { title: 'На выжженой земле', url: 'https://nextjs-boil-delta.vercel.app/На выжженной земле.mp3' },
       { title: 'Девятый десяток', url: 'https://nextjs-boil-delta.vercel.app/Девятый_десяток_для_вечности_миг_1.mp3' }
     ];
-      
-
 
     const buttonsContainer = document.getElementById('buttons-container');
     const audioPlayer = document.getElementById('audio-player');
 
     function addToPlaylist(trackTitle) {
-
       let current = localStorage.getItem('trek') || '';
-
-      let songs = current.split('\n').filter(s => s.trim() !== '');
+      let songs = current.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
       if (songs.includes(trackTitle)) {
         alert(`Песня "${trackTitle}" уже есть в плейлисте.`);
@@ -267,7 +300,6 @@
       }
 
       songs.push(trackTitle);
-
       localStorage.setItem('trek', songs.join('\n'));
       alert(`Песня "${trackTitle}" добавлена в плейлист.`);
     }
@@ -278,31 +310,12 @@
         if (!track.title.trim()) return;
 
         const trackWrapper = document.createElement('div');
-        trackWrapper.style.display = 'flex';
-        trackWrapper.style.alignItems = 'center';
-        trackWrapper.style.gap = '10px';
-        trackWrapper.style.marginBottom = '10px';
-        const addBtn = document.createElement('button');
-        addBtn.textContent = '+';
-        addBtn.style.background = 'rgba(0,0,0,0.05)';
-        addBtn.style.color = '#333';
-        addBtn.style.border = '1px solid rgba(0,0,0,0.1)';
-        addBtn.style.borderRadius = '6px';
-        addBtn.style.padding = '4px 10px';
-        addBtn.style.cursor = 'pointer';
-        addBtn.style.fontWeight = '500';
-        addBtn.style.fontSize = '0.85em';
-        addBtn.style.userSelect = 'none';
-        addBtn.style.transition = 'background-color 0.3s ease, border-color 0.3s ease';
+        trackWrapper.className = 'track-row';
 
-        addBtn.addEventListener('mouseenter', () => {
-          addBtn.style.background = 'rgba(0,0,0,0.1)';
-          addBtn.style.borderColor = 'rgba(0,0,0,0.2)';
-        });
-        addBtn.addEventListener('mouseleave', () => {
-          addBtn.style.background = 'rgba(0,0,0,0.05)';
-          addBtn.style.borderColor = 'rgba(0,0,0,0.1)';
-        });
+        const addBtn = document.createElement('button');
+        addBtn.className = 'add-btn';
+        addBtn.textContent = '+';
+        addBtn.setAttribute('aria-label', `Добавить песню "${track.title}" в плейлист`);
 
         addBtn.addEventListener('click', () => {
           addToPlaylist(track.title);
@@ -312,8 +325,7 @@
         playBtn.textContent = track.title;
         playBtn.disabled = !track.url;
         playBtn.className = 'local-track-button';
-        playBtn.style.flexGrow = '1';
-        playBtn.style.textAlign = 'left';
+        playBtn.setAttribute('aria-label', track.url ? `Воспроизвести ${track.title}` : `${track.title} (нет аудио)`);
 
         playBtn.addEventListener('click', async () => {
           if (!track.url) return;
@@ -329,7 +341,6 @@
 
         trackWrapper.appendChild(addBtn);
         trackWrapper.appendChild(playBtn);
-
         buttonsContainer.appendChild(trackWrapper);
       });
     }
@@ -339,4 +350,3 @@
 </body>
 
 </html>
-
