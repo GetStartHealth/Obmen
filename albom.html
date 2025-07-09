@@ -259,54 +259,70 @@
   function createLocalTrackButtons() {
     buttonsContainer.innerHTML = '';
     tracks.forEach(track => {
-      if (!track.title.trim()) return;
+  if (!track.title.trim()) return;
 
-      const trackWrapper = document.createElement('div');
-      trackWrapper.style.display = 'flex';
-      trackWrapper.style.alignItems = 'center';
-      trackWrapper.style.gap = '10px';
-      trackWrapper.style.marginBottom = '10px';
+  const trackWrapper = document.createElement('div');
+  trackWrapper.style.display = 'flex';
+  trackWrapper.style.alignItems = 'center';
+  trackWrapper.style.gap = '10px';
+  trackWrapper.style.marginBottom = '10px';
 
-      const addBtn = document.createElement('button');
-      addBtn.textContent = 'Добавить в плейлист';
-      addBtn.style.background = 'linear-gradient(to right, #6a11cb, #2575fc)';
-      addBtn.style.color = 'white';
-      addBtn.style.border = 'none';
-      addBtn.style.borderRadius = '10px';
-      addBtn.style.padding = '6px 12px';
-      addBtn.style.cursor = 'pointer';
-      addBtn.style.fontWeight = '600';
-      addBtn.style.userSelect = 'none';
+  const addBtn = document.createElement('button');
+  addBtn.title = 'Добавить в плейлист';
+  addBtn.textContent = '+';
+  addBtn.style.width = '36px';
+  addBtn.style.height = '36px';
+  addBtn.style.background = 'rgba(0,0,0,0.05)';
+  addBtn.style.color = '#333';
+  addBtn.style.border = '1px solid rgba(0,0,0,0.1)';
+  addBtn.style.borderRadius = '6px';
+  addBtn.style.cursor = 'pointer';
+  addBtn.style.fontWeight = '600';
+  addBtn.style.fontSize = '1.3em';
+  addBtn.style.lineHeight = '1';
+  addBtn.style.userSelect = 'none';
+  addBtn.style.display = 'flex';
+  addBtn.style.alignItems = 'center';
+  addBtn.style.justifyContent = 'center';
+  addBtn.style.transition = 'background-color 0.3s ease, border-color 0.3s ease';
 
-      addBtn.addEventListener('click', () => {
-        addToPlaylist(track.title);
-      });
+  addBtn.addEventListener('mouseenter', () => {
+    addBtn.style.background = 'rgba(0,0,0,0.1)';
+    addBtn.style.borderColor = 'rgba(0,0,0,0.2)';
+  });
+  addBtn.addEventListener('mouseleave', () => {
+    addBtn.style.background = 'rgba(0,0,0,0.05)';
+    addBtn.style.borderColor = 'rgba(0,0,0,0.1)';
+  });
 
-      const playBtn = document.createElement('button');
-      playBtn.textContent = track.title;
-      playBtn.disabled = !track.url;
-      playBtn.className = 'local-track-button';
-      playBtn.style.flexGrow = '1';
-      playBtn.style.textAlign = 'left';
+  addBtn.addEventListener('click', () => {
+    addToPlaylist(track.title);
+  });
 
-      playBtn.addEventListener('click', async () => {
-        if (!track.url) return;
-        try {
-          if (audioPlayer.src !== track.url) {
-            audioPlayer.src = track.url;
-          }
-          await audioPlayer.play();
-        } catch (e) {
-          console.warn('Ошибка воспроизведения:', e);
-        }
-      });
+  const playBtn = document.createElement('button');
+  playBtn.textContent = track.title;
+  playBtn.disabled = !track.url;
+  playBtn.className = 'local-track-button';
+  playBtn.style.flexGrow = '1';
+  playBtn.style.textAlign = 'left';
 
-      trackWrapper.appendChild(addBtn);
-      trackWrapper.appendChild(playBtn);
+  playBtn.addEventListener('click', async () => {
+    if (!track.url) return;
+    try {
+      if (audioPlayer.src !== track.url) {
+        audioPlayer.src = track.url;
+      }
+      await audioPlayer.play();
+    } catch (e) {
+      console.warn('Ошибка воспроизведения:', e);
+    }
+  });
 
-      buttonsContainer.appendChild(trackWrapper);
-    });
-  }
+  trackWrapper.appendChild(addBtn);
+  trackWrapper.appendChild(playBtn);
+
+  buttonsContainer.appendChild(trackWrapper);
+});
 
   createLocalTrackButtons();
 </script>
