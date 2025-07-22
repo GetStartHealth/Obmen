@@ -27,7 +27,7 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
-
+MAX_MESSAGE_LENGTH = 4000
 TOKEN = os.getenv("TOKEN")
 TOKEN_DEEP_SEEK = os.getenv("TOKEN_DEEP_SEEK")
 
@@ -80,7 +80,13 @@ async def generating(message: Message, state: FSMContext):
         await message.answer("Компиляция запроса...⏳")
         await state.set_state(PleaseStop.wait) 
         res = await a_generate(message.text)
-        await message.answer(res)
+        
+        def split_text(text, max_length=MAX_MESSAGE_LENGTH):
+            return [text[i:i+max_length] for i in range(0, len(text), max_length)]
+
+        for chunk in split_text(res):
+            await message.answer(chunk)
+            
         await state.clear()
 
 async def main() -> None:
