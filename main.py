@@ -27,7 +27,7 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
-MAX_MESSAGE_LENGTH = 4000
+MAX_MESSAGE_LENGTH = 4500
 TOKEN = os.getenv("TOKEN")
 TOKEN_DEEP_SEEK = os.getenv("TOKEN_DEEP_SEEK")
 
