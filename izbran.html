@@ -432,6 +432,12 @@
         favoritesContainer.style.userSelect = 'none';
       } else {
         favoriteTracks.forEach(track => {
+
+          const trackContainer = document.createElement('div');
+      trackContainer.style.display = 'flex';
+      trackContainer.style.alignItems = 'center';
+      trackContainer.style.justifyContent = 'space-between';
+
           const btn = document.createElement('button');
 
           btn.textContent = track.title;
@@ -465,8 +471,9 @@
             }
           });
 
-          favoritesContainer.appendChild(btn);
-          favoritesContainer.appendChild(deleteBtn);
+          trackContainer.appendChild(btn);
+          trackContainer.appendChild(deleteBtn);
+          favoritesContainer.appendChild(trackContainer)
         });
       }
     }
