@@ -304,13 +304,13 @@
       let songs = current.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
       if (songs.includes(trackTitle)) {
-        alert(`Песня "${trackTitle}" уже есть в плейлисте.`);
+        alert('Песня ${trackTitle} уже есть в плейлисте.');
         return;
       }
 
       songs.push(trackTitle);
       localStorage.setItem('trek', songs.join('\n'));
-      alert(`Песня "${trackTitle}" добавлена в плейлист.`);
+      alert('Песня ${trackTitle} добавлена в плейлист.');
     }
 
     tracks.forEach(track => {
@@ -318,20 +318,47 @@
         const albumTitle = document.createElement('div');
         albumTitle.className = 'album-title';
         albumTitle.textContent = track.title;
+        albumTitle.style.cursor = 'pointer';
+      
+        const albumTracks = document.createElement('div');
+        albumTracks.style.display = 'none'
+
+        
+        
         albumTitle.onclick = () => {
-          const albumTracks = albumTitle.nextElementSibling;
           albumTracks.style.display = (albumTracks.style.display === 'none') ? 'block' : 'none';
         };
+        
+        track.album.forEach(song => {
+          const trackRow = document.createElement('div');
+          trackRow.className = 'track-row';
+
+          const addBtn = document.createElement('button');
+          addBtn.className = 'add-btn';
+          addBtn.textContent = '+';
+          addBtn.title = `Добавить "${track.title}" в плейлист`;
+          addBtn.setAttribute('aria-label', `Добавить ${song.title} в плейлист`);
+          addBtn.onclick = () => addToPlaylist(song.title);
+
+          const trackBtn = document.createElement('button');
+          trackBtn.className = 'local-track-button';
+          trackBtn.textContent = song.title;
+          trackBtn.title = `Воспроизвести ${song.title}`;
+          trackBtn.disabled = !song.url;
+          trackBtn.onclick = () => {
+            if (song.url) {
+              audioPlayer.src = song.url;
+              audioPlayer.play();
+            }
+          };
+          trackRow.appendChild(addBtn);
+          trackRow.appendChild(trackBtn);
+          albumTracks.appendChild(trackRow);
+        })
         buttonsContainer.appendChild(albumTitle);
+        buttonsContainer.appendChild(albumTracks);
       }
     });
-
-
-    trackWrapper.appendChild(addBtn);
-    trackWrapper.appendChild(playBtn);
-    buttonsContainer.appendChild(trackWrapper);
-
-
   </script>
 </body>
 
