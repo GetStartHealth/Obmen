@@ -414,15 +414,16 @@
     const favoritesContainer = document.getElementById('favorites-container');
     const audioPlayer = document.getElementById('audio-player');
 
-    const favoriteTitlesRaw = localStorage.getItem('trek') || '';
+    function UpdateFunction() {
+      favoritesContainer.innerHTML = '';
+
+      const favoriteTitlesRaw = localStorage.getItem('trek') || '';
     const favoriteTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
     const favoriteTracks = favoriteTitles
       .map(title => tracks.find(t => t.title === title))
       .filter(t => t && t.url);
 
-    function UpdateFunction() {
-      favoritesContainer.innerHTML = '';
       if (favoriteTracks.length === 0) {
         favoritesContainer.textContent = 'Плейлист избранных треков пуст или не содержит доступных для воспроизведения треков.';
         favoritesContainer.style.color = '#363E6B';
@@ -469,6 +470,8 @@
         });
       }
     }
+
     UpdateFunction()
+
   </script>
 </body>
