@@ -430,6 +430,13 @@
     } else {
       favoriteTracks.forEach(track => {
         const btn = document.createElement('button');
+
+        btn.textContent = track.title;
+        btn.className = 'track-button';
+        btn.disabled = !track.url;
+        btn.title = `Воспроизвести ${track.title}`;
+        btn.setAttribute('aria-label', `Воспроизвести ${track.title}`);
+
         const deleteBtn = document.createElement('button');
         deleteBtn.textContent = '-';
         deleteBtn.className = 'delete-button';
@@ -437,12 +444,6 @@
         deleteBtn.addEventListener('click', () => {
             
         });
-
-        btn.textContent = track.title;
-        btn.className = 'track-button';
-        btn.disabled = !track.url;
-        btn.title = `Воспроизвести ${track.title}`;
-        btn.setAttribute('aria-label', `Воспроизвести ${track.title}`);
 
         btn.addEventListener('click', () => {
           if (track.url) {
