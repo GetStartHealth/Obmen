@@ -406,8 +406,6 @@
             
         });
 
-        favoritesContainer.appendChild(btn);
-        favoritesContainer.appendChild(deleteBtn);
         btn.textContent = track.title;
         btn.className = 'track-button';
         btn.disabled = !track.url;
@@ -424,6 +422,7 @@
         });
 
         favoritesContainer.appendChild(btn);
+        favoritesContainer.appendChild(deleteBtn);
       });
     }
   </script>
