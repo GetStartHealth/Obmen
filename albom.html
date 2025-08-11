@@ -360,6 +360,12 @@
           addBtn.setAttribute('aria-label', `Добавить ${song.title} в плейлист`);
           addBtn.onclick = () => addToPlaylist(song.title);
 
+
+          const toggleButton = document.createElement('button');
+          toggleButton.textContent = '▼';
+          toggleButton.style.marginLeft = '10px';
+
+
           const trackBtn = document.createElement('button');
           trackBtn.className = 'local-track-button';
           trackBtn.textContent = song.title;
@@ -374,6 +380,7 @@
           trackRow.appendChild(addBtn);
           trackRow.appendChild(trackBtn);
           albumTracks.appendChild(trackRow);
+          albumTitle.appendChild(toggleButton);
         })
         buttonsContainer.appendChild(albumTitle);
         buttonsContainer.appendChild(albumTracks);
