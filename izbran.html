@@ -101,6 +101,13 @@
   overflow: hidden;
   text-overflow: ellipsis;
   outline: none;
+  font-size: 14px;      
+  padding: 4px 8px;        
+  min-width: 100px;       
+  max-width: 200px;       
+  white-space: nowrap;    
+  overflow: hidden;       
+  text-overflow: ellipsis;
 }
 
 .track-button:hover:not(:disabled) {
@@ -188,8 +195,13 @@
   }
 
   .track-button {
-    font-size: 0.9rem;
-    padding: 24px 24px;
+    font-size: 14px;      
+  padding: 4px 8px;        
+  min-width: 100px;       
+  max-width: 200px;       
+  white-space: nowrap;    
+  overflow: hidden;       
+  text-overflow: ellipsis;
   }
 
   .delete-button {
@@ -213,8 +225,13 @@
   }
 
   .track-button {
-    font-size: 1rem;
-    padding: 24px 24px;
+    font-size: 14px;      
+  padding: 4px 8px;        
+  min-width: 100px;       
+  max-width: 200px;       
+  white-space: nowrap;    
+  overflow: hidden;       
+  text-overflow: ellipsis;
   }
 
   .delete-button {
@@ -470,9 +487,8 @@
               audioPlayer.play().catch(e => console.warn('Ошибка воспроизведения:', e));
             }
           });
-
-          trackContainer.appendChild(btn);
           trackContainer.appendChild(deleteBtn);
+          trackContainer.appendChild(btn);
           favoritesContainer.appendChild(trackContainer)
         });
       }
@@ -482,3 +498,5 @@
 
   </script>
 </body>
+
+
