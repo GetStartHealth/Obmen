@@ -243,7 +243,6 @@
       {
       title: '1 ТГК МУЗ-ЧАТ',
       album: [
-          { title: '', url: '' },
           { title: 'Городской маршрут', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/Русская%20душа%20-%20Городской%20маршрут.mp3' },
           { title: 'Неважно', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/tagmp3_2.-Русская-душа---Неважно.mp3' },
           { title: 'Здесь лапы у ели', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/tagmp3_3.-Русская-душа---Здесь-лапы-у-ели.mp3' },
@@ -325,13 +324,13 @@
       let songs = current.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
       if (songs.includes(trackTitle)) {
-        alert('Песня ${trackTitle} уже есть в плейлисте.');
+        alert(`Песня "${trackTitle}" уже есть в плейлист`);
         return;
       }
 
       songs.push(trackTitle);
       localStorage.setItem('trek', songs.join('\n'));
-      alert('Песня ${trackTitle} добавлена в плейлист.');
+      alert(`Песня "${trackTitle}" уже есть в плейлист`);
     }
 
     tracks.forEach(track => {
