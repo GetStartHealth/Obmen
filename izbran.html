@@ -441,8 +441,55 @@
         deleteBtn.textContent = '-';
         deleteBtn.className = 'delete-button';
         deleteBtn.setAttribute('aria-label', `Удалить ${track.title}`);
+
         deleteBtn.addEventListener('click', () => {
+            const raw = localStorage.getItem('trek') || '';
+            const rawFilter = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+
+            elemented = rawFilter.filter(rawFilter => rawFilter !== track.title)
+
+            localStorage.setItem('trek', elemented.join('\n'));
+
+            favoritesContainer.innerHTML = '';
+
+            favoriteTracks.forEach(track => {
+        const btn = document.createElement('button');
+
+        btn.textContent = track.title;
+        btn.className = 'track-button';
+        btn.disabled = !track.url;
+        btn.title = `Воспроизвести ${track.title}`;
+        btn.setAttribute('aria-label', `Воспроизвести ${track.title}`);
+
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = '-';
+        deleteBtn.className = 'delete-button';
+        deleteBtn.setAttribute('aria-label', `Удалить ${track.title}`);
+
+        deleteBtn.addEventListener('click', () => {
+            const raw = localStorage.getItem('trek') || '';
+            const rawFilter = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+
+            elemented = rawFilter.filter(rawFilter => rawFilter !== track.title)
+
+            localStorage.setItem('trek', elemented.join('\n'));
+
+            favoritesContainer.innerHTML = '';
             
+        });
+
+        btn.addEventListener('click', () => {
+          if (track.url) {
+            if (audioPlayer.src !== track.url) {
+              audioPlayer.src = track.url;
+            }
+            audioPlayer.play().catch(e => console.warn('Ошибка воспроизведения:', e));
+          }
+        });
+
+        favoritesContainer.appendChild(btn);
+        favoritesContainer.appendChild(deleteBtn);
+      });
         });
 
         btn.addEventListener('click', () => {
