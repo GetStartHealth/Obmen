@@ -422,6 +422,7 @@
       .filter(t => t && t.url);
 
     function UpdateFunction() {
+      favoritesContainer.innerHTML = '';
       if (favoriteTracks.length === 0) {
         favoritesContainer.textContent = 'Плейлист избранных треков пуст или не содержит доступных для воспроизведения треков.';
         favoritesContainer.style.color = '#363E6B';
@@ -450,6 +451,8 @@
               elemented = rawFilter.filter(rawFilter => rawFilter !== track.title)
 
               localStorage.setItem('trek', elemented.join('\n'));
+
+              UpdateFunction()
           });
 
           btn.addEventListener('click', () => {
@@ -466,6 +469,6 @@
         });
       }
     }
-    UpdateFunction()
+
   </script>
 </body>
