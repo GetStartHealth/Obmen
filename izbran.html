@@ -449,6 +449,8 @@
             elemented = rawFilter.filter(rawFilter => rawFilter !== track.title)
 
             localStorage.setItem('trek', elemented.join('\n'));
+
+            favoritesContainer.innerHTML = ''
             favoriteTracks.forEach(track => {
         const btn = document.createElement('button');
 
