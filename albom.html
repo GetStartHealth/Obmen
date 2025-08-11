@@ -313,48 +313,25 @@
       alert(`Песня "${trackTitle}" добавлена в плейлист.`);
     }
 
-    function createLocalTrackButtons() {
-      buttonsContainer.innerHTML = '';
-      tracks.forEach(track => {
-        if (!track.title.trim()) return;
+    tracks.forEach(track => {
+      if (track.album) {
+        const albumTitle = document.createElement('div');
+        albumTitle.className = 'album-title';
+        albumTitle.textContent = track.title;
+        albumTitle.onclick = () => {
+          const albumTracks = albumTitle.nextElementSibling;
+          albumTracks.style.display = (albumTracks.style.display === 'none') ? 'block' : 'none';
+        };
+        buttonsContainer.appendChild(albumTitle);
+      }
+    });
 
-        const trackWrapper = document.createElement('div');
-        trackWrapper.className = 'track-row';
 
-        const addBtn = document.createElement('button');
-        addBtn.className = 'add-btn';
-        addBtn.textContent = '+';
-        addBtn.setAttribute('aria-label', `Добавить песню "${track.title}" в плейлист`);
+    trackWrapper.appendChild(addBtn);
+    trackWrapper.appendChild(playBtn);
+    buttonsContainer.appendChild(trackWrapper);
 
-        addBtn.addEventListener('click', () => {
-          addToPlaylist(track.title);
-        });
 
-        const playBtn = document.createElement('button');
-        playBtn.textContent = track.title;
-        playBtn.disabled = !track.url;
-        playBtn.className = 'local-track-button';
-        playBtn.setAttribute('aria-label', track.url ? `Воспроизвести ${track.title}` : `${track.title} (нет аудио)`);
-
-        playBtn.addEventListener('click', async () => {
-          if (!track.url) return;
-          try {
-            if (audioPlayer.src !== track.url) {
-              audioPlayer.src = track.url;
-            }
-            await audioPlayer.play();
-          } catch (e) {
-            console.warn('Ошибка воспроизведения:', e);
-          }
-        });
-
-        trackWrapper.appendChild(addBtn);
-        trackWrapper.appendChild(playBtn);
-        buttonsContainer.appendChild(trackWrapper);
-      });
-    }
-
-    createLocalTrackButtons();
   </script>
 </body>
 
