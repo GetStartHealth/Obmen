@@ -95,14 +95,12 @@
   border-radius: 8px;
 }
 
-
 #favorites-container > div {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
 }
-
 
 .track-button {
   background: #363E6B;
@@ -117,22 +115,14 @@
   box-shadow: 0 5px 18px rgba(54, 62, 107, 0.7);
   transition: box-shadow 0.3s ease, transform 0.2s ease;
   user-select: none;
-  min-width: 230px;     
-  max-width: 260px;     
+  min-width: 230px;
+  max-width: 260px;
   white-space: nowrap;
-  overflow: hidden;      
+  overflow: hidden;
   text-overflow: ellipsis;
-  flex-shrink: 0;     
-  outline: none;
   flex-shrink: 0;
+  outline: none;
   height: 36px;
-}
-
-#favorites-container > div {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
 }
 
 .track-button:hover:not(:disabled) {
@@ -193,47 +183,47 @@
   user-select: none;
 }
 
+/* Новый стиль для local-track-button с фиксированной шириной */
+.local-track-button {
+  background: #363E6B;
+  border: none;
+  border-radius: 16px;
+  padding: 4px 8px;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 5px 18px rgba(54, 62, 107, 0.7);
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  user-select: none;
+  outline: none;
+  min-width: 230px;
+  max-width: 260px;
+  flex-shrink: 0;
+  height: 36px;
+}
 
+.local-track-button:hover:not(:disabled) {
+  box-shadow: 0 9px 28px rgba(54, 62, 107, 1);
+  transform: translateY(-3px);
+}
 
+.local-track-button:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 5px 18px rgba(54, 62, 107, 0.7);
+}
 
-  .local-track-button {
-      flex-grow: 1;
-      background: #363E6B;
-      border: none;
-      border-radius: 16px;
-      padding: 12px 22px;
-      color: white;
-      font-size: 1rem;
-      font-weight: 700;
-      text-align: left;
-      cursor: pointer;
-      box-shadow: 0 5px 18px rgba(54, 62, 107, 0.7);
-      transition: box-shadow 0.3s ease, transform 0.2s ease;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      user-select: none;
-      outline: none;
-    }
-
-    .local-track-button:hover:not(:disabled) {
-      box-shadow: 0 9px 28px rgba(54, 62, 107, 1);
-      transform: translateY(-3px);
-    }
-
-    .local-track-button:active:not(:disabled) {
-      transform: translateY(0);
-      box-shadow: 0 5px 18px rgba(54, 62, 107, 0.7);
-    }
-
-    .local-track-button:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      box-shadow: none;
-      background: #999;
-      color: #ccc;
-    }
-
+.local-track-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+  background: #999;
+  color: #ccc;
+}
 
 @media (max-width: 640px) {
   #playlist-container {
@@ -249,6 +239,18 @@
   }
 
   .track-button {
+    font-size: 14px;
+    padding: 4px 8px;
+    min-width: 230px;
+    max-width: 260px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-shrink: 0;
+    height: 36px;
+  }
+
+  .local-track-button {
     font-size: 14px;
     padding: 4px 8px;
     min-width: 230px;
@@ -278,6 +280,18 @@
   }
 
   .track-button {
+    font-size: 14px;
+    padding: 4px 8px;
+    min-width: 230px;
+    max-width: 260px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-shrink: 0;
+    height: 36px;
+  }
+
+  .local-track-button {
     font-size: 14px;
     padding: 4px 8px;
     min-width: 230px;
@@ -596,6 +610,25 @@
                 audioPlayer.play().catch(e => console.warn('Ошибка воспроизведения:', e));
               }
             });
+
+
+             const deleteBtn1 = document.createElement('button');
+              deleteBtn1.textContent = '-';
+              deleteBtn1.className = 'delete-button';
+              deleteBtn1.setAttribute('aria-label', `Удалить ${vf.title}`);
+
+              deleteBtn1.addEventListener('click', () => {
+                const favoriteTitlesRaw = localStorage.getItem('trekA') || '';
+                const favoriteTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+
+                const updatedFavorites = favoriteTitles.filter(title => title !== vf.title);
+
+                localStorage.setItem('trekA', updatedFavorites.join('\n'));
+
+                UpdateFunction();
+              });
+
+            albomContainer.appendChild(deleteBtn1);
             albomContainer.appendChild(btnf);
           });
         }
