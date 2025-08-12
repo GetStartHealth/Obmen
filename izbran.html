@@ -43,6 +43,21 @@
       text-shadow: none;
     }
 
+
+
+
+
+    .tracks-container {
+  display: none;
+  margin-top: 8px;
+  flex-direction: column;
+  gap: 12px; 
+  transition: max-height 0.3s ease;
+  overflow: hidden; 
+}
+
+
+
     .small-button {
       align-self: flex-start;
       margin-bottom: 20px;
@@ -136,9 +151,9 @@
       background: #363E6B;
       border: none;
       border-radius: 16px;
-      padding: 4px 8px;
+      padding: 8px 18px;
       color: white;
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 700;
       text-align: left;
       cursor: pointer;
@@ -152,7 +167,7 @@
       text-overflow: ellipsis;
       flex-shrink: 0;
       outline: none;
-      height: 36px;
+      height: 48px;
     }
 
     .track-button:hover:not(:disabled) {
@@ -633,13 +648,9 @@ const favoritesContainer = document.getElementById('favorites-container');
         albumButton.appendChild(deleteBtn2);
 
         const tracksContainer = document.createElement('div');
-        tracksContainer.style.display = 'none';
-        tracksContainer.style.marginTop = '8px';
-        tracksContainer.style.flexDirection = 'column';
-        tracksContainer.style.gap = '8px';
-        tracksContainer.style.display = 'none';
-        tracksContainer.style.flexWrap = 'nowrap';
-        tracksContainer.style.alignItems = 'flex-start';
+        tracksContainer.className = 'tracks-container'; 
+        tracksContainer.style.maxHeight = '0'; 
+        tracksContainer.style.overflow = 'hidden';
 
         albomMass.album.forEach(vf => {
           const btnf = document.createElement('button');
@@ -663,8 +674,9 @@ const favoritesContainer = document.getElementById('favorites-container');
         });
 
         albumButton.addEventListener('click', () => {
-          const isHidden = tracksContainer.style.display === 'none' || tracksContainer.style.display === '';
-          tracksContainer.style.display = isHidden ? 'flex' : 'none';
+          const isHidden = tracksContainer.style.maxHeight === '0px';
+          tracksContainer.style.maxHeight = isHidden ? '500px' : '0px'; 
+          tracksContainer.style.transition = 'max-height 0.3s ease';
         });
 
         albumDiv.appendChild(albumButton);
