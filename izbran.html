@@ -683,8 +683,32 @@
       const albomTitlesRaw = localStorage.getItem('trekA') || '';
       const AlbomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
+      const trackList = document.createElement('div');
+      trackList.style.display = 'none'; 
+
       AlbomTitles.forEach(albom => {
         const albomMass = albomsT.find(a => a.title === albom);
+        const albumDiv = document.createElement('div');
+        albumDiv.style.marginBottom = '16px';
+
+          const albumButton = document.createElement('button');
+          albumButton.textContent = albomMass.title;
+          albumButton.className = 'small-button';
+          albumButton.setAttribute('aria-expanded', 'false');
+          albumButton.style.width = '100%';
+          albumButton.style.textAlign = 'left';
+          albumButton.style.display = 'flex';
+          albumButton.style.justifyContent = 'space-between';
+          albumButton.style.alignItems = 'center';
+
+
+          const tracksContainer = document.createElement('div');
+          tracksContainer.style.display = 'none';
+          tracksContainer.style.marginTop = '8px';
+          tracksContainer.style.display = 'flex';
+          tracksContainer.style.flexDirection = 'column';
+          tracksContainer.style.gap = '8px';
+
         if (albomMass) {
           albomMass.album.forEach(vf => {
             const btnf = document.createElement('button');
@@ -702,8 +726,16 @@
 
 
           
-            albomContainer.appendChild(btnf);
+            tracksContainer.appendChild(btnf);
           });
+
+          albumButton.addEventListener('click', () => {           
+            tracksContainer.style.display = (tracksContainer.style.display === 'none') ? 'block' : 'none';
+          });
+
+          albumDiv.appendChild(albumButton);
+          albumDiv.appendChild(tracksContainer);
+          albomContainer.appendChild(albumDiv);       
         }
       });
     }
