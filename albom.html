@@ -28,7 +28,6 @@
       justify-content: space-between;
       align-items: center;
       border-radius: 10px;
-      margin-bottom: 10px;
     }
 
     #playlist-container {
@@ -217,7 +216,6 @@
       justify-content: space-between;
       align-items: center;
       border-radius: 10px;
-      margin-bottom: 10px;
     }
 
       .local-track-button {
@@ -322,13 +320,9 @@
         { title: 'Война дошла до Сталинграда', url: 'https://nextjs-boil-delta.vercel.app/Война%20дошла%20до%20Сталинграда%20(2).mp3' },
         { title: 'На выжженой земле', url: 'https://nextjs-boil-delta.vercel.app/На выжженной земле.mp3' },
         { title: 'Девятый десяток', url: 'https://nextjs-boil-delta.vercel.app/Девятый_десяток_для_вечности_миг_1.mp3' },
+        { title: 'ШАНСОНЬЕ', url: '' },
+        { title: 'Путник', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Русская-душа---Путник.mp3' },
       ]
-      },
-      {
-        title: 'ШАНСОНЬЕ',
-        album: [
-          { title: 'Путник', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Русская-душа---Путник.mp3' },
-        ]
       }
       ];
 
@@ -362,6 +356,15 @@
         
         
         albumTitle.onclick = () => {
+          const allAlbumTracks = document.querySelectorAll('.album-tracks');
+          allAlbumTracks.forEach(getTrack => {
+            if (albumTracks !== getTrack) {
+              getTrack.style.display = 'none';
+            }
+
+          });
+
+
           albumTracks.style.display = (albumTracks.style.display === 'none') ? 'block' : 'none';
         };
         
@@ -388,10 +391,14 @@
               audioPlayer.play();
             }
           };
+          
           trackRow.appendChild(addBtn);
           trackRow.appendChild(trackBtn);
           albumTracks.appendChild(trackRow);
+          
         })
+
+        albumTracks.className = 'album-tracks';
         buttonsContainer.appendChild(albumTitle);
         buttonsContainer.appendChild(albumTracks);
       }
@@ -400,3 +407,4 @@
 </body>
 
 </html>
+
