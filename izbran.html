@@ -211,37 +211,78 @@
     }
 
     .album-title {
-      background-color: #6570af;
-      padding: 10px;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-radius: 10px;
-      margin-bottom: 10px;
-      user-select: none;
-      font-weight: 700;
-      font-size: 1.1rem;
-      color: white;
-      transition: background-color 0.3s ease;
-    }
+  position: relative;
+  background-color: #6570af;
+  padding: 10px 48px 10px 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  user-select: none;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: white;
+  transition: background-color 0.3s ease;
+}
 
-    .album-title:hover {
-      background-color: #4a5d9e;
-    }
+.album-title:hover {
+  background-color: #4a5d9e;
+}
 
- 
-    .album-title::after {
-      content: '▼';
-      font-size: 0.8em;
-      transition: transform 0.3s ease;
-      margin-left: 10px;
-      color: white;
-    }
 
-    .album-title[aria-expanded="true"]::after {
-      transform: rotate(180deg);
-    }
+.album-title .title-text {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  user-select: none;
+}
+
+
+.album-title .title-text::after {
+  content: '▼';
+  font-size: 0.8em;
+  margin-left: 8px;
+  color: white;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+
+.album-title[aria-expanded="true"] .title-text::after {
+  transform: rotate(180deg);
+}
+
+
+.album-title .delete-button {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: none;
+  color: rgb(41, 41, 41);
+  font-weight: 700;
+  font-size: 1.3rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  user-select: none;
+  z-index: 2;
+}
+
+.album-title .delete-button:hover {
+  transform: translateY(-50%) scale(1.1);
+}
+
+.album-title .delete-button:active {
+  transform: translateY(-50%) scale(0.95);
+}
 
     @media (max-width: 640px) {
       #playlist-container {
