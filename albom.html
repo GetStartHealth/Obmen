@@ -347,7 +347,7 @@
 
       songs.unshift(trackTitle);
       localStorage.setItem('trek', songs.join('\n'));
-      alert(`Песня "${trackTitle}" уже есть в плейлист`);
+      alert(`Песня "${trackTitle}" добавлена`);
     }
 
     tracks.forEach(track => {
@@ -402,8 +402,10 @@
           trackRow.appendChild(addBtn);
           trackRow.appendChild(trackBtn);
           albumTracks.appendChild(trackRow);
+          albumTitle.appendChild(addBtn)
           
         })
+    
 
         albumTracks.className = 'album-tracks';
         buttonsContainer.appendChild(albumTitle);
