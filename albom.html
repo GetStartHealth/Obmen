@@ -496,7 +496,10 @@
           addBtn.textContent = '+';
           addBtn.title = `Добавить "${track.title}" в плейлист`;
           addBtn.setAttribute('aria-label', `Добавить ${song.title} в плейлист`);
-          addBtn.onclick = () => addToPlaylist(song.title);
+          addBtn.onclick = (event) => {
+             event.stopPropagation(); 
+             addToPlaylist(song.title);
+          };
 
 
           const trackBtn = document.createElement('button');
