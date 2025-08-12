@@ -608,7 +608,6 @@ const favoritesContainer = document.getElementById('favorites-container');
         albumButton.addEventListener('click', () => {
           const isHidden = tracksContainer.style.display === 'none' || tracksContainer.style.display === '';
           tracksContainer.style.display = isHidden ? 'flex' : 'none';
-          albumButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
         });
 
         albumDiv.appendChild(albumButton);
