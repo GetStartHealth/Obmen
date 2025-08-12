@@ -658,6 +658,7 @@
     const audioPlayer = document.getElementById('audio-player');
 
     function UpdateFunction() {
+      
       favoritesContainer.innerHTML = '';
       albomContainer.innerHTML = '';
 
@@ -743,6 +744,7 @@
           tracksContainer.style.display = 'flex';
           tracksContainer.style.flexDirection = 'column';
           tracksContainer.style.gap = '8px';
+          tracksContainer.style.display = 'none';
 
         if (albomMass) {
           albomMass.album.forEach(vf => {
