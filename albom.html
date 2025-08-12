@@ -100,7 +100,45 @@
 
     .add-btn {
       flex-shrink: 0;
-      background: linear-gradient(45deg, #d8d8d8, #2c6b51);
+      background: linear-gradient(45deg, #1c6d4b, #419974);
+      border: none;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      font-size: 1.7rem;
+      line-height: 1;
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 5px 14px #1c6d4b;
+      transition: box-shadow 0.3s ease, transform 0.2s ease;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      user-select: none;
+    }
+
+    .add-btn:hover {
+      box-shadow: 0 8px 22px #1c6d4b;
+      transform: scale(1.1);
+    }
+
+    .add-btn:active {
+      transform: scale(0.95);
+      box-shadow: 0 5px 14px #1c6d4b;
+    }
+
+
+
+
+
+
+
+
+
+    .add-btn-albom {
+      flex-shrink: 0;
+      background: linear-gradient(45deg, #ffffff, #ffffff);
       border: none;
       border-radius: 50%;
       width: 36px;
@@ -118,15 +156,75 @@
       user-select: none;
     }
 
-    .add-btn:hover {
-      box-shadow: 0 8px 22px #e4e4e4;
+    .add-btn-albom:hover {
+      box-shadow: 0 8px 22px #ffffff;
       transform: scale(1.1);
     }
 
-    .add-btn:active {
+    .add-btn-albom:active {
       transform: scale(0.95);
       box-shadow: 0 5px 14px #ffffff;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     .local-track-button {
@@ -405,7 +503,7 @@
         })
 
         const addBtn = document.createElement('button');
-        addBtn.className = 'add-btn';
+        addBtn.className = 'add-btn-albom';
         addBtn.textContent = '+';
         addBtn.title = `Добавить "${track.title}" в плейлист`;
         addBtn.setAttribute('aria-label', `Добавить ${track.title} в плейлист`);
