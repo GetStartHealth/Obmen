@@ -6,313 +6,214 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Избранные треки</title>
   <style>
- body {
-  margin: 0;
-  background-color: #363E6B;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  display: flex;
-  justify-content: center;
-  padding: 40px 20px;
-  min-height: 100vh;
-  color: #fff;
-  user-select: none;
-}
-
-#playlist-container {
-  background: #fff; 
-  border-radius: 24px;
-  padding: 30px 30px 40px;
-  max-width: 620px;
-  width: 100%;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-  display: flex;
-  flex-direction: column;
-  color: #363E6B; 
-  user-select: none;
-  box-sizing: border-box;
-}
-
-#playlist-container h3 {
-  margin: 0 0 24px 10px;
-  font-weight: 700;
-  font-size: 2rem;
-  letter-spacing: 0.05em;
-  color: #363E6B; 
-  text-shadow: none;
-}
-
-.small-button {
-  align-self: flex-start;
-  margin-bottom: 20px;
-  background: #fff;
-  color: #363E6B;
-  border: 2.5px solid #363E6B;
-  border-radius: 16px;
-  padding: 10px 24px;
-  font-weight: 700;
-  font-size: 1rem;
-  cursor: pointer;
-  box-shadow: 0 5px 18px rgba(54, 62, 107, 0.25);
-  transition: box-shadow 0.3s ease, transform 0.2s ease, color 0.3s ease, border-color 0.3s ease;
-  user-select: none;
-}
-
-.small-button:hover {
-  box-shadow: 0 9px 28px rgba(54, 62, 107, 0.5);
-  transform: translateY(-3px);
-  color: #2a3150;
-  border-color: #2a3150;
-}
-
-.small-button:active {
-  transform: translateY(0);
-  box-shadow: 0 5px 18px rgba(54, 62, 107, 0.25);
-}
-
-#favorites-container {
-  overflow-y: auto;
-  max-height: 430px;
-  padding-right: 6px;
-  margin-bottom: 20px;
-  user-select: none;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-#favorites-container::-webkit-scrollbar {
-  width: 8px;
-}
-
-#favorites-container::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-#favorites-container::-webkit-scrollbar-thumb {
-  background: #363E6B;
-  border-radius: 8px;
-}
-
-#favorites-container > div {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#albom-container {
-  overflow-y: auto;
-  max-height: 430px;
-  padding-right: 6px;
-  margin-bottom: 20px;
-  user-select: none;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-#albom-container::-webkit-scrollbar {
-  width: 8px;
-}
-
-#albom-container::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-#albom-container::-webkit-scrollbar-thumb {
-  background: #363E6B;
-  border-radius: 8px;
-}
-
-#albom-container > div {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.track-button {
-  background: #363E6B;
-  border: none;
-  border-radius: 16px;
-  padding: 4px 8px;
-  color: white;
-  font-size: 14px;
-  font-weight: 700;
-  text-align: left;
-  cursor: pointer;
-  box-shadow: 0 5px 18px rgba(54, 62, 107, 0.7);
-  transition: box-shadow 0.3s ease, transform 0.2s ease;
-  user-select: none;
-  min-width: 230px;
-  max-width: 260px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  flex-shrink: 0;
-  outline: none;
-  height: 36px;
-}
-
-.track-button:hover:not(:disabled) {
-  box-shadow: 0 9px 28px rgba(54, 62, 107, 1);
-  transform: translateY(-3px);
-}
-
-.track-button:active:not(:disabled) {
-  transform: translateY(0);
-  box-shadow: 0 5px 18px rgba(54, 62, 107, 0.7);
-}
-
-.track-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  box-shadow: none;
-  background: #ccc;
-  color: #666;
-}
-
-.delete-button {
-  flex-shrink: 0;
-  background: #5e2213;
-  border: none;
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  font-size: 1.7rem;
-  line-height: 1;
-  color: white;
-  font-weight: 700;
-  cursor: pointer;
-  box-shadow: 0 5px 14px rgba(82, 30, 30, 0.7);
-  transition: box-shadow 0.3s ease, transform 0.2s ease;
-  user-select: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.delete-button:hover {
-  box-shadow: 0 8px 22px rgba(82, 30, 30, 0.7);
-  transform: scale(1.1);
-}
-
-.delete-button:active {
-  transform: scale(0.95);
-  box-shadow: 0 5px 14px rgba(82, 30, 30, 0.7);
-}
-
-#audio-player {
-  width: 100%;
-  border-radius: 14px;
-  box-shadow: 0 6px 20px rgba(54, 62, 107, 0.3);
-  outline: none;
-  background-color: #fff;
-  height: 46px;
-  user-select: none;
-}
-
-
-.local-track-button {
-  background: #363E6B;
-  border: none;
-  border-radius: 16px;
-  padding: 4px 8px;
-  color: white;
-  font-size: 14px;
-  font-weight: 700;
-  text-align: left;
-  cursor: pointer;
-  box-shadow: 0 5px 18px rgba(54, 62, 107, 0.7);
-  transition: box-shadow 0.3s ease, transform 0.2s ease;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  user-select: none;
-  outline: none;
-  min-width: 230px;
-  max-width: 260px;
-  flex-shrink: 0;
-  height: 36px;
-}
-
-.local-track-button:hover:not(:disabled) {
-  box-shadow: 0 9px 28px rgba(54, 62, 107, 1);
-  transform: translateY(-3px);
-}
-
-.local-track-button:active:not(:disabled) {
-  transform: translateY(0);
-  box-shadow: 0 5px 18px rgba(54, 62, 107, 0.7);
-}
-
-.local-track-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  box-shadow: none;
-  background: #999;
-  color: #ccc;
-}
-
-.album-title {
+    body {
+      margin: 0;
+      background-color: #363E6B;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      display: flex;
+      justify-content: center;
+      padding: 40px 20px;
+      min-height: 100vh;
+      color: #fff;
+      user-select: none;
+    }
+
+    #playlist-container {
+      background: #fff;
+      border-radius: 24px;
+      padding: 30px 30px 40px;
+      max-width: 620px;
+      width: 100%;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+      display: flex;
+      flex-direction: column;
+      color: #363E6B;
+      user-select: none;
+      box-sizing: border-box;
+    }
+
+    #playlist-container h3 {
+      margin: 0 0 24px 10px;
+      font-weight: 700;
+      font-size: 2rem;
+      letter-spacing: 0.05em;
+      color: #363E6B;
+      text-shadow: none;
+    }
+
+    .small-button {
+      align-self: flex-start;
+      margin-bottom: 20px;
+      background: #fff;
+      color: #363E6B;
+      border: 2.5px solid #363E6B;
+      border-radius: 16px;
+      padding: 10px 24px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 5px 18px rgba(54, 62, 107, 0.25);
+      transition: box-shadow 0.3s ease, transform 0.2s ease, color 0.3s ease, border-color 0.3s ease;
+      user-select: none;
+    }
+
+    .small-button:hover {
+      box-shadow: 0 9px 28px rgba(54, 62, 107, 0.5);
+      transform: translateY(-3px);
+      color: #2a3150;
+      border-color: #2a3150;
+    }
+
+    .small-button:active {
+      transform: translateY(0);
+      box-shadow: 0 5px 18px rgba(54, 62, 107, 0.25);
+    }
+
+    #favorites-container {
+      overflow-y: auto;
+      max-height: 430px;
+      padding-right: 6px;
+      margin-bottom: 20px;
+      user-select: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    #favorites-container::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    #favorites-container::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    #favorites-container::-webkit-scrollbar-thumb {
+      background: #363E6B;
+      border-radius: 8px;
+    }
+
+    #favorites-container > div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    #albom-container {
+      overflow-y: auto;
+      max-height: 430px;
+      padding-right: 6px;
+      margin-bottom: 20px;
+      user-select: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    #albom-container::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    #albom-container::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    #albom-container::-webkit-scrollbar-thumb {
+      background: #363E6B;
+      border-radius: 8px;
+    }
+
+    #albom-container > div {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .track-button {
+      background: #363E6B;
+      border: none;
+      border-radius: 16px;
+      padding: 4px 8px;
+      color: white;
+      font-size: 14px;
+      font-weight: 700;
+      text-align: left;
+      cursor: pointer;
+      box-shadow: 0 5px 18px rgba(54, 62, 107, 0.7);
+      transition: box-shadow 0.3s ease, transform 0.2s ease;
+      user-select: none;
+      min-width: 230px;
+      max-width: 260px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      flex-shrink: 0;
+      outline: none;
+      height: 36px;
+    }
+
+    .track-button:hover:not(:disabled) {
+      box-shadow: 0 9px 28px rgba(54, 62, 107, 1);
+      transform: translateY(-3px);
+    }
+
+    .track-button:active:not(:disabled) {
+      transform: translateY(0);
+      box-shadow: 0 5px 18px rgba(54, 62, 107, 0.7);
+    }
+
+    .track-button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      box-shadow: none;
+      background: #ccc;
+      color: #666;
+    }
+
+    .delete-button {
+      flex-shrink: 0;
+      background: #5e2213;
+      border: none;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      font-size: 1.7rem;
+      line-height: 1;
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 5px 14px rgba(82, 30, 30, 0.7);
+      transition: box-shadow 0.3s ease, transform 0.2s ease;
+      user-select: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .delete-button:hover {
+      box-shadow: 0 8px 22px rgba(82, 30, 30, 0.7);
+      transform: scale(1.1);
+    }
+
+    .delete-button:active {
+      transform: scale(0.95);
+      box-shadow: 0 5px 14px rgba(82, 30, 30, 0.7);
+    }
+
+    #audio-player {
+      width: 100%;
+      border-radius: 14px;
+      box-shadow: 0 6px 20px rgba(54, 62, 107, 0.3);
+      outline: none;
+      background-color: #fff;
+      height: 46px;
+      user-select: none;
+    }
+
+    .album-title {
       background-color: #6570af;
       padding: 10px;
       cursor: pointer;
@@ -320,118 +221,66 @@
       justify-content: space-between;
       align-items: center;
       border-radius: 10px;
-       margin-bottom: 10px;
+      margin-bottom: 10px;
+      user-select: none;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: white;
+      transition: background-color 0.3s ease;
     }
 
-@media (max-width: 640px) {
-  #playlist-container {
-    padding: 25px 20px 30px;
-  }
-
-  #playlist-container h3 {
-    font-size: 1.6rem;
-  }
-
-  #favorites-container {
-    max-height: 300px;
-  }
-
-  .track-button {
-    font-size: 14px;
-    padding: 4px 8px;
-    min-width: 230px;
-    max-width: 260px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    flex-shrink: 0;
-    height: 36px;
-  }
-
-  .local-track-button {
-    font-size: 14px;
-    padding: 4px 8px;
-    min-width: 230px;
-    max-width: 260px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    flex-shrink: 0;
-    height: 36px;
-  }
-
-  .delete-button {
-    width: 32px;
-    height: 32px;
-    font-size: 1.5rem;
-  }
-
-  #audio-player {
-    height: 40px;
-  }
-  .album-title {
-      background-color: #6570af;
-      padding: 10px;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-radius: 10px;
-       margin-bottom: 10px;
-
-    }
-}
-
-@media (max-width: 480px) {
-  .small-button {
-    font-size: 1.5em;
-    padding: 14px 28px;
-  }
-
-  .track-button {
-    font-size: 14px;
-    padding: 4px 8px;
-    min-width: 230px;
-    max-width: 260px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    flex-shrink: 0;
-    height: 36px;
-  }
-
-  .local-track-button {
-    font-size: 14px;
-    padding: 4px 8px;
-    min-width: 230px;
-    max-width: 260px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    flex-shrink: 0;
-    height: 36px;
-  }
-
-  .delete-button {
-    width: 32px;
-    height: 32px;
-    font-size: 1.5rem;
-  }
-
-  .album-title {
-      background-color: #6570af;
-      padding: 10px;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-radius: 10px;
-       margin-bottom: 10px;
-
+    .album-title:hover {
+      background-color: #4a5d9e;
     }
 
-}
+    /* Стрелочка раскрытия */
+    .album-title::after {
+      content: '▼';
+      font-size: 0.8em;
+      transition: transform 0.3s ease;
+      margin-left: 10px;
+      color: white;
+    }
 
+    .album-title[aria-expanded="true"]::after {
+      transform: rotate(180deg);
+    }
+
+    @media (max-width: 640px) {
+      #playlist-container {
+        padding: 25px 20px 30px;
+      }
+
+      #playlist-container h3 {
+        font-size: 1.6rem;
+      }
+
+      #favorites-container {
+        max-height: 300px;
+      }
+
+      .track-button {
+        font-size: 14px;
+        padding: 4px 8px;
+        min-width: 230px;
+        max-width: 260px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        flex-shrink: 0;
+        height: 36px;
+      }
+
+      .delete-button {
+        width: 32px;
+        height: 32px;
+        font-size: 1.5rem;
+      }
+
+      #audio-player {
+        height: 40px;
+      }
+    }
 </style>
 </head>
 
@@ -652,13 +501,11 @@
 
 
 
-
-     const favoritesContainer = document.getElementById('favorites-container');
+const favoritesContainer = document.getElementById('favorites-container');
     const albomContainer = document.getElementById('albom-container');
     const audioPlayer = document.getElementById('audio-player');
 
     function UpdateFunction() {
-      
       favoritesContainer.innerHTML = '';
       albomContainer.innerHTML = '';
 
@@ -674,6 +521,7 @@
         favoritesContainer.style.padding = '10px';
         favoritesContainer.style.fontWeight = '600';
         favoritesContainer.style.userSelect = 'none';
+        favoritesContainer.textContent = 'Нет избранных треков';
       } else {
         favoriteTracks.forEach(track => {
           const trackContainer = document.createElement('div');
@@ -713,67 +561,60 @@
         });
       }
 
-      
-
-
       const albomTitlesRaw = localStorage.getItem('trekA') || '';
       const AlbomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
-      const trackList = document.createElement('div');
-      trackList.style.display = 'none'; 
-
       AlbomTitles.forEach(albom => {
         const albomMass = albomsT.find(a => a.title === albom);
+        if (!albomMass) return;
+
         const albumDiv = document.createElement('div');
         albumDiv.style.marginBottom = '16px';
+        albumDiv.style.display = 'flex';
+        albumDiv.style.flexDirection = 'column';
 
-          const albumButton = document.createElement('button');
-          albumButton.textContent = albomMass.title;
-          albumButton.className = 'album-title';
-          albumButton.setAttribute('aria-expanded', 'false');
-          albumButton.style.width = '100%';
-          albumButton.style.textAlign = 'left';
-          albumButton.style.display = 'flex';
-          albumButton.style.justifyContent = 'space-between';
-          albumButton.style.alignItems = 'center';
+        const albumButton = document.createElement('button');
+        albumButton.textContent = albomMass.title;
+        albumButton.className = 'album-title';
+        albumButton.setAttribute('aria-expanded', 'false');
+        albumButton.style.width = '100%';
+        albumButton.style.textAlign = 'left';
 
+        const tracksContainer = document.createElement('div');
+        tracksContainer.style.display = 'none';
+        tracksContainer.style.marginTop = '8px';
+        tracksContainer.style.flexDirection = 'column';
+        tracksContainer.style.gap = '8px';
+        tracksContainer.style.display = 'none';
+        tracksContainer.style.flexWrap = 'nowrap';
+        tracksContainer.style.alignItems = 'flex-start';
 
-          const tracksContainer = document.createElement('div');
-          tracksContainer.style.display = 'none';
-          tracksContainer.style.marginTop = '8px';
-          tracksContainer.style.display = 'block';
-          tracksContainer.style.flexDirection = 'column';
-          tracksContainer.style.gap = '8px';
-          tracksContainer.style.display = 'none';
+        albomMass.album.forEach(vf => {
+          const btnf = document.createElement('button');
+          btnf.textContent = vf.title;
+          btnf.className = 'track-button';
+          btnf.title = `Воспроизвести ${vf.title}`;
+          btnf.setAttribute('aria-label', `Воспроизвести ${vf.title}`);
 
-        if (albomMass) {
-          albomMass.album.forEach(vf => {
-            const btnf = document.createElement('button');
-            btnf.textContent = vf.title;
-            btnf.className = 'track-button';
-            btnf.title = `Воспроизвести ${vf.title}`;
-            btnf.setAttribute('aria-label', `Воспроизвести ${vf.title}`);
-
-            btnf.addEventListener('click', () => {
-              if (vf.url) {
-                audioPlayer.src = vf.url;
-                audioPlayer.play().catch(e => console.warn('Ошибка воспроизведения:', e));
-              }
-            });
-
-
-          
-            tracksContainer.appendChild(btnf);
+          btnf.addEventListener('click', () => {
+            if (vf.url) {
+              audioPlayer.src = vf.url;
+              audioPlayer.play().catch(e => console.warn('Ошибка воспроизведения:', e));
+            }
           });
 
-          albumButton.addEventListener('click', () => {           
-            tracksContainer.style.display = (tracksContainer.style.display === 'none') ? 'block' : 'none';
-          });
+          tracksContainer.appendChild(btnf);
+        });
 
-          albumDiv.appendChild(albumButton);
-          albumDiv.appendChild(tracksContainer);
-          albomContainer.appendChild(albumDiv);       
-        }
+        albumButton.addEventListener('click', () => {
+          const isHidden = tracksContainer.style.display === 'none' || tracksContainer.style.display === '';
+          tracksContainer.style.display = isHidden ? 'flex' : 'none';
+          albumButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+        });
+
+        albumDiv.appendChild(albumButton);
+        albumDiv.appendChild(tracksContainer);
+        albomContainer.appendChild(albumDiv);
       });
     }
 
