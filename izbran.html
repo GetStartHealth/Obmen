@@ -572,12 +572,26 @@ const favoritesContainer = document.getElementById('favorites-container');
         albumDiv.style.display = 'flex';
         albumDiv.style.flexDirection = 'column';
 
+        const deleteBtn2 = document.createElement('button');
+          deleteBtn2.textContent = '-';
+          deleteBtn2.className = 'delete-button';
+          deleteBtn2.setAttribute('aria-label', `Удалить ${albomMass.title}`);
+
+          deleteBtn2.addEventListener('click', () => {
+            const rawFilter = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+            const updatedFavorites = rawFilter.filter(fav => fav !== albomMass.title);
+            localStorage.setItem('trekA', updatedFavorites.join('\n'));
+            UpdateFunction();
+          });
+
         const albumButton = document.createElement('button');
         albumButton.textContent = albomMass.title;
         albumButton.className = 'album-title';
         albumButton.setAttribute('aria-expanded', 'false');
         albumButton.style.width = '100%';
         albumButton.style.textAlign = 'left';
+
+        albumButton.appendChild(deleteBtn2);
 
         const tracksContainer = document.createElement('div');
         tracksContainer.style.display = 'none';
@@ -595,17 +609,7 @@ const favoritesContainer = document.getElementById('favorites-container');
           btnf.title = `Воспроизвести ${vf.title}`;
           btnf.setAttribute('aria-label', `Воспроизвести ${vf.title}`);
 
-        const deleteBtn2 = document.createElement('button');
-          deleteBtn2.textContent = '-';
-          deleteBtn2.className = 'delete-button';
-          deleteBtn2.setAttribute('aria-label', `Удалить ${albomMass.title}`);
 
-          deleteBtn2.addEventListener('click', () => {
-            const rawFilter = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-            const updatedFavorites = rawFilter.filter(fav => fav !== albomMass.title);
-            localStorage.setItem('trekA', updatedFavorites.join('\n'));
-            UpdateFunction();
-          });
 
           btnf.addEventListener('click', () => {
             if (vf.url) {
@@ -614,7 +618,7 @@ const favoritesContainer = document.getElementById('favorites-container');
             }
           });
 
-          albumButton.appendChild(deleteBtn2)
+          a.appendChild(deleteBtn2)
 
           tracksContainer.appendChild(btnf);
         });
