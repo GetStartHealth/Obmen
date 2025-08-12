@@ -312,6 +312,17 @@
   color: #ccc;
 }
 
+.album-title {
+      background-color: #6570af;
+      padding: 10px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 10px;
+       margin-bottom: 10px;
+    }
+
 @media (max-width: 640px) {
   #playlist-container {
     padding: 25px 20px 30px;
@@ -358,6 +369,17 @@
   #audio-player {
     height: 40px;
   }
+  .album-title {
+      background-color: #6570af;
+      padding: 10px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 10px;
+       margin-bottom: 10px;
+
+    }
 }
 
 @media (max-width: 480px) {
@@ -395,6 +417,19 @@
     height: 32px;
     font-size: 1.5rem;
   }
+
+  .album-title {
+      background-color: #6570af;
+      padding: 10px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 10px;
+       margin-bottom: 10px;
+
+    }
+
 }
 
 </style>
@@ -693,7 +728,7 @@
 
           const albumButton = document.createElement('button');
           albumButton.textContent = albomMass.title;
-          albumButton.className = 'small-button';
+          albumButton.className = 'albom-title';
           albumButton.setAttribute('aria-expanded', 'false');
           albumButton.style.width = '100%';
           albumButton.style.textAlign = 'left';
