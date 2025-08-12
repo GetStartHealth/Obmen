@@ -184,46 +184,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     .local-track-button {
       flex-grow: 1;
       background: #363E6B;
@@ -450,6 +410,19 @@
       alert(`Песня "${trackTitle}" добавлена`);
     }
 
+
+    function addToPlaylistAlbom(trackTitle, trackAlbom) {
+      let current = localStorage.getItem('trek') || '';
+      let songs = current.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+
+      trackAlbom.forEach(albomT => {
+        songs.unshift(albomT.title)
+      })
+
+      localStorage.setItem('AlbomTrek', songs.join('\n'));
+      alert(`Альбом "${trackTitle}" добавлен`);
+    }
+
     tracks.forEach(track => {
       if (track.album) {
         const albumTitle = document.createElement('div');
@@ -497,6 +470,7 @@
               audioPlayer.src = song.url;
               audioPlayer.play();
             }
+            
           };
           
           trackRow.appendChild(addBtn);
@@ -509,7 +483,7 @@
         addBtn.textContent = '+';
         addBtn.title = `Добавить "${track.title}" в плейлист`;
         addBtn.setAttribute('aria-label', `Добавить ${track.title} в плейлист`);
-        addBtn.onclick = () => addToPlaylist(track.title);
+        addBtn.onclick = () => addToPlaylistAlbom(track.title, track.album);
 
         albumTitle.appendChild(addBtn)
     
