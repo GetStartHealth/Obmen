@@ -175,17 +175,16 @@
 
     .delete-button {
       flex-shrink: 0;
-      background: #5e2213;
+      background: #ffffff;
       border: none;
       border-radius: 50%;
       width: 36px;
       height: 36px;
-      font-size: 1.7rem;
+      font-size: 1.3rem;
       line-height: 1;
       color: white;
       font-weight: 700;
       cursor: pointer;
-      box-shadow: 0 5px 14px rgba(82, 30, 30, 0.7);
       transition: box-shadow 0.3s ease, transform 0.2s ease;
       user-select: none;
       display: flex;
@@ -194,13 +193,11 @@
     }
 
     .delete-button:hover {
-      box-shadow: 0 8px 22px rgba(82, 30, 30, 0.7);
       transform: scale(1.1);
     }
 
     .delete-button:active {
       transform: scale(0.95);
-      box-shadow: 0 5px 14px rgba(82, 30, 30, 0.7);
     }
 
     #audio-player {
@@ -274,7 +271,7 @@
       .delete-button {
         width: 32px;
         height: 32px;
-        font-size: 1.5rem;
+        font-size: 1.3rem;
       }
 
       #audio-player {
@@ -540,7 +537,8 @@ const favoritesContainer = document.getElementById('favorites-container');
           deleteBtn.className = 'delete-button';
           deleteBtn.setAttribute('aria-label', `Удалить ${track.title}`);
 
-          deleteBtn.addEventListener('click', () => {
+          deleteBtn.addEventListener('click', (event) => {
+            event.stopPropagation();
             const rawFilter = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
             const updatedFavorites = rawFilter.filter(fav => fav !== track.title);
             localStorage.setItem('trek', updatedFavorites.join('\n'));
