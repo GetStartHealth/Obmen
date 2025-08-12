@@ -451,15 +451,14 @@
     }
 
 
-    function addToPlaylistAlbom(trackTitle, trackAlbom) {
-      let current = localStorage.getItem('trek') || '';
+    function addToPlaylistAlbom(trackTitle) {
+      let current = localStorage.getItem('trekA') || '';
       let songs = current.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
-      trackAlbom.forEach(albomT => {
-        songs.unshift(albomT.title)
-      })
+      songs.unshift(trackTitle)
 
-      localStorage.setItem('trek', songs.join('\n'));
+
+      localStorage.setItem('trekA', songs.join('\n'));
       alert(`Альбом "${trackTitle}" добавлен`);
     }
 
@@ -523,7 +522,7 @@
         addBtn.textContent = '+';
         addBtn.title = `Добавить "${track.title}" в плейлист`;
         addBtn.setAttribute('aria-label', `Добавить ${track.title} в плейлист`);
-        addBtn.onclick = () => addToPlaylistAlbom(track.title, track.album);
+        addBtn.onclick = () => addToPlaylistAlbom(track.title);
 
         albumTitle.appendChild(addBtn)
     
@@ -535,5 +534,3 @@
     });
   </script>
 </body>
-
-</html>
