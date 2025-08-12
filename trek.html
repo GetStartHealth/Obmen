@@ -372,7 +372,7 @@
         return;
       }
 
-      songs.push(trackTitle);
+      songs.unshift(trackTitle);
       localStorage.setItem('trek', songs.join('\n'));
       alert(`Песня "${trackTitle}" добавлена в плейлист.`);
     }
