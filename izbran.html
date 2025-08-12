@@ -677,6 +677,8 @@
         });
       }
 
+      
+
 
       const albomTitlesRaw = localStorage.getItem('trekA') || '';
       const AlbomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
@@ -699,23 +701,7 @@
             });
 
 
-             const deleteBtn1 = document.createElement('button');
-              deleteBtn1.textContent = '-';
-              deleteBtn1.className = 'delete-button';
-              deleteBtn1.setAttribute('aria-label', `Удалить ${vf.title}`);
-
-              deleteBtn1.addEventListener('click', () => {
-                const favoriteTitlesRaw = localStorage.getItem('trekA') || '';
-                const favoriteTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-
-                const updatedFavorites = favoriteTitles.filter(title => title !== vf.title);
-
-                localStorage.setItem('trekA', updatedFavorites.join('\n'));
-
-                UpdateFunction();
-              });
-
-            albomContainer.appendChild(deleteBtn1);
+          
             albomContainer.appendChild(btnf);
           });
         }
