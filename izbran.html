@@ -739,10 +739,60 @@ const searchInput = document.querySelector('.searchL input[type="text"]');
 
 searchInput.addEventListener('input', () => {
   const query = searchInput.value.toLowerCase();
+  favoritesContainer.innerHTML = ''; // очищаем контейнер с любимыми треками
+
   const favoriteTitlesRaw = localStorage.getItem('trek') || '';
   const favoriteTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-  const trackToScrollTo = favoriteTitles.find(title => title.toLowerCase().includes(query));
-  console.log(trackToScrollTo)
+
+  const favoriteTracks = favoriteTitles
+    .map(title => tracks.find(t => t.title.toLowerCase().includes(query) && t.title === title))
+    .filter(t => t && t.url);
+
+  if (favoriteTracks.length === 0) {
+    favoritesContainer.style.color = '#363E6B';
+    favoritesContainer.style.padding = '10px';
+    favoritesContainer.style.fontWeight = '600';
+    favoritesContainer.style.userSelect = 'none';
+    favoritesContainer.textContent = 'Нет результатов для поиска'; // сообщение о том, что нет результатов
+  } else {
+    favoriteTracks.forEach(track => {
+      const trackContainer = document.createElement('div');
+      trackContainer.style.display = 'flex';
+      trackContainer.style.alignItems = 'center';
+      trackContainer.style.justifyContent = 'space-between';
+
+      const btn = document.createElement('button');
+      btn.textContent = track.title;
+      btn.className = 'track-button';
+      btn.disabled = !track.url;
+      btn.title = `Воспроизвести ${track.title}`;
+      btn.setAttribute('aria-label', `Воспроизвести ${track.title}`);
+
+      const deleteBtn = document.createElement('button');
+      deleteBtn.textContent = '-';
+      deleteBtn.className = 'delete-button';
+      deleteBtn.setAttribute('aria-label', `Удалить ${track.title}`);
+
+      deleteBtn.addEventListener('click', (event) => {
+        event.stopPropagation();
+        const rawFilter = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+        const updatedFavorites = rawFilter.filter(fav => fav !== track.title);
+        localStorage.setItem('trek', updatedFavorites.join('\n'));
+        UpdateFunction();
+      });
+
+      btn.addEventListener('click', () => {
+        if (track.url) {
+          audioPlayer.src = track.url;
+          audioPlayer.play().catch(e => console.warn('Ошибка воспроизведения:', e));
+        }
+      });
+
+      trackContainer.appendChild(deleteBtn);
+      trackContainer.appendChild(btn);
+      favoritesContainer.appendChild(trackContainer);
+    });
+  }
 });
 
 
