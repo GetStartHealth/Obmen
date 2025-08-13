@@ -254,15 +254,17 @@
 }
 
 
-.album-title[aria-expanded="true"] .title-text::after {
+.album-title .title-text::after {
   content: '▼';
   font-size: 0.8em;
   margin-left: 8px;
   color: white;
   transition: transform 0.3s ease;
   flex-shrink: 0;
+  display: inline-block;
+  transform-origin: center;
+  transform: rotate(0deg);
 }
-
 
 .album-title[aria-expanded="true"] .title-text::after {
   transform: rotate(180deg);
@@ -691,7 +693,8 @@
          const isHidden = tracksContainer.style.maxHeight === '0px';
          tracksContainer.style.maxHeight = isHidden ? '500px' : '0px';
          tracksContainer.style.transition = 'max-height 0.3s ease';
-         albumButton.setAttribute('aria-expanded', isHidden);
+         albumButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+
         });
 
         albumDiv.appendChild(albumButton);
