@@ -726,33 +726,46 @@ const searchForm = document.querySelector('.searchL');
 searchForm.addEventListener('submit', (event) => {
   event.preventDefault(); 
   const query = searchInput.value.toLowerCase();
+  
   const favoriteTitlesRaw = localStorage.getItem('trek') || '';
   const favoriteTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
   const albomTitlesRaw = localStorage.getItem('trekA') || '';
   const albomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
-  const trackToScrollToA = albomTitles.find(title => title.toLowerCase().includes(query));
+
+  const albomToScrollTo = albomTitles.find(title => title.toLowerCase().includes(query));
+
   const trackToScrollTo = favoriteTitles.find(title => title.toLowerCase().includes(query));
 
-  ver = Array.from(favoritesContainer.children) 
-  verA = Array.from(albomContainer.children) 
-  
-  const Element = ver.find(child => child.textContent.includes(trackToScrollTo));
-  Element.scrollIntoView({ behavior: 'smooth', block: 'center' }); 
-  Element.classList.add('highlight');
-  setTimeout(() => {
-    Element.classList.remove('highlight');
-  }, 2000); 
+  const ver = Array.from(favoritesContainer.children);
+  const verA = Array.from(albomContainer.children);
 
-  const ElementA = verA.find(child => child.querySelector('.title-text').textContent.includes(trackToScrollToA));
-  ElementA.scrollIntoView({ behavior: 'smooth', block: 'center' }); 
-  ElementA.classList.add('highlight');
-  setTimeout(() => {
-    ElementA.classList.remove('highlight');
-  }, 2000); 
-      
+
+  if (trackToScrollTo) {
+    const Element = ver.find(child => child.textContent.includes(trackToScrollTo));
+    if (Element) {
+      Element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      Element.classList.add('highlight');
+      setTimeout(() => {
+        Element.classList.remove('highlight');
+      }, 2000);
+    }
+  }
+
+
+  if (albomToScrollTo) {
+    const ElementA = verA.find(child => child.querySelector('.title-text').textContent.includes(albomToScrollTo));
+    if (ElementA) {
+      ElementA.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      ElementA.classList.add('highlight');
+      setTimeout(() => {
+        ElementA.classList.remove('highlight');
+      }, 2000);
+    }
+  }
 });
+
 
 
 UpdateFunction();
