@@ -600,7 +600,7 @@ searchForm.addEventListener('submit', (event) => {
 
 
   if (albomToScrollTo) {
-    const ElementA = verA.find(child => child.textContent.includes(albomToScrollTo));
+    const ElementA = verA.find(child => child.textContent.includes(albomToScrollTo.title));
     if (ElementA) {
       ElementA.scrollIntoView({ behavior: 'smooth', block: 'center' });
       ElementA.classList.add('highlight');
