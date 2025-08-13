@@ -593,7 +593,7 @@ searchForm.addEventListener('submit', (event) => {
   event.preventDefault(); 
   const query = searchInput.value.toLowerCase();
 
-  const albomToScrollTo = tracks.find(title => title.toLowerCase().includes(query));
+  const albomToScrollTo = tracks.find(title1 => title1.title.toLowerCase().includes(query));
 
   const verA = Array.from(buttonsContainer.children);
 
