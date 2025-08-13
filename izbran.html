@@ -729,9 +729,8 @@ searchForm.addEventListener('submit', (event) => {
   
   const Element = ver.find(child => 
       child.textContent.includes(trackToScrollTo));
+  Element.scrollIntoView();
 });
-
-Element.scrollIntoView();
 
 UpdateFunction();
   </script>
