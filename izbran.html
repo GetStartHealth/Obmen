@@ -554,7 +554,7 @@
 
 
 
-const favoritesContainer = document.getElementById('favorites-container');
+    const favoritesContainer = document.getElementById('favorites-container');
     const albomContainer = document.getElementById('albom-container');
     const audioPlayer = document.getElementById('audio-player');
 
@@ -632,7 +632,6 @@ const favoritesContainer = document.getElementById('favorites-container');
         titleText.className = 'title-text';
         titleText.textContent = albomMass.title;
 
-        albumButton.appendChild(titleText);
 
 
 
@@ -659,6 +658,9 @@ const favoritesContainer = document.getElementById('favorites-container');
 
         albumButton.appendChild(deleteBtn2);
 
+        
+        albumButton.appendChild(titleText);
+        
         const tracksContainer = document.createElement('div');
         tracksContainer.className = 'tracks-container'; 
         tracksContainer.style.maxHeight = '0'; 
@@ -703,9 +705,6 @@ const favoritesContainer = document.getElementById('favorites-container');
   </script>
 </body>
     
-
-  </script>
-</body>
 
   </script>
 </body>
