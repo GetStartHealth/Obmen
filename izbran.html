@@ -736,7 +736,6 @@
 
 
 const searchInput = document.querySelector('.searchL input[type="text"]');
-
 const searchForm = document.querySelector('.searchL');
 
 searchForm.addEventListener('submit', (event) => {
@@ -745,17 +744,13 @@ searchForm.addEventListener('submit', (event) => {
   const favoriteTitlesRaw = localStorage.getItem('trek') || '';
   const favoriteTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
-
   const trackToScrollTo = favoriteTitles.find(title => title.toLowerCase().includes(query));
   
-
   if (trackToScrollTo) {
-    console.log(trackToScrollTo);
+    console.log(trackToScrollTo); // Вывод найденного трека в консоль
   } else {
     console.log("Трек не найден");
   }
-
-  UpdateFunction();
 });
 
 
