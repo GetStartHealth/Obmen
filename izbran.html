@@ -599,6 +599,8 @@
       favoritesContainer.innerHTML = '';
       albomContainer.innerHTML = '';
 
+      
+
       const favoriteTitlesRaw = localStorage.getItem('trek') || '';
       const favoriteTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
@@ -730,6 +732,18 @@
          tracksContainer.style.transition = 'max-height 0.3s ease';
          albumButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
 
+        });
+
+
+        const searchInput = document.querySelector('.searchL input[type="text"]');
+
+        searchInput.addEventListener('input', () => {
+          const TrekRaw = localStorage.getItem('trek') || '';
+          const rawF = TrekRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+          const query = searchInput.value;
+          const qd = rawF.find(a => a.title === query);
+          console.log(qd)
+            
         });
 
         albumDiv.appendChild(albumButton);
