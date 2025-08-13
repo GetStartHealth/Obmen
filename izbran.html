@@ -742,8 +742,6 @@ searchInput.addEventListener('input', () => {
   const favoriteTitlesRaw = localStorage.getItem('trek') || '';
   const favoriteTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
   const trackToScrollTo = favoriteTitles.find(title => title.toLowerCase().includes(query));
-
-  print(trackToScrollTo)
   console.log(trackToScrollTo)
 });
 
