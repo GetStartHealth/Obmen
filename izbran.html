@@ -56,6 +56,11 @@
   transition: max-height 0.3s ease;
 }
 
+.highlight {
+  background-color: rgba(255, 255, 0, 0.5); 
+  transition: background-color 0.3s ease; 
+}
+
 
 
     .small-button {
@@ -728,9 +733,12 @@ searchForm.addEventListener('submit', (event) => {
   ver = Array.from(favoritesContainer.children) 
   
   const Element = ver.find(child => 
+      
       child.textContent.includes(trackToScrollTo));
-  Element.scrollIntoView();
+      Element.scrollIntoView(); 
+      Element.classList.add('highlight');
 });
+
 
 UpdateFunction();
   </script>
