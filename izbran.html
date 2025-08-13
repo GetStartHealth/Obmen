@@ -732,7 +732,8 @@ searchForm.addEventListener('submit', (event) => {
   const albomTitlesRaw = localStorage.getItem('trekA') || '';
   const albomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
-  const trackToScrollTo = albomTitles.find(title => title.toLowerCase().includes(query));
+  const trackToScrollToA = albomTitles.find(title => title.toLowerCase().includes(query));
+  const trackToScrollTo = favoriteTitles.find(title => title.toLowerCase().includes(query));
 
   ver = Array.from(favoritesContainer.children) 
   verA = Array.from(albomContainer.children) 
@@ -744,11 +745,11 @@ searchForm.addEventListener('submit', (event) => {
     Element.classList.remove('highlight');
   }, 2000); 
 
-  const ElementA = verA.find(child => child.textContent.includes(trackToScrollTo));
-  Element.scrollIntoView({ behavior: 'smooth', block: 'center' }); 
-  Element.classList.add('highlight');
+  const ElementA = verA.find(child => child.textContent.includes(trackToScrollToA));
+  ElementA.scrollIntoView({ behavior: 'smooth', block: 'center' }); 
+  ElementA.classList.add('highlight');
   setTimeout(() => {
-    Element.classList.remove('highlight');
+    ElementA.classList.remove('highlight');
   }, 2000); 
       
 });
