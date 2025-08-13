@@ -737,11 +737,14 @@
 
 const searchInput = document.querySelector('.searchL input[type="text"]');
 
-searchInput.addEventListener('input', () => {
+const searchForm = document.querySelector('.searchL');
+
+searchForm.addEventListener('submit', (event) => {
+  event.preventDefault(); 
   const query = searchInput.value.toLowerCase();
   const favoriteTitlesRaw = localStorage.getItem('trek') || '';
-  console.log(favoriteTitlesRaw)
   const favoriteTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+
 
   const trackToScrollTo = favoriteTitles.find(title => title.toLowerCase().includes(query));
   
@@ -756,6 +759,7 @@ searchInput.addEventListener('input', () => {
 });
 
 
+
           albumDiv.appendChild(albumButton);
           albumDiv.appendChild(tracksContainer);
           albomContainer.appendChild(albumDiv);
@@ -763,10 +767,6 @@ searchInput.addEventListener('input', () => {
       }
 
     UpdateFunction();
-    
-
-  </script>
-</body>
     
 
   </script>
