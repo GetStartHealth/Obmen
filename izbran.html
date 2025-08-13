@@ -736,14 +736,14 @@ searchForm.addEventListener('submit', (event) => {
   ver = Array.from(favoritesContainer.children) 
   verA = Array.from(albomContainer.children) 
   
-  const Element = ver.find(child => child.textContent.includes(trackToScrollTo()));
+  const Element = ver.find(child => child.textContent.includes(trackToScrollTo));
   Element.scrollIntoView({ behavior: 'smooth', block: 'center' }); 
   Element.classList.add('highlight');
   setTimeout(() => {
     Element.classList.remove('highlight');
   }, 2000); 
 
-  const ElementA = verA.find(child => child.textContent.includes(trackToScrollTo()));
+  const ElementA = verA.find(child => child.textContent.includes(trackToScrollTo));
   Element.scrollIntoView({ behavior: 'smooth', block: 'center' }); 
   Element.classList.add('highlight');
   setTimeout(() => {
