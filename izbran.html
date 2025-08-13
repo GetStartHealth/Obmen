@@ -732,14 +732,13 @@ searchForm.addEventListener('submit', (event) => {
 
   ver = Array.from(favoritesContainer.children) 
   
-  const Element = ver.find(child => 
+  const Element = ver.find(child => child.textContent.includes(trackToScrollTo()));
+  Element.scrollIntoView({ block: 'center' }); 
+  Element.classList.add('highlight');
+  setTimeout(() => {
+    Element.classList.remove('highlight');
+  }, 2000); 
       
-      child.textContent.includes(trackToScrollTo()));
-      Element.scrollIntoView({ block: 'center' }); 
-      Element.classList.add('highlight');
-      setTimeout(() => {
-        Element.classList.remove('highlight');
-      }, 2000); 
 });
 
 
