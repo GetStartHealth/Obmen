@@ -730,9 +730,9 @@ searchForm.addEventListener('submit', (event) => {
   const favoriteTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
   const albomTitlesRaw = localStorage.getItem('trekA') || '';
-  const albomTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+  const albomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
-  const trackToScrollTo = favoriteTitles.find(title => title.toLowerCase().includes(query));
+  const trackToScrollTo = albomTitles.find(title => title.toLowerCase().includes(query));
 
   ver = Array.from(favoritesContainer.children) 
   verA = Array.from(albomContainer.children) 
