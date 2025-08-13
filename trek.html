@@ -205,6 +205,11 @@
       background: #363E6B;
       border-radius: 8px;
     }
+    .highlight {
+  background-color: rgba(255, 255, 0, 0.5); 
+  transition: background-color 0.3s ease; 
+  border-radius: 16px;
+}
 
     @media (max-width: 640px) {
       #playlist-container {
@@ -247,9 +252,13 @@
 <body>
   <section id="playlist-container" aria-label="Плейлист треков">
     <h3>Треки</h3>
+    <form action="search" method="get" class="searchL">  
+    <input type="text" name="query" placeholder="Поиск песен...">   
+    </form>  
     <button class="small-button" onclick="location.href='index.html'" aria-label="Перейти в меню">Меню</button>
     <div id="buttons-container" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
     <audio id="audio-player" controls preload="none" controlsList="nodownload" aria-label="Аудиоплеер для треков"></audio>
+    
   </section>
 
   <script>
@@ -415,6 +424,36 @@
       const row = createTrackRow(track);
       buttonsContainer.appendChild(row);
     });
+
+
+
+    const searchInput = document.querySelector('.searchL input[type="text"]');
+const searchForm = document.querySelector('.searchL');
+
+searchForm.addEventListener('submit', (event) => {
+  event.preventDefault(); 
+
+  const query = searchInput.value.toLowerCase();
+
+  const trackToScrollTo = tracks.find(title => title.title.toLowerCase().includes(query));
+
+  const ver = Array.from(buttonsContainer.children);
+
+
+
+  if (trackToScrollTo) {
+    const Element = ver.find(child => child.textContent.includes(trackToScrollTo.title));
+    if (Element) {
+      Element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      Element.classList.add('highlight');
+      setTimeout(() => {
+        Element.classList.remove('highlight');
+      }, 2000);
+    }
+  }
+
+});
+
   </script>
 </body>
 
