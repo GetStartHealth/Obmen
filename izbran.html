@@ -743,14 +743,8 @@ searchInput.addEventListener('input', () => {
   const favoriteTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
   const trackToScrollTo = favoriteTitles.find(title => title.toLowerCase().includes(query));
 
-  if (trackToScrollTo) {
-    const trackButton = Array.from(favoritesContainer.querySelectorAll('.track-button'))
-      .find(button => button.textContent.toLowerCase() === trackToScrollTo.toLowerCase());
-
-    if (trackButton) {
-      trackButton.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-  }
+  print(trackToScrollTo)
+  console.log(trackToScrollTo)
 });
 
 
