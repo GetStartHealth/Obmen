@@ -59,7 +59,6 @@
 .highlight {
   background-color: rgba(255, 255, 0, 0.5); 
   transition: background-color 0.3s ease; 
-  border-radius: 16px;
 }
 
 
@@ -367,12 +366,6 @@
         height: 32px;
         font-size: 1.3rem;
       }
-
-      .highlight {
-  background-color: rgba(255, 255, 0, 0.5); 
-  transition: background-color 0.3s ease; 
-  border-radius: 16px;
-}
 
       #audio-player {
         height: 40px;
@@ -735,11 +728,22 @@ searchForm.addEventListener('submit', (event) => {
   const favoriteTitlesRaw = localStorage.getItem('trek') || '';
   const favoriteTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
+  const albomTitlesRaw = localStorage.getItem('trekA') || '';
+  const albomTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+
   const trackToScrollTo = favoriteTitles.find(title => title.toLowerCase().includes(query));
 
   ver = Array.from(favoritesContainer.children) 
+  verA = Array.from(albomContainer.children) 
   
-  const Element = ver.find(child => child.textContent.includes(trackToScrollTo));
+  const Element = ver.find(child => child.textContent.includes(trackToScrollTo()));
+  Element.scrollIntoView({ behavior: 'smooth', block: 'center' }); 
+  Element.classList.add('highlight');
+  setTimeout(() => {
+    Element.classList.remove('highlight');
+  }, 2000); 
+
+  const ElementA = verA.find(child => child.textContent.includes(trackToScrollTo()));
   Element.scrollIntoView({ behavior: 'smooth', block: 'center' }); 
   Element.classList.add('highlight');
   setTimeout(() => {
