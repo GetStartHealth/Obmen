@@ -724,22 +724,14 @@ searchForm.addEventListener('submit', (event) => {
   const favoriteTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
   const trackToScrollTo = favoriteTitles.find(title => title.toLowerCase().includes(query));
-  
-  if (trackToScrollTo) {
-    const trackElement = Array.from(favoritesContainer.children).find(child => 
-      child.textContent.includes(trackToScrollTo)
-    );
 
-    if (trackElement) {
-      trackElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      console.log(`Найден трек: ${trackToScrollTo}`); 
-    } else {
-      console.log("Трек не найден");
-    }
-  } else {
-    console.log("Трек не найден");
-  }
+  ver = Array.from(favoritesContainer.children) 
+  
+  const Element = ver.find(child => 
+      child.textContent.includes(trackToScrollTo));
 });
+
+Element.scrollIntoView();
 
 UpdateFunction();
   </script>
