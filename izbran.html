@@ -340,9 +340,9 @@
 <body>
   <section id="playlist-container" aria-label="Плейлист избранных треков">
     <h3>Избранные треки</h3>
-    <button class="small-button" onclick="location.href='index.html'" aria-label="Перейти в меню">Меню</button>
-    <div id="favorites-container" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
+    <button class="small-button" onclick="location.href='index.html'" aria-label="Перейти в меню">Меню</button>    
     <div id="albom-container" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
+    <div id="favorites-container" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
     <audio id="audio-player" controls preload="none" controlsList="nodownload" aria-label="Аудиоплеер для избранных треков"></audio>
   </section>
 
@@ -626,6 +626,18 @@ const favoritesContainer = document.getElementById('favorites-container');
         albumDiv.style.display = 'flex';
         albumDiv.style.flexDirection = 'column';
 
+
+
+        const titleText = document.createElement('span');
+        titleText.className = 'title-text';
+        titleText.textContent = albomMass.title;
+
+        albumButton.appendChild(titleText);
+
+
+
+
+
         const deleteBtn2 = document.createElement('button');
           deleteBtn2.textContent = '-';
           deleteBtn2.className = 'delete-button';
@@ -674,9 +686,9 @@ const favoritesContainer = document.getElementById('favorites-container');
         });
 
         albumButton.addEventListener('click', () => {
-          const isHidden = tracksContainer.style.maxHeight === '0px';
-          tracksContainer.style.maxHeight = isHidden ? '500px' : '0px'; 
-          tracksContainer.style.transition = 'max-height 0.3s ease';
+         const isHidden = tracksContainer.style.maxHeight === '0px';
+         tracksContainer.style.maxHeight = isHidden ? '500px' : '0px';
+         tracksContainer.style.transition = 'max-height 0.3s ease';
         });
 
         albumDiv.appendChild(albumButton);
@@ -691,6 +703,9 @@ const favoritesContainer = document.getElementById('favorites-container');
   </script>
 </body>
     
+
+  </script>
+</body>
 
   </script>
 </body>
