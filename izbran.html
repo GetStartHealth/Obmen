@@ -735,46 +735,24 @@
         });
 
 
-        const searchInput = document.querySelector('.searchL input[type="text"]');
+const searchInput = document.querySelector('.searchL input[type="text"]');
 
-        searchInput.addEventListener('input', () => {
-          const query = searchInput.value.toLowerCase();
-          const favoriteTitlesRaw = localStorage.getItem('trek') || '';
-          const favoriteTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-          const filteredTracks = favoriteTitles.filter(title => title.toLowerCase().includes(query));
+searchInput.addEventListener('input', () => {
+  const query = searchInput.value.toLowerCase();
+  const favoriteTitlesRaw = localStorage.getItem('trek') || '';
+  const favoriteTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+  const trackToScrollTo = favoriteTitles.find(title => title.toLowerCase().includes(query));
 
+  if (trackToScrollTo) {
+    const trackButton = Array.from(favoritesContainer.querySelectorAll('.track-button'))
+      .find(button => button.textContent.toLowerCase() === trackToScrollTo.toLowerCase());
 
-          favoritesContainer.innerHTML = '';
-          filteredTracks.forEach(trackn => {
+    if (trackButton) {
+      trackButton.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }
+});
 
-            const track = tracks.find(a => a.title === trackn);
-
-            const trackContainer = document.createElement('div');
-            trackContainer.style.display = 'flex';
-            trackContainer.style.alignItems = 'center';
-            trackContainer.style.justifyContent = 'space-between';
-
-            const btn = document.createElement('button');
-            btn.textContent = track.title;
-            btn.className = 'track-button';
-            btn.disabled = !track.url;
-            btn.title = `Воспроизвести ${track.title}`;
-            btn.setAttribute('aria-label', `Воспроизвести ${track.title}`);
-
-
-            btn.addEventListener('click', () => {
-              if (track.url) {
-                audioPlayer.src = track.url;
-                audioPlayer.play().catch(e => console.warn('Ошибка воспроизведения:', e));
-              }
-            });
-
-            trackContainer.appendChild(btn);
-            favoritesContainer.appendChild(trackContainer);
-          });
-            
-              
-          });
 
           albumDiv.appendChild(albumButton);
           albumDiv.appendChild(tracksContainer);
