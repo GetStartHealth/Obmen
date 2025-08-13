@@ -374,7 +374,7 @@
     <h3>Избранные треки</h3>
     <button class="small-button" onclick="location.href='index.html'" aria-label="Перейти в меню">Меню</button> 
     
-    <form method="get" class="searchL">  
+    <form action="search" method="get" class="searchL">  
     <input type="text" name="query" placeholder="Поиск песен...">   
     </form>  
     <div id="albom-container" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
@@ -735,22 +735,24 @@
         });
 
 
-const searchInput = document.querySelector('.searchL input[type="text"]');
-const searchForm = document.querySelector('.searchL');
+document.addEventListener('DOMContentLoaded', () => {
+  const searchInput = document.querySelector('.searchL input[type="text"]');
+  const searchForm = document.querySelector('.searchL');
 
-searchForm.addEventListener('submit', (event) => {
-  event.preventDefault(); 
-  const query = searchInput.value.toLowerCase();
-  const favoriteTitlesRaw = localStorage.getItem('trek') || '';
-  const favoriteTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+  searchForm.addEventListener('submit', (event) => {
+    event.preventDefault(); 
+    const query = searchInput.value.toLowerCase();
+    const favoriteTitlesRaw = localStorage.getItem('trek') || '';
+    const favoriteTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
-  const trackToScrollTo = favoriteTitles.find(title => title.toLowerCase().includes(query));
-  
-  if (trackToScrollTo) {
-    console.log(trackToScrollTo); 
-  } else {
-    console.log("Трек не найден");
-  }
+    const trackToScrollTo = favoriteTitles.find(title => title.toLowerCase().includes(query));
+    
+    if (trackToScrollTo) {
+      console.log(trackToScrollTo); 
+    } else {
+      console.log("Трек не найден");
+    }
+  });
 });
 
 
