@@ -594,14 +594,7 @@ searchForm.addEventListener('submit', (event) => {
   const query = searchInput.value.toLowerCase();
 
   const albomToScrollTo = tracks.find(title1 => title1.title.toLowerCase().includes(query));
-
-
-
-  
-
   const verA = Array.from(buttonsContainer.children);
-
-
 
   if (albomToScrollTo) {
     const ElementA = verA.find(child => child.textContent.includes(albomToScrollTo.title));
@@ -612,34 +605,38 @@ searchForm.addEventListener('submit', (event) => {
         ElementA.classList.remove('highlight');
       }, 2000);
     }
-  }
-  else {
+  } else {
+
+    let trackFound = false; 
     tracks.forEach(titleTracks => {
-        const filteredAlbomTitle = titleTracks.album;
-        const FeAlbomTitle = filteredAlbomTitle.find(title12 => title12.title.toLowerCase().includes(query));
-        const AV = Array.from(buttonsContainer.children);
-        
-        if (FeAlbomTitle) {
-            const FeAlbomTitleFear = FeAlbomTitle.title;
-            console.log(FeAlbomTitleFear);
+      const filteredAlbomTitle = titleTracks.album;
+      const FeAlbomTitle = filteredAlbomTitle.find(title12 => title12.title.toLowerCase().includes(query));
 
-            
-            console.log(trackElement)
-            
-        }
+      if (FeAlbomTitle) {
         const albumElement = verA.find(child => child.textContent.includes(titleTracks.title));
-        const trackRow = Array.from(albumElement.nextElementSibling.children).find(row => row.textContent.includes(FeAlbomTitle.title));
-        if (trackRow) {
-          trackRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-        else {
-          console.log("нету")
-        }
+        if (albumElement) {
+          albumElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
+     
+          const trackRow = Array.from(albumElement.nextElementSibling.children).find(row => row.textContent.includes(FeAlbomTitle.title));
+          if (trackRow) {
+            trackRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            trackRow.classList.add('highlight');
+            setTimeout(() => {
+              trackRow.classList.remove('highlight');
+            }, 2000);
+          }
+        }
+        trackFound = true; 
+      }
     });
 
+    if (!trackFound) {
+      alert('Трек не найден');
+    }
   }
 });
+
 
   </script>
 </body>
