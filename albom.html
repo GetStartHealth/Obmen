@@ -622,8 +622,8 @@ searchForm.addEventListener('submit', (event) => {
         FeAlbomTitleFear = FeAlbomTitle.title
         console.log(FeAlbomTitleFear)
       }
-      ChildreanObjectAlbom = Array.from(buttonsContainer.children);
-      console.log(ChildreanObjectAlbom.albumTracks)
+      ChildreanObjectAlbom = Array.from(buttonsContainer.albumTracks);
+      console.log(ChildreanObjectAlbom)
       const Fe = ChildreanObjectAlbom.find(title123 => title123.textContent.toLowerCase().includes(ChildreanObjectAlbom));
       console.log(Fe)
 
