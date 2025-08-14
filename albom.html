@@ -624,13 +624,8 @@ searchForm.addEventListener('submit', (event) => {
       }
       ChildreanObjectAlbom = Array.from(buttonsContainer);
       console.log(ChildreanObjectAlbom)
-      const Fe = ChildreanObjectAlbom.find(title123 => title123.textContent.toLowerCase().includes(FeAlbomTitleFear));
+      const Fe = ChildreanObjectAlbom.find(title123 => title123.textContent.toLowerCase().includes(FeAlbomTitleFear.toLowerCase()));
       console.log(Fe)
-
-
-
-      
-
     })
   }
 });
