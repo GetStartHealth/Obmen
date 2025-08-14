@@ -615,19 +615,22 @@ searchForm.addEventListener('submit', (event) => {
   }
   else {
     tracks.forEach(titleTracks => {
-      const filteredAlbomTitle = titleTracks.album
-      const FeAlbomTitle = filteredAlbomTitle.find(title12 => title12.title.toLowerCase().includes(query));
-      const AV = Array.from(buttonsContainer.children);
-      if (FeAlbomTitle) {
-        FeAlbomTitleFear = FeAlbomTitle.title
-        console.log(FeAlbomTitleFear)
-      }
-      ChildreanObjectAlbom = Array.from(buttonsContainer);
-      console.log(ChildreanObjectAlbom.albumTracks)
-      console.log(ChildreanObjectAlbom)
-      const Fe = ChildreanObjectAlbom.find(title123 => title123.albumTracks.textContent.toLowerCase().includes(FeAlbomTitleFear.toLowerCase()));
-      console.log(Fe)
-    })
+        const filteredAlbomTitle = titleTracks.album;
+        const FeAlbomTitle = filteredAlbomTitle.find(title12 => title12.title.toLowerCase().includes(query));
+        const AV = Array.from(buttonsContainer.children);
+        
+        if (FeAlbomTitle) {
+            const FeAlbomTitleFear = FeAlbomTitle.title;
+            console.log(FeAlbomTitleFear);
+
+            const trackElement = Array.from(buttonsContainer.children).find(button => button.textContent === FeAlbomTitleFear);
+            
+            if (trackElement) {
+                trackElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+    });
+
   }
 });
 
