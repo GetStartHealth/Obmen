@@ -451,6 +451,11 @@ searchForm.addEventListener('submit', (event) => {
       Element.classList.add('highlight');
       setTimeout(() => {
         Element.classList.remove('highlight');
+        setTimeout(() => {
+          Element.classList.add('highlight.fade-out');       
+        }, 500)
+
+        Element.classList.remove('highlight.fade-ot');
       }, 2000);
     }
   }
