@@ -774,11 +774,9 @@ searchForm.addEventListener('submit', (event) => {
       const FeAlbomTitle = filteredAlbomTitle.find(title12 => title12.title.toLowerCase().includes(query));
 
       if (FeAlbomTitle) {
-        const albumElement = verA.find(child => child.textContent.includes(titleTracks.title));
+        const albumElement = verA.find(child => child.querySelector(".title-text").textContent.includes(titleTracks.title));
         if (albumElement) {
-          albumElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
-          v = albumElement.children
-          console.log(v)
+          print(albumElement)
         }      }
     });
   }
