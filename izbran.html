@@ -793,7 +793,8 @@ searchForm.addEventListener('submit', (event) => {
       const albumElement = verA.find(child => child.querySelector(".title-text").textContent.includes(titleTracks.title));
       if (albumElement) {
         const TC = Array.from(albumElement.querySelectorAll(".tracks-container"));
-        const lement = TC.find(child => child.textContent.includes(FeAlbomTitle.title)); // Используем includes вместо find
+        console.log(TC)
+        const lement = TC.find(child => child.textContent.includes(FeAlbomTitle.title)); 
 
         if (lement) { 
           lement.scrollIntoView({ behavior: 'smooth', block: 'center' });
