@@ -792,10 +792,9 @@ searchForm.addEventListener('submit', (event) => {
     if (FeAlbomTitle) {
       const albumElement = verA.find(child => child.querySelector(".title-text").textContent.includes(titleTracks.title));
       if (albumElement) {
-        const TC = Array.from(albumElement.querySelectorAll(".track-button"));
-        console.log(TC)
+        const TC = Array.from(albumElement.querySelectorAll(".tracks-container button"));
         const lement = TC.find(child => child.textContent.includes(FeAlbomTitle.title)); 
-        console.log(lement)
+        console.lo(lement)
 
         if (lement) { 
           lement.scrollIntoView({ behavior: 'smooth', block: 'center' });
