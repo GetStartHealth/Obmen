@@ -618,9 +618,7 @@ searchForm.addEventListener('submit', (event) => {
       const filteredAlbomTitle = titleTracks.album
       const FeAlbomTitle = filteredAlbomTitle.find(title12 => title12.title.toLowerCase().includes(query));
       const AV = Array.from(buttonsContainer.children);
-      const ElementAV = AV.find(child => child.albumTracks.textContent.includes(FeAlbomTitle.title));
-      ElementAV.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
+      console.log(FeAlbomTitle)
       
 
     })
