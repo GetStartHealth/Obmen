@@ -778,6 +778,7 @@ searchForm.addEventListener('submit', (event) => {
         if (albumElement) {
           albumElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
           get = albumElement.nextElementSibling
+          console.log(get)
 
      
           const trackRow = Array.from(albumElement.nextElementSibling.children).find(row => row.textContent.includes(FeAlbomTitle.title));
