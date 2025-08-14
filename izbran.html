@@ -775,7 +775,10 @@ searchForm.addEventListener('submit', (event) => {
 
       if (FeAlbomTitle) {
         const albumElement = verA.find(child => child.querySelector(".title-text").textContent.includes(titleTracks.title));
-        console.log(albumElement.querySelectorAll(".tracks-container"))
+        const TC = albumElement.querySelectorAll(".tracks-container")
+        const lement = TC.find(child => child.textContent.includes(FeAlbomTitle.title));
+        console.log(lement)
+
     }
     });
   }
