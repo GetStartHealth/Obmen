@@ -595,6 +595,10 @@ searchForm.addEventListener('submit', (event) => {
 
   const albomToScrollTo = tracks.find(title1 => title1.title.toLowerCase().includes(query));
 
+
+
+  
+
   const verA = Array.from(buttonsContainer.children);
 
 
@@ -608,6 +612,18 @@ searchForm.addEventListener('submit', (event) => {
         ElementA.classList.remove('highlight');
       }, 2000);
     }
+  }
+  else {
+    tracks.forEach(titleTracks => {
+      const filteredAlbomTitle = titleTracks.album
+      const FeAlbomTitle = filteredAlbomTitle.find(title12 => title12.title.toLowerCase().includes(query));
+      const AV = Array.from(buttonsContainer.children);
+      const ElementAV = AV.find(child => child.albumTracks.textContent.includes(FeAlbomTitle.title));
+      ElementAV.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+      
+
+    })
   }
 });
 
