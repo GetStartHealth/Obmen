@@ -623,9 +623,18 @@ searchForm.addEventListener('submit', (event) => {
             const FeAlbomTitleFear = FeAlbomTitle.title;
             console.log(FeAlbomTitleFear);
 
-            const trackElement = Array.from(buttonsContainer.children).find(button => button.textContent === FeAlbomTitleFear);
+            
             console.log(trackElement)
+            
         }
+        const trackRow = Array.from(albumElement.nextElementSibling.children).find(row => row.textContent.includes(FeAlbomTitle.title));
+        if (trackRow) {
+          trackRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        else {
+          console.log("нету")
+        }
+
     });
 
   }
