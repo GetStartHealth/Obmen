@@ -624,10 +624,7 @@ searchForm.addEventListener('submit', (event) => {
             console.log(FeAlbomTitleFear);
 
             const trackElement = Array.from(buttonsContainer.children).find(button => button.textContent === FeAlbomTitleFear);
-            
-            if (trackElement) {
-                trackElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
+            console.log(trackElement)
         }
     });
 
