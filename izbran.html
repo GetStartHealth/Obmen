@@ -775,7 +775,7 @@ searchForm.addEventListener('submit', (event) => {
 
       if (FeAlbomTitle) {
         const albumElement = verA.find(child => child.querySelector(".title-text").textContent.includes(titleTracks.title));
-        const TC = albumElement.querySelectorAll(".tracks-container")
+        const TC = Array.from(albumElement.querySelectorAll(".tracks-container"));
         const lement = TC.find(child => child.textContent.includes(FeAlbomTitle.title));
         console.log(lement)
 
