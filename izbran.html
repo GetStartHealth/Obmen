@@ -778,6 +778,7 @@ searchForm.addEventListener('submit', (event) => {
         const TC = Array.from(albumElement.querySelectorAll(".tracks-container"));
         const lement = TC.find(child => child.textContent.includes(FeAlbomTitle.title));
         console.log(lement)
+        scrollToElement(lement);
 
     }
     });
