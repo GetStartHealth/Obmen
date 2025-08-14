@@ -618,7 +618,10 @@ searchForm.addEventListener('submit', (event) => {
       const filteredAlbomTitle = titleTracks.album
       const FeAlbomTitle = filteredAlbomTitle.find(title12 => title12.title.toLowerCase().includes(query));
       const AV = Array.from(buttonsContainer.children);
-      console.log(FeAlbomTitle)
+      if (FeAlbomTitle) {
+        FeAlbomTitleFear = FeAlbomTitle.title
+        console.log(FeAlbomTitleFear)
+      }
       console.log(Array.from(buttonsContainer.children));
 
 
