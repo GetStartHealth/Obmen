@@ -794,7 +794,7 @@ searchForm.addEventListener('submit', (event) => {
   if (albumElement) {
     const TC = Array.from(albumElement.querySelectorAll(".tracks-container button"));
     const lement = TC.find(child => child.textContent.includes(FeAlbomTitle.title));
-    lement.style.maxHeight === '500px'
+    albumElement.querySelector('.album-title').click();
     if (lement) { 
       lement.scrollIntoView({ behavior: 'smooth', block: 'center' });
       lement.classList.add('highlight');
