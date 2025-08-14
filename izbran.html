@@ -779,20 +779,7 @@ searchForm.addEventListener('submit', (event) => {
           albumElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
           get = albumElement.nextElementSibling
           console.log(get)
-
-     
-          const trackRow = Array.from(albumElement.nextElementSibling.children).find(row => row.textContent.includes(FeAlbomTitle.title));
-          if (trackRow) {
-  trackRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  get.style.display = 'block';
-  
-  trackRow.classList.add('highlight');
-  setTimeout(() => {
-    trackRow.classList.remove('highlight');  
-  }, 2000);
-}
         }
-        trackFound = true; 
       }
     });
   }
