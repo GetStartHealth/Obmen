@@ -777,9 +777,8 @@ searchForm.addEventListener('submit', (event) => {
         const albumElement = verA.find(child => child.textContent.includes(titleTracks.title));
         if (albumElement) {
           albumElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          console.log(albumElement)
-        }
-      }
+          console.log(albumElement.trackContainer)
+        }      }
     });
   }
 
