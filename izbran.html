@@ -775,7 +775,7 @@ searchForm.addEventListener('submit', (event) => {
 
       if (FeAlbomTitle) {
         const albumElement = verA.find(child => child.querySelector(".title-text").textContent.includes(titleTracks.title));
-        console.log(albumElement)
+        console.log(albumElement.querySelectorAll(".tracks-container"))
     }
     });
   }
@@ -785,7 +785,5 @@ searchForm.addEventListener('submit', (event) => {
 
 
 UpdateFunction();
-  </script>
-</body>
   </script>
 </body>
