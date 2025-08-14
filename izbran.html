@@ -141,6 +141,22 @@
       width: 8px;
     }
 
+    .highlight {
+    background-color: rgba(66, 153, 99, 0.7); 
+    border-left: 5px solid #2d4e2d; 
+    border-radius: 10px;
+    transition: background-color 0.5s ease, transform 0.5s ease; 
+    padding: 10px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+}
+
+.fade-out {
+    opacity: 0; 
+    transform: scale(0.95); 
+    transition: opacity 0.5s ease, transform 0.5s ease; 
+}
+
+
     #albom-container::-webkit-scrollbar-track {
       background: transparent;
     }
@@ -779,6 +795,14 @@ searchForm.addEventListener('submit', (event) => {
         const lement = TC.find(child => child.textContent.includes(FeAlbomTitle.title));
         console.log(lement)
         lement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        lement.classList.add('highlight');
+  setTimeout(() => {
+    lement.classList.remove('highlight'); 
+    lement.classList.add('fade-out'); 
+    setTimeout(() => {
+      lement.classList.remove('fade-out'); 
+    }, 500); 
+  }, 2000);
         const verDA = Array.from(albomContainer.albumDiv.albumButton);
         print(verD)
 
