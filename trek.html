@@ -206,16 +206,12 @@
       border-radius: 8px;
     }
     .highlight {
-    background-color: rgb(120, 168, 118); 
-    transition: background-color 0.3s ease, opacity 0.5s ease, transform 0.5s ease; 
-    border-radius: 16px;
-    opacity: 1;
-    transform: scale(1); 
-}
-
-.highlight.fade-out {
-    opacity: 0; 
-    transform: scale(0.95); 
+    background-color: rgba(66, 153, 99, 0.7); 
+    border-left: 5px solid #2d4e2d; 
+    border-radius: 10px;
+    transition: background-color 0.5s ease, transform 0.5s ease; 
+    padding: 10px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
 }
 
     @media (max-width: 640px) {
@@ -454,8 +450,6 @@ searchForm.addEventListener('submit', (event) => {
       Element.scrollIntoView({ behavior: 'smooth', block: 'center' });
       Element.classList.add('highlight');
       setTimeout(() => {
-      Element.classList.add('highlight.fade-out');
-
         Element.classList.remove('highlight');
       }, 2000);
     }
@@ -467,4 +461,3 @@ searchForm.addEventListener('submit', (event) => {
 </body>
 
 </html>
-
