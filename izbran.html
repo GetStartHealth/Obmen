@@ -743,7 +743,7 @@ function UpdateFunction() {
       btnf.title = `Воспроизвести ${vf.title}`;
       btnf.setAttribute('aria-label', `Воспроизвести ${vf.title}`);
       const DisabledTitlesRaw12 = localStorage.getItem('disabled') || '';
-      const disabledTitles12 = DisabledTitlesRaw1.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+      const disabledTitles12 = DisabledTitlesRaw12.split('\n').map(s => s.trim()).filter(s => s.length > 0);
       if (disabledTitles12.map(title => title.toLowerCase()).includes(vf.title.toLowerCase())){
         btnf.disabled = true;
       }
