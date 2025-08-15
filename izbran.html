@@ -226,7 +226,7 @@
       cursor: pointer;
 
       position: absolute;
-  right: 20px;
+  right: 60px;
   bottom: 10px;
     }
 
@@ -693,7 +693,7 @@ function UpdateFunction() {
         const rawFilter = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
         const updatedFavorites = rawFilter.filter(fav => fav !== track.title);
         localStorage.setItem('trek', updatedFavorites.join('\n'));
-        console.log(`Трек "${track.title}" удален из избранного.`); // Отладочное сообщение
+        console.log(`Трек "${track.title}" удален из избранного.`); 
         UpdateFunction();
       });
 
@@ -772,7 +772,6 @@ function UpdateFunction() {
         restoreBtn.className = 'restore-button';
         restoreBtn.setAttribute('aria-label', `Восстановить ${vf.title}`);
         restoreBtn.disabled = false; 
-        deleteBtn22.remove();
 
         restoreBtn.addEventListener('click', () => {
             const updatedDisabledTitles = disabledTitles.filter(title => title.toLowerCase() !== vf.title.toLowerCase());
