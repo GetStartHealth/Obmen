@@ -751,6 +751,21 @@ function UpdateFunction() {
       if (disabledTitles.map(title => title.toLowerCase()).includes(vf.title.toLowerCase()+"-")) {
         btnf.disabled = true;
         console.log("Сработало")
+
+        const restoreBtn = document.createElement('button');
+        restoreBtn.textContent = 'Восстановить';
+        restoreBtn.className = 'restore-button';
+        restoreBtn.setAttribute('aria-label', `Восстановить ${vf.title}`);
+
+        restoreBtn.addEventListener('click', () => {
+            const updatedDisabledTitles = disabledTitles.filter(title => title.toLowerCase() !== vf.title.toLowerCase());
+            localStorage.setItem('disabled', updatedDisabledTitles.join('\n'));
+            btnf.disabled = false; 
+            restoreBtn.remove(); 
+            console.log(`Трек "${vf.title}" восстановлен.`); 
+        });
+
+        btnf.appendChild(restoreBtn);
       }
 
       btnf.addEventListener('click', () => {
