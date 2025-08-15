@@ -209,7 +209,7 @@
       cursor: pointer;
 
       position: absolute;
-  right: 60px;
+  right: 20px;
   bottom: 10px;
     }
 
@@ -693,7 +693,7 @@ function UpdateFunction() {
         const rawFilter = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
         const updatedFavorites = rawFilter.filter(fav => fav !== track.title);
         localStorage.setItem('trek', updatedFavorites.join('\n'));
-        console.log(`Трек "${track.title}" удален из избранного.`); 
+        console.log(`Трек "${track.title}" удален из избранного.`); // Отладочное сообщение
         UpdateFunction();
       });
 
@@ -802,7 +802,7 @@ function UpdateFunction() {
         const btnfDisabled = btnf.textContent;
         const disabledTitlesRaw = localStorage.getItem('disabled') || '';
         const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-        localStorage.setItem('disabled', btnfDisabled);
+        localStorage.setItem('disabled', btnfDisabled + '\n' + disabledTitles.join('\n'));
         console.log(`Трек "${btnfDisabled}" отключен.`); 
       });
       btnf.appendChild(deleteBtn22);
