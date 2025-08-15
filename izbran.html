@@ -197,6 +197,21 @@
       justify-content: space-between;
       position: relative;
     }
+    .restore-button{
+      background: #ffffff;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      font-size: 1.3rem;
+      line-height: 1;
+      color: rgb(39, 39, 39);
+      font-weight: 700;
+      cursor: pointer;
+
+      position: absolute;
+  right: 20px;
+  bottom: 10px;
+    }
 
 
     .delete-button12 {
@@ -753,7 +768,7 @@ function UpdateFunction() {
         console.log("Сработало")
 
         const restoreBtn = document.createElement('button');
-        restoreBtn.textContent = 'Восстановить';
+        restoreBtn.textContent = '+';
         restoreBtn.className = 'restore-button';
         restoreBtn.setAttribute('aria-label', `Восстановить ${vf.title}`);
 
