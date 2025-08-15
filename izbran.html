@@ -818,6 +818,7 @@ function UpdateFunction() {
         restoreBtn.disabled = false; 
 
         restoreBtn.addEventListener('click', () => {
+          event.stopPropagation(); 
             const updatedDisabledTitles = disabledTitles.filter(title => title.toLowerCase() !== vf.title.toLowerCase()+"-");
             localStorage.setItem('disabled', updatedDisabledTitles.join('\n'));
             btnf.disabled = false; 
@@ -826,6 +827,7 @@ function UpdateFunction() {
             const disabledTitlesRaw3 = localStorage.getItem('disabled') || '';
             const disabledTitles3 = disabledTitlesRaw3.split('\n').map(s => s.trim()).filter(s => s.length > 0);
             console.log(disabledTitles3); 
+            UpdateFunction()
         });
 
         btnf.appendChild(restoreBtn);
