@@ -772,24 +772,27 @@ function UpdateFunction() {
       const disabledTitlesRaw = localStorage.getItem('disabled') || '';
       const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
       console.log(disabledTitles)
-      if (disabledTitles.map(title => title.toLowerCase()).includes(vf.title.toLowerCase()+"-")) {
-        btnf.disabled = true;
-        console.log("Сработало")
+
+    if (disabledTitles.map(title => title.toLowerCase()).includes(vf.title.toLowerCase())) {
+        btnf.disabled = true; 
+        
 
         const restoreBtn = document.createElement('button');
-        restoreBtn.textContent = '+';
+        restoreBtn.textContent = 'Восстановить';
         restoreBtn.className = 'restore-button';
         restoreBtn.setAttribute('aria-label', `Восстановить ${vf.title}`);
 
+
         restoreBtn.addEventListener('click', () => {
-          const updatedDisabled = disabledTitles.filter(favb => favb.toLowerCase() !== vf.title.toLowerCase());
-          localStorage.setItem('disabled', updatedDisabled.join('\n'));
-          btnf.disabled = false
-          restoreBtn.remove();
-           
+            const updatedDisabledTitles = disabledTitles.filter(title => title.toLowerCase() !== vf.title.toLowerCase());
+            localStorage.setItem('disabled', updatedDisabledTitles.join('\n'));
+            btnf.disabled = false; 
+            restoreBtn.remove(); 
+            console.log(`Трек "${vf.title}" восстановлен.`); 
         });
-        btnf.appendChild(restoreBtn)
-      }
+
+        btnf.appendChild(restoreBtn);
+    }
 
       btnf.addEventListener('click', () => {
         if (vf.url) {
@@ -818,7 +821,7 @@ function UpdateFunction() {
 
     albumButton.addEventListener('click', () => {
       const isHidden = tracksContainer.style.maxHeight === '0px';
-      tracksContainer.style.maxHeight = isHidden ? '600px' : '0px';
+      tracksContainer.style.maxHeight = isHidden ? '700px' : '0px';
       tracksContainer.style.transition = 'max-height 0.3s ease';
       albumButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
     });
