@@ -508,6 +508,11 @@
       let current = localStorage.getItem('trekA') || '';
       let songs = current.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
+      if (songs.includes(trackTitle)) {
+        alert(`Альбом "${trackTitle}" уже есть`)
+        return;
+      }
+
       songs.unshift(trackTitle)
 
 
