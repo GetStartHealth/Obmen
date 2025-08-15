@@ -186,14 +186,14 @@
       box-shadow: 0 5px 18px rgba(54, 62, 107, 0.7);
       transition: box-shadow 0.3s ease, transform 0.2s ease;
       user-select: none;
-      min-width: 260px;
-      max-width: 290px;
+      min-width: 230px;
+      max-width: 260px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
       flex-shrink: 0;
       outline: none;
-      height: 55px;
+      height: 48px;
       justify-content: space-between;
       position: relative;
     }
@@ -212,7 +212,7 @@
       
       position: absolute;
   right: 20px;
-  bottom: 5px;
+  bottom: 10px;
     }
 
     .delete-button12:hover {
@@ -400,13 +400,13 @@
       .track-button {
         font-size: 14px;
         padding: 4px 8px;
-        min-width: 260px;
-        max-width: 290px;
+        min-width: 230px;
+        max-width: 260px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
         flex-shrink: 0;
-        height: 55px;
+        height: 36px;
       }
 
       .delete-button {
@@ -756,7 +756,7 @@ function UpdateFunction() {
     deleteBtn22.setAttribute('aria-label', `Удалить ${albomMass.title}`);
 
     deleteBtn22.addEventListener('click', () => {
-      console.log(vf.title)
+      btnf.disabled = true;
     });
       btnf.appendChild(deleteBtn22)
       tracksContainer.appendChild(btnf);
