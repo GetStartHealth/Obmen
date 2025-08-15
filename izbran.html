@@ -54,8 +54,6 @@
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s ease;
-  align-items: center;
-  justify-content: space-between; 
 }
 
 
@@ -199,30 +197,30 @@
     }
 
 
-    .delete-button12 {
-  background: #ffffff;
-  border: none;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  font-size: 1.3rem;
-  color: rgb(255, 255, 255);
-  font-weight: 700;
-  cursor: pointer;
-  transition: box-shadow 0.3s ease, transform 0.2s ease;
-  user-select: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-left: auto; 
-      margin-bottom: auto;
-}
+    .delete-button1 {
+      flex-shrink: 0;
+      background: #c25858;
+      border: none;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      font-size: 1.3rem;
+      line-height: 1;
+      color: rgb(255, 255, 255);
+      font-weight: 700;
+      cursor: pointer;
+      transition: box-shadow 0.3s ease, transform 0.2s ease;
+      user-select: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-    .delete-button12:hover {
+    .delete-button1:hover {
       transform: scale(1.1);
     }
 
-    .delete-button12:active {
+    .delete-button1:active {
       transform: scale(0.95);
     }
 
@@ -767,7 +765,7 @@ function UpdateFunction() {
 
     albumButton.addEventListener('click', () => {
       const isHidden = tracksContainer.style.maxHeight === '0px';
-      tracksContainer.style.maxHeight = isHidden ? '700px' : '0px';
+      tracksContainer.style.maxHeight = isHidden ? '600px' : '0px';
       tracksContainer.style.transition = 'max-height 0.3s ease';
       albumButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
     });
