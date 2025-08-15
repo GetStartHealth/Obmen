@@ -774,6 +774,7 @@ function UpdateFunction() {
         restoreBtn.disabled = false; 
 
         restoreBtn.addEventListener('click', () => {
+            event.preventDefault();
             const updatedDisabledTitles = disabledTitles.filter(title => title.toLowerCase() !== vf.title.toLowerCase()+"-");
             localStorage.setItem('disabled', updatedDisabledTitles.join('\n'));
             btnf.disabled = false; 
