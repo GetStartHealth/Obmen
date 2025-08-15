@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 
 <head>
@@ -805,6 +805,7 @@ searchForm.addEventListener('submit', (event) => {
     albumElement.querySelector('.album-title').click();
     if (lement) { 
           lement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          albumElement.scrollIntoView({behavior: 'smooth', block: 'center'})
           
           setTimeout(() => {
             const container = albumElement.querySelector('.tracks-container');
