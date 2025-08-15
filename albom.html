@@ -627,6 +627,7 @@ searchForm.addEventListener('submit', (event) => {
      
           const trackRow = Array.from(albumElement.nextElementSibling.children).find(row => row.textContent.includes(FeAlbomTitle.title));
           if (trackRow) {
+  albumElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
   trackRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
   get.style.display = 'block';
   
