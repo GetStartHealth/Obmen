@@ -196,6 +196,37 @@
       height: 48px;
     }
 
+
+    .delete-button12 {
+      flex-shrink: 0;
+      background: #ffffff;
+      border: none;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      font-size: 1.3rem;
+      line-height: 1;
+      color: rgb(255, 255, 255);
+      font-weight: 700;
+      cursor: pointer;
+      transition: box-shadow 0.3s ease, transform 0.2s ease;
+      user-select: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 10px;
+      margin-right: 30px;
+
+    }
+
+    .delete-button12:hover {
+      transform: scale(1.1);
+    }
+
+    .delete-button12:active {
+      transform: scale(0.95);
+    }
+
     .track-button:hover:not(:disabled) {
       box-shadow: 0 9px 28px rgba(54, 62, 107, 1);
       transform: translateY(-3px);
@@ -725,7 +756,7 @@ function UpdateFunction() {
 
       const deleteBtn22 = document.createElement('button');
     deleteBtn22.textContent = '-';
-    deleteBtn22.className = 'delete-button';
+    deleteBtn22.className = 'delete-button12';
     deleteBtn22.setAttribute('aria-label', `Удалить ${albomMass.title}`);
 
     deleteBtn22.addEventListener('click', () => {
@@ -737,7 +768,7 @@ function UpdateFunction() {
 
     albumButton.addEventListener('click', () => {
       const isHidden = tracksContainer.style.maxHeight === '0px';
-      tracksContainer.style.maxHeight = isHidden ? '600px' : '0px';
+      tracksContainer.style.maxHeight = isHidden ? '700px' : '0px';
       tracksContainer.style.transition = 'max-height 0.3s ease';
       albumButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
     });
