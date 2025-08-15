@@ -775,7 +775,9 @@ function UpdateFunction() {
 
         restoreBtn.addEventListener('click', () => {
             event.preventDefault();
-            const updatedDisabledTitles = disabledTitles.filter(title => title.toLowerCase() !== vf.title.toLowerCase()+"-");
+            const disabledTitlesRaw09 = localStorage.getItem('disabled') || '';
+      const disabledTitles09 = disabledTitlesRaw09.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+            const updatedDisabledTitles = disabledTitles09.filter(title => title.toLowerCase() !== vf.title.toLowerCase()+"-");
             localStorage.setItem('disabled', updatedDisabledTitles.join('\n'));
             btnf.disabled = false; 
             restoreBtn.remove(); 
@@ -819,7 +821,9 @@ function UpdateFunction() {
 
         restoreBtn.addEventListener('click', () => {
           event.stopPropagation(); 
-            const updatedDisabledTitles = disabledTitles.filter(title => title.toLowerCase() !== vf.title.toLowerCase()+"-");
+          const disabledTitlesRaw091 = localStorage.getItem('disabled') || '';
+      const disabledTitles091 = disabledTitlesRaw091.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+            const updatedDisabledTitles = disabledTitles1.filter(title => title.toLowerCase() !== vf.title.toLowerCase()+"-");
             localStorage.setItem('disabled', updatedDisabledTitles.join('\n'));
             btnf.disabled = false; 
             restoreBtn.remove(); 
