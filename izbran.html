@@ -804,21 +804,12 @@ searchForm.addEventListener('submit', (event) => {
         });
     albumElement.querySelector('.album-title').click();
     if (lement) { 
-          lement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
           albumElement.scrollIntoView({behavior: 'smooth', block: 'center'})
+          lement.scrollIntoView({ behavior: 'smooth', block: 'center' });
           
           setTimeout(() => {
-            const container = albumElement.querySelector('.tracks-container');
-            const elementRect = lement.getBoundingClientRect();
-            const containerRect = container.getBoundingClientRect();
-
-     
-            if (elementRect.bottom > containerRect.bottom) {
-              container.scrollBy({ top: elementRect.bottom - containerRect.bottom, behavior: 'smooth' });
-            } else if (elementRect.top < containerRect.top) {
-              container.scrollBy({ top: elementRect.top - containerRect.top, behavior: 'smooth' });
-            }
-            
+    
             lement.classList.add('highlight');
             setTimeout(() => {
               lement.classList.remove('highlight');
