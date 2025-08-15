@@ -745,6 +745,8 @@ function UpdateFunction() {
       const DisabledTitlesRaw12 = localStorage.getItem('disabled') || '';
       const disabledTitles12 = DisabledTitlesRaw12.split('\n').map(s => s.trim()).filter(s => s.length > 0);
       if (disabledTitles12.map(title => title.toLowerCase()).includes(vf.title.toLowerCase())){
+        der = disabledTitles12.map(title => title.toLowerCase()).includes(vf.title.toLowerCase())
+        console.log(der)
         btnf.disabled = true;
       }
 
