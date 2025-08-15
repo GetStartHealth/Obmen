@@ -779,6 +779,9 @@ function UpdateFunction() {
             btnf.disabled = false; 
             restoreBtn.remove(); 
             console.log(`Трек "${vf.title}" восстановлен.`); 
+            const disabledTitlesRaw3 = localStorage.getItem('disabled') || '';
+            const disabledTitles3 = disabledTitlesRaw3.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+            console.log(disabledTitles3); 
         });
 
         btnf.appendChild(restoreBtn);
