@@ -756,8 +756,13 @@ function UpdateFunction() {
     deleteBtn22.setAttribute('aria-label', `Удалить ${albomMass.title}`);
 
     deleteBtn22.addEventListener('click', () => {
-      event.stopPropagation(); 
       btnf.disabled = true;
+      btnfDisabled = btnf.textContent
+      localStorage.setItem('disabled', btnfDisabled);
+      const DisabledTitlesRaw = localStorage.getItem('disbled') || '';
+      const disabledTitles = disabledTitles.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+      console.log(disabledTitles)
+
     });
       btnf.appendChild(deleteBtn22)
       tracksContainer.appendChild(btnf);
