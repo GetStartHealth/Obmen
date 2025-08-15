@@ -823,8 +823,8 @@ function UpdateFunction() {
           event.stopPropagation(); 
           const disabledTitlesRaw091 = localStorage.getItem('disabled') || '';
       const disabledTitles091 = disabledTitlesRaw091.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-            const updatedDisabledTitles = disabledTitles1.filter(title => title.toLowerCase() !== vf.title.toLowerCase()+"-");
-            localStorage.setItem('disabled', updatedDisabledTitles.join('\n'));
+            const updatedDisabledTitles1 = disabledTitles091.filter(title => title.toLowerCase() !== vf.title.toLowerCase()+"-");
+            localStorage.setItem('disabled', updatedDisabledTitles1.join('\n'));
             btnf.disabled = false; 
             restoreBtn.remove(); 
             console.log(`Трек "${vf.title}" восстановлен.`); 
