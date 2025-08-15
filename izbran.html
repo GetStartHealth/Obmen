@@ -93,7 +93,7 @@
       margin-bottom: 20px;
       user-select: none;
       display: flex;
-      margin-top: 60px;
+      margin-top: 80px;
       flex-direction: column;
       gap: 12px;
     }
@@ -723,7 +723,18 @@ function UpdateFunction() {
         }
       });
 
+      const deleteBtn2 = document.createElement('button');
+    deleteBtn2.textContent = '-';
+    deleteBtn2.className = 'delete-button';
+    deleteBtn2.setAttribute('aria-label', `Удалить ${albomMass.title}`);
+
+    deleteBtn2.addEventListener('click', () => {
+      console.log(albomMass.title)
+    });
+
+
       tracksContainer.appendChild(btnf);
+      tracksContainer.appendChild(deleteBtn2);
     });
 
     albumButton.addEventListener('click', () => {
