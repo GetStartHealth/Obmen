@@ -720,7 +720,7 @@ function UpdateFunction() {
       const rawFilter = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
       const updatedFavorites = rawFilter.filter(fav => fav !== albomMass.title);
       localStorage.setItem('trekA', updatedFavorites.join('\n'));
-      console.log(`Альбом "${albomMass.title}" удален из избранного.`); // Отладочное сообщение
+      console.log(`Альбом "${albomMass.title}" удален из избранного.`); 
       UpdateFunction();
     });
 
@@ -747,8 +747,10 @@ function UpdateFunction() {
 
       const disabledTitlesRaw = localStorage.getItem('disabled') || '';
       const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+      console.log(disabledTitles)
       if (disabledTitles.map(title => title.toLowerCase()).includes(vf.title.toLowerCase())) {
         btnf.disabled = true;
+        console.log("Сработало")
       }
 
       btnf.addEventListener('click', () => {
@@ -770,7 +772,7 @@ function UpdateFunction() {
         const disabledTitlesRaw = localStorage.getItem('disabled') || '';
         const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
         localStorage.setItem('disabled', btnfDisabled + '\n' + disabledTitles.join('\n'));
-        console.log(`Трек "${btnfDisabled}" отключен.`); // Отладочное сообщение
+        console.log(`Трек "${btnfDisabled}" отключен.`); 
       });
       btnf.appendChild(deleteBtn22);
       tracksContainer.appendChild(btnf);
