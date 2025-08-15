@@ -398,7 +398,7 @@
   <section id="playlist-container" aria-label="Плейлист избранных треков">
     <h3>Избранные треки</h3>
     <button class="small-button" onclick="location.href='index.html'" aria-label="Перейти в меню">Меню</button> 
-    
+
     <form action="search" method="get" class="searchL">  
     <input type="text" name="query" placeholder="Поиск песен...">   
     </form>  
@@ -745,7 +745,7 @@ const searchForm = document.querySelector('.searchL');
 searchForm.addEventListener('submit', (event) => {
   event.preventDefault(); 
   const query = searchInput.value.toLowerCase();
-  
+
   const favoriteTitlesRaw = localStorage.getItem('trek') || '';
   const favoriteTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
@@ -792,11 +792,9 @@ searchForm.addEventListener('submit', (event) => {
    if (FeAlbomTitle) {
   const albumElement = verA.find(child => child.querySelector(".title-text").textContent.includes(titleTracks.title));
   if (albumElement) {
-    const TC = Array.from(albumElement.querySelectorAll(".tracks-container"));
+    const TC = Array.from(albumElement.querySelectorAll(".tracks-container button"));
     const lement = TC.find(child => child.textContent.includes(FeAlbomTitle.title));
-    const allAlbums = document.querySelectorAll('.tracks-container');
-
-    albumElement.querySelector('.album-title').click();
+    albumElement.querySelector('.album-title').click();;
     if (lement) { 
       lement.scrollIntoView({ behavior: 'smooth', block: 'center' });
       lement.classList.add('highlight');
