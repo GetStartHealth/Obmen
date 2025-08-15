@@ -760,7 +760,7 @@ function UpdateFunction() {
       btnf.disabled = true;
       btnfDisabled = btnf.textContent
       localStorage.setItem('disabled', btnfDisabled);
-      const DisabledTitlesRaw = localStorage.getItem('disbled') || '';
+      const DisabledTitlesRaw = localStorage.getItem('disabled') || '';
       const disabledTitles = DisabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
       console.log(disabledTitles)
 
