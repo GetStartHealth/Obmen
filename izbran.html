@@ -802,15 +802,16 @@ searchForm.addEventListener('submit', (event) => {
             container.parentElement.querySelector('.album-title').setAttribute('aria-expanded', 'false');
           }
         });
-    albumElement.style.maxHeight = '500;
+    albumElement.querySelector('.album-title').click();
     if (lement) { 
 
           albumElement.scrollIntoView({behavior: 'smooth', block: 'center'})
-
           setTimeout(() => {
-             lement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          }, 1000)
- 
+            lement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+          }, 500)
+
+          
           setTimeout(() => {
     
             lement.classList.add('highlight');
