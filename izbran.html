@@ -729,14 +729,15 @@ function UpdateFunction() {
     deleteBtn2.setAttribute('aria-label', `Удалить ${albomMass.title}`);
 
     deleteBtn2.addEventListener('click', () => {
-      console.log(albomMass.title)
+      console.log(vf.title)
     });
 
 
       tracksContainer.appendChild(deleteBtn2);
       tracksContainer.appendChild(btnf);
+      tracksContainer.appendChild(tracksContainer)
 
-      
+
     });
 
     albumButton.addEventListener('click', () => {
