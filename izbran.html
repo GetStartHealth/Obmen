@@ -742,9 +742,9 @@ function UpdateFunction() {
       btnf.className = 'track-button';
       btnf.title = `Воспроизвести ${vf.title}`;
       btnf.setAttribute('aria-label', `Воспроизвести ${vf.title}`);
-      const DisabledTitlesRaw1 = localStorage.getItem('disabled') || '';
-      const disabledTitles1 = DisabledTitlesRaw1.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-      if (disabledTitles1.includes(vf.title)) {
+      const DisabledTitlesRaw12 = localStorage.getItem('disabled') || '';
+      const disabledTitles12 = DisabledTitlesRaw1.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+      if (disabledTitles12.map(title => title.toLowerCase()).includes(vf.title.toLowerCase())){
         btnf.disabled = true;
       }
 
