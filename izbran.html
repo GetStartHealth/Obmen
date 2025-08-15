@@ -746,6 +746,7 @@ function UpdateFunction() {
       const disabledTitles12 = DisabledTitlesRaw12.split('\n').map(s => s.trim()).filter(s => s.length > 0);
       if (disabledTitles12.map(title => title.toLowerCase()).includes(vf.title.toLowerCase())){
         der = disabledTitles12.map(title => title.toLowerCase()).includes(vf.title.toLowerCase())
+        console.log(disabledTitles12)
         console.log(der)
         btnf.disabled = true;
       }
@@ -770,7 +771,7 @@ function UpdateFunction() {
       btnfDisabled = btnf.textContent
       const DisabledTitlesRaw = localStorage.getItem('disabled') || '';
       const disabledTitles = DisabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-      localStorage.setItem('disabled', btnfDisabled + disabledTitles);
+      localStorage.setItem('disabled', btnfDisabled + '\n' + disabledTitles.join('\n'));
       const DisabledTitlesRaw1 = localStorage.getItem('disabled') || '';
       const disabledTitles1 = DisabledTitlesRaw1.split('\n').map(s => s.trim()).filter(s => s.length > 0);
       console.log(disabledTitles1)
