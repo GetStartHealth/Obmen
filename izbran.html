@@ -728,7 +728,7 @@ function UpdateFunction() {
 
     albumButton.addEventListener('click', () => {
       const isHidden = tracksContainer.style.maxHeight === '0px';
-      tracksContainer.style.maxHeight = isHidden ? '500px' : '0px';
+      tracksContainer.style.maxHeight = isHidden ? '430px' : '0px';
       tracksContainer.style.transition = 'max-height 0.3s ease';
       albumButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
     });
