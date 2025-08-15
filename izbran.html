@@ -209,7 +209,7 @@
       cursor: pointer;
 
       position: absolute;
-  right: 60px;
+  right: 20px;
   bottom: 10px;
     }
 
@@ -771,7 +771,8 @@ function UpdateFunction() {
         restoreBtn.textContent = '+';
         restoreBtn.className = 'restore-button';
         restoreBtn.setAttribute('aria-label', `Восстановить ${vf.title}`);
-        restoreBtn.disabled = false;
+        restoreBtn.disabled = false; 
+        deleteBtn2.remove();
 
         restoreBtn.addEventListener('click', () => {
             const updatedDisabledTitles = disabledTitles.filter(title => title.toLowerCase() !== vf.title.toLowerCase());
