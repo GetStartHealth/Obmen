@@ -678,6 +678,7 @@ function UpdateFunction() {
         const rawFilter = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
         const updatedFavorites = rawFilter.filter(fav => fav !== track.title);
         localStorage.setItem('trek', updatedFavorites.join('\n'));
+        console.log(`Трек "${track.title}" удален из избранного.`); // Отладочное сообщение
         UpdateFunction();
       });
 
@@ -719,6 +720,7 @@ function UpdateFunction() {
       const rawFilter = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
       const updatedFavorites = rawFilter.filter(fav => fav !== albomMass.title);
       localStorage.setItem('trekA', updatedFavorites.join('\n'));
+      console.log(`Альбом "${albomMass.title}" удален из избранного.`); // Отладочное сообщение
       UpdateFunction();
     });
 
@@ -742,9 +744,10 @@ function UpdateFunction() {
       btnf.className = 'track-button';
       btnf.title = `Воспроизвести ${vf.title}`;
       btnf.setAttribute('aria-label', `Воспроизвести ${vf.title}`);
-      const DisabledTitlesRaw12 = localStorage.getItem('disabled') || '';
-      const disabledTitles12 = DisabledTitlesRaw12.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-      if (disabledTitles12.map(title => title.toLowerCase()).includes(vf.title.toLowerCase())) {
+
+      const disabledTitlesRaw = localStorage.getItem('disabled') || '';
+      const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+      if (disabledTitles.map(title => title.toLowerCase()).includes(vf.title.toLowerCase())) {
         btnf.disabled = true;
       }
 
@@ -764,11 +767,12 @@ function UpdateFunction() {
         event.stopPropagation(); 
         btnf.disabled = true;
         const btnfDisabled = btnf.textContent;
-        const DisabledTitlesRaw = localStorage.getItem('disabled') || '';
-        const disabledTitles = DisabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+        const disabledTitlesRaw = localStorage.getItem('disabled') || '';
+        const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
         localStorage.setItem('disabled', btnfDisabled + '\n' + disabledTitles.join('\n'));
+        console.log(`Трек "${btnfDisabled}" отключен.`); // Отладочное сообщение
       });
-      btnf.appendChild(deleteBtn22)
+      btnf.appendChild(deleteBtn22);
       tracksContainer.appendChild(btnf);
     });
 
@@ -785,7 +789,6 @@ function UpdateFunction() {
   });
 }
 
-
 const searchInput = document.querySelector('.searchL input[type="text"]');
 const searchForm = document.querySelector('.searchL');
 
@@ -799,14 +802,11 @@ searchForm.addEventListener('submit', (event) => {
   const albomTitlesRaw = localStorage.getItem('trekA') || '';
   const albomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
-
   const albomToScrollTo = albomTitles.find(title => title.toLowerCase().includes(query));
-
   const trackToScrollTo = favoriteTitles.find(title => title.toLowerCase().includes(query));
 
   const ver = Array.from(favoritesContainer.children);
   const verA = Array.from(albomContainer.children);
-
 
   if (trackToScrollTo) {
     const Element = ver.find(child => child.textContent.includes(trackToScrollTo));
@@ -819,7 +819,6 @@ searchForm.addEventListener('submit', (event) => {
     }
   }
 
-
   if (albomToScrollTo) {
     const ElementA = verA.find(child => child.querySelector('.title-text').textContent.includes(albomToScrollTo));
     if (ElementA) {
@@ -831,56 +830,50 @@ searchForm.addEventListener('submit', (event) => {
     }
   } 
   else {
-  let trackFound = false; 
-  albomsT.forEach(titleTracks => {
-    const filteredAlbomTitle = titleTracks.album;
-    const FeAlbomTitle = filteredAlbomTitle.find(title12 => title12.title.toLowerCase().includes(query));
+    let trackFound = false; 
+    albomsT.forEach(titleTracks => {
+      const filteredAlbomTitle = titleTracks.album;
+      const FeAlbomTitle = filteredAlbomTitle.find(title12 => title12.title.toLowerCase().includes(query));
 
-   if (FeAlbomTitle) {
-  const albumElement = verA.find(child => child.querySelector(".title-text").textContent.includes(titleTracks.title));
-  if (albumElement) {
-    const TC = Array.from(albumElement.querySelectorAll(".tracks-container button"));
-    const lement = TC.find(child => child.textContent.includes(FeAlbomTitle.title));
-    const allAlbums = document.querySelectorAll('.tracks-container');
-        allAlbums.forEach(container => {
-          if (container !== albumElement.querySelector('.tracks-container')) {
-            container.style.maxHeight = '0'; 
-            container.parentElement.querySelector('.album-title').setAttribute('aria-expanded', 'false');
-          }
-        });
-    albumElement.querySelector('.album-title').click();
-    if (lement) { 
-
-          albumElement.scrollIntoView({behavior: 'smooth', block: 'center'})
-          setTimeout(() => {
-            lement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-          }, 500)
-
-          
-          setTimeout(() => {
-    
-            lement.classList.add('highlight');
+      if (FeAlbomTitle) {
+        const albumElement = verA.find(child => child.querySelector(".title-text").textContent.includes(titleTracks.title));
+        if (albumElement) {
+          const TC = Array.from(albumElement.querySelectorAll(".tracks-container button"));
+          const lement = TC.find(child => child.textContent.includes(FeAlbomTitle.title));
+          const allAlbums = document.querySelectorAll('.tracks-container');
+          allAlbums.forEach(container => {
+            if (container !== albumElement.querySelector('.tracks-container')) {
+              container.style.maxHeight = '0'; 
+              container.parentElement.querySelector('.album-title').setAttribute('aria-expanded', 'false');
+            }
+          });
+          albumElement.querySelector('.album-title').click();
+          if (lement) { 
+            albumElement.scrollIntoView({behavior: 'smooth', block: 'center'})
             setTimeout(() => {
-              lement.classList.remove('highlight');
-              lement.classList.add('fade-out'); 
+              lement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 500)
+
+            setTimeout(() => {
+              lement.classList.add('highlight');
               setTimeout(() => {
-                lement.classList.remove('fade-out'); 
-              }, 750);
-            }, 3000);
-          }, 300); 
-          
-          trackFound = true;
+                lement.classList.remove('highlight');
+                lement.classList.add('fade-out'); 
+                setTimeout(() => {
+                  lement.classList.remove('fade-out'); 
+                }, 750);
+              }, 3000);
+            }, 300); 
+            
+            trackFound = true;
+          }
         }
       }
-    }
-  });
-}
-
+    });
+  }
 });
 
-
-
 UpdateFunction();
+
   </script>
 </body>
