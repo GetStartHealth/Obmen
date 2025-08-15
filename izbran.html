@@ -800,6 +800,10 @@ searchForm.addEventListener('submit', (event) => {
       lement.classList.add('highlight');
       setTimeout(() => {
         lement.classList.remove('highlight');
+        lement.classList.add('fade-out'); 
+        setTimeout(() => {
+          lement.classList.remove('fade-out'); 
+        }, 500);
       }, 2000);
       trackFound = true;
     }
