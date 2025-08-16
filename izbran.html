@@ -473,7 +473,7 @@
 
     <form action="search" method="get" class="searchL">  
     <input type="text" name="query" placeholder="Поиск песен..."> 
-     <button id="sort-button" class="small-button12" aria-label="Сортировать по названию">...</button>  
+     <button id="sort-button" class="small-button12" type="button" aria-label="Сортировать по названию">...</button> 
     </form>  
     <div id="albom-container" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
     <div id="favorites-container" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
@@ -969,6 +969,10 @@ searchForm.addEventListener('submit', (event) => {
     });
   }
 
+
+
+});
+
   function NumbercreateTrackRow(track) {
       const row = document.createElement('div');
       row.className = 'track-row';
@@ -991,22 +995,16 @@ searchForm.addEventListener('submit', (event) => {
     }
 
 
-  document.getElementById('sort-button').addEventListener('click', () => {
-   event.preventDefault();
+  document.getElementById('sort-button').addEventListener('click', (event) => {
+   event.preventDefault();  
    favoritesContainer.innerHTML = '';
 
+   tracks.sort((a, b) => a.title.localeCompare(b.title));
 
-  tracks.sort((a, b) => a.title.localeCompare(b.title));
-
-
-  tracks.forEach((trackSort, index) => {
-        const clearTrackRowToSort = NumbercreateTrackRow(trackSort, index);
-        favoritesContainer.appendChild(clearTrackRowToSort);
-      });
-
-});
-
-
+   tracks.forEach((trackSort) => {
+       const clearTrackRowToSort = NumbercreateTrackRow(trackSort);
+       favoritesContainer.appendChild(clearTrackRowToSort);
+   });
 });
 
 UpdateFunction();
