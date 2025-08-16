@@ -683,7 +683,7 @@ const favoritesContainer = document.getElementById('favorites-container');
 const albomContainer = document.getElementById('albom-container');
 const audioPlayer = document.getElementById('audio-player');
 
-function UpdateFunction() {
+function UpdateFunction() {;
   favoritesContainer.innerHTML = '';
   albomContainer.innerHTML = '';
 
@@ -1076,7 +1076,23 @@ searchForm.addEventListener('submit', (event) => {
           audioPlayer.src = albom.url;
           audioPlayer.play().catch(e => console.warn('Ошибка воспроизведения:', e));
         }
-      }); 
+      });
+      const deleteBtn221 = document.createElement('button');
+      deleteBtn221.textContent = '-';
+      deleteBtn221.className = 'delete-button12';
+      deleteBtn221.setAttribute('aria-label', `Удалить ${albom.title}`);
+
+      deleteBtn221.addEventListener('click', (event) => {
+        event.stopPropagation(); 
+        btnf2.disabled = true;
+        const btnfDisabled = btnf2.textContent;
+        const disabledTitlesRaw = localStorage.getItem('disabled') || '';
+        const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+        localStorage.setItem('disabled', btnfDisabled + '\n' + disabledTitles.join('\n'));
+        console.log(`Трек "${btnfDisabled}" отключен.`); 
+      });
+
+      btnf2.appendChild(deleteBtn221)
       tracksContainer.appendChild(btnf2)
     })
 
