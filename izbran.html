@@ -1101,9 +1101,16 @@ searchForm.addEventListener('submit', (event) => {
           const disabledTitlesRaw0911 = localStorage.getItem('disabled') || '';
       const disabledTitles0911 = disabledTitlesRaw0911.split('\n').map(s => s.trim()).filter(s => s.length > 0);
             const updatedDisabledTitles13 = disabledTitles0911.filter(title => title.toLowerCase() !== albom.title.toLowerCase()+"-");
-            localStorage.setItem('disabled', updatedDisabledTitles13.join('\n'));
-            console.log(updatedDisabledTitles13)
-            btnf2.disabled = false;
+            if (updatedDisabledTitles13){           
+             localStorage.setItem('disabled', updatedDisabledTitles13.join('\n'));
+             console.log(updatedDisabledTitles13)
+             btnf2.disabled = false;
+            } else {
+              const updatedDisabledTitles130 = disabledTitles0911.filter(title => title.toLowerCase() !== albom.title.toLowerCase()+"-+");
+              localStorage.setItem('disabled', updatedDisabledTitles130.join('\n'));
+             console.log(updatedDisabledTitles130)
+             btnf2.disabled = false;
+            }
         });
 
       const deleteBtn221 = document.createElement('button');
