@@ -1050,8 +1050,12 @@ searchForm.addEventListener('submit', (event) => {
       const updatedFavorites = rawFilter.filter(fav => fav !== track.title);
       localStorage.setItem('trekA', updatedFavorites.join('\n'));
       console.log(`Альбом "${track.title}" удален из избранного.`); 
+
+
       UpdateFunction();
     });
+
+    
 
 
     
@@ -1090,7 +1094,27 @@ searchForm.addEventListener('submit', (event) => {
         const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
         localStorage.setItem('disabled', btnfDisabled + '\n' + disabledTitles.join('\n'));
         console.log(`Трек "${btnfDisabled}" отключен.`); 
+
+
+        const restoreBtn0 = document.createElement('button');
+        restoreBtn0.textContent = '+';
+        restoreBtn0.className = 'restore-button';
+        restoreBtn0.setAttribute('aria-label', `Восстановить ${track.title}`);
+        restoreBtn0.disabled = false; 
+
+        restoreBtn0.addEventListener('click', () => {
+          event.stopPropagation(); 
+          const disabledTitlesRaw0911 = localStorage.getItem('disabled') || '';
+      const disabledTitles0911 = disabledTitlesRaw091.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+            const updatedDisabledTitles13 = disabledTitles0911.filter(title => title.toLowerCase() !== track.title.toLowerCase()+"-");
+            localStorage.setItem('disabled', updatedDisabledTitles13.join('\n'));
+            btnf2.disabled = false; 
+            restoreBtn0.remove(); 
+        });
+        
       });
+
+      btnf2.appendChild(restoreBtn0);
 
       btnf2.appendChild(deleteBtn221)
       tracksContainer.appendChild(btnf2)
