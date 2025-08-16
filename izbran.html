@@ -1087,6 +1087,10 @@ searchForm.addEventListener('submit', (event) => {
     const der = track.album.sort((a, b) => a.title.localeCompare(b.title))
 
     der.forEach(albom => {
+      const trackRowa = document.createElement('div');
+        trackRowa.style.display = 'flex';
+        trackRowa.style.alignItems = 'center';
+        trackRowa.style.justifyContent = 'space-between';
 
         
       const btnf2 = document.createElement('button');
@@ -1110,7 +1114,7 @@ searchForm.addEventListener('submit', (event) => {
 
       const restoreBtn0 = document.createElement('button');
         restoreBtn0.textContent = '+';
-        restoreBtn0.className = 'restore-button-please';
+        restoreBtn0.className = 'restore-button';
         restoreBtn0.setAttribute('aria-label', `Восстановить ${albom.title}`);
         restoreBtn0.disabled = false; 
 
@@ -1138,16 +1142,13 @@ searchForm.addEventListener('submit', (event) => {
         const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
         localStorage.setItem('disabled', btnfDisabled + '\n' + disabledTitles.join('\n'));
         console.log(`Трек "${btnfDisabled}" отключен.`); 
-
-
-  
-
       });
 
-      btnf2.appendChild(deleteBtn221)
+      trackRowa.appendChild(btnf2)
+      trackRowa.appendChild(restoreBtn0)
+      trackRowa.appendChild(deleteBtn221)
 
-      tracksContainer.appendChild(btnf2)
-      tracksContainer.appendChild(restoreBtn0)
+      tracksContainer.appendChild(trackRowa)
     })
 
  
