@@ -976,6 +976,7 @@ searchForm.addEventListener('submit', (event) => {
   function NumbercreateTrackRow(track) {
       const row = document.createElement('div');
       row.className = 'track-row';
+      const favoriteTitlesRaw = localStorage.getItem('trek') || '';
 
       const trackBtn = document.createElement('button');
       trackBtn.className = 'track-button';
