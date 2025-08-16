@@ -86,6 +86,35 @@
       box-shadow: 0 5px 18px rgba(54, 62, 107, 0.25);
     }
 
+
+    .small-button12 {
+      align-self: flex-start;
+      margin-bottom: 20px;
+      background: #fff;
+      color: #363E6B;
+      border: 2.5px solid #363E6B;
+      border-radius: 16px;
+      padding: 10px 24px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 5px 18px rgba(54, 62, 107, 0.25);
+      transition: box-shadow 0.3s ease, transform 0.2s ease, color 0.3s ease, border-color 0.3s ease;
+      user-select: none;
+    }
+
+    .small-button12:hover {
+      box-shadow: 0 9px 28px rgba(54, 62, 107, 0.5);
+      transform: translateY(-3px);
+      color: #2a3150;
+      border-color: #2a3150;
+    }
+
+    .small-button12:active {
+      transform: translateY(0);
+      box-shadow: 0 5px 18px rgba(54, 62, 107, 0.25);
+    }
+
     #favorites-container {
       overflow-y: auto;
       max-height: 430px;
@@ -444,7 +473,7 @@
 
     <form action="search" method="get" class="searchL">  
     <input type="text" name="query" placeholder="Поиск песен..."> 
-     <button id="sort-button" class="small-button" aria-label="Сортировать по названию">...</button>  
+     <button id="sort-button" class="small-button12" aria-label="Сортировать по названию">...</button>  
     </form>  
     <div id="albom-container" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
     <div id="favorites-container" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
@@ -945,7 +974,7 @@ searchForm.addEventListener('submit', (event) => {
       row.className = 'track-row';
 
       const trackBtn = document.createElement('button');
-      trackBtn.className = 'local-track-button';
+      trackBtn.className = 'track-button';
       trackBtn.textContent = track.title;
       trackBtn.title = `Воспроизвести ${track.title}`;
       trackBtn.disabled = !track.url;
