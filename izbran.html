@@ -242,6 +242,22 @@
   bottom: 10px;
     }
 
+    .restore-button-please{
+      background: #2c2c2c;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      font-size: 1.3rem;
+      line-height: 1;
+      color: rgb(255, 255, 255);
+      font-weight: 700;
+      cursor: pointer;
+
+      position: absolute;
+  right: 10px;
+  bottom: 10px;
+    }
+
 
     .delete-button12 {
       background: #c25858;
@@ -1071,11 +1087,8 @@ searchForm.addEventListener('submit', (event) => {
     const der = track.album.sort((a, b) => a.title.localeCompare(b.title))
 
     der.forEach(albom => {
-      const trackRow = document.createElement('div');
-        trackRow.style.display = 'flex';
-        trackRow.style.alignItems = 'center';
-        trackRow.style.justifyContent = 'space-between';
 
+        
       const btnf2 = document.createElement('button');
       btnf2.textContent = albom.title;
       btnf2.className = 'track-button';
@@ -1097,7 +1110,7 @@ searchForm.addEventListener('submit', (event) => {
 
       const restoreBtn0 = document.createElement('button');
         restoreBtn0.textContent = '+';
-        restoreBtn0.className = 'restore-button';
+        restoreBtn0.className = 'restore-button-please';
         restoreBtn0.setAttribute('aria-label', `Восстановить ${albom.title}`);
         restoreBtn0.disabled = false; 
 
@@ -1131,11 +1144,10 @@ searchForm.addEventListener('submit', (event) => {
 
       });
 
-       trackRow.appendChild(btnf2)
-        trackRow.appendChild(restoreBtn0)
-      trackRow.appendChild(deleteBtn221)
+      btnf2.appendChild(deleteBtn221)
 
-      tracksContainer.appendChild(trackRow)
+      tracksContainer.appendChild(btnf2)
+      tracksContainer.appendChild(restoreBtn0)
     })
 
  
