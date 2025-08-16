@@ -1024,6 +1024,7 @@ searchForm.addEventListener('submit', (event) => {
 
     function ANumbercreateTrackRow(track) {
       const AlbomTitlesRaw = localStorage.getItem('trekA') || '';
+      
 
       const albumDiv = document.createElement('div');
     albumDiv.style.marginBottom = '16px';
@@ -1081,6 +1082,13 @@ searchForm.addEventListener('submit', (event) => {
           audioPlayer.play().catch(e => console.warn('Ошибка воспроизведения:', e));
         }
       });
+      const disabledTitlesRaw67 = localStorage.getItem('disabled') || '';
+      const disabledTitles67 = disabledTitlesRaw67.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+      console.log(disabledTitles67)
+      if (disabledTitles67.map(title => title.toLowerCase()).includes(albom.title.toLowerCase()+"-")) {
+        btnf2.disabled = true;
+        console.log("Сработало")
+      }
 
       const restoreBtn0 = document.createElement('button');
         restoreBtn0.textContent = '+';
@@ -1094,8 +1102,7 @@ searchForm.addEventListener('submit', (event) => {
       const disabledTitles0911 = disabledTitlesRaw0911.split('\n').map(s => s.trim()).filter(s => s.length > 0);
             const updatedDisabledTitles13 = disabledTitles0911.filter(title => title.toLowerCase() !== albom.title.toLowerCase()+"-");
             localStorage.setItem('disabled', updatedDisabledTitles13.join('\n'));
-            btnf2.disabled = false; 
-            restoreBtn0.remove(); 
+            btnf2.disabled = false;
         });
 
       const deleteBtn221 = document.createElement('button');
