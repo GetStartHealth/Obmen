@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Плейлист треков</title>
+  <title>Избранные треки</title>
   <style>
     body {
       margin: 0;
@@ -17,6 +17,7 @@
       padding: 40px 20px;
       min-height: 100vh;
       color: #fff;
+      user-select: none;
     }
 
     #playlist-container {
@@ -30,6 +31,7 @@
       flex-direction: column;
       color: #363E6B;
       user-select: none;
+      box-sizing: border-box;
     }
 
     #playlist-container h3 {
@@ -38,7 +40,22 @@
       font-size: 2rem;
       letter-spacing: 0.05em;
       color: #363E6B;
+      text-shadow: none;
     }
+
+
+
+
+
+    .tracks-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
 
 
     .small-button {
@@ -69,35 +86,217 @@
       box-shadow: 0 5px 18px rgba(54, 62, 107, 0.25);
     }
 
-    #buttons-container {
+
+    .small-button12 {
+      align-self: flex-start;
+      margin-bottom: 20px;
+      background: #fff;
+      color: #363E6B;
+      border: 2.5px solid #363E6B;
+      border-radius: 16px;
+      padding: 10px 24px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 5px 18px rgba(54, 62, 107, 0.25);
+      transition: box-shadow 0.3s ease, transform 0.2s ease, color 0.3s ease, border-color 0.3s ease;
+      user-select: none;
+    }
+
+    .small-button12:hover {
+      box-shadow: 0 9px 28px rgba(54, 62, 107, 0.5);
+      transform: translateY(-3px);
+      color: #2a3150;
+      border-color: #2a3150;
+    }
+
+    .small-button12:active {
+      transform: translateY(0);
+      box-shadow: 0 5px 18px rgba(54, 62, 107, 0.25);
+    }
+
+    #favorites-container {
       overflow-y: auto;
       max-height: 430px;
       padding-right: 6px;
       margin-bottom: 20px;
       user-select: none;
-    }
-
-    .track-row {
       display: flex;
-      align-items: center;
-      margin-bottom: 12px;
+      margin-top: 80px;
+      flex-direction: column;
       gap: 12px;
     }
 
+    #favorites-container::-webkit-scrollbar {
+      width: 8px;
+    }
 
-    .add-btn {
+    #favorites-container::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    #favorites-container::-webkit-scrollbar-thumb {
+      background: #363E6B;
+      border-radius: 8px;
+    }
+
+    #favorites-container > div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    #albom-container {
+      overflow-y: auto;
+      max-height: 2000px;
+      padding-right: 6px;
+      margin-bottom: 10px;
+      user-select: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    #albom-container::-webkit-scrollbar {
+      width: 14px;
+    }
+
+    .highlight {
+    background-color: rgba(66, 153, 99, 0.7); 
+    border-left: 5px solid #2d4e2d; 
+    border-radius: 10px;
+    transition: background-color 0.5s ease, transform 0.5s ease; 
+    padding: 10px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+}
+
+    .track-button.highlight {
+    background-color: rgba(66, 153, 99, 0.7); 
+    border-left: 5px solid #2d4e2d; 
+    border-radius: 10px;
+    transition: background-color 0.5s ease, transform 0.5s ease; 
+    padding: 10px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+}
+
+.fade-out {
+    opacity: 0; 
+    transform: scale(0.95); 
+    transition: opacity 0.5s ease, transform 0.5s ease; 
+}
+
+
+    #albom-container::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    #albom-container::-webkit-scrollbar-thumb {
+      background: #363E6B;
+      border-radius: 8px;
+    }
+
+    #albom-container > div {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .track-button {
+      background: #363E6B;
+      border: none;
+      border-radius: 16px;
+      padding: 8px 18px;
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+      text-align: left;
+      cursor: pointer;
+      box-shadow: 0 5px 18px rgba(54, 62, 107, 0.7);
+      transition: box-shadow 0.3s ease, transform 0.2s ease;
+      user-select: none;
+      min-width: 230px;
+      max-width: 260px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       flex-shrink: 0;
-      background: #1c6d4b;
+      outline: none;
+      height: 48px;
+      justify-content: space-between;
+      position: relative;
+    }
+    .restore-button{
+      background: #2c2c2c;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      font-size: 1.3rem;
+      line-height: 1;
+      color: rgb(255, 255, 255);
+      font-weight: 700;
+      cursor: pointer;
+
+      position: absolute;
+  right: 60px;
+  bottom: 10px;
+    }
+
+
+    .delete-button12 {
+      background: #c25858;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      font-size: 1.3rem;
+      line-height: 1;
+      color: rgb(255, 255, 255);
+      font-weight: 700;
+      cursor: pointer;
+
+      position: absolute;
+  right: 20px;
+  bottom: 10px;
+    }
+
+    .delete-button12:hover {
+      transform: scale(1.1);
+    }
+
+    .delete-button12:active {
+      transform: scale(0.95);
+    }
+
+    .track-button:hover:not(:disabled) {
+      box-shadow: 0 9px 28px rgba(54, 62, 107, 1);
+      transform: translateY(-3px);
+    }
+
+    .track-button:active:not(:disabled) {
+      transform: translateY(0);
+      box-shadow: 0 5px 18px rgba(54, 62, 107, 0.7);
+    }
+
+    .track-button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      box-shadow: none;
+      background: #ccc;
+      color: #666;
+    }
+
+    .delete-button {
+      flex-shrink: 0;
+      background: #c25858;
       border: none;
       border-radius: 50%;
       width: 36px;
       height: 36px;
-      font-size: 1.7rem;
+      font-size: 1.3rem;
       line-height: 1;
-      color: white;
+      color: rgb(255, 255, 255);
       font-weight: 700;
       cursor: pointer;
-      box-shadow: 0 5px 14px rgba(66, 153, 99, 0.7);
       transition: box-shadow 0.3s ease, transform 0.2s ease;
       user-select: none;
       display: flex;
@@ -105,16 +304,101 @@
       align-items: center;
     }
 
-    .add-btn:hover {
-      box-shadow: 0 8px 22px rgba(66, 153, 99, 0.7);
+    .delete-button:hover {
       transform: scale(1.1);
     }
 
-    .add-btn:active {
+    .delete-button:active {
       transform: scale(0.95);
-      box-shadow: 0 5px 14px rgba(66, 153, 99, 0.7);
     }
-    .searchL {
+
+    #audio-player {
+      width: 100%;
+      border-radius: 14px;
+      box-shadow: 0 6px 20px rgba(54, 62, 107, 0.3);
+      outline: none;
+      background-color: #fff;
+      height: 46px;
+      user-select: none;
+    }
+
+    .album-title {
+  position: relative;
+  background-color: #6570af;
+  padding: 17px 55px 17px 22px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  user-select: none;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.album-title:hover {
+  background-color: #4a5d9e;
+}
+
+
+.album-title .title-text {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  user-select: none;
+}
+
+
+.album-title .title-text::after {
+  content: '▼';
+  font-size: 0.8em;
+  margin-left: 8px;
+  color: white;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+  display: inline-block;
+  transform-origin: center;
+  transform: rotate(0deg);
+}
+
+.album-title[aria-expanded="true"] .title-text::after {
+  transform: rotate(180deg);
+}
+
+
+.album-title .delete-button {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: none;
+  color: rgb(43, 43, 43);
+  font-weight: 700;
+  font-size: 1.3rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  user-select: none;
+  z-index: 2;
+}
+
+.album-title .delete-button:hover {
+  transform: translateY(-50%) scale(1.1);
+}
+
+.album-title .delete-button:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.searchL {
   margin-bottom: 20px;
   width: 100%;
   display: flex;
@@ -144,111 +428,6 @@
   box-shadow: 0 0 8px rgba(74, 93, 158, 0.6);
 }
 
-
-    .num-btn {
-      flex-shrink: 0;
-      background: #363E6B;
-      border: none;
-      border-radius: 50%;
-      width: 36px;
-      height: 36px;
-      font-size: 1.1rem;
-      line-height: 1;
-      color: white;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 5px 14px rgba(54, 62, 107, 0.7);
-      transition: box-shadow 0.3s ease, transform 0.2s ease;
-      user-select: none;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .num-btn:hover {
-      box-shadow: 0 8px 22px rgba(54, 62, 107, 0.9);
-      transform: scale(1.1);
-    }
-
-    .num-btn:active {
-      transform: scale(0.95);
-      box-shadow: 0 5px 14px rgba(54, 62, 107, 0.7);
-    }
-
-
-    .local-track-button {
-      flex-grow: 1;
-      background: #363E6B;
-      border: none;
-      border-radius: 16px;
-      padding: 12px 22px;
-      color: white;
-      font-size: 1rem;
-      font-weight: 700;
-      text-align: left;
-      cursor: pointer;
-      box-shadow: 0 5px 18px rgba(54, 62, 107, 0.7);
-      transition: box-shadow 0.3s ease, transform 0.2s ease;
-      user-select: none;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .local-track-button:hover:not(:disabled) {
-      box-shadow: 0 9px 28px rgba(54, 62, 107, 1);
-      transform: translateY(-3px);
-    }
-
-    .local-track-button:active:not(:disabled) {
-      transform: translateY(0);
-      box-shadow: 0 5px 18px rgba(54, 62, 107, 0.7);
-    }
-
-    .local-track-button:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      box-shadow: none;
-      background: #ccc;
-      color: #666;
-    }
-
-    #audio-player {
-      width: 100%;
-      border-radius: 14px;
-      box-shadow: 0 6px 20px rgba(54, 62, 107, 0.3);
-      outline: none;
-      background-color: #fff;
-      height: 46px;
-      user-select: none;
-    }
-
-    #buttons-container::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    #buttons-container::-webkit-scrollbar-track {
-      background: transparent;
-    }
-
-    #buttons-container::-webkit-scrollbar-thumb {
-      background: #363E6B;
-      border-radius: 8px;
-    }
-    .highlight {
-    background-color: rgba(66, 153, 99, 0.7); 
-    border-left: 5px solid #2d4e2d; 
-    border-radius: 10px;
-    transition: background-color 0.5s ease, transform 0.5s ease; 
-    padding: 10px; 
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
-}
-
-.fade-out {
-    opacity: 0; 
-    transform: scale(0.95); 
-    transition: opacity 0.5s ease, transform 0.5s ease; 
-}
     @media (max-width: 640px) {
       #playlist-container {
         padding: 25px 20px 30px;
@@ -258,49 +437,141 @@
         font-size: 1.6rem;
       }
 
-      .track-row {
-        gap: 10px;
+      #favorites-container {
+        max-height: 300px;
       }
 
-      .add-btn {
+      .track-button {
+        font-size: 14px;
+        padding: 4px 8px;
+        min-width: 260px;
+        max-width: 290px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        flex-shrink: 0;
+        height: 55px;
+      }
+
+      .delete-button {
         width: 32px;
         height: 32px;
-        font-size: 1.5rem;
-      }
-
-      .num-btn {
-        width: 32px;
-        height: 32px;
-        font-size: 1.1rem;
-      }
-
-
-      .local-track-button {
-        font-size: 0.9rem;
-        padding: 10px 16px;
+        font-size: 1.3rem;
       }
 
       #audio-player {
         height: 40px;
       }
     }
-  </style>
+</style>
 </head>
 
 <body>
-  <section id="playlist-container" aria-label="Плейлист треков">
-    <h3>Треки</h3>
+  <section id="playlist-container" aria-label="Плейлист избранных треков">
+    <h3>Избранные треки</h3>
+    <button class="small-button" onclick="location.href='index.html'" aria-label="Перейти в меню">Меню</button> 
+
     <form action="search" method="get" class="searchL">  
-    <input type="text" name="query" placeholder="Поиск песен...">   
-    <button id="sort-button" class="small-button" aria-label="Сортировать по названию">А-Я</button>
+    <input type="text" name="query" placeholder="Поиск песен..."> 
+     <button id="sort-button" class="small-button12" type="button" aria-label="Сортировать по названию">...</button> 
     </form>  
-    <button class="small-button" onclick="location.href='index.html'" aria-label="Перейти в меню">Меню</button>
-    <div id="buttons-container" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
-    <audio id="audio-player" controls preload="none" controlsList="nodownload" aria-label="Аудиоплеер для треков"></audio>
-    
+    <div id="albom-container" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
+    <div id="favorites-container" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
+    <audio id="audio-player" controls preload="none" controlsList="nodownload" aria-label="Аудиоплеер для избранных треков"></audio>
   </section>
 
   <script>
+    const albomsT = [
+      {
+      title: '1 ТГК МУЗ-ЧАТ',
+      album: [
+          { title: 'Городской маршрут', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/Русская%20душа%20-%20Городской%20маршрут.mp3' },
+          { title: 'Неважно', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/tagmp3_2.-Русская-душа---Неважно.mp3' },
+          { title: 'Здесь лапы у ели', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/tagmp3_3.-Русская-душа---Здесь-лапы-у-ели.mp3' },
+          { title: 'Булгаков', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/tagmp3_4.-Русская-душа---Булгаков.mp3' },
+          { title: 'В чем сила, брат', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/5.%20Русская%20душа%20-%20В%20чем%20сила,%20брат.mp3' },
+          { title: 'Дерзкий вечер', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/tagmp3_6.-Русская-душа---Дерзкий-вечер.mp3' },
+          { title: 'Пушкин', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/tagmp3_7.-Русская-душа---Пушкин.mp3' },
+          { title: 'Санкции', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/tagmp3_8_Русская-душа_Новости_смотрю_и_плачу.mp3' },
+          { title: 'Здесь лапы у ели', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/tagmp3_9.-Русская-душа---Здесь-лапы-у-ели.mp3' },
+        ]
+      },
+      {
+      title: '2 ТГК МУЗ-ЧАТ',
+      album: [
+        { title: 'Очень', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/2.%20Русская%20душа%20-%20Очень.wav--online-audio-convert.com%20(1).mp3' },
+        { title: 'Воронье', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/воронье.mp3' },
+        { title: 'Тишина', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/тишина.mp3' },
+        { title: 'Туман', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/5.%20Русская%20душа%20-%20Туман.wav--online-audio-convert.com.mp3' },
+        { title: 'Дети 20-го века', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/6.%20Русская%20душа%20-%20Дети%2020-го%20века.wav--online-audio-convert.com.mp3' },
+        { title: 'Застава', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/7.%20Русская%20душа%20-%20Застава.wav--online-audio-convert.com.mp3' },
+        { title: 'Великая держава', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/Русская душа - Великая держава.mp3' },
+      ]
+      },
+      {
+      title: '3 ТГК МУЗ-ЧАТ',
+      album: [
+        { title: 'Гафт', url: 'https://nextjs-boil-delta.vercel.app/гафт.mp3' },
+        { title: 'Читаю строки ветхого завета', url: 'https://nextjs-boil-delta.vercel.app/Читаю-строки-ветхого-завета_.mp3' },
+        { title: 'Женщина до утра', url: 'https://nextjs-boil-delta.vercel.app/женщина%20до%20утра.mp3' },
+        { title: 'Одесса', url: 'https://nextjs-boil-delta.vercel.app/4.%20Русская%20душа%20-%20Одесса%20(1).mp3' },
+        { title: 'Трепещет сердце от безумства', url: 'https://nextjs-boil-delta.vercel.app/5_Русская_душа_Трепещет_сердце_от_безумства.mp3' },
+        { title: 'Мой город', url: 'https://nextjs-boil-delta.vercel.app/мой-город.mp3' },
+        { title: 'За деньги', url: 'https://nextjs-boil-delta.vercel.app/за-деньги.mp3' },
+        { title: 'Не стыдно', url: 'https://nextjs-boil-delta.vercel.app/Не-стыдно.mp3' },
+      ]
+      },
+      {
+      title: 'ГЕРОИ В МУЗЫКЕ',
+      album: [
+        { title: 'Блокада Ленинграда', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Блокада-Ленинграда-(2).mp3' },
+        { title: 'Вагнера', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_РД-Вагнера.mp3' },
+        { title: 'Стрелок', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_стрелок.mp3' },
+        { title: 'Ну, здравствуй, мама!', url: 'https://nextjs-boil-delta.vercel.app/Ну,%20здравствуй,%20мама!.mp3' },
+        { title: 'Мать', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Русская-душа---мать.mp3' },
+        { title: 'Там, где маки лютуют', url: 'https://nextjs-boil-delta.vercel.app/Там, где маки лютуют.mp3' },
+        { title: 'Как заставить молчать', url: 'https://nextjs-boil-delta.vercel.app/3_Русская_Душа_Как_заставить_молчать.mp3' },
+        { title: 'Горит свеча', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Свеча-(2).mp3' },
+      ]
+
+      },
+      {
+        title: 'ЛИРИКА ДУШИ',
+        album: [
+          { title: 'Романс', url: 'https://nextjs-boil-delta.vercel.app/Русская%20душа%20-%20Романс%20.mp3' },
+          { title: 'Венчание', url: 'https://nextjs-boil-delta.vercel.app/Венчание%20(4).mp3' },
+          { title: 'Случайно встретились глазами', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Случайно-встретились-глазами.mp3' },
+          { title: 'Люди бывают разными', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Русская-душа-–-Одни-и-те-же-имена.mp3' },
+          { title: 'Брат', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Брат-версия.mp3' },
+          { title: 'Недописанный стих', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Русская_душа_Недописанный_стих_.mp3' },
+          { title: 'Испачканной карандашом', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Русская_душа_Испачканной_карандашом_.mp3' },
+          { title: 'Одни и те же имена', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Русская-душа-–-Одни-и-те-же-имена.mp3' },
+          { title: 'Пройдусь по парку', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Русская-душа---Пройдусь-по-парку.mp3' },
+        ]
+      },
+      {
+      title: 'ПОБЕДНЫЙ МАЙ',
+      album: [
+        { title: 'Слезы кончились', url: 'https://nextjs-boil-delta.vercel.app/Слезы%20кончились.mp3' },
+        { title: 'Не прячь, слезу мой друг', url: 'https://nextjs-boil-delta.vercel.app/Не прячь, мой друг слезу.mp3' },
+        { title: 'Там на обычном и завьюженном холме', url: 'https://nextjs-boil-delta.vercel.app/Там_на_обычном_и_завьюженном_холме.mp3' },
+        { title: 'Вечная память героям', url: 'https://nextjs-boil-delta.vercel.app/Вечная%20память%20героям!%20(2).mp3' },
+        { title: 'Вы слышите?', url: 'https://nextjs-boil-delta.vercel.app/cromulentarrangements461%20–%20Вы%20слышите_.mp3' },
+        { title: 'Уже не стало ветеранов', url: 'https://nextjs-boil-delta.vercel.app/Уже%20не%20стало%20ветеранов.mp3' },
+        { title: 'Мы часто о героях говорим', url: 'https://nextjs-boil-delta.vercel.app/Мы%20часто%20о%20героях%20говорим%20(2).mp3' },
+        { title: 'Война дошла до Сталинграда', url: 'https://nextjs-boil-delta.vercel.app/Война%20дошла%20до%20Сталинграда%20(2).mp3' },
+        { title: 'На выжженой земле', url: 'https://nextjs-boil-delta.vercel.app/На выжженной земле.mp3' },
+        { title: 'Девятый десяток', url: 'https://nextjs-boil-delta.vercel.app/Девятый_десяток_для_вечности_миг_1.mp3' },        
+      ]
+      },
+      {
+      title: 'ШАНСОНЬЕ',
+      album: [
+        { title: 'Путник', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Русская-душа---Путник.mp3' },
+      ]
+      }  
+      ];
+
     const tracks = [
       { titleNumber: '1' ,title: 'Богеме Ивлеевой', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская%20душа%20-%20Богеме%20Ивлеевой%20(5).mp3' },
       { titleNumber: '2', title: 'Я музыкант, я делаю рок', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская_душа_Я_музыкант,_я_делаю_рок,.mp3' },
@@ -327,7 +598,7 @@
       { titleNumber: '23',title: 'Пионеры', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Пионеры%20(1).mp3' },
       { titleNumber: '24',title: 'День библиотек', url: 'https://nextjs-boilerplate-i6pd.vercel.app/День%20библиотек.mp3' },
       { titleNumber: '25',title: 'Пограничники', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская%20душа%20-%20Пограничники.mp3' },
-      { titleNumber: '26',title: 'Первое июня', url: 'https://nextjs-boilerplate-i6pd.vercel.app/1%20июня%20(1).mp3' },
+      { titleNumber: '26',title: '1 июня', url: 'https://nextjs-boilerplate-i6pd.vercel.app/1%20июня%20(1).mp3' },
       { titleNumber: '27',title: 'Русский язык', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Мой%20язык%20(2).mp3' },
       { titleNumber: '28',title: 'Троица', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Славься,%20Троица-Святая,%20(Remix).mp3' },
       { titleNumber: '29',title: 'День России', url: 'https://nextjs-boilerplate-i6pd-git-main-ds-projects-d772f088.vercel.app/День%20Рoссии%20готов%20.mp3' },
@@ -336,7 +607,7 @@
       { titleNumber: '32',title: 'Гимн славян', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская%20душа%20-%20Гимн%20славян%20.mp3' },
       { titleNumber: '33',title: 'День молодежи', url: 'https://nextjs-boilerplate-i6pd.vercel.app/День%20молодёжи.mp3' },
       { titleNumber: '34',title: 'Поэты', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Поэты%202.0%20(3).mp3' },
-      { titleNumber: '35',title: 'Первое апреля', url: 'https://nextjs-boilerplate-i6pd.vercel.app/1%20апрелч%20.mp3' },
+      { titleNumber: '35',title: '1 апреля', url: 'https://nextjs-boilerplate-i6pd.vercel.app/1%20апрелч%20.mp3' },
       { titleNumber: '36',title: 'Витязи', url: 'https://nextjs-boilerplate-i6pd.vercel.app/витя3и.mp3' },
       { titleNumber: '37',title: 'Юрий Гагарин', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Гагарин%20(1).mp3' },
       { titleNumber: '38',title: 'ПВО', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Наш%20мирный%20сон%20оберегают%20во́ины,.mp3' },
@@ -345,7 +616,7 @@
       { titleNumber: '41',title: 'Русская земля', url: 'https://nextjs-boilerplate-i6pd.vercel.app/русский.mp3' },
       { titleNumber: '42',title: 'Радоница', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская%20душа%20-%20Радоница.MP3.mp3' },
       { titleNumber: '43',title: 'Пожарным', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Не%20важно%20им,%20кто%20там%20попал%20в%20беду.mp3' },
-      { titleNumber: '44',title: 'Первое мая', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская%20душа%20-%20Без%20труда%20ты%20земли%20не%20вскопаешь%20.mp3' },
+      { titleNumber: '44',title: '1 мая', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская%20душа%20-%20Без%20труда%20ты%20земли%20не%20вскопаешь%20.mp3' },
       { titleNumber: '45',title: 'Красный крест', url: 'https://nextjs-boilerplate-i6pd.vercel.app/На%20поле%20боя,%20в%20вихре%20огня%20(1).mp3' },
       { titleNumber: '46',title: 'Ивана Купала', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская душа - Ивана Купала (1).mp3' },
       { titleNumber: '47',title: 'Ну, здравствуй, мама', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Ну, здравствуй, мама!.mp3' },
@@ -406,198 +677,449 @@
       { titleNumber: '102', title: 'Там, где маки лютуют', url: 'https://nextjs-boil-delta.vercel.app/Там, где маки лютуют.mp3' },
       { titleNumber: '103', title: 'Великая держава', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/Русская душа - Великая держава.mp3' },
       { titleNumber: '104', title: 'Уходят на войну', url: 'https://nextjs-boil-delta.vercel.app/Русская+душа+-+Уходят+на+войну++%281%29.mp3' },
-    ]
+    ];
 
-    const buttonsContainer = document.getElementById('buttons-container');
-    const audioPlayer = document.getElementById('audio-player');
+const favoritesContainer = document.getElementById('favorites-container');
+const albomContainer = document.getElementById('albom-container');
+const audioPlayer = document.getElementById('audio-player');
 
-    function addToPlaylist(trackTitle) {
-      let current = localStorage.getItem('trek') || '';
-      let songs = current.split('\n').filter(s => s.trim() !== '');
+function UpdateFunction() {
+  favoritesContainer.innerHTML = '';
+  albomContainer.innerHTML = '';
 
-      if (songs.includes(trackTitle)) {
-        alert(`Песня "${trackTitle}" уже есть в плейлисте.`);
-        return;
-      }
+  const favoriteTitlesRaw = localStorage.getItem('trek') || '';
+  const favoriteTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
-      songs.unshift(trackTitle);
-      localStorage.setItem('trek', songs.join('\n'));
-      alert(`Песня "${trackTitle}" добавлена в плейлист.`);
-    }
+  const favoriteTracks = favoriteTitles
+    .map(title => tracks.find(t => t.title === title))
+    .filter(t => t && t.url);
 
-    function createTrackRow(track) {
-      const row = document.createElement('div');
-      row.className = 'track-row';
+  if (favoriteTracks.length === 0) {
+    favoritesContainer.style.color = '#363E6B';
+    favoritesContainer.style.padding = '10px';
+    favoritesContainer.style.fontWeight = '600';
+    favoritesContainer.style.userSelect = 'none';
+  } else {
+    favoriteTracks.forEach(track => {
+      const trackContainer = document.createElement('div');
+      trackContainer.style.display = 'flex';
+      trackContainer.style.alignItems = 'center';
+      trackContainer.style.justifyContent = 'space-between';
 
-      const addBtn = document.createElement('button');
-      addBtn.className = 'add-btn';
-      addBtn.textContent = '+';
-      addBtn.title = `Добавить "${track.title}" в плейлист`;
-      addBtn.setAttribute('aria-label', `Добавить ${track.title} в плейлист`);
-      addBtn.onclick = () => addToPlaylist(track.title);
+      const btn = document.createElement('button');
+      btn.textContent = track.title;
+      btn.className = 'track-button';
+      btn.disabled = !track.url;
+      btn.title = `Воспроизвести ${track.title}`;
+      btn.setAttribute('aria-label', `Воспроизвести ${track.title}`);
 
-      const trackBtn = document.createElement('button');
-      trackBtn.className = 'local-track-button';
-      trackBtn.textContent = track.title;
-      trackBtn.title = `Воспроизвести ${track.title}`;
-      trackBtn.disabled = !track.url;
-      trackBtn.onclick = () => {
+      const deleteBtn = document.createElement('button');
+      deleteBtn.textContent = '-';
+      deleteBtn.className = 'delete-button';
+      deleteBtn.setAttribute('aria-label', `Удалить ${track.title}`);
+
+      deleteBtn.addEventListener('click', (event) => {
+        event.stopPropagation();
+        const rawFilter = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+        const updatedFavorites = rawFilter.filter(fav => fav !== track.title);
+        localStorage.setItem('trek', updatedFavorites.join('\n'));
+        console.log(`Трек "${track.title}" удален из избранного.`); 
+        UpdateFunction();
+      });
+
+      btn.addEventListener('click', () => {
         if (track.url) {
           audioPlayer.src = track.url;
-          audioPlayer.play();
+          audioPlayer.play().catch(e => console.warn('Ошибка воспроизведения:', e));
         }
-      };
+      });
 
-      const numBtn = document.createElement('button');
-      numBtn.className = 'num-btn';
-      numBtn.textContent = track.titleNumber;
+      trackContainer.appendChild(deleteBtn);
+      trackContainer.appendChild(btn);
+      favoritesContainer.appendChild(trackContainer);
+    });
+  }
 
-      row.appendChild(addBtn);
-      row.appendChild(numBtn)
-      row.appendChild(trackBtn);
+  const albomTitlesRaw = localStorage.getItem('trekA') || '';
+  const AlbomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
-      return row;
-    }
+  AlbomTitles.forEach(albom => {
+    const albomMass = albomsT.find(a => a.title === albom);
+    if (!albomMass) return;
 
-    tracks.forEach(track => {
-      const row = createTrackRow(track);
-      buttonsContainer.appendChild(row);
+    const albumDiv = document.createElement('div');
+    albumDiv.style.marginBottom = '16px';
+    albumDiv.style.display = 'flex';
+    albumDiv.style.flexDirection = 'column';
+
+    const titleText = document.createElement('span');
+    titleText.className = 'title-text';
+    titleText.textContent = albomMass.title;
+
+    const deleteBtn2 = document.createElement('button');
+    deleteBtn2.textContent = '-';
+    deleteBtn2.className = 'delete-button';
+    deleteBtn2.setAttribute('aria-label', `Удалить ${albomMass.title}`);
+
+    deleteBtn2.addEventListener('click', () => {
+      const rawFilter = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+      const updatedFavorites = rawFilter.filter(fav => fav !== albomMass.title);
+      localStorage.setItem('trekA', updatedFavorites.join('\n'));
+      console.log(`Альбом "${albomMass.title}" удален из избранного.`); 
+      UpdateFunction();
     });
 
+    const albumButton = document.createElement('button');
+    albumButton.className = 'album-title';
+    albumButton.setAttribute('aria-expanded', 'false');
+    albumButton.style.width = '100%';
+    albumButton.style.textAlign = 'left';
 
+    albumButton.appendChild(deleteBtn2);
+    albumButton.appendChild(titleText);
 
+    const tracksContainer = document.createElement('div');
+    tracksContainer.className = 'tracks-container'; 
+    tracksContainer.style.maxHeight = '0'; 
+    tracksContainer.style.overflow = 'hidden';
 
+    albomMass.album.forEach(vf => {
+      const btnf = document.createElement('button');
+      btnf.textContent = vf.title;
+      btnf.className = 'track-button';
+      btnf.title = `Воспроизвести ${vf.title}`;
+      btnf.setAttribute('aria-label', `Воспроизвести ${vf.title}`);
 
+      const disabledTitlesRaw = localStorage.getItem('disabled') || '';
+      const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+      console.log(disabledTitles)
+      if (disabledTitles.map(title => title.toLowerCase()).includes(vf.title.toLowerCase()+"-")) {
+        btnf.disabled = true;
+        console.log("Сработало")
 
+        const restoreBtn = document.createElement('button');
+        restoreBtn.textContent = '+';
+        restoreBtn.className = 'restore-button';
+        restoreBtn.setAttribute('aria-label', `Восстановить ${vf.title}`);
+        restoreBtn.disabled = false; 
 
+        restoreBtn.addEventListener('click', () => {
+            event.preventDefault();
+            const disabledTitlesRaw09 = localStorage.getItem('disabled') || '';
+      const disabledTitles09 = disabledTitlesRaw09.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+            const updatedDisabledTitles = disabledTitles09.filter(title => title.toLowerCase() !== vf.title.toLowerCase()+"-");
+            localStorage.setItem('disabled', updatedDisabledTitles.join('\n'));
+            btnf.disabled = false; 
+            restoreBtn.remove(); 
+            console.log(`Трек "${vf.title}" восстановлен.`); 
+            const disabledTitlesRaw3 = localStorage.getItem('disabled') || '';
+            const disabledTitles3 = disabledTitlesRaw3.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+            console.log(disabledTitles3); 
+        });
 
+        btnf.appendChild(restoreBtn);
+      }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    function NumbercreateTrackRow(track, index) {
-      const row = document.createElement('div');
-      row.className = 'track-row';
-
-      const addBtn = document.createElement('button');
-      addBtn.className = 'add-btn';
-      addBtn.textContent = '+';
-      addBtn.title = `Добавить "${track.title}" в плейлист`;
-      addBtn.setAttribute('aria-label', `Добавить ${track.title} в плейлист`);
-      addBtn.onclick = () => addToPlaylist(track.title);
-
-      const trackBtn = document.createElement('button');
-      trackBtn.className = 'local-track-button';
-      trackBtn.textContent = track.title;
-      trackBtn.title = `Воспроизвести ${track.title}`;
-      trackBtn.disabled = !track.url;
-      trackBtn.onclick = () => {
-        if (track.url) {
-          audioPlayer.src = track.url;
-          audioPlayer.play();
+      btnf.addEventListener('click', () => {
+        if (vf.url) {
+          audioPlayer.src = vf.url;
+          audioPlayer.play().catch(e => console.warn('Ошибка воспроизведения:', e));
         }
-      };
+      });
 
-      const numBtn = document.createElement('button');
-      numBtn.className = 'num-btn';
-      numBtn.textContent = index + 1;
+      const deleteBtn22 = document.createElement('button');
+      deleteBtn22.textContent = '-';
+      deleteBtn22.className = 'delete-button12';
+      deleteBtn22.setAttribute('aria-label', `Удалить ${albomMass.title}`);
 
-      row.appendChild(addBtn);
-      row.appendChild(numBtn)
-      row.appendChild(trackBtn);
-
-      return row;
-    }
-
-
-
-
-
+      deleteBtn22.addEventListener('click', (event) => {
+        event.stopPropagation(); 
+        btnf.disabled = true;
+        const btnfDisabled = btnf.textContent;
+        const disabledTitlesRaw = localStorage.getItem('disabled') || '';
+        const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+        localStorage.setItem('disabled', btnfDisabled + '\n' + disabledTitles.join('\n'));
+        console.log(`Трек "${btnfDisabled}" отключен.`); 
 
 
 
+        const restoreBtn = document.createElement('button');
+        restoreBtn.textContent = '+';
+        restoreBtn.className = 'restore-button';
+        restoreBtn.setAttribute('aria-label', `Восстановить ${vf.title}`);
+        restoreBtn.disabled = false; 
 
+        restoreBtn.addEventListener('click', () => {
+          event.stopPropagation(); 
+          const disabledTitlesRaw091 = localStorage.getItem('disabled') || '';
+      const disabledTitles091 = disabledTitlesRaw091.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+            const updatedDisabledTitles1 = disabledTitles091.filter(title => title.toLowerCase() !== vf.title.toLowerCase()+"-");
+            localStorage.setItem('disabled', updatedDisabledTitles1.join('\n'));
+            btnf.disabled = false; 
+            restoreBtn.remove(); 
+            console.log(`Трек "${vf.title}" восстановлен.`); 
+            const disabledTitlesRaw3 = localStorage.getItem('disabled') || '';
+            const disabledTitles3 = disabledTitlesRaw3.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+            console.log(disabledTitles3); 
+        });
 
+        btnf.appendChild(restoreBtn);
+        
+        
+      });
+      btnf.appendChild(deleteBtn22);
+      tracksContainer.appendChild(btnf);
+   } 
+);
+  
 
+    albumButton.addEventListener('click', () => {
+      const isHidden = tracksContainer.style.maxHeight === '0px';
+      tracksContainer.style.maxHeight = isHidden ? '600px' : '0px';
+      tracksContainer.style.transition = 'max-height 0.3s ease';
+      albumButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+    });
 
+    albumDiv.appendChild(albumButton);
+    albumDiv.appendChild(tracksContainer);
+    albomContainer.appendChild(albumDiv);
+  });
+}
 
-
-    const searchInput = document.querySelector('.searchL input[type="text"]');
+const searchInput = document.querySelector('.searchL input[type="text"]');
 const searchForm = document.querySelector('.searchL');
 
 searchForm.addEventListener('submit', (event) => {
   event.preventDefault(); 
-
   const query = searchInput.value.toLowerCase();
 
-  const trackToScrollTo = tracks.find(title => title.title.toLowerCase().includes(query));
+  const favoriteTitlesRaw = localStorage.getItem('trek') || '';
+  const favoriteTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
-  const ver = Array.from(buttonsContainer.children);
+  const albomTitlesRaw = localStorage.getItem('trekA') || '';
+  const albomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
+  const albomToScrollTo = albomTitles.find(title => title.toLowerCase().includes(query));
+  const trackToScrollTo = favoriteTitles.find(title => title.toLowerCase().includes(query));
 
+  const ver = Array.from(favoritesContainer.children);
+  const verA = Array.from(albomContainer.children);
 
   if (trackToScrollTo) {
-    const Element = ver.find(child => child.textContent.includes(trackToScrollTo.title));
+    const Element = ver.find(child => child.textContent.includes(trackToScrollTo));
     if (Element) {
       Element.scrollIntoView({ behavior: 'smooth', block: 'center' });
       Element.classList.add('highlight');
       setTimeout(() => {
-                Element.classList.add('fade-out');
-                setTimeout(() => {
-                    Element.classList.remove('highlight');
-                    Element.classList.remove('fade-out'); 
-                }, 500); 
-            }, 2000);
+        Element.classList.remove('highlight');
+      }, 2000);
     }
   }
 
+  if (albomToScrollTo) {
+    const ElementA = verA.find(child => child.querySelector('.title-text').textContent.includes(albomToScrollTo));
+    if (ElementA) {
+      ElementA.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      ElementA.classList.add('highlight');
+      setTimeout(() => {
+        ElementA.classList.remove('highlight');
+      }, 2000);
+    }
+  } 
+  else {
+    let trackFound = false; 
+    albomsT.forEach(titleTracks => {
+      const filteredAlbomTitle = titleTracks.album;
+      const FeAlbomTitle = filteredAlbomTitle.find(title12 => title12.title.toLowerCase().includes(query));
+
+      if (FeAlbomTitle) {
+        const albumElement = verA.find(child => child.querySelector(".title-text").textContent.includes(titleTracks.title));
+        if (albumElement) {
+          const TC = Array.from(albumElement.querySelectorAll(".tracks-container button"));
+          const lement = TC.find(child => child.textContent.includes(FeAlbomTitle.title));
+          const allAlbums = document.querySelectorAll('.tracks-container');
+          allAlbums.forEach(container => {
+            if (container !== albumElement.querySelector('.tracks-container')) {
+              container.style.maxHeight = '0'; 
+              container.parentElement.querySelector('.album-title').setAttribute('aria-expanded', 'false');
+            }
+          });
+          albumElement.querySelector('.album-title').click();
+          if (lement) { 
+            albumElement.scrollIntoView({behavior: 'smooth', block: 'center'})
+            setTimeout(() => {
+              lement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 500)
+
+            setTimeout(() => {
+              lement.classList.add('highlight');
+              setTimeout(() => {
+                lement.classList.remove('highlight');
+                lement.classList.add('fade-out'); 
+                setTimeout(() => {
+                  lement.classList.remove('fade-out'); 
+                }, 750);
+              }, 3000);
+            }, 300); 
+
+            trackFound = true;
+          }
+        }
+      }
+    });
+  }
+
+
+
 });
 
-document.getElementById('sort-button').addEventListener('click', () => {
-   event.preventDefault();
-  buttonsContainer.innerHTML = '';
+  function NumbercreateTrackRow(track) {
+      const row = document.createElement('div');
+      row.className = 'track-row';
+      const favoriteTitlesRaw = localStorage.getItem('trek') || '';
 
+      const trackBtn = document.createElement('button');
+      trackBtn.className = 'track-button';
+      trackBtn.textContent = track.title;
+      trackBtn.title = `Воспроизвести ${track.title}`;
+      trackBtn.disabled = !track.url;
+      trackBtn.onclick = () => {
+        if (track.url) {
+          audioPlayer.src = track.url;
+          audioPlayer.play();
+        }
+      };
 
-  tracks.sort((a, b) => a.title.localeCompare(b.title));
+      const deleteBtn = document.createElement('button');
+      deleteBtn.textContent = '-';
+      deleteBtn.className = 'delete-button';
+      deleteBtn.setAttribute('aria-label', `Удалить ${track.title}`);
 
-
-  tracks.forEach((trackSort, index) => {
-        const clearTrackRowToSort = NumbercreateTrackRow(trackSort, index);
-        buttonsContainer.appendChild(clearTrackRowToSort);
+      deleteBtn.addEventListener('click', (event) => {
+        event.stopPropagation();
+        const rawFilter = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+        const updatedFavorites = rawFilter.filter(fav => fav !== track.title);
+        localStorage.setItem('trek', updatedFavorites.join('\n'));
+        console.log(`Трек "${track.title}" удален из избранного.`); 
+        UpdateFunction();
       });
 
+
+      row.appendChild(deleteBtn);
+      row.appendChild(trackBtn);
+
+      return row;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    function ANumbercreateTrackRow(track) {
+      const AlbomTitlesRaw = localStorage.getItem('trek') || '';
+
+      const albumDiv = document.createElement('div');
+    albumDiv.style.marginBottom = '16px';
+    albumDiv.style.display = 'flex';
+    albumDiv.style.flexDirection = 'column';
+
+    const titleText = document.createElement('span');
+    titleText.className = 'title-text';
+    titleText.textContent = track.title;
+
+    const albumButton = document.createElement('button');
+    albumButton.className = 'album-title';
+    albumButton.setAttribute('aria-expanded', 'false');
+    albumButton.style.width = '100%';
+    albumButton.style.textAlign = 'left';
+
+    albumButton.appendChild(titleText);
+
+     const tracksContainer = document.createElement('div');
+    tracksContainer.className = 'tracks-container'; 
+    tracksContainer.style.maxHeight = '0'; 
+    tracksContainer.style.overflow = 'hidden';
+
+    const btnf2 = document.createElement('button');
+      btnf2.textContent = track.title;
+      btnf2.className = 'track-button';
+      btnf2.title = `Воспроизвести ${track.title}`;
+      btnf2.setAttribute('aria-label', `Воспроизвести ${track.title}`);
+
+    albumButton.addEventListener('click', () => {
+      const isHidden = tracksContainer.style.maxHeight === '0px';
+      tracksContainer.style.maxHeight = isHidden ? '600px' : '0px';
+      tracksContainer.style.transition = 'max-height 0.3s ease';
+      albumButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+    });
+
+
+    tracksContainer.appendChild(btnf2)
+
+    albumDiv.appendChild(tracksContainer)
+    albumDiv.append(albumButton)
+    albomContainer.append(albumDiv)
+
+
+
+    console.log(track.title)
+
+      return ;
+    }
+
+
+
+
+
+
+
+
+
+
+
+  document.getElementById('sort-button').addEventListener('click', (event) => {
+   event.preventDefault();  
+   favoritesContainer.innerHTML = '';
+   const favoriteTitlesRaw = localStorage.getItem('trek') || '';
+   const favoriteTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+
+   favoriteTitles.sort((a, b) => a.localeCompare(b));
+   console.log(favoriteTitles)
+
+   favoriteTitles.forEach((trackSort) => {
+     console.log(trackSort)
+       const track = tracks.find(t => t.title === trackSort);
+       console.log(track)
+       const clearTrackRowToSort = NumbercreateTrackRow(track);
+       favoritesContainer.appendChild(clearTrackRowToSort);
+   });
+
+   albomContainer.innerHTML = '';
+
+   const albomTitlesRaw = localStorage.getItem('trekA') || '';
+   const AlbomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+
+   AlbomTitles.sort((a, b) => a.localeCompare(b));
+   console.log(AlbomTitles)
+
+   AlbomTitles.forEach((AlbomSort) => {
+       console.log(AlbomSort)
+       const AlbomTrack = albomsT.find(t => t.title === trackSort);
+       console.log(AlbomTrack)
+       const AclearTrackRowToSort = ANumbercreateTrackRow(AlbomTrack);
+       albomContainer.appendChild(AclearTrackRowToSort);
+   });
+
 });
+
+UpdateFunction();
 
   </script>
 </body>
-
-</html>
