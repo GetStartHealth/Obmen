@@ -1047,12 +1047,20 @@ searchForm.addEventListener('submit', (event) => {
     tracksContainer.style.maxHeight = '0'; 
     tracksContainer.style.overflow = 'hidden';
 
-    track.album.forEach(albom => {
+    const der = track.album.sort((a, b) => a.title.localeCompare(b.title))
+
+    der.forEach(albom => {
       const btnf2 = document.createElement('button');
       btnf2.textContent = albom.title;
       btnf2.className = 'track-button';
       btnf2.title = `Воспроизвести ${albom.title}`;
       btnf2.setAttribute('aria-label', `Воспроизвести ${albom.title}`);
+      btnf2.addEventListener('click', () => {
+        if (vf.url) {
+          audioPlayer.src = albom.url;
+          audioPlayer.play().catch(e => console.warn('Ошибка воспроизведения:', e));
+        }
+      }); 
       tracksContainer.appendChild(btnf2)
     })
 
