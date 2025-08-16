@@ -1060,6 +1060,8 @@ searchForm.addEventListener('submit', (event) => {
       albumButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
     });
 
+    console.log(albumButton)
+
 
     tracksContainer.appendChild(btnf2)
 
@@ -1114,6 +1116,7 @@ searchForm.addEventListener('submit', (event) => {
        const AlbomTrack = albomsT.find(t => t.title === AlbomSort);
        console.log(AlbomTrack)
        const AclearTrackRowToSort = ANumbercreateTrackRow(AlbomTrack);
+       console.log(AclearTrackRowToSort)
        albomContainer.appendChild(AclearTrackRowToSort);
    });
 
