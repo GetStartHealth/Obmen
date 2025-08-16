@@ -590,11 +590,10 @@ document.getElementById('sort-button').addEventListener('click', () => {
   tracks.sort((a, b) => a.title.localeCompare(b.title));
 
 
-  tracks.forEach(trackSort, index => {
-    const clearTrackRowToSort = NumbercreateTrackRow(trackSort, index)
-    index++
-    buttonsContainer.appendChild(clearTrackRowToSort)
-  })
+  tracks.forEach((trackSort, index) => {
+        const clearTrackRowToSort = NumbercreateTrackRow(trackSort, index);
+        buttonsContainer.appendChild(clearTrackRowToSort);
+      });
 
 });
 
