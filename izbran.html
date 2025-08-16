@@ -1071,6 +1071,11 @@ searchForm.addEventListener('submit', (event) => {
     const der = track.album.sort((a, b) => a.title.localeCompare(b.title))
 
     der.forEach(albom => {
+      const trackRow = document.createElement('div');
+        trackRow.style.display = 'flex';
+        trackRow.style.alignItems = 'center';
+        trackRow.style.justifyContent = 'space-between';
+
       const btnf2 = document.createElement('button');
       btnf2.textContent = albom.title;
       btnf2.className = 'track-button';
@@ -1126,10 +1131,11 @@ searchForm.addEventListener('submit', (event) => {
 
       });
 
-      btnf2.appendChild(deleteBtn221)
+       trackRow.appendChild(btnf2)
+        trackRow.appendChild(restoreBtn0)
+      trackRow.appendChild(deleteBtn221)
 
-      tracksContainer.appendChild(btnf2)
-      tracksContainer.appendChild(restoreBtn0)
+      tracksContainer.appendChild(trackRow)
     })
 
  
