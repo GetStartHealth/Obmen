@@ -1111,7 +1111,7 @@ searchForm.addEventListener('submit', (event) => {
 
    AlbomTitles.forEach((AlbomSort) => {
        console.log(AlbomSort)
-       const AlbomTrack = albomsT.find(t => t.title === trackSort);
+       const AlbomTrack = albomsT.find(t => t.title === AlbomTrack);
        console.log(AlbomTrack)
        const AclearTrackRowToSort = ANumbercreateTrackRow(AlbomTrack);
        albomContainer.appendChild(AclearTrackRowToSort);
