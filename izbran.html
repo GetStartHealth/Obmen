@@ -940,21 +940,9 @@ searchForm.addEventListener('submit', (event) => {
     });
   }
 
-
-
-
-});
-
-function NumbercreateTrackRow(track, index) {
+  function NumbercreateTrackRow(track) {
       const row = document.createElement('div');
       row.className = 'track-row';
-
-      const addBtn = document.createElement('button');
-      addBtn.className = 'add-btn';
-      addBtn.textContent = '+';
-      addBtn.title = `Добавить "${track.title}" в плейлист`;
-      addBtn.setAttribute('aria-label', `Добавить ${track.title} в плейлист`);
-      addBtn.onclick = () => addToPlaylist(track.title);
 
       const trackBtn = document.createElement('button');
       trackBtn.className = 'local-track-button';
@@ -968,6 +956,7 @@ function NumbercreateTrackRow(track, index) {
         }
       };
 
+      row.appendChild(trackBtn);
 
       return row;
     }
@@ -981,10 +970,13 @@ function NumbercreateTrackRow(track, index) {
   tracks.sort((a, b) => a.title.localeCompare(b.title));
 
 
-  tracks.forEach((trackSort) => {
-        const clearTrackRowToSort = NumbercreateTrackRow(trackSort);
+  tracks.forEach((trackSort, index) => {
+        const clearTrackRowToSort = NumbercreateTrackRow(trackSort, index);
         favoritesContainer.appendChild(clearTrackRowToSort);
       });
+
+});
+
 
 });
 
