@@ -1028,6 +1028,15 @@ searchForm.addEventListener('submit', (event) => {
        const clearTrackRowToSort = NumbercreateTrackRow(track);
        favoritesContainer.appendChild(clearTrackRowToSort);
    });
+
+   albomContainer.innerHTML = '';
+
+   const albomTitlesRaw = localStorage.getItem('trekA') || '';
+   const AlbomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+
+   AlbomTitles.sort((a, b) => a.localeCompare(b));
+   console.log(AlbomTitles)
+
 });
 
 UpdateFunction();
