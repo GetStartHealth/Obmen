@@ -505,9 +505,6 @@ document.getElementById('sort-button').addEventListener('click', () => {
   tracks.sort((a, b) => a.title.localeCompare(b.title));
 
 
-
-  console.log(a)
-
   tracks.forEach(trackSort => {
     const clearTrackRowToSort = createTrackRow(trackSort)
     buttonsContainer.appendChild(clearTrackRowToSort)
