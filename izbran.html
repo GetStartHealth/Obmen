@@ -963,13 +963,6 @@ searchForm.addEventListener('submit', (event) => {
         }
       };
 
-      const numBtn = document.createElement('button');
-      numBtn.className = 'num-btn';
-      numBtn.textContent = index + 1;
-
-      row.appendChild(addBtn);
-      row.appendChild(numBtn)
-      row.appendChild(trackBtn);
 
       return row;
     }
@@ -983,8 +976,8 @@ searchForm.addEventListener('submit', (event) => {
   tracks.sort((a, b) => a.title.localeCompare(b.title));
 
 
-  tracks.forEach((trackSort, index) => {
-        const clearTrackRowToSort = NumbercreateTrackRow(trackSort, index);
+  tracks.forEach((trackSort) => {
+        const clearTrackRowToSort = NumbercreateTrackRow(trackSort);
         favoritesContainer.appendChild(clearTrackRowToSort);
       });
 
