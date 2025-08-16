@@ -498,9 +498,20 @@ searchForm.addEventListener('submit', (event) => {
 });
 
 document.getElementById('sort-button').addEventListener('click', () => {
+   event.preventDefault();
   buttonsContainer.innerHTML = '';
-  const a = tracks.sort()
+
+
+  tracks.sort((a, b) => a.title.localeCompare(b.title));
+
+
+
   console.log(a)
+
+  tracks.forEach(trackSort => {
+    const clearTrackRowToSort = createTrackRow(trackSort)
+    buttonsContainer.appendChild(clearTrackRowToSort)
+  })
 
 });
 
