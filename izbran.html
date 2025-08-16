@@ -1019,6 +1019,7 @@ searchForm.addEventListener('submit', (event) => {
    const favoriteTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
    favoriteTitles.sort((a, b) => a.localeCompare(b));
+   console.log(favoriteTitles)
 
    favoriteTitles.forEach((trackSort) => {
        const track = tracks.find(t => t.title === trackSort);
