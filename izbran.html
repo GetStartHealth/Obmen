@@ -1040,6 +1040,21 @@ searchForm.addEventListener('submit', (event) => {
     albumButton.style.width = '100%';
     albumButton.style.textAlign = 'left';
 
+    const deleteBtn212 = document.createElement('button');
+    deleteBtn212.textContent = '-';
+    deleteBtn212.className = 'delete-button';
+    deleteBtn212.setAttribute('aria-label', `Удалить ${track.title}`);
+
+    deleteBtn212.addEventListener('click', () => {
+      const rawFilter = AlbomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+      const updatedFavorites = rawFilter.filter(fav => fav !== track.title);
+      localStorage.setItem('trekA', updatedFavorites.join('\n'));
+      console.log(`Альбом "${track.title}" удален из избранного.`); 
+      UpdateFunction();
+    });
+
+
+    albumButton.appendChild(deleteBtn212)
     albumButton.appendChild(titleText);
 
      const tracksContainer = document.createElement('div');
@@ -1056,7 +1071,7 @@ searchForm.addEventListener('submit', (event) => {
       btnf2.title = `Воспроизвести ${albom.title}`;
       btnf2.setAttribute('aria-label', `Воспроизвести ${albom.title}`);
       btnf2.addEventListener('click', () => {
-        if (vf.url) {
+        if (albom.url) {
           audioPlayer.src = albom.url;
           audioPlayer.play().catch(e => console.warn('Ошибка воспроизведения:', e));
         }
