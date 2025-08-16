@@ -1015,11 +1015,14 @@ searchForm.addEventListener('submit', (event) => {
   document.getElementById('sort-button').addEventListener('click', (event) => {
    event.preventDefault();  
    favoritesContainer.innerHTML = '';
+   const favoriteTitlesRaw = localStorage.getItem('trek') || '';
+   const favoriteTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
-   tracks.sort((a, b) => a.title.localeCompare(b.title));
+   favoriteTitles.sort((a, b) => a.localeCompare(b));
 
-   tracks.forEach((trackSort) => {
-       const clearTrackRowToSort = NumbercreateTrackRow(trackSort);
+   favoriteTitles.forEach((trackSort) => {
+       const track = tracks.find(t => t.title === trackSort);
+       const clearTrackRowToSort = NumbercreateTrackRow(track);
        favoritesContainer.appendChild(clearTrackRowToSort);
    });
 });
