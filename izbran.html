@@ -989,6 +989,22 @@ searchForm.addEventListener('submit', (event) => {
         }
       };
 
+      const deleteBtn = document.createElement('button');
+      deleteBtn.textContent = '-';
+      deleteBtn.className = 'delete-button';
+      deleteBtn.setAttribute('aria-label', `Удалить ${track.title}`);
+
+      deleteBtn.addEventListener('click', (event) => {
+        event.stopPropagation();
+        const rawFilter = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+        const updatedFavorites = rawFilter.filter(fav => fav !== track.title);
+        localStorage.setItem('trek', updatedFavorites.join('\n'));
+        console.log(`Трек "${track.title}" удален из избранного.`); 
+        UpdateFunction();
+      });
+
+
+      row.appendChild(deleteBtn);
       row.appendChild(trackBtn);
 
       return row;
