@@ -1085,7 +1085,7 @@ searchForm.addEventListener('submit', (event) => {
       const disabledTitlesRaw67 = localStorage.getItem('disabled') || '';
       const disabledTitles67 = disabledTitlesRaw67.split('\n').map(s => s.trim()).filter(s => s.length > 0);
       console.log(disabledTitles67)
-      if (disabledTitles67.map(title => title.toLowerCase()).includes(albom.title.toLowerCase()+"-+")) {
+      if (disabledTitles67.map(title => title.toLowerCase()).includes(albom.title.toLowerCase()+"-")) {
         btnf2.disabled = true;
         console.log("Сработало")
       }
@@ -1104,6 +1104,8 @@ searchForm.addEventListener('submit', (event) => {
             localStorage.setItem('disabled', updatedDisabledTitles13.join('\n'));
             btnf2.disabled = false;
         });
+
+      
 
       const deleteBtn221 = document.createElement('button');
       deleteBtn221.textContent = '-';
@@ -1125,9 +1127,9 @@ searchForm.addEventListener('submit', (event) => {
       });
 
       btnf2.appendChild(deleteBtn221)
-      btnf2.appendChild(restoreBtn0);
 
       tracksContainer.appendChild(btnf2)
+      tracksContainer.appendChild(restoreBtn0)
     })
 
  
