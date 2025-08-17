@@ -1108,6 +1108,9 @@ searchForm.addEventListener('submit', (event) => {
         console.log("Сработало")
       }
 
+      const dopsConteiner = document.createElement('div');
+      dopsConteiner.className = 'button-container'; 
+
       const restoreBtn0 = document.createElement('button');
         restoreBtn0.textContent = '+';
         restoreBtn0.className = 'restore-button';
@@ -1144,9 +1147,11 @@ searchForm.addEventListener('submit', (event) => {
 
       });
 
-      btnf2.appendChild(deleteBtn221)
+      dopsConteiner.appendChild(restoreBtn0)
+      dopsConteiner.appendChild(deleteBtn221)
 
       tracksContainer.appendChild(btnf2)
+      tracksContainer.appendChild(dopsConteiner)
     })
 
  
