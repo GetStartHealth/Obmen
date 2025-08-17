@@ -819,7 +819,7 @@ function UpdateFunction() {;
         restoreBtn.setAttribute('aria-label', `Восстановить ${vf.title}`);
         restoreBtn.disabled = false; 
 
-        restoreBtn.addEventListener('click', () => {
+        restoreBtn.addEventListener('click', (event) => {
             event.preventDefault();
             const disabledTitlesRaw09 = localStorage.getItem('disabled') || '';
       const disabledTitles09 = disabledTitlesRaw09.split('\n').map(s => s.trim()).filter(s => s.length > 0);
@@ -1129,7 +1129,6 @@ searchForm.addEventListener('submit', (event) => {
       
 
       const deleteBtn221 = document.createElement('button');
-      deleteBtn221.textContent = '-';
       deleteBtn221.className = 'delete-button12';
       deleteBtn221.setAttribute('aria-label', `Удалить ${albom.title}`);
 
@@ -1147,11 +1146,11 @@ searchForm.addEventListener('submit', (event) => {
 
       });
 
-      dopsConteiner.appendChild(restoreBtn0)
+     
       btnf2.appendChild(deleteBtn221)
+      btnf2.appendChild(restoreBtn0)
 
       tracksContainer.appendChild(btnf2)
-      tracksContainer.appendChild(dopsConteiner)
     })
 
  
@@ -1225,9 +1224,6 @@ searchForm.addEventListener('submit', (event) => {
 });
 
 UpdateFunction();
-
-  </script>
-</body>
 
   </script>
 </body>
