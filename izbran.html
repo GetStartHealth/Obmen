@@ -242,7 +242,7 @@
   bottom: 10px;
     }
 
-    .restore-button-please{
+    .restore-button0909{
       background: #2c2c2c;
       border-radius: 50%;
       width: 32px;
@@ -1087,6 +1087,20 @@ searchForm.addEventListener('submit', (event) => {
     const der = track.album.sort((a, b) => a.title.localeCompare(b.title))
 
     der.forEach(albom => {
+      const restoreBtn0 = document.createElement('button');
+        restoreBtn0.className = 'restore-button0909';
+        restoreBtn0.setAttribute('aria-label', `Восстановить ${albom.title}`);
+        restoreBtn0.disabled = false; 
+
+        restoreBtn0.addEventListener('click', (event) => {
+          event.stopPropagation(); 
+          const disabledTitlesRaw0911 = localStorage.getItem('disabled') || '';
+      const disabledTitles0911 = disabledTitlesRaw0911.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+            const updatedDisabledTitles13 = disabledTitles0911.filter(title => title.toLowerCase() !== albom.title.toLowerCase()+"-");
+            localStorage.setItem('disabled', updatedDisabledTitles13.join('\n'));
+            btnf2.disabled = false;
+            restoreBtn0.remove()
+        });
 
         
       const btnf2 = document.createElement('button');
@@ -1106,24 +1120,10 @@ searchForm.addEventListener('submit', (event) => {
       if (disabledTitles67.map(title => title.toLowerCase()).includes(albom.title.toLowerCase()+"-")) {
         btnf2.disabled = true;
         console.log("Сработало")
+        btnf2.appendChild(restoreBtn0)
       }
 
-      const dopsConteiner = document.createElement('div');
-      dopsConteiner.className = 'button-container'; 
-
-      const restoreBtn0 = document.createElement('button');
-        restoreBtn0.className = 'restore-button';
-        restoreBtn0.setAttribute('aria-label', `Восстановить ${albom.title}`);
-        restoreBtn0.disabled = false; 
-
-        restoreBtn0.addEventListener('click', (event) => {
-          event.stopPropagation(); 
-          const disabledTitlesRaw0911 = localStorage.getItem('disabled') || '';
-      const disabledTitles0911 = disabledTitlesRaw0911.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-            const updatedDisabledTitles13 = disabledTitles0911.filter(title => title.toLowerCase() !== albom.title.toLowerCase()+"-");
-            localStorage.setItem('disabled', updatedDisabledTitles13.join('\n'));
-            btnf2.disabled = false;
-        });
+      
 
       
 
@@ -1148,7 +1148,6 @@ searchForm.addEventListener('submit', (event) => {
 
      
       btnf2.appendChild(deleteBtn221)
-      btnf2.appendChild(restoreBtn0)
 
       tracksContainer.appendChild(btnf2)
     })
