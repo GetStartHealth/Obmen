@@ -1087,10 +1087,6 @@ searchForm.addEventListener('submit', (event) => {
     const der = track.album.sort((a, b) => a.title.localeCompare(b.title))
 
     der.forEach(albom => {
-      const trackRowa = document.createElement('div');
-        trackRowa.style.display = 'flex';
-        trackRowa.style.alignItems = 'center';
-        trackRowa.style.justifyContent = 'space-between';
 
         
       const btnf2 = document.createElement('button');
@@ -1142,13 +1138,17 @@ searchForm.addEventListener('submit', (event) => {
         const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
         localStorage.setItem('disabled', btnfDisabled + '\n' + disabledTitles.join('\n'));
         console.log(`Трек "${btnfDisabled}" отключен.`); 
+
+
+  
+
       });
 
-      trackRowa.appendChild(btnf2)
-      trackRowa.appendChild(restoreBtn0)
-      trackRowa.appendChild(deleteBtn221)
+      btnf2.appendChild(deleteBtn221)
 
-      tracksContainer.appendChild(trackRowa)
+      tracksContainer.appendChild(restoreBtn0)
+      tracksContainer.appendChild(btnf2)
+      
     })
 
  
