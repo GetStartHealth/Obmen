@@ -1129,12 +1129,7 @@ searchForm.addEventListener('submit', (event) => {
       if (disabledTitles67.map(title => title.toLowerCase()).includes(albom.title.toLowerCase()+"-")) {
         btnf2.disabled = true;
         console.log("Сработало")
-      } else if (disabledTitles67.map(title => title.toLowerCase()).includes(albom.title.toLowerCase()+"+-")) {
-        btnf2.disabled = true;
-        console.log("Сработало")
-      } 
-
-      const restoreBtn0 = document.createElement('button');
+        const restoreBtn0 = document.createElement('button');
         restoreBtn0.textContent = '+';
         restoreBtn0.className = 'restore-button';
         restoreBtn0.setAttribute('aria-label', `Восстановить ${albom.title}`);
@@ -1148,6 +1143,26 @@ searchForm.addEventListener('submit', (event) => {
             localStorage.setItem('disabled', updatedDisabledTitles13.join('\n'));
             btnf2.disabled = false;
         });
+      } else if (disabledTitles67.map(title => title.toLowerCase()).includes(albom.title.toLowerCase()+"+-")) {
+        btnf2.disabled = true;
+        console.log("Сработало")
+        const restoreBtn0 = document.createElement('button');
+        restoreBtn0.textContent = '+';
+        restoreBtn0.className = 'restore-button';
+        restoreBtn0.setAttribute('aria-label', `Восстановить ${albom.title}`);
+        restoreBtn0.disabled = false; 
+
+        restoreBtn0.addEventListener('click', () => {
+          event.stopPropagation(); 
+          const disabledTitlesRaw0911 = localStorage.getItem('disabled') || '';
+      const disabledTitles0911 = disabledTitlesRaw0911.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+            const updatedDisabledTitles13 = disabledTitles0911.filter(title => title.toLowerCase() !== albom.title.toLowerCase()+"-");
+            localStorage.setItem('disabled', updatedDisabledTitles13.join('\n'));
+            btnf2.disabled = false;
+        });
+      } 
+
+      
 
       
 
