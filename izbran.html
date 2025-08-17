@@ -1112,7 +1112,6 @@ searchForm.addEventListener('submit', (event) => {
       dopsConteiner.className = 'button-container'; 
 
       const restoreBtn0 = document.createElement('button');
-        restoreBtn0.textContent = '+';
         restoreBtn0.className = 'restore-button';
         restoreBtn0.setAttribute('aria-label', `Восстановить ${albom.title}`);
         restoreBtn0.disabled = false; 
@@ -1129,6 +1128,7 @@ searchForm.addEventListener('submit', (event) => {
       
 
       const deleteBtn221 = document.createElement('button');
+      deleteBtn221.textContent = '';
       deleteBtn221.className = 'delete-button12';
       deleteBtn221.setAttribute('aria-label', `Удалить ${albom.title}`);
 
