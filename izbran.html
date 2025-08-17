@@ -1117,7 +1117,7 @@ searchForm.addEventListener('submit', (event) => {
         restoreBtn0.setAttribute('aria-label', `Восстановить ${albom.title}`);
         restoreBtn0.disabled = false; 
 
-        restoreBtn0.addEventListener('click', () => {
+        restoreBtn0.addEventListener('click', (event) => {
           event.stopPropagation(); 
           const disabledTitlesRaw0911 = localStorage.getItem('disabled') || '';
       const disabledTitles0911 = disabledTitlesRaw0911.split('\n').map(s => s.trim()).filter(s => s.length > 0);
