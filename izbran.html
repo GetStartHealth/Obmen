@@ -1157,7 +1157,7 @@ searchForm.addEventListener('submit', (event) => {
 
     albumButton.addEventListener('click', () => {
       const isHidden = tracksContainer.style.maxHeight === '0px';
-      tracksContainer.style.maxHeight = isHidden ? '600px' : '0px';
+      tracksContainer.style.maxHeight = isHidden ? '1000px' : '0px';
       tracksContainer.style.transition = 'max-height 0.3s ease';
       albumButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
     });
