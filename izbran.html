@@ -834,7 +834,7 @@ function UpdateFunction() {;
         });
 
         btnf.appendChild(restoreBtn);
-      } else if (disabledTitles.map(title => title.toLowerCase()).includes(vf.title.toLowerCase()+"-+")) {
+      } else if (disabledTitles.map(title => title.toLowerCase()).includes(vf.title.toLowerCase()+"+-")) {
         btnf.disabled = true;
         console.log("Сработало")
 
@@ -1129,7 +1129,7 @@ searchForm.addEventListener('submit', (event) => {
       if (disabledTitles67.map(title => title.toLowerCase()).includes(albom.title.toLowerCase()+"-")) {
         btnf2.disabled = true;
         console.log("Сработало")
-      } else if (disabledTitles67.map(title => title.toLowerCase()).includes(albom.title.toLowerCase()+"-+")) {
+      } else if (disabledTitles67.map(title => title.toLowerCase()).includes(albom.title.toLowerCase()+"+-")) {
         btnf2.disabled = true;
         console.log("Сработало")
       } 
