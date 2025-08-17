@@ -254,7 +254,7 @@
       cursor: pointer;
 
       position: absolute;
-  right: 10px;
+  right: 60px;
   bottom: 10px;
     }
 
@@ -1140,6 +1140,7 @@ searchForm.addEventListener('submit', (event) => {
         const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
         localStorage.setItem('disabled', btnfDisabled + '\n' + disabledTitles.join('\n'));
         console.log(`Трек "${btnfDisabled}" отключен.`); 
+        btnf2.appendChild(restoreBtn0)
 
 
   
