@@ -607,12 +607,19 @@ document.getElementById('sort-button-data').addEventListener('click', () => {
 
    tracks.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-   console.log(tracks)
+   tracks.forEach((trackSort, index) => {
+        const clearTrackRowToSort1 = NumbercreateTrackRow(trackSort, index);
+        buttonsContainer.appendChild(clearTrackRowToSort1);
+      });
+
+
 });
 
 
 
   </script>
 </body>
+
+</html>
 
 </html>
