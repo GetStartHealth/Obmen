@@ -184,7 +184,7 @@
       width: 58px;
       height: 58px;
       font-size: 0.85rem;
-      line-height: 1;
+      line-height: 2;
       color: white;
       font-weight: 1500;
       cursor: pointer;
@@ -623,9 +623,10 @@
       const trackDate = track.date.substring(3, 5)
       numBtnDate.textContent = track.date.substring(0, 2) + ' ' + monthDay[trackDate] + "\n" + track.date.substring(6, 10);
 
+       row.appendChild(numBtnDate);
       row.appendChild(addBtn);
       row.appendChild(numBtn)
-      row.appendChild(numBtnDate);
+     
       row.appendChild(trackBtn);
 
       return row;
@@ -713,3 +714,4 @@ document.getElementById('sort-button-data').addEventListener('click', () => {
 </body>
 
 </html>
+
