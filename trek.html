@@ -603,7 +603,7 @@
 
       const numBtnDate = document.createElement('button');
       numBtnDate.className = 'num-btn-date';
-      numBtnDate.textContent = track.date;
+      numBtnDate.textContent = track.date.substring(0, 5);
 
       row.appendChild(addBtn);
       row.appendChild(numBtn)
