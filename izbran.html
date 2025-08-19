@@ -1044,9 +1044,9 @@ function ABCUpdateFunction() {
 
     deleteBtn2.addEventListener('click', () => {
       const rawFilter = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-      const updatedFavorites = rawFilter.filter(fav => fav !== albomMass.title);
+      const updatedFavorites = rawFilter.filter(fav => fav !== der.title);
       localStorage.setItem('trekA', updatedFavorites.join('\n'));
-      console.log(`Альбом "${albomMass.title}" удален из избранного.`); 
+      console.log(`Альбом "${der.title}" удален из избранного.`); 
       ABCUpdateFunction();
     });
 
