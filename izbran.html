@@ -1020,7 +1020,8 @@ function ABCUpdateFunction() {
     const derA = albomsT.find(a => a.title === trackBearReat);
     get.push(derA)
   })
-  console.log(get)
+  const getUpdate = get.sort((a, b) => a.title.localeCompare(b.title))
+  console.log(getUpdate)
   console.log('стоп')
 
   
@@ -1028,13 +1029,8 @@ function ABCUpdateFunction() {
   
 
   AlbomTitles.forEach(albom => {
-    get = []
-    const der = albomsT.find(a => a.title === albom);
-    console.log(der)
-    const albomMass = der.album.sort((a, b) => a.title.localeCompare(b.title))
+    const albomMass = getUpdate.album.sort((a, b) => a.title.localeCompare(b.title))
     console.log(albomMass)
-
-    der
 
 
     if (!albomMass) return;
@@ -1046,7 +1042,7 @@ function ABCUpdateFunction() {
 
     const titleText = document.createElement('span');
     titleText.className = 'title-text';
-    titleText.textContent = der.title;
+    titleText.textContent = getUpdate.title;
 
     const deleteBtn2 = document.createElement('button');
     deleteBtn2.textContent = '-';
@@ -1055,7 +1051,7 @@ function ABCUpdateFunction() {
 
     deleteBtn2.addEventListener('click', () => {
       const rawFilter = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-      const updatedFavorites = rawFilter.filter(fav => fav !== der.title);
+      const updatedFavorites = rawFilter.filter(fav => fav !== getUpdate.title);
       localStorage.setItem('trekA', updatedFavorites.join('\n'));
       console.log(`Альбом "${der.title}" удален из избранного.`); 
       ABCUpdateFunction();
@@ -1903,3 +1899,7 @@ UpdateFunction();
 
   </script>
 </body>
+
+
+
+
