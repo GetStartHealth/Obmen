@@ -543,6 +543,49 @@
 
 
 
+    function DateNumbercreateTrackRow(track, index) {
+      const row = document.createElement('div');
+      row.className = 'track-row';
+
+      const addBtn = document.createElement('button');
+      addBtn.className = 'add-btn';
+      addBtn.textContent = '+';
+      addBtn.title = `Добавить "${track.title}" в плейлист`;
+      addBtn.setAttribute('aria-label', `Добавить ${track.title} в плейлист`);
+      addBtn.onclick = () => addToPlaylist(track.title);
+
+      const trackBtn = document.createElement('button');
+      trackBtn.className = 'local-track-button';
+      trackBtn.textContent = track.title;
+      trackBtn.title = `Воспроизвести ${track.title}`;
+      trackBtn.disabled = !track.url;
+      trackBtn.onclick = () => {
+        if (track.url) {
+          audioPlayer.src = track.url;
+          audioPlayer.play();
+        }
+      };
+
+      const numBtn = document.createElement('button');
+      numBtn.className = 'num-btn';
+      numBtn.textContent = index + 1;
+
+      const numBtnDate = document.createElement('button');
+      numBtnDate.className = 'num-btn';
+      numBtnDate.textContent = track.date;
+
+      row.appendChild(addBtn);
+      row.appendChild(numBtn)
+      row.appendChild(numBtnDate);
+      row.appendChild(trackBtn);
+
+      return row;
+    }
+
+
+
+
+
 
 
 
@@ -608,7 +651,7 @@ document.getElementById('sort-button-data').addEventListener('click', () => {
    tracks.sort((a, b) => new Date(b.date) - new Date(a.date));
 
    tracks.forEach((trackSort, index) => {
-        const clearTrackRowToSort1 = NumbercreateTrackRow(trackSort, index);
+        const clearTrackRowToSort1 = DateNumbercreateTrackRow(trackSort, index);
         buttonsContainer.appendChild(clearTrackRowToSort1);
       });
 
@@ -619,7 +662,5 @@ document.getElementById('sort-button-data').addEventListener('click', () => {
 
   </script>
 </body>
-
-</html>
 
 </html>
