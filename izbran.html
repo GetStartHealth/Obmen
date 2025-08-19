@@ -1322,6 +1322,10 @@ document.getElementById('sort-button-data').addEventListener('click', (event) =>
    console.log(filteredUpdatedFavorites)
 
    filteredUpdatedFavorites.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+   filteredUpdatedFavorites.forEach(favoritesTrek => {
+      console.log(favoritesTrek)
+   })
 });
 
 UpdateFunction();
