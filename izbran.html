@@ -524,10 +524,8 @@
     <form action="search" method="get" class="searchL">  
     <input type="text" name="query" placeholder="Поиск песен..."> 
     </form>  
-    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
       <button id="sort-button" class="small-button" aria-label="Сортировать по названию">А-Я</button>
       <button id="sort-button-data" class="small-button" aria-label="Сортировать по датам">Дата</button>
-    </div>
     <div id="albom-container" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
     <div id="favorites-container" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
     <audio id="audio-player" controls preload="none" controlsList="nodownload" aria-label="Аудиоплеер для избранных треков"></audio>
@@ -1217,7 +1215,7 @@ searchForm.addEventListener('submit', (event) => {
 
 
 
-function DateNumbercreateTrackRow(track) {
+    function DateNumbercreateTrackRow(track) {
       const row = document.createElement('div');
       row.className = 'track-row';
 
@@ -1238,7 +1236,6 @@ function DateNumbercreateTrackRow(track) {
 
       }
 
-
       const trackBtn = document.createElement('button');
       trackBtn.className = 'local-track-button';
       trackBtn.textContent = track.title;
@@ -1251,11 +1248,11 @@ function DateNumbercreateTrackRow(track) {
         }
       };
 
+
       const numBtnDate = document.createElement('button');
       numBtnDate.className = 'num-btn-date';
       const trackDate = track.date.substring(3, 5)
       numBtnDate.textContent = track.date.substring(0, 2) + ' ' + monthDay[trackDate] + "\n" + track.date.substring(6, 10);
-
       row.appendChild(numBtnDate);
      
       row.appendChild(trackBtn);
