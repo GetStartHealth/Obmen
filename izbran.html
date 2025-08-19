@@ -1424,17 +1424,19 @@ function DateUpdateFunction() {
   const albomTitlesRaw = localStorage.getItem('trekA') || '';
   const AlbomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
-  get = {}
+  get = []
   AlbomTitles.forEach(trackBearReat => {
     const derA = albomsT.find(a => a.title === trackBearReat);
-    get[DateTitle] = derA.DateTitle;
-    get[title] = derA.title;
-    get[album] = derA.album;
+    get.push({
+            DateTitle: derA.DateTitle,
+            title: derA.title,
+            album: derA.album,
+            date: derA.titleDate
+        });
   })
   console.log(get)
-  get.sort((a, b) => new Date(b.date) - new Date(a.date));
+  get.sort((a, b) => new Date(b.titleDate) - new Date(a.titleDate));
   
-  console.log(getUpdate)
   console.log('стоп')
 
   AlbomTitles.forEach(albom => {
