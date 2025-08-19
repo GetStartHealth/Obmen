@@ -1061,7 +1061,6 @@ function ABCUpdateFunction() {
       const rawFilter = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
       const updatedFavorites = rawFilter.filter(fav => fav !== getUpdate[index].title);
       localStorage.setItem('trekA', updatedFavorites.join('\n'));
-      console.log(`Альбом "${der.title}" удален из избранного.`); 
       ABCUpdateFunction();
     });
 
