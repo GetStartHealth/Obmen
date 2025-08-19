@@ -607,63 +607,6 @@
 
 
 
-    function DateNumbercreateTrackRow(track, index) {
-      const row = document.createElement('div');
-      row.className = 'track-row';
-
-      monthDay = {
-        '01': 'янв',
-        '02': 'фев',
-        '03': 'мар',
-        '04': 'апр',
-        '05': 'май',
-        '06': 'июн',
-        '07': 'июл',
-        '08': 'авг',
-        '09': 'сен',
-        '10': 'окт',
-        '11': 'нояб',
-        '12': 'дек',
-
-
-      }
-
-      const addBtn = document.createElement('button');
-      addBtn.className = 'add-btn';
-      addBtn.textContent = '+';
-      addBtn.title = `Добавить "${track.title}" в плейлист`;
-      addBtn.setAttribute('aria-label', `Добавить ${track.title} в плейлист`);
-      addBtn.onclick = () => addToPlaylist(track.title);
-
-      const trackBtn = document.createElement('button');
-      trackBtn.className = 'local-track-button';
-      trackBtn.textContent = track.title;
-      trackBtn.title = `Воспроизвести ${track.title}`;
-      trackBtn.disabled = !track.url;
-      trackBtn.onclick = () => {
-        if (track.url) {
-          audioPlayer.src = track.url;
-          audioPlayer.play();
-        }
-      };
-
-      const numBtn = document.createElement('button');
-      numBtn.className = 'num-btn';
-      numBtn.textContent = index + 1;
-
-      const numBtnDate = document.createElement('button');
-      numBtnDate.className = 'num-btn-date';
-      const trackDate = track.date.substring(3, 5)
-      numBtnDate.textContent = track.date.substring(0, 2) + ' ' + monthDay[trackDate] + "\n" + track.date.substring(6, 10);
-
-      row.appendChild(addBtn);
-      row.appendChild(numBtn)
-      row.appendChild(numBtnDate);
-
-      row.appendChild(trackBtn);
-
-      return row;
-    }
 
 
 
