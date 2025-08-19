@@ -621,7 +621,7 @@
       const numBtnDate = document.createElement('button');
       numBtnDate.className = 'num-btn-date';
       const trackDate = track.date.substring(3, 5)
-      numBtnDate.textContent = monthDay[trackDate];
+      numBtnDate.textContent = track.date.substring(0, 3) + monthDay[trackDate] + track.date.substring(6, 10);
 
       row.appendChild(addBtn);
       row.appendChild(numBtn)
