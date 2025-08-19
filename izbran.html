@@ -354,6 +354,40 @@
   transition: background-color 0.3s ease;
 }
 
+
+
+
+
+.num-btn-date {
+      flex-shrink: 0;
+      background: #363E6B;
+      border: none;
+      border-radius: 25%;
+      width: 58px;
+      height: 58px;
+      font-size: 0.85rem;
+      line-height: 2;
+      color: white;
+      font-weight: 1500;
+      cursor: pointer;
+      box-shadow: 0 5px 14px rgba(54, 62, 107, 0.7);
+      transition: box-shadow 0.3s ease, transform 0.2s ease;
+      user-select: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .num-btn-date:hover {
+      box-shadow: 0 8px 22px rgba(54, 62, 107, 0.9);
+      transform: scale(1.1);
+    }
+
+    .num-btn-date:active {
+      transform: scale(0.95);
+      box-shadow: 0 5px 14px rgba(54, 62, 107, 0.7);
+    }
+
 .album-title:hover {
   background-color: #4a5d9e;
 }
@@ -489,8 +523,11 @@
 
     <form action="search" method="get" class="searchL">  
     <input type="text" name="query" placeholder="Поиск песен..."> 
-     <button id="sort-button" class="small-button12" type="button" aria-label="Сортировать по названию">А-Я</button> 
     </form>  
+    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+      <button id="sort-button" class="small-button" aria-label="Сортировать по названию">А-Я</button>
+      <button id="sort-button-data" class="small-button" aria-label="Сортировать по датам">Дата</button>
+    </div>
     <div id="albom-container" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
     <div id="favorites-container" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
     <audio id="audio-player" controls preload="none" controlsList="nodownload" aria-label="Аудиоплеер для избранных треков"></audio>
@@ -589,111 +626,111 @@
       ];
 
     const tracks = [
-      { titleNumber: '1' ,title: 'Богеме Ивлеевой', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская%20душа%20-%20Богеме%20Ивлеевой%20(5).mp3' },
-      { titleNumber: '2', title: 'Я музыкант, я делаю рок', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская_душа_Я_музыкант,_я_делаю_рок,.mp3' },
-      { titleNumber: '3', title: 'В голове с утра забота', url: 'https://nextjs-boilerplate-i6pd-fylb5ok5s-ds-projects-d772f088.vercel.app/В_голове_с_утра_забота__едит_повар_на_ра-_1_-_1_.mp3' },
-      { titleNumber: '4', title: 'Есенин', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Кем_был_Есенин__мечтатель_иль_повеса__1.mp3' },
-      { titleNumber: '5', title: 'Крестов молчания', url: 'https://nextjs-boilerplate-i6pd.vercel.app/tagmp3_Русская-душа---Крестов-молчания%20(1).mp3' },
-      { titleNumber: '6', title: 'Богата русская природа', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская%20душа%20-%20Богата%20Русская%20природа.mp3' },
-      { titleNumber: '7', title: 'Жизнь прекрасна', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Жизнь_прекрасна,_словно_светлый_день,_1.mp3' },
-      { titleNumber: '8', title: 'Кружит снег', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Кружит%20снег.mp3' },
-      { titleNumber: '9', title: 'Если б не пришла зима', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Если%20б%20не%20пришла%20зима.mp3' },
-      { titleNumber: '10', title: 'На дворе снежинки кружат', url: 'https://nextjs-boilerplate-i6pd.vercel.app/На%20дворе%20снежинки%20кружат.mp3' },
-      { titleNumber: '11', title: 'Новый год', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская%20душа%20Новый%20год.mp3' },
-      { titleNumber: '12', title: 'Рождество', url: 'https://nextjs-boilerplate-i6pd.vercel.app/рождeство%20(1).mp3' },
-      { titleNumber: '13', title: 'Дальнобой', url: 'https://nextjs-boilerplate-i6pd-git-main-ds-projects-d772f088.vercel.app/DALNOBOY_03-_1_-_1_.mp3' },
-      { titleNumber: '14', title: 'Старый Новый Год', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская%20душа%20Старый%20новый%20год.mp3' },
-      { titleNumber: '15',title: 'Крещение', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская%20душа%20-%20Крещение.mp3' },
-      { titleNumber: '16',title: 'Выпускной', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Бау-Выпускной.mp3' },
-      { titleNumber: '17',title: 'Высоцкий', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская%20душа%20-%20Высоцкий.mp3' },
-      { titleNumber: '18',title: 'Венеры', url: 'https://nextjs-boilerplate-i6pd.vercel.app/венеры.mp3' },
-      { titleNumber: '19',title: 'Женщинам', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская%20душа%20-%20Женщинам.MP3' },
-      { titleNumber: '20',title: 'Слова', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская%20душа%20-%20Слова.mp3' },
-      { titleNumber: '21',title: '1941-1945', url: 'https://nextjs-boilerplate-i6pd.vercel.app/1941-1945%20гг..MP3' },
-      { titleNumber: '22',title: 'Семья', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Семья.mp3' },
-      { titleNumber: '23',title: 'Пионеры', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Пионеры%20(1).mp3' },
-      { titleNumber: '24',title: 'День библиотек', url: 'https://nextjs-boilerplate-i6pd.vercel.app/День%20библиотек.mp3' },
-      { titleNumber: '25',title: 'Пограничники', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская%20душа%20-%20Пограничники.mp3' },
-      { titleNumber: '26',title: '1 июня', url: 'https://nextjs-boilerplate-i6pd.vercel.app/1%20июня%20(1).mp3' },
-      { titleNumber: '27',title: 'Русский язык', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Мой%20язык%20(2).mp3' },
-      { titleNumber: '28',title: 'Троица', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Славься,%20Троица-Святая,%20(Remix).mp3' },
-      { titleNumber: '29',title: 'День России', url: 'https://nextjs-boilerplate-i6pd-git-main-ds-projects-d772f088.vercel.app/День%20Рoссии%20готов%20.mp3' },
-      { titleNumber: '30',title: 'Чёрная дата', url: 'https://nextjs-boilerplate-i6pd-git-main-ds-projects-d772f088.vercel.app/Черная%20дата%20(1).mp3' },
-      { titleNumber: '31',title: 'Волны бьются о борт крутой', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Волны%20бьются%20о%20борт%20крутой.mp3' },
-      { titleNumber: '32',title: 'Гимн славян', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская%20душа%20-%20Гимн%20славян%20.mp3' },
-      { titleNumber: '33',title: 'День молодежи', url: 'https://nextjs-boilerplate-i6pd.vercel.app/День%20молодёжи.mp3' },
-      { titleNumber: '34',title: 'Поэты', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Поэты%202.0%20(3).mp3' },
-      { titleNumber: '35',title: '1 апреля', url: 'https://nextjs-boilerplate-i6pd.vercel.app/1%20апрелч%20.mp3' },
-      { titleNumber: '36',title: 'Витязи', url: 'https://nextjs-boilerplate-i6pd.vercel.app/витя3и.mp3' },
-      { titleNumber: '37',title: 'Юрий Гагарин', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Гагарин%20(1).mp3' },
-      { titleNumber: '38',title: 'ПВО', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Наш%20мирный%20сон%20оберегают%20во́ины,.mp3' },
-      { titleNumber: '39',title: 'Служителям искусства', url: 'https://nextjs-boilerplate-i6pd.vercel.app/служителям%20искусства.mp3' },
-      { titleNumber: '40',title: 'Чистый четверг', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Чистый%20четверг.mp3' },
-      { titleNumber: '41',title: 'Русская земля', url: 'https://nextjs-boilerplate-i6pd.vercel.app/русский.mp3' },
-      { titleNumber: '42',title: 'Радоница', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская%20душа%20-%20Радоница.MP3.mp3' },
-      { titleNumber: '43',title: 'Пожарным', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Не%20важно%20им,%20кто%20там%20попал%20в%20беду.mp3' },
-      { titleNumber: '44',title: '1 мая', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская%20душа%20-%20Без%20труда%20ты%20земли%20не%20вскопаешь%20.mp3' },
-      { titleNumber: '45',title: 'Красный крест', url: 'https://nextjs-boilerplate-i6pd.vercel.app/На%20поле%20боя,%20в%20вихре%20огня%20(1).mp3' },
-      { titleNumber: '46',title: 'Ивана Купала', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская душа - Ивана Купала (1).mp3' },
-      { titleNumber: '47',title: 'Ну, здравствуй, мама', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Ну, здравствуй, мама!.mp3' },
-      { titleNumber: '48',title: 'Романс', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская душа - Романс .mp3' },
-      { titleNumber: '49',title: 'Не оставляй меня весной', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская душа - Не оставляй меня весной .mp3' },
-      { titleNumber: '50',title: 'Встало солнце на рассвете', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская душа - Встало солнце на рассвете.mp3' },
-      { titleNumber: '51',title: 'Пасха', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская душа - Пасха.mp3' },  
-      { titleNumber: '52',title: 'Городской маршрут', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская душа - Городской маршрут.mp3' }, 
-      { titleNumber: '53',title: 'Неважно', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/tagmp3_2.-Русская-душа---Неважно.mp3' },
-      { titleNumber: '54',title: 'Здесь лапы у ели', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/tagmp3_3.-Русская-душа---Здесь-лапы-у-ели.mp3' },
-      { titleNumber: '55',title: 'Булгаков', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/tagmp3_4.-Русская-душа---Булгаков.mp3' },
-      { titleNumber: '56',title: 'В чем сила, брат', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/5.%20Русская%20душа%20-%20В%20чем%20сила,%20брат.mp3' },
-      { titleNumber: '57',title: 'Дерзкий вечер', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/tagmp3_6.-Русская-душа---Дерзкий-вечер.mp3' },
-      { titleNumber: '58',title: 'Пушкин', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/tagmp3_7.-Русская-душа---Пушкин.mp3' },
-      { titleNumber: '59',title: 'Санкции', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/tagmp3_8_Русская-душа_Новости_смотрю_и_плачу.mp3' },
-      { titleNumber: '60',title: 'Здесь лапы у ели', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/tagmp3_9.-Русская-душа---Здесь-лапы-у-ели.mp3' },
-      { titleNumber: '61',title: 'Очень', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/2.%20Русская%20душа%20-%20Очень.wav--online-audio-convert.com%20(1).mp3' },
-      { titleNumber: '62',title: 'Воронье', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/воронье.mp3' },
-      { titleNumber: '63',title: 'Тишина', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/тишина.mp3' },
-      { titleNumber: '64',title: 'Туман', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/5.%20Русская%20душа%20-%20Туман.wav--online-audio-convert.com.mp3' },
-      { titleNumber: '65',title: 'Дети 20-го века', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/6.%20Русская%20душа%20-%20Дети%2020-го%20века.wav--online-audio-convert.com.mp3' },
-      { titleNumber: '66',title: 'Застава', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/7.%20Русская%20душа%20-%20Застава.wav--online-audio-convert.com.mp3' },
-      { titleNumber: '67',title: 'Гафт', url: 'https://nextjs-boil-delta.vercel.app/гафт.mp3' },
-      { titleNumber: '68',title: 'Читаю строки ветхого завета', url: 'https://nextjs-boil-delta.vercel.app/Читаю-строки-ветхого-завета_.mp3' },
-      { titleNumber: '69',title: 'Женщина до утра', url: 'https://nextjs-boil-delta.vercel.app/женщина%20до%20утра.mp3' },
-      { titleNumber: '70',title: 'Одесса', url: 'https://nextjs-boil-delta.vercel.app/4.%20Русская%20душа%20-%20Одесса%20(1).mp3' },
-      { titleNumber: '71',title: 'Трепещет сердце от безумства', url: 'https://nextjs-boil-delta.vercel.app/5_Русская_душа_Трепещет_сердце_от_безумства.mp3' },
-      { titleNumber: '72',title: 'Мой город', url: 'https://nextjs-boil-delta.vercel.app/мой-город.mp3' },
-      { titleNumber: '73',title: 'За деньги', url: 'https://nextjs-boil-delta.vercel.app/за-деньги.mp3' },
-      { titleNumber: '74',title: 'Не стыдно', url: 'https://nextjs-boil-delta.vercel.app/Не-стыдно.mp3' },
-      { titleNumber: '75',title: 'Блокада Ленинграда', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Блокада-Ленинграда-(2).mp3' },
-      { titleNumber: '76',title: 'Вагнера', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_РД-Вагнера.mp3' },
-      { titleNumber: '77',title: 'Стрелок', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_стрелок.mp3' },
-      { titleNumber: '78',title: 'Мать', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Русская-душа---мать.mp3' },
-      { titleNumber: '79',title: 'Как заставить молчать', url: 'https://nextjs-boil-delta.vercel.app/3_Русская_Душа_Как_заставить_молчать.mp3' },
-      { titleNumber: '80',title: 'Горит свеча', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Свеча-(2).mp3' },
-      { titleNumber: '81',title: 'Женщинам', url: 'https://nextjs-boil-delta.vercel.app/Русская%20душа%20-%20Женщинам%20(1).MP3' },
-      { titleNumber: '82',title: 'Романс', url: 'https://nextjs-boil-delta.vercel.app/Русская%20душа%20-%20Романс%20.mp3' },
-      { titleNumber: '83',title: 'Венчание', url: 'https://nextjs-boil-delta.vercel.app/Венчание%20(4).mp3' },
-      { titleNumber: '84',title: 'Случайно встретились глазами', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Случайно-встретились-глазами.mp3' },
-      { titleNumber: '85',title: 'Люди бывают разными', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Русская-душа-–-Одни-и-те-же-имена.mp3' },
-      { titleNumber: '86',title: 'Брат', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Брат-версия.mp3' },
-      { titleNumber: '87',title: 'Путник', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Русская-душа---Путник.mp3' },
-      { titleNumber: '88',title: 'Недописанный стих', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Русская_душа_Недописанный_стих_.mp3' },
-      { titleNumber: '89',title: 'Испачканной карандашом', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Русская_душа_Испачканной_карандашом_.mp3' },
-      { titleNumber: '90',title: 'Одни и те же имена', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Русская-душа-–-Одни-и-те-же-имена.mp3' },
-      { titleNumber: '91',title: 'Пройдусь по парку', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Русская-душа---Пройдусь-по-парку.mp3' },
-      { titleNumber: '92',title: 'Слезы кончились', url: 'https://nextjs-boil-delta.vercel.app/Слезы%20кончились.mp3' },
-      { titleNumber: '93',title: 'Не прячь, слезу мой друг', url: 'https://nextjs-boil-delta.vercel.app/Не прячь, мой друг слезу.mp3' },
-      { titleNumber: '94',title: 'Там на обычном и завьюженном холме', url: 'https://nextjs-boil-delta.vercel.app/Там_на_обычном_и_завьюженном_холме.mp3' },
-      { titleNumber: '95',title: 'Вечная память героям', url: 'https://nextjs-boil-delta.vercel.app/Вечная%20память%20героям!%20(2).mp3' },
-      { titleNumber: '96',title: 'Вы слышите?', url: 'https://nextjs-boil-delta.vercel.app/cromulentarrangements461%20–%20Вы%20слышите_.mp3' },
-      { titleNumber: '97',title: 'Уже не стало ветеранов', url: 'https://nextjs-boil-delta.vercel.app/Уже%20не%20стало%20ветеранов.mp3' },
-      { titleNumber: '98', title: 'Мы часто о героях говорим', url: 'https://nextjs-boil-delta.vercel.app/Мы%20часто%20о%20героях%20говорим%20(2).mp3' },
-      { titleNumber: '99', title: 'Война дошла до Сталинграда', url: 'https://nextjs-boil-delta.vercel.app/Война%20дошла%20до%20Сталинграда%20(2).mp3' },
-      { titleNumber: '100', title: 'На выжженой земле', url: 'https://nextjs-boil-delta.vercel.app/На выжженной земле.mp3' },
-      { titleNumber: '101', title: 'Девятый десяток', url: 'https://nextjs-boil-delta.vercel.app/Девятый_десяток_для_вечности_миг_1.mp3' },
-      { titleNumber: '102', title: 'Там, где маки лютуют', url: 'https://nextjs-boil-delta.vercel.app/Там, где маки лютуют.mp3' },
-      { titleNumber: '103', title: 'Великая держава', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/Русская душа - Великая держава.mp3' },
-      { titleNumber: '104', title: 'Уходят на войну', url: 'https://nextjs-boil-delta.vercel.app/Русская+душа+-+Уходят+на+войну++%281%29.mp3' },
-    ];
+      { date:'09.09\n2014', titleNumber: '1' ,title: 'Богеме Ивлеевой', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская%20душа%20-%20Богеме%20Ивлеевой%20(5).mp3' },
+      { date:'09.02\n2025', titleNumber: '2', title: 'Я музыкант, я делаю рок', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская_душа_Я_музыкант,_я_делаю_рок,.mp3' },
+      { date:'09.04\n2024', titleNumber: '3', title: 'В голове с утра забота', url: 'https://nextjs-boilerplate-i6pd-fylb5ok5s-ds-projects-d772f088.vercel.app/В_голове_с_утра_забота__едит_повар_на_ра-_1_-_1_.mp3' },
+      { date:'09.11\n2004',titleNumber: '4', title: 'Есенин', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Кем_был_Есенин__мечтатель_иль_повеса__1.mp3' },
+      { date:'09.01\n2024',titleNumber: '5', title: 'Крестов молчания', url: 'https://nextjs-boilerplate-i6pd.vercel.app/tagmp3_Русская-душа---Крестов-молчания%20(1).mp3' },
+      { date:'09.01\n2024',titleNumber: '6', title: 'Богата русская природа', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская%20душа%20-%20Богата%20Русская%20природа.mp3' },
+      { date:'09.01\n2024',titleNumber: '7', title: 'Жизнь прекрасна', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Жизнь_прекрасна,_словно_светлый_день,_1.mp3' },
+      { date:'09.01\n2024',titleNumber: '8', title: 'Кружит снег', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Кружит%20снег.mp3' },
+      { date:'09.01\n2024',titleNumber: '9', title: 'Если б не пришла зима', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Если%20б%20не%20пришла%20зима.mp3' },
+      { date:'09.01\n2024',titleNumber: '10', title: 'На дворе снежинки кружат', url: 'https://nextjs-boilerplate-i6pd.vercel.app/На%20дворе%20снежинки%20кружат.mp3' },
+      { date:'09.01\n2024',titleNumber: '11', title: 'Новый год', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская%20душа%20Новый%20год.mp3' },
+      { date:'09.01\n2024',titleNumber: '12', title: 'Рождество', url: 'https://nextjs-boilerplate-i6pd.vercel.app/рождeство%20(1).mp3' },
+      { date:'09.01\n2024',titleNumber: '13', title: 'Дальнобой', url: 'https://nextjs-boilerplate-i6pd-git-main-ds-projects-d772f088.vercel.app/DALNOBOY_03-_1_-_1_.mp3' },
+      { date:'09.01\n2024',titleNumber: '14', title: 'Старый Новый Год', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская%20душа%20Старый%20новый%20год.mp3' },
+      { date:'09.01\n2024',titleNumber: '15',title: 'Крещение', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская%20душа%20-%20Крещение.mp3' },
+      { date:'09.01\n2024',titleNumber: '16',title: 'Выпускной', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Бау-Выпускной.mp3' },
+      { date:'09.01\n2024',titleNumber: '17',title: 'Высоцкий', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская%20душа%20-%20Высоцкий.mp3' },
+      { date:'09.01\n2024',titleNumber: '18',title: 'Венеры', url: 'https://nextjs-boilerplate-i6pd.vercel.app/венеры.mp3' },
+      { date:'09.01\n2024',titleNumber: '19',title: 'Женщинам', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская%20душа%20-%20Женщинам.MP3' },
+      { date:'09.01\n2024',titleNumber: '20',title: 'Слова', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская%20душа%20-%20Слова.mp3' },
+      { date:'09.01\n2024',titleNumber: '21',title: '1941-1945', url: 'https://nextjs-boilerplate-i6pd.vercel.app/1941-1945%20гг..MP3' },
+      { date:'09.01\n2024',titleNumber: '22',title: 'Семья', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Семья.mp3' },
+      { date:'09.01\n2024',titleNumber: '23',title: 'Пионеры', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Пионеры%20(1).mp3' },
+      { date:'09.01\n2024',titleNumber: '24',title: 'День библиотек', url: 'https://nextjs-boilerplate-i6pd.vercel.app/День%20библиотек.mp3' },
+      { date:'09.01\n2024',titleNumber: '25',title: 'Пограничники', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская%20душа%20-%20Пограничники.mp3' },
+      { date:'09.01\n2024',titleNumber: '26',title: 'Первое июня', url: 'https://nextjs-boilerplate-i6pd.vercel.app/1%20июня%20(1).mp3' },
+      { date:'09.01\n2024',titleNumber: '27',title: 'Русский язык', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Мой%20язык%20(2).mp3' },
+      { date:'09.01\n2024',titleNumber: '28',title: 'Троица', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Славься,%20Троица-Святая,%20(Remix).mp3' },
+      { date:'09.01\n2024',titleNumber: '29',title: 'День России', url: 'https://nextjs-boilerplate-i6pd-git-main-ds-projects-d772f088.vercel.app/День%20Рoссии%20готов%20.mp3' },
+      { date:'09.01\n2024',titleNumber: '30',title: 'Чёрная дата', url: 'https://nextjs-boilerplate-i6pd-git-main-ds-projects-d772f088.vercel.app/Черная%20дата%20(1).mp3' },
+      {date:'09.01\n2024',titleNumber: '31',title: 'Волны бьются о борт крутой', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Волны%20бьются%20о%20борт%20крутой.mp3' },
+      { date:'09.01\n2024',titleNumber: '32',title: 'Гимн славян', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская%20душа%20-%20Гимн%20славян%20.mp3' },
+      { date:'09.01\n2024',titleNumber: '33',title: 'День молодежи', url: 'https://nextjs-boilerplate-i6pd.vercel.app/День%20молодёжи.mp3' },
+      { date:'09.01\n2024',titleNumber: '34',title: 'Поэты', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Поэты%202.0%20(3).mp3' },
+      { date:'09.01\n2024',titleNumber: '35',title: 'Первое апреля', url: 'https://nextjs-boilerplate-i6pd.vercel.app/1%20апрелч%20.mp3' },
+      { date:'09.01\n2024',titleNumber: '36',title: 'Витязи', url: 'https://nextjs-boilerplate-i6pd.vercel.app/витя3и.mp3' },
+      { date:'09.01\n2024',titleNumber: '37',title: 'Юрий Гагарин', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Гагарин%20(1).mp3' },
+      { date:'09.01\n2024',titleNumber: '38',title: 'ПВО', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Наш%20мирный%20сон%20оберегают%20во́ины,.mp3' },
+      { date:'09.01\n2024',titleNumber: '39',title: 'Служителям искусства', url: 'https://nextjs-boilerplate-i6pd.vercel.app/служителям%20искусства.mp3' },
+      { date:'09.01\n2024',titleNumber: '40',title: 'Чистый четверг', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Чистый%20четверг.mp3' },
+      { date:'09.01\n2024',titleNumber: '41',title: 'Русская земля', url: 'https://nextjs-boilerplate-i6pd.vercel.app/русский.mp3' },
+      { date:'09.01\n2024',titleNumber: '42',title: 'Радоница', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская%20душа%20-%20Радоница.MP3.mp3' },
+      { date:'09.01\n2024',titleNumber: '43',title: 'Пожарным', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Не%20важно%20им,%20кто%20там%20попал%20в%20беду.mp3' },
+      { date:'09.01\n2024',titleNumber: '44',title: 'Первое мая', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская%20душа%20-%20Без%20труда%20ты%20земли%20не%20вскопаешь%20.mp3' },
+      { date:'09.01\n2024',titleNumber: '45',title: 'Красный крест', url: 'https://nextjs-boilerplate-i6pd.vercel.app/На%20поле%20боя,%20в%20вихре%20огня%20(1).mp3' },
+      { date:'09.01\n2024',titleNumber: '46',title: 'Ивана Купала', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская душа - Ивана Купала (1).mp3' },
+      { date:'09.01\n2024',titleNumber: '47',title: 'Ну, здравствуй, мама', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Ну, здравствуй, мама!.mp3' },
+      { date:'09.01\n2024',titleNumber: '48',title: 'Романс', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская душа - Романс .mp3' },
+      { date:'09.01\n2024',titleNumber: '49',title: 'Не оставляй меня весной', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская душа - Не оставляй меня весной .mp3' },
+      { date:'09.01\n2024',titleNumber: '50',title: 'Встало солнце на рассвете', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская душа - Встало солнце на рассвете.mp3' },
+      { date:'09.01\n2024',titleNumber: '51',title: 'Пасха', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская душа - Пасха.mp3' },  
+      { date:'09.01\n2024',titleNumber: '52',title: 'Городской маршрут', url: 'https://nextjs-boilerplate-i6pd.vercel.app/Русская душа - Городской маршрут.mp3' }, 
+      { date:'09.01\n2024',titleNumber: '53',title: 'Неважно', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/tagmp3_2.-Русская-душа---Неважно.mp3' },
+      { date:'09.01\n2024',titleNumber: '54',title: 'Здесь лапы у ели', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/tagmp3_3.-Русская-душа---Здесь-лапы-у-ели.mp3' },
+      { date:'09.01\n2024',titleNumber: '55',title: 'Булгаков', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/tagmp3_4.-Русская-душа---Булгаков.mp3' },
+      { date:'09.01\n2024',titleNumber: '56',title: 'В чем сила, брат', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/5.%20Русская%20душа%20-%20В%20чем%20сила,%20брат.mp3' },
+      { date:'09.01\n2024',titleNumber: '57',title: 'Дерзкий вечер', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/tagmp3_6.-Русская-душа---Дерзкий-вечер.mp3' },
+      { date:'09.01\n2024',titleNumber: '58',title: 'Пушкин', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/tagmp3_7.-Русская-душа---Пушкин.mp3' },
+      { date:'09.01\n2024',titleNumber: '59',title: 'Санкции', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/tagmp3_8_Русская-душа_Новости_смотрю_и_плачу.mp3' },
+      { date:'09.01\n2024',titleNumber: '60',title: 'Здесь лапы у ели', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/tagmp3_9.-Русская-душа---Здесь-лапы-у-ели.mp3' },
+      { date:'09.01\n2024',titleNumber: '61',title: 'Очень', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/2.%20Русская%20душа%20-%20Очень.wav--online-audio-convert.com%20(1).mp3' },
+      { date:'09.01\n2024',titleNumber: '62',title: 'Воронье', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/воронье.mp3' },
+      { date:'09.01\n2024',titleNumber: '63',title: 'Тишина', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/тишина.mp3' },
+      { date:'09.01\n2024',titleNumber: '64',title: 'Туман', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/5.%20Русская%20душа%20-%20Туман.wav--online-audio-convert.com.mp3' },
+      { date:'09.01\n2024',titleNumber: '65',title: 'Дети 20-го века', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/6.%20Русская%20душа%20-%20Дети%2020-го%20века.wav--online-audio-convert.com.mp3' },
+      { date:'09.01\n2024',titleNumber: '66',title: 'Застава', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/7.%20Русская%20душа%20-%20Застава.wav--online-audio-convert.com.mp3' },
+      { date:'09.01\n2024',titleNumber: '67',title: 'Гафт', url: 'https://nextjs-boil-delta.vercel.app/гафт.mp3' },
+      { date:'09.01\n2024',titleNumber: '68',title: 'Читаю строки ветхого завета', url: 'https://nextjs-boil-delta.vercel.app/Читаю-строки-ветхого-завета_.mp3' },
+      { date:'09.01\n2024',titleNumber: '69',title: 'Женщина до утра', url: 'https://nextjs-boil-delta.vercel.app/женщина%20до%20утра.mp3' },
+      { date:'09.01\n2024',titleNumber: '70',title: 'Одесса', url: 'https://nextjs-boil-delta.vercel.app/4.%20Русская%20душа%20-%20Одесса%20(1).mp3' },
+      { date:'09.01\n2024',titleNumber: '71',title: 'Трепещет сердце от безумства', url: 'https://nextjs-boil-delta.vercel.app/5_Русская_душа_Трепещет_сердце_от_безумства.mp3' },
+      { date:'09.01\n2024',titleNumber: '72',title: 'Мой город', url: 'https://nextjs-boil-delta.vercel.app/мой-город.mp3' },
+      { date:'09.01\n2024',titleNumber: '73',title: 'За деньги', url: 'https://nextjs-boil-delta.vercel.app/за-деньги.mp3' },
+      { date:'09.01\n2024',titleNumber: '74',title: 'Не стыдно', url: 'https://nextjs-boil-delta.vercel.app/Не-стыдно.mp3' },
+      { date:'09.01\n2024',titleNumber: '75',title: 'Блокада Ленинграда', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Блокада-Ленинграда-(2).mp3' },
+      { date:'09.01\n2024',titleNumber: '76',title: 'Вагнера', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_РД-Вагнера.mp3' },
+      { date:'09.01\n2024',titleNumber: '77',title: 'Стрелок', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_стрелок.mp3' },
+      { date:'09.01\n2024',titleNumber: '78',title: 'Мать', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Русская-душа---мать.mp3' },
+      { date:'09.01\n2024',titleNumber: '79',title: 'Как заставить молчать', url: 'https://nextjs-boil-delta.vercel.app/3_Русская_Душа_Как_заставить_молчать.mp3' },
+      { date:'09.01\n2024',titleNumber: '80',title: 'Горит свеча', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Свеча-(2).mp3' },
+      { date:'09.01\n2024',titleNumber: '81',title: 'Женщинам', url: 'https://nextjs-boil-delta.vercel.app/Русская%20душа%20-%20Женщинам%20(1).MP3' },
+      { date:'09.01\n2024',titleNumber: '82',title: 'Романс', url: 'https://nextjs-boil-delta.vercel.app/Русская%20душа%20-%20Романс%20.mp3' },
+      { date:'09.01\n2024',titleNumber: '83',title: 'Венчание', url: 'https://nextjs-boil-delta.vercel.app/Венчание%20(4).mp3' },
+      { date:'09.01\n2024',titleNumber: '84',title: 'Случайно встретились глазами', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Случайно-встретились-глазами.mp3' },
+      { date:'09.01\n2024',titleNumber: '85',title: 'Люди бывают разными', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Русская-душа-–-Одни-и-те-же-имена.mp3' },
+      { date:'09.01\n2024',titleNumber: '86',title: 'Брат', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Брат-версия.mp3' },
+      { date:'09.01\n2024',titleNumber: '87',title: 'Путник', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Русская-душа---Путник.mp3' },
+      { date:'09.01\n2024',titleNumber: '88',title: 'Недописанный стих', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Русская_душа_Недописанный_стих_.mp3' },
+      { date:'09.01\n2024',titleNumber: '89',title: 'Испачканной карандашом', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Русская_душа_Испачканной_карандашом_.mp3' },
+      { date:'09.01\n2024',titleNumber: '90',title: 'Одни и те же имена', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Русская-душа-–-Одни-и-те-же-имена.mp3' },
+      { date:'09.01\n2024',titleNumber: '91',title: 'Пройдусь по парку', url: 'https://nextjs-boil-delta.vercel.app/tagmp3_Русская-душа---Пройдусь-по-парку.mp3' },
+      { date:'09.01\n2024',titleNumber: '92',title: 'Слезы кончились', url: 'https://nextjs-boil-delta.vercel.app/Слезы%20кончились.mp3' },
+      { date:'09.01\n2024',titleNumber: '93',title: 'Не прячь, слезу мой друг', url: 'https://nextjs-boil-delta.vercel.app/Не прячь, мой друг слезу.mp3' },
+      { date:'09.01\n2024',titleNumber: '94',title: 'Там на обычном и завьюженном холме', url: 'https://nextjs-boil-delta.vercel.app/Там_на_обычном_и_завьюженном_холме.mp3' },
+      { date:'09.01\n2024',titleNumber: '95',title: 'Вечная память героям', url: 'https://nextjs-boil-delta.vercel.app/Вечная%20память%20героям!%20(2).mp3' },
+      { date:'09.01\n2024',titleNumber: '96',title: 'Вы слышите?', url: 'https://nextjs-boil-delta.vercel.app/cromulentarrangements461%20–%20Вы%20слышите_.mp3' },
+      { date:'09.01\n2024',titleNumber: '97',title: 'Уже не стало ветеранов', url: 'https://nextjs-boil-delta.vercel.app/Уже%20не%20стало%20ветеранов.mp3' },
+      { date:'09.01\n2024',titleNumber: '98', title: 'Мы часто о героях говорим', url: 'https://nextjs-boil-delta.vercel.app/Мы%20часто%20о%20героях%20говорим%20(2).mp3' },
+      { date:'09.01\n2024',titleNumber: '99', title: 'Война дошла до Сталинграда', url: 'https://nextjs-boil-delta.vercel.app/Война%20дошла%20до%20Сталинграда%20(2).mp3' },
+      { date:'09.01\n2024',titleNumber: '100', title: 'На выжженой земле', url: 'https://nextjs-boil-delta.vercel.app/На выжженной земле.mp3' },
+      { date:'09.01\n2024',titleNumber: '101', title: 'Девятый десяток', url: 'https://nextjs-boil-delta.vercel.app/Девятый_десяток_для_вечности_миг_1.mp3' },
+      { date:'09.01\n2024',titleNumber: '102', title: 'Там, где маки лютуют', url: 'https://nextjs-boil-delta.vercel.app/Там, где маки лютуют.mp3' },
+      { date:'09.01\n2024',titleNumber: '103', title: 'Великая держава', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/Русская душа - Великая держава.mp3' },
+      { date:'09.01\n2024',titleNumber: '104', title: 'Уходят на войну', url: 'https://nextjs-boil-delta.vercel.app/Русская+душа+-+Уходят+на+войну++%281%29.mp3' },
+    ]
 
 const favoritesContainer = document.getElementById('favorites-container');
 const albomContainer = document.getElementById('albom-container');
@@ -1180,6 +1217,51 @@ searchForm.addEventListener('submit', (event) => {
 
 
 
+function DateNumbercreateTrackRow(track) {
+      const row = document.createElement('div');
+      row.className = 'track-row';
+
+      monthDay = {
+        '01': 'янв',
+        '02': 'фев',
+        '03': 'мар',
+        '04': 'апр',
+        '05': 'май',
+        '06': 'июн',
+        '07': 'июл',
+        '08': 'авг',
+        '09': 'сен',
+        '10': 'окт',
+        '11': 'нояб',
+        '12': 'дек',
+
+
+      }
+
+
+      const trackBtn = document.createElement('button');
+      trackBtn.className = 'local-track-button';
+      trackBtn.textContent = track.title;
+      trackBtn.title = `Воспроизвести ${track.title}`;
+      trackBtn.disabled = !track.url;
+      trackBtn.onclick = () => {
+        if (track.url) {
+          audioPlayer.src = track.url;
+          audioPlayer.play();
+        }
+      };
+
+      const numBtnDate = document.createElement('button');
+      numBtnDate.className = 'num-btn-date';
+      const trackDate = track.date.substring(3, 5)
+      numBtnDate.textContent = track.date.substring(0, 2) + ' ' + monthDay[trackDate] + "\n" + track.date.substring(6, 10);
+
+      row.appendChild(numBtnDate);
+     
+      row.appendChild(trackBtn);
+
+      return row;
+    }
 
 
 
@@ -1220,6 +1302,21 @@ searchForm.addEventListener('submit', (event) => {
        console.log(AclearTrackRowToSort)
        albomContainer.appendChild(AclearTrackRowToSort);
    });
+
+});
+
+
+document.getElementById('sort-button-data').addEventListener('click', () => {
+   event.preventDefault();
+   favoritesContainer.innerHTML = '';
+
+   tracks.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+   tracks.forEach(trackSort => {
+        const clearTrackRowToSort1 = DateNumbercreateTrackRow(trackSort);
+        favoritesContainer.appendChild(clearTrackRowToSort1);
+      });
+
 
 });
 
