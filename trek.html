@@ -244,6 +244,36 @@
       color: #666;
     }
 
+
+    .small-button1 {
+      background: #fff;
+      color: #363E6B;
+      border: 2.5px solid #363E6B;
+      border-radius: 16px;
+      padding: 10px 0; 
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 5px 18px rgba(54, 62, 107, 0.25);
+      transition: box-shadow 0.3s ease, transform 0.2s ease, color 0.3s ease, border-color 0.3s ease;
+      user-select: none;
+      width: 30%;
+      margin: 0 5px;
+    }
+
+    .small-button1:hover {
+      box-shadow: 0 9px 28px rgba(54, 62, 107, 0.5);
+      transform: translateY(-3px);
+      color: #2a3150;
+      border-color: #2a3150;
+    }
+
+    .small-button1:active {
+      transform: translateY(0);
+      box-shadow: 0 5px 18px rgba(54, 62, 107, 0.25);
+    }
+
+
     #audio-player {
       width: 100%;
       border-radius: 14px;
@@ -323,9 +353,10 @@
     <h3>Треки</h3>
     <form action="search" method="get" class="searchL">  
     <input type="text" name="query" placeholder="Поиск песен...">   
-    <button id="sort-button" class="small-button" aria-label="Сортировать по названию">А-Я</button>
-    <button id="sort-button-data" class="small-button" aria-label="Сортировать по датам">Дата</button>
+    
     </form>  
+    <button id="sort-button" class="small-button1" aria-label="Сортировать по названию">А-Я</button>
+    <button id="sort-button-data" class="small-button1" aria-label="Сортировать по датам">Дата</button>
     <button class="small-button" onclick="location.href='index.html'" aria-label="Перейти в меню">Меню</button>
     <div id="buttons-container" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
     <audio id="audio-player" controls preload="none" controlsList="nodownload" aria-label="Аудиоплеер для треков"></audio>
@@ -714,4 +745,3 @@ document.getElementById('sort-button-data').addEventListener('click', () => {
 </body>
 
 </html>
-
