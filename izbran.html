@@ -1050,7 +1050,7 @@ function ABCUpdateFunction() {
 
     const titleText = document.createElement('span');
     titleText.className = 'title-text';
-    titleText.textContent = getUpdate.title;
+    titleText.textContent = getUpdate[index].title;
 
     const deleteBtn2 = document.createElement('button');
     deleteBtn2.textContent = '-';
@@ -1059,7 +1059,7 @@ function ABCUpdateFunction() {
 
     deleteBtn2.addEventListener('click', () => {
       const rawFilter = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-      const updatedFavorites = rawFilter.filter(fav => fav !== getUpdate.title);
+      const updatedFavorites = rawFilter.filter(fav => fav !== getUpdate[index].title);
       localStorage.setItem('trekA', updatedFavorites.join('\n'));
       console.log(`Альбом "${der.title}" удален из избранного.`); 
       ABCUpdateFunction();
