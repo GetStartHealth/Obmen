@@ -1064,7 +1064,7 @@ function ABCUpdateFunction() {
     tracksContainer.style.maxHeight = '0'; 
     tracksContainer.style.overflow = 'hidden';
 
-    albomMass.album.forEach(vf => {
+    albomMass.forEach(vf => {
       const btnf = document.createElement('button');
       btnf.textContent = vf.title;
       btnf.className = 'track-button';
@@ -1890,7 +1890,5 @@ document.getElementById('sort-button-data').addEventListener('click', (event) =>
 
 UpdateFunction();
 
-  </script>
-</body>
   </script>
 </body>
