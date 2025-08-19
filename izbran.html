@@ -1325,6 +1325,9 @@ document.getElementById('sort-button-data').addEventListener('click', (event) =>
 
    filteredUpdatedFavorites.forEach(favoritesTrek => {
       console.log(favoritesTrek)
+      veu = DateNumbercreateTrackRow(favoritesTrek)
+      favoritesContainer.appendChild(veu)
+
    })
 });
 
