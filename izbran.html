@@ -1049,7 +1049,6 @@ function DateUpdateFunction() {
       numBtnDate.className = 'num-btn-date';
       const trackDate = track.date.substring(3, 5)
       numBtnDate.textContent = track.date.substring(0, 2) + ' ' + monthDay[trackDate] + "\n" + track.date.substring(6, 10);
-      row.appendChild(numBtnDate);
 
       const deleteBtn = document.createElement('button');
       deleteBtn.textContent = '-';
