@@ -1424,20 +1424,7 @@ function DateUpdateFunction() {
   const albomTitlesRaw = localStorage.getItem('trekA') || '';
   const AlbomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
-  get = []
-  AlbomTitles.forEach(trackBearReat => {
-    const derA = albomsT.find(a => a.title === trackBearReat);
-    get.push({
-            DateTitle: derA.DateTitle,
-            title: derA.title,
-            album: derA.album,
-            date: derA.titleDate
-        });
-  })
-  console.log(get)
-  get.sort((a, b) => new Date(b.titleDate) - new Date(a.titleDate));
   
-  console.log('стоп')
 
   AlbomTitles.forEach(albom => {
     const albomMass = albomsT.find(a => a.title === albom);
@@ -1891,6 +1878,31 @@ searchForm.addEventListener('submit', (event) => {
     function DateNumbercreateTrackRow(track) {
       const row = document.createElement('div');
       row.className = 'track-row';
+
+      const albomTitlesRaw = localStorage.getItem('trekA') || '';
+   const AlbomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+
+
+      get = []
+  AlbomTitles.forEach(trackBearReat => {
+    const derA = albomsT.find(a => a.title === trackBearReat);
+    get.push({
+            DateTitle: derA.DateTitle,
+            title: derA.title,
+            album: derA.album,
+            date: derA.titleDate
+        });
+  })
+  console.log(get)
+  get.sort((a, b) => new Date(b.titleDate) - new Date(a.titleDate));
+  
+
+  console.log('стоп')
+
+
+albomContainer.innerHTML = '';
+
+   
 
       monthDay = {
         '01': 'янв',
