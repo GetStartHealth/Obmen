@@ -736,7 +736,8 @@ const favoritesContainer = document.getElementById('favorites-container');
 const albomContainer = document.getElementById('albom-container');
 const audioPlayer = document.getElementById('audio-player');
 
-function UpdateFunction() {;
+function UpdateFunction() {
+  localStorage.clear()
   favoritesContainer.innerHTML = '';
   albomContainer.innerHTML = '';
 
@@ -1349,9 +1350,6 @@ document.getElementById('sort-button-data').addEventListener('click', (event) =>
 });
 
 UpdateFunction();
-
-  </script>
-</body>
 
   </script>
 </body>
