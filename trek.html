@@ -176,6 +176,37 @@
     }
 
 
+    .num-btn-date {
+      flex-shrink: 0;
+      background: #363E6B;
+      border: none;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      font-size: 0.8rem;
+      line-height: 1;
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 5px 14px rgba(54, 62, 107, 0.7);
+      transition: box-shadow 0.3s ease, transform 0.2s ease;
+      user-select: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .num-btn-date:hover {
+      box-shadow: 0 8px 22px rgba(54, 62, 107, 0.9);
+      transform: scale(1.1);
+    }
+
+    .num-btn-date:active {
+      transform: scale(0.95);
+      box-shadow: 0 5px 14px rgba(54, 62, 107, 0.7);
+    }
+
+
     .local-track-button {
       flex-grow: 1;
       background: #363E6B;
@@ -571,7 +602,7 @@
       numBtn.textContent = index + 1;
 
       const numBtnDate = document.createElement('button');
-      numBtnDate.className = 'num-btn';
+      numBtnDate.className = 'num-btn-date';
       numBtnDate.textContent = track.date;
 
       row.appendChild(addBtn);
