@@ -1030,10 +1030,15 @@ function ABCUpdateFunction() {
 
   AlbomTitles.forEach((albom, index) => {
 
-    console.log(getUpdate[index + 1])
+    console.log(getUpdate[index])
     console.log('стоп')
-    const albomMass = getUpdate[index + 1].album.sort((a, b) => a.title.localeCompare(b.title))
+    const albomMass = getUpdate[index].album.sort((a, b) => a.title.localeCompare(b.title))
     console.log(albomMass)
+
+    if (getUpdate.length > index) {
+      console.log(getUpdate.length)
+      console.log('Конец')
+    }
 
 
     if (!albomMass) return;
