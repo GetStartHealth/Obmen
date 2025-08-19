@@ -961,6 +961,7 @@ function ABCUpdateFunction() {
     .map(title => tracks.find(t => t.title === title))
     .filter(t => t && t.url);
 
+  console.log(favoriteTracks)
   favoriteTracks.sort((a, b) => a.localeCompare(b));
   console.log(favoriteTracks)
 
@@ -1887,7 +1888,5 @@ document.getElementById('sort-button-data').addEventListener('click', (event) =>
 
 UpdateFunction();
 
-  </script>
-</body>
   </script>
 </body>
