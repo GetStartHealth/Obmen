@@ -268,6 +268,7 @@
       border-color: #2a3150;
     }
 
+
     .small-button1:active {
       transform: translateY(0);
       box-shadow: 0 5px 18px rgba(54, 62, 107, 0.25);
@@ -352,15 +353,15 @@
   <section id="playlist-container" aria-label="Плейлист треков">
     <h3>Треки</h3>
     <form action="search" method="get" class="searchL">  
-    <input type="text" name="query" placeholder="Поиск песен...">   
-    
+      <input type="text" name="query" placeholder="Поиск песен...">   
     </form>  
-    <button id="sort-button" class="small-button1" aria-label="Сортировать по названию">А-Я</button>
-    <button id="sort-button-data" class="small-button1" aria-label="Сортировать по датам">Дата</button>
-    <button class="small-button" onclick="location.href='index.html'" aria-label="Перейти в меню">Меню</button>
+    <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+      <button id="sort-button" class="small-button" aria-label="Сортировать по названию">А-Я</button>
+      <button id="sort-button-data" class="small-button" aria-label="Сортировать по датам">Дата</button>
+    </div>
+    <button class="small-button" style="margin-top: 20px;" onclick="location.href='index.html'" aria-label="Перейти в меню">Меню</button>
     <div id="buttons-container" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
     <audio id="audio-player" controls preload="none" controlsList="nodownload" aria-label="Аудиоплеер для треков"></audio>
-    
   </section>
 
   <script>
