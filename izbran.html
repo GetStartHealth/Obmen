@@ -524,8 +524,10 @@
     <form action="search" method="get" class="searchL">  
     <input type="text" name="query" placeholder="Поиск песен..."> 
     </form>  
+      <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
       <button id="sort-button" class="small-button" aria-label="Сортировать по названию">А-Я</button>
       <button id="sort-button-data" class="small-button" aria-label="Сортировать по датам">Дата</button>
+    </div>
     <div id="albom-container" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
     <div id="favorites-container" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
     <audio id="audio-player" controls preload="none" controlsList="nodownload" aria-label="Аудиоплеер для избранных треков"></audio>
@@ -1307,14 +1309,13 @@ document.getElementById('sort-button-data').addEventListener('click', (event) =>
    event.preventDefault();
    favoritesContainer.innerHTML = '';
 
-   tracks.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-   tracks.forEach(trackSort => {
-        const clearTrackRowToSort1 = DateNumbercreateTrackRow(trackSort);
-        favoritesContainer.appendChild(clearTrackRowToSort1);
-      });
-
-
+   data = {}
+   const aTitlesRaw = localStorage.getItem('trek') || '';
+   const ATitles = aTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+   ATitles.forEach(trackBear => {
+    const FilteredUpdatedFavorites = tracks.find(t => t.title === trackBear);;
+   })
+   console.log(FilteredUpdatedFavorites)
 });
 
 UpdateFunction();
