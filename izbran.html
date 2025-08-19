@@ -1022,7 +1022,9 @@ function ABCUpdateFunction() {
 
   AlbomTitles.forEach(albom => {
     const der = albomsT.find(a => a.title === albom);
+    console.log(der)
     const albomMass = der.album.sort((a, b) => a.title.localeCompare(b.title))
+    console.log(albomMass)
 
     if (!albomMass) return;
 
@@ -1890,6 +1892,5 @@ UpdateFunction();
 
   </script>
 </body>
-
   </script>
 </body>
