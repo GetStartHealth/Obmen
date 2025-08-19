@@ -1309,13 +1309,21 @@ document.getElementById('sort-button-data').addEventListener('click', (event) =>
    event.preventDefault();
    favoritesContainer.innerHTML = '';
 
-   data = {}
+   const filteredUpdatedFavorites = [];
    const aTitlesRaw = localStorage.getItem('trek') || '';
    const ATitles = aTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
    ATitles.forEach(trackBear => {
-    const FilteredUpdatedFavorites = tracks.find(t => t.title === trackBear);
-    const decel = DateNumbercreateTrackRow(FilteredUpdatedFavorites)
-    favoritesContainer.appendChild(decel)
+      const foundTrack = tracks.find(t => t.title === trackBear);
+      if (foundTrack) {
+          filteredUpdatedFavorites.push(foundTrack);
+      }
+   });
+
+   filteredUpdatedFavorites.sort((a, b) => new Date(b.date) - new Date(a.date));
+    
+   filteredUpdatedFavorites.forEach(track => {
+        bve = DateNumbercreateTrackRow(track)
+        favoritesContainer.bve
    })
 });
 
