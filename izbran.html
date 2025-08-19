@@ -1319,15 +1319,14 @@ document.getElementById('sort-button-data').addEventListener('click', (event) =>
       }
    });
 
+   console.log(filteredUpdatedFavorites)
+
    filteredUpdatedFavorites.sort((a, b) => new Date(b.date) - new Date(a.date));
-    
-   filteredUpdatedFavorites.forEach(track => {
-        bve = DateNumbercreateTrackRow(track)
-        favoritesContainer.bve
-   })
 });
 
 UpdateFunction();
 
+  </script>
+</body>
   </script>
 </body>
