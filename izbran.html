@@ -962,7 +962,7 @@ function ABCUpdateFunction() {
     .filter(t => t && t.url);
 
   console.log(favoriteTracks)
-  favoriteTracks.sort((a, b) => a.localeCompare(b));
+  favoriteTracks.sort((a, b) => a.title.localeCompare(b.title));
   console.log(favoriteTracks)
 
   
