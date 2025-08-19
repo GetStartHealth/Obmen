@@ -1009,6 +1009,8 @@ function DateUpdateFunction() {
     .map(title => tracks.find(t => t.title === title))
     .filter(t => t && t.url);
 
+  console.log(favoriteTracks)
+
   if (favoriteTracks.length === 0) {
     favoritesContainer.style.color = '#363E6B';
     favoritesContainer.style.padding = '10px';
