@@ -1015,16 +1015,27 @@ function ABCUpdateFunction() {
 
   const albomTitlesRaw = localStorage.getItem('trekA') || '';
   const AlbomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+  get = []
+  AlbomTitles.forEach(trackBearReat => {
+    const derA = albomsT.find(a => a.title === trackBearReat);
+    get.push(derA)
+  })
+  console.log(get)
+  console.log('стоп')
 
   
 
   
 
   AlbomTitles.forEach(albom => {
+    get = []
     const der = albomsT.find(a => a.title === albom);
     console.log(der)
     const albomMass = der.album.sort((a, b) => a.title.localeCompare(b.title))
     console.log(albomMass)
+
+    der
+
 
     if (!albomMass) return;
 
