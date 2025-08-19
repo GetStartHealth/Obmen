@@ -365,8 +365,8 @@
       border-radius: 25%;
       width: 58px;
       height: 58px;
-      font-size: 0.85rem;
-      line-height: 2;
+      font-size: 0.80rem;
+      line-height: 1;
       color: white;
       font-weight: 1500;
       cursor: pointer;
@@ -1249,6 +1249,23 @@ searchForm.addEventListener('submit', (event) => {
           audioPlayer.play();
         }
       };
+      const deleteBtn56 = document.createElement('button');
+      deleteBtn56.textContent = '-';
+      deleteBtn56.className = 'delete-button';
+      deleteBtn56.setAttribute('aria-label', `Удалить ${track.title}`);
+
+      deleteBtn56.addEventListener('click', (event) => {
+        event.stopPropagation();
+        const favoriteTitlesRawUpdate = localStorage.getItem('trek') || '';
+        const rawFilterDate = favoriteTitlesRawUpdate.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+        const updatedFavorites = rawFilterDate.filter(fav => fav !== track.title);
+        localStorage.setItem('trek', updatedFavorites.join('\n'));
+        console.log(`Трек "${track.title}" удален из избранного.`); 
+        UpdateFunction();
+      });
+
+
+      
 
 
       const numBtnDate = document.createElement('button');
@@ -1256,7 +1273,7 @@ searchForm.addEventListener('submit', (event) => {
       const trackDate = track.date.substring(3, 5)
       numBtnDate.textContent = track.date.substring(0, 2) + ' ' + monthDay[trackDate] + "\n" + track.date.substring(6, 10);
       row.appendChild(numBtnDate);
-     
+      row.appendChild(deleteBtn56);
       row.appendChild(trackBtn);
 
       return row;
@@ -1332,6 +1349,9 @@ document.getElementById('sort-button-data').addEventListener('click', (event) =>
 });
 
 UpdateFunction();
+
+  </script>
+</body>
 
   </script>
 </body>
