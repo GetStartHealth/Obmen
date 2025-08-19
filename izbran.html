@@ -1313,7 +1313,7 @@ document.getElementById('sort-button-data').addEventListener('click', (event) =>
    const aTitlesRaw = localStorage.getItem('trek') || '';
    const ATitles = aTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
    ATitles.forEach(trackBear => {
-    const FilteredUpdatedFavorites = tracks.find(t => t.title === trackBear);;
+    const FilteredUpdatedFavorites = tracks.find(t => t.title === trackBear);
    })
    console.log(FilteredUpdatedFavorites)
 });
