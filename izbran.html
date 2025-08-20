@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -877,7 +878,6 @@ function UpdateFunction() {
             restoreBtn.remove(); 
         });
 
-        btnf.appendChild(restoreBtn);
       }
 
       btnf.addEventListener('click', () => {
@@ -899,34 +899,12 @@ function UpdateFunction() {
         const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
         localStorage.setItem('disabled', btnfDisabled + '\n' + disabledTitles.join('\n'));
         console.log(`Трек "${btnfDisabled}" отключен.`); 
-
-
-
-        const restoreBtn = document.createElement('button');
-        restoreBtn.textContent = '+';
-        restoreBtn.className = 'restore-button';
-        restoreBtn.setAttribute('aria-label', `Восстановить ${vf.title}`);
-        restoreBtn.disabled = false; 
-
-        restoreBtn.addEventListener('click', () => {
-          event.stopPropagation(); 
-          const disabledTitlesRaw091 = localStorage.getItem('disabled') || '';
-      const disabledTitles091 = disabledTitlesRaw091.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-            const updatedDisabledTitles1 = disabledTitles091.filter(title => title.toLowerCase() !== vf.title.toLowerCase()+"-");
-            localStorage.setItem('disabled', updatedDisabledTitles1.join('\n'));
-            btnf.disabled = false; 
-            restoreBtn.remove(); 
-            console.log(`Трек "${vf.title}" восстановлен.`); 
-            const disabledTitlesRaw3 = localStorage.getItem('disabled') || '';
-            const disabledTitles3 = disabledTitlesRaw3.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-            console.log(disabledTitles3); 
-        });
-
-        btnf.appendChild(restoreBtn);
         
         
       });
       btnf.appendChild(deleteBtn22);
+              btnf.appendChild(restoreBtn);
+
       tracksContainer.appendChild(btnf);
    } 
 );
