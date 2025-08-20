@@ -264,11 +264,10 @@
       line-height: 1;
       color: rgb(255, 255, 255);
       font-weight: 700;
-      cursor: pointer;
 
       position: absolute;
   right: 20px;
-  bottom: 10px;
+  bottom: 5px;
     }
 
     .delete-button12:hover {
@@ -875,7 +874,6 @@ function UpdateFunction() {
       const deleteBtn22 = document.createElement('button');
       deleteBtn22.textContent = '-';
       deleteBtn22.className = 'delete-button12';
-      deleteBtn22.setAttribute('aria-label', `Удалить ${albomMass.title}`);
 
       deleteBtn22.addEventListener('click', (event) => {
         event.stopPropagation(); 
