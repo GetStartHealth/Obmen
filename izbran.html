@@ -107,17 +107,22 @@ body {
     }
 
     .small-button80 {
-  width: 130px; 
+  flex: 0 0 auto;      
+  width: auto;         
+  min-width: 145px;     
   margin: 0 5px;
+  padding: 10px 16px;   
   background: #fff;
   color: #363E6B;
   border: 2.5px solid #363E6B;
   border-radius: 16px;
-  padding: 10px 24px;
   font-weight: 700;
   font-size: 1rem;
-  height: 20px;
+  line-height: 1;      
   cursor: pointer;
+  display: flex;      
+  align-items: center;  
+  justify-content: center; 
   box-shadow: 0 5px 18px rgba(54, 62, 107, 0.25);
   transition: box-shadow 0.3s ease, transform 0.2s ease, color 0.3s ease, border-color 0.3s ease;
   user-select: none;
