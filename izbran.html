@@ -2204,7 +2204,6 @@ searchForm.addEventListener('submit', (event) => {
             localStorage.setItem('disabled', updatedDisabledTitles13.join('\n'));
             btnf290.disabled = false;
             restoreBtn0.remove()
-            deleteBtn2210.remove()
         })
 
         
@@ -2215,6 +2214,7 @@ searchForm.addEventListener('submit', (event) => {
       if (disabledTitles67.map(title => title.toLowerCase()).includes(albom.title.toLowerCase())) {
         btnf290.disabled = true;
         console.log("Сработало")
+        deleteBtn2210.remove()
         albomRow.appendChild(restoreBtn0)
       }
 
