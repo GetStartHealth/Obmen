@@ -234,34 +234,37 @@
 }
 
     .restore-button0909{
+      flex-shrink: 0;
       background: #7db14d;
       border-radius: 50%;
-      width: 32px;
-      height: 32px;
+      width: 36px;
+      height: 36px;
       font-size: 1.3rem;
       line-height: 1;
       color: rgb(255, 255, 255);
       font-weight: 700;
-  position: absolute; 
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%); 
+      right: 20px;
+      bottom: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .restore-button{
+       flex-shrink: 0;
       background: #7db14d;
       border-radius: 50%;
-      width: 32px;
-      height: 32px;
+      width: 36px;
+      height: 36px;
       font-size: 1.3rem;
       line-height: 1;
       color: rgb(255, 255, 255);
       font-weight: 700;
-  bottom: 10px;
-  position: absolute; 
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%); 
+      right: 20px;
+      bottom: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
 
@@ -905,10 +908,11 @@ function UpdateFunction() {
               const buttonContainer = document.createElement('div');
             buttonContainer.style.display = 'flex';
             buttonContainer.style.gap = '10px';
-            
+
             const btnfDisabled = btnf.textContent;
             const disabledTitlesRaw = localStorage.getItem('disabled') || '';
             const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+            
             if (disabledTitles.map(title => title.toLowerCase()).includes(vf.title.toLowerCase())) {
               
               btnf.disabled = true;
@@ -948,6 +952,7 @@ function UpdateFunction() {
                 console.log(`Трек "${btnfDisabled}" отключен.`);
             });
 
+            
 
           
             buttonContainer.appendChild(deleteBtn22);
