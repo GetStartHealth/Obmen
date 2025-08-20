@@ -1194,14 +1194,14 @@ function ABCUpdateFunction() {
 
     if (!albomMass) return;
 
-     const buttonContainer = document.createElement('div');
-     buttonContainer.style.display = 'flex';
-     buttonContainer.style.gap = '10px';
+     
 
      const trackContainer = document.createElement('div');
-            trackContainer.style.display = 'flex';
-            trackContainer.style.alignItems = 'center';
-            trackContainer.style.justifyContent = 'space-between';
+        trackContainer.style.display = 'flex'; 
+        trackContainer.style.alignItems = 'center';
+        trackContainer.style.justifyContent = 'space-between';
+        trackContainer.style.width = '100%'; 
+        trackContainer.style.marginBottom = '8px';
 
     const albumDiv = document.createElement('div');
     albumDiv.style.marginBottom = '16px';
@@ -1238,6 +1238,8 @@ function ABCUpdateFunction() {
     tracksContainer.className = 'tracks-container'; 
     tracksContainer.style.maxHeight = '0'; 
     tracksContainer.style.overflow = 'hidden';
+    tracksContainer.style.display = 'flex'; 
+    tracksContainer.style.flexDirection = 'column';
     
 
     albomMass.forEach(vf => {
@@ -1247,10 +1249,21 @@ function ABCUpdateFunction() {
       btnf.title = `Воспроизвести ${vf.title}`;
       btnf.setAttribute('aria-label', `Воспроизвести ${vf.title}`);
 
+       const trackContainer = document.createElement('div');
+        trackContainer.style.display = 'flex'; 
+        trackContainer.style.alignItems = 'center';
+        trackContainer.style.justifyContent = 'space-between';
+        trackContainer.style.width = '100%'; 
+        trackContainer.style.marginBottom = '8px';
+        
+      const buttonContainer = document.createElement('div');
+     buttonContainer.style.display = 'flex';
+     buttonContainer.style.gap = '10px';
+
       const disabledTitlesRaw = localStorage.getItem('disabled') || '';
       const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
       console.log(disabledTitles)
-      if (disabledTitles.map(title => title.toLowerCase()).includes(vf.title.toLowerCase()+"-")) {
+      if (disabledTitles.map(title => title.toLowerCase()).includes(vf.title.toLowerCase())) {
         btnf.disabled = true;
         console.log("Сработало")
 
@@ -1264,7 +1277,7 @@ function ABCUpdateFunction() {
             event.preventDefault();
             const disabledTitlesRaw09 = localStorage.getItem('disabled') || '';
       const disabledTitles09 = disabledTitlesRaw09.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-            const updatedDisabledTitles = disabledTitles09.filter(title => title.toLowerCase() !== vf.title.toLowerCase()+"-");
+            const updatedDisabledTitles = disabledTitles09.filter(title => title.toLowerCase() !== vf.title.toLowerCase());
             localStorage.setItem('disabled', updatedDisabledTitles.join('\n'));
             btnf.disabled = false; 
             restoreBtn.remove(); 
@@ -1274,7 +1287,7 @@ function ABCUpdateFunction() {
             console.log(disabledTitles3); 
         });
 
-        btnf.appendChild(restoreBtn);
+        buttonContainer.appendChild(restoreBtn);
       }
 
       btnf.addEventListener('click', () => {
