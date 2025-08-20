@@ -323,6 +323,27 @@
       transform: scale(0.95);
     }
 
+
+    .delete-button217 {
+      flex-shrink: 0;
+      background: #c25858;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      font-size: 1.3rem;
+      line-height: 1;
+      color: rgb(255, 255, 255);
+      font-weight: 700;
+    }
+
+    .delete-button217:hover {
+      transform: scale(1.1);
+    }
+
+    .delete-button217:active {
+      transform: scale(0.95);
+    }
+
     #audio-player {
       width: 100%;
       border-radius: 14px;
@@ -2120,12 +2141,12 @@ searchForm.addEventListener('submit', (event) => {
         btnf290.appendChild(restoreBtn0)
       }
 
-      const deleteBtn221 = document.createElement('button');
-      deleteBtn221.textContent = '-';
-      deleteBtn221.className = 'delete-button12';
-      deleteBtn221.setAttribute('aria-label', `Удалить ${albom.title}`);
+      const deleteBtn2210 = document.createElement('button');
+      deleteBtn2210.textContent = '-';
+      deleteBtn2210.className = 'delete-button127';
+      deleteBtn2210.setAttribute('aria-label', `Удалить ${albom.title}`);
 
-      deleteBtn221.addEventListener('click', (event) => {
+      deleteBtn2210.addEventListener('click', (event) => {
         event.stopPropagation(); 
         btnf290.disabled = true;
         const btnfDisabled = btnf290.textContent;
@@ -2139,8 +2160,9 @@ searchForm.addEventListener('submit', (event) => {
       });
       
       albomRow.appendChild(numBtnDate);
+      albomRow.appendChild(deleteBtn2210)
       albomRow.appendChild(btnf290)
-      albomRow.appendChild(deleteBtn221)
+     
       tracksContainer.appendChild(albomRow)
       
     })
