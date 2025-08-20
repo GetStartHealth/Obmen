@@ -847,6 +847,7 @@ function UpdateFunction() {
     tracksContainer.className = 'tracks-container'; 
     tracksContainer.style.maxHeight = '0'; 
     tracksContainer.style.overflow = 'hidden';
+    
 
     albomMass.album.forEach(vf => {
       const btnf = document.createElement('button');
@@ -854,6 +855,7 @@ function UpdateFunction() {
       btnf.className = 'track-button';
       btnf.title = `Воспроизвести ${vf.title}`;
       btnf.setAttribute('aria-label', `Воспроизвести ${vf.title}`);
+      btnf.style.justifyContent = 'space-between';
 
       const disabledTitlesRaw = localStorage.getItem('disabled') || '';
       const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
