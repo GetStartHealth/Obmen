@@ -2045,6 +2045,10 @@ searchForm.addEventListener('submit', (event) => {
     titleText.className = 'title-text';
     titleText.textContent = track.title;
 
+    const albomRowDate = document.createElement('div');
+    albomRowDate.style.display = 'flex';
+    albomRowDate.style.gap = '16px';
+
     const albumButton = document.createElement('button');
     albumButton.className = 'album-title';
     albumButton.setAttribute('aria-expanded', 'false');
@@ -2056,8 +2060,9 @@ searchForm.addEventListener('submit', (event) => {
       const trackDate = track.titleDate.substring(3, 5)
       numBtnDate23.textContent = track.titleDate.substring(0, 2) + ' ' + monthDay[trackDate] + "\n" + track.titleDate.substring(6, 10);
 
-    albumButton.appendChild(numBtnDate23)
-    albumButton.appendChild(titleText)
+    albomRowDate.appendChild(numBtnDate23)
+    albomRowDate.appendChild(titleText)
+    albumButton.appendChild(albomRowDate)
 
     const tracksContainer = document.createElement('div');
     tracksContainer.className = 'tracks-container'; 
@@ -2188,7 +2193,7 @@ document.getElementById('sort-button-data').addEventListener('click', (event) =>
       }
    });
 
-   AlbomfilteredUpdatedFavorites.sort((a, b) => new Date(b.DateTitle) - new Date(a.DateTitle));
+   AlbomfilteredUpdatedFavorites.sort((a, b) => new Date(b.titleDate) - new Date(a.titleDate));
 
    AlbomfilteredUpdatedFavorites.forEach(filteredAlbom => {
     tea = DateAlbom(filteredAlbom)
