@@ -2058,14 +2058,14 @@ searchForm.addEventListener('submit', (event) => {
     tracksContainer.style.maxHeight = '0'; 
     tracksContainer.style.overflow = 'hidden';
 
-    track.album.sort((a, b) => new Date(b.DateTitle) - new Date(a.DateTitle));
+    track.album.sort((a, b) => new Date(b.titleDate) - new Date(a.titleDate));
 
     track.album.forEach(albom => {
       const numBtnDate = document.createElement('button');
       numBtnDate.className = 'num-btn-date';
       console.log(albom)
-      const trackDate = albom.DateTitle.substring(3, 5)
-      numBtnDate.textContent = albom.DateTitle.substring(0, 2) + ' ' + monthDay[trackDate] + "\n" + albom.DateTitle.substring(6, 10);
+      const trackDate = albom.titleDate.substring(3, 5)
+      numBtnDate.textContent = albom.titleDate.substring(0, 2) + ' ' + monthDay[trackDate] + "\n" + albom.titleDate.substring(6, 10);
 
       const btnf290 = document.createElement('button');
       btnf290.textContent = albom.title;
