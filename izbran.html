@@ -2004,7 +2004,6 @@ searchForm.addEventListener('submit', (event) => {
 
 
     function DateAlbom(track) {
-      albomContainer.innerHTML = '';
 
       const albomTitlesRaw = localStorage.getItem('trekA') || '';
    const AlbomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
