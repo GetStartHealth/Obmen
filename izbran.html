@@ -266,9 +266,7 @@
     color: rgb(255, 255, 255);
     font-weight: 700;
     position: absolute;
-    right: 20px;
-    bottom: 10px;
-    z-index: 10;
+    
 }
     .delete-button12:hover {
       transform: scale(1.1);
@@ -334,6 +332,8 @@
       line-height: 1;
       color: rgb(255, 255, 255);
       font-weight: 700;
+      right: 20px;
+      bottom: 10px;
     }
 
     .delete-button217:hover {
@@ -2154,7 +2154,7 @@ searchForm.addEventListener('submit', (event) => {
         const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
         localStorage.setItem('disabled', btnfDisabled + "-" + '\n' + disabledTitles.join('\n'));
         console.log(`Трек "${btnfDisabled}" отключен.`); 
-        btnf290.appendChild(restoreBtn0)
+        albomRow.appendChild(restoreBtn0)
 
 
       });
