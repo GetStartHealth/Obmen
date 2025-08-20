@@ -259,17 +259,15 @@
     flex-shrink: 0;
       background: #c25858;
       border-radius: 50%;
-      width: 36px;
-      height: 36px;
-      font-size: 1.3rem;
+      width: 30px;
+      height: 30px;
+      font-size: 1.1rem;
       line-height: 1;
       color: rgb(255, 255, 255);
       font-weight: 700;
-      position: fixed;
       right: 10px;
       bottom: 10px;  
-      
-      z-index: 4;
+      position: fixed;
 }
     .delete-button12:hover {
       transform: scale(1.1);
@@ -864,12 +862,10 @@ function UpdateFunction() {
       const disabledTitlesRaw = localStorage.getItem('disabled') || '';
       const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
       console.log(disabledTitles)
-      if (disabledTitles.map(title => title.toLowerCase()).includes(vf.title.toLowerCase()+"-")) {
         btnf.disabled = true;
         console.log("Сработало")
 
         const restoreBtn = document.createElement('button');
-        restoreBtn.textContent = '+';
         restoreBtn.className = 'restore-button';
         restoreBtn.setAttribute('aria-label', `Восстановить ${vf.title}`);
         restoreBtn.disabled = false; 
@@ -885,7 +881,7 @@ function UpdateFunction() {
         });
 
         btnf.appendChild(restoreBtn);
-      }
+  
 
       btnf.addEventListener('click', () => {
         if (vf.url) {
