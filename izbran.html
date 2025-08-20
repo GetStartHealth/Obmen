@@ -909,27 +909,27 @@ function UpdateFunction() {
               btnf.disabled = true;
               console.log("Сработало")
 
-              const restoreBtn = document.createElement('button');
-              restoreBtn.textContent = '+';
-              restoreBtn.className = 'restore-button';
-              restoreBtn.setAttribute('aria-label', `Восстановить ${vf.title}`);
-              restoreBtn.disabled = false; 
+              const restoreBtn89 = document.createElement('button');
+              restoreBtn89.textContent = '+';
+              restoreBtn89.className = 'restore-button';
+              restoreBtn89.setAttribute('aria-label', `Восстановить ${vf.title}`);
+              restoreBtn89.disabled = false; 
 
-              restoreBtn.addEventListener('click', (event) => {
+              restoreBtn89.addEventListener('click', (event) => {
                   event.preventDefault();
                   const disabledTitlesRaw09 = localStorage.getItem('disabled') || '';
             const disabledTitles09 = disabledTitlesRaw09.split('\n').map(s => s.trim()).filter(s => s.length > 0);
                   const updatedDisabledTitles = disabledTitles09.filter(title => title.toLowerCase() !== vf.title.toLowerCase());
                   localStorage.setItem('disabled', updatedDisabledTitles.join('\n'));
                   btnf.disabled = false; 
-                  restoreBtn.remove(); 
+                  restoreBtn89.remove(); 
                   console.log(`Трек "${vf.title}" восстановлен.`); 
                   const disabledTitlesRaw3 = localStorage.getItem('disabled') || '';
                   const disabledTitles3 = disabledTitlesRaw3.split('\n').map(s => s.trim()).filter(s => s.length > 0);
                   console.log(disabledTitles3); 
               });
 
-             buttonContainer.appendChild(restoreBtn);
+             buttonContainer.appendChild(restoreBtn89);
       }
 
 
