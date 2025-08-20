@@ -2055,8 +2055,7 @@ const deleteBtn2124 = document.createElement('button');
     deleteBtn2124.setAttribute('aria-label', `Удалить ${track.title}`);
 
     deleteBtn2124.addEventListener('click', () => {
-        const rawFilter = AlbomTitles.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-        const updatedFavorites = rawFilter.filter(fav => fav !== track.title);
+        const updatedFavorites = AlbomTitles.filter(fav => fav !== track.title);
         localStorage.setItem('trekA', updatedFavorites.join('\n'));
         console.log(`Альбом "${track.title}" удален из избранного.`); 
         DateUpdateFunction();
