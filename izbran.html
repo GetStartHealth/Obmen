@@ -901,6 +901,37 @@ function UpdateFunction() {
             deleteBtn22.textContent = '-';
             deleteBtn22.className = 'delete-button12';
             deleteBtn22.setAttribute('aria-label', `Удалить ${vf.title}`);
+            const btnfDisabled = btnf.textContent;
+            const disabledTitlesRaw = localStorage.getItem('disabled') || '';
+            const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+            if (disabledTitles.map(title => title.toLowerCase()).includes(vf.title.toLowerCase())) {
+              
+              btnf.disabled = true;
+              console.log("Сработало")
+
+              const restoreBtn = document.createElement('button');
+              restoreBtn.textContent = '+';
+              restoreBtn.className = 'restore-button';
+              restoreBtn.setAttribute('aria-label', `Восстановить ${vf.title}`);
+              restoreBtn.disabled = false; 
+
+              restoreBtn.addEventListener('click', (event) => {
+                  event.preventDefault();
+                  const disabledTitlesRaw09 = localStorage.getItem('disabled') || '';
+            const disabledTitles09 = disabledTitlesRaw09.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+                  const updatedDisabledTitles = disabledTitles09.filter(title => title.toLowerCase() !== vf.title.toLowerCase());
+                  localStorage.setItem('disabled', updatedDisabledTitles.join('\n'));
+                  btnf.disabled = false; 
+                  restoreBtn.remove(); 
+                  console.log(`Трек "${vf.title}" восстановлен.`); 
+                  const disabledTitlesRaw3 = localStorage.getItem('disabled') || '';
+                  const disabledTitles3 = disabledTitlesRaw3.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+                  console.log(disabledTitles3); 
+              });
+
+             buttonContainer.appendChild(restoreBtn);
+      }
+
 
             deleteBtn22.addEventListener('click', (event) => {
                 event.stopPropagation();
