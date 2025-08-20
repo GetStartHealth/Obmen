@@ -2200,7 +2200,7 @@ searchForm.addEventListener('submit', (event) => {
         const btnfDisabled = btnf290.textContent;
         const disabledTitlesRaw = localStorage.getItem('disabled') || '';
         const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-        localStorage.setItem('disabled', btnfDisabled + "-" + '\n' + disabledTitles.join('\n'));
+        localStorage.setItem('disabled', btnfDisabled + '\n' + disabledTitles.join('\n'));
         console.log(`Трек "${btnfDisabled}" отключен.`); 
         albomRow.appendChild(restoreBtn0)
 
