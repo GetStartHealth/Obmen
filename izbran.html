@@ -1474,6 +1474,8 @@ function DateUpdateFunction() {
       deleteBtn.className = 'delete-button';
       deleteBtn.setAttribute('aria-label', `Удалить ${track.title}`);
 
+      
+
       deleteBtn.addEventListener('click', (event) => {
         event.stopPropagation();
         const rawFilter = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
@@ -1511,6 +1513,10 @@ function DateUpdateFunction() {
     albumDiv.style.display = 'flex';
     albumDiv.style.flexDirection = 'column';
 
+     const albomRowDate = document.createElement('div');
+    albomRowDate.style.display = 'flex';
+    albomRowDate.style.gap = '16px';
+
     const titleText = document.createElement('span');
     titleText.className = 'title-text';
     titleText.textContent = albomMass.title;
@@ -1534,13 +1540,29 @@ function DateUpdateFunction() {
     albumButton.style.width = '100%';
     albumButton.style.textAlign = 'left';
 
+     const numBtnDate23 = document.createElement('button');
+      numBtnDate23.className = 'num-btn-date';
+      const trackDate = albom.titleDate.substring(3, 5)
+      numBtnDate23.textContent = albom.titleDate.substring(0, 2) + ' ' + monthDay[trackDate] + "\n" + albom.titleDate.substring(6, 10);
+
+
+    albumButton.appendChild(numBtnDate23)
     albumButton.appendChild(deleteBtn2);
     albumButton.appendChild(titleText);
 
-    const tracksContainer = document.createElement('div');
+     const tracksContainer = document.createElement('div');
     tracksContainer.className = 'tracks-container'; 
     tracksContainer.style.maxHeight = '0'; 
     tracksContainer.style.overflow = 'hidden';
+    tracksContainer.style.display = 'flex'; 
+    tracksContainer.style.flexDirection = 'column';
+
+    const trackContainer = document.createElement('div');
+        trackContainer.style.display = 'flex'; 
+        trackContainer.style.alignItems = 'center';
+        trackContainer.style.justifyContent = 'space-between';
+        trackContainer.style.width = '100%'; 
+        trackContainer.style.marginBottom = '8px';
 
     albomMass.album.forEach(vf => {
       const btnf = document.createElement('button');
@@ -1548,6 +1570,25 @@ function DateUpdateFunction() {
       btnf.className = 'track-button';
       btnf.title = `Воспроизвести ${vf.title}`;
       btnf.setAttribute('aria-label', `Воспроизвести ${vf.title}`);
+      
+
+      const trackContainer = document.createElement('div');
+        trackContainer.style.display = 'flex'; 
+        trackContainer.style.alignItems = 'center';
+        trackContainer.style.justifyContent = 'space-between';
+        trackContainer.style.width = '100%'; 
+        trackContainer.style.marginBottom = '8px';
+
+      const numBtnDate23 = document.createElement('button');
+      numBtnDate23.className = 'num-btn-date';
+      const trackDate = vf.titleDate.substring(3, 5)
+      numBtnDate23.textContent = vf.titleDate.substring(0, 2) + ' ' + monthDay[trackDate] + "\n" + vf.titleDate.substring(6, 10);
+      buttonContainer.appendChild(numBtnDate23)
+
+
+      const buttonContainer = document.createElement('div');
+     buttonContainer.style.display = 'flex';
+     buttonContainer.style.gap = '10px';
 
       const disabledTitlesRaw = localStorage.getItem('disabled') || '';
       const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
@@ -1576,7 +1617,7 @@ function DateUpdateFunction() {
             console.log(disabledTitles3); 
         });
 
-        btnf.appendChild(restoreBtn);
+        buttonContainer.appendChild(restoreBtn);
       }
 
       btnf.addEventListener('click', () => {
@@ -1623,12 +1664,15 @@ function DateUpdateFunction() {
             console.log(disabledTitles3); 
         });
 
-        btnf.appendChild(restoreBtn);
+        buttonContainer.appendChild(restoreBtn);
 
 
       });
-      btnf.appendChild(deleteBtn22);
-      tracksContainer.appendChild(btnf);
+      buttonContainer.appendChild(deleteBtn22);
+
+       trackContainer.appendChild(btnf);
+       trackContainer.appendChild(buttonContainer);
+       tracksContainer.appendChild(trackContainer);
    } 
 );
 
