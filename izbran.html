@@ -1848,10 +1848,12 @@ searchForm.addEventListener('submit', (event) => {
     albumButton.appendChild(titleText);
     albumButton.appendChild(deleteBtn212)
 
-     const tracksContainer = document.createElement('div');
-    tracksContainer.className = 'tracks-container'; 
-    tracksContainer.style.maxHeight = '0'; 
-    tracksContainer.style.overflow = 'hidden';
+    const tracksContainer = document.createElement('div');
+tracksContainer.className = 'tracks-container'; 
+tracksContainer.style.maxHeight = '0'; 
+tracksContainer.style.overflow = 'hidden';
+tracksContainer.style.display = 'flex'; 
+tracksContainer.style.flexDirection = 'column';
 
     const der = track.album.sort((a, b) => a.title.localeCompare(b.title))
 
@@ -1886,7 +1888,7 @@ searchForm.addEventListener('submit', (event) => {
       const disabledTitlesRaw67 = localStorage.getItem('disabled') || '';
       const disabledTitles67 = disabledTitlesRaw67.split('\n').map(s => s.trim()).filter(s => s.length > 0);
       console.log(disabledTitles67)
-      if (disabledTitles67.map(title => title.toLowerCase()).includes(albom.title.toLowerCase()+"-")) {
+      if (disabledTitles67.map(title => title.toLowerCase()).includes(albom.title.toLowerCase())) {
         btnf2.disabled = true;
         console.log("Сработало")
         btnf2.appendChild(restoreBtn0)
