@@ -900,6 +900,23 @@ function UpdateFunction() {
         const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
         localStorage.setItem('disabled', btnfDisabled + '\n' + disabledTitles.join('\n'));
         console.log(`Трек "${btnfDisabled}" отключен.`); 
+
+        const restoreBtn = document.createElement('button');
+        restoreBtn.className = 'restore-button';
+        restoreBtn.setAttribute('aria-label', `Восстановить ${vf.title}`);
+        restoreBtn.disabled = false; 
+
+        restoreBtn.addEventListener('click', (event) => {
+            event.preventDefault();
+            const disabledTitlesRaw09 = localStorage.getItem('disabled') || '';
+      const disabledTitles09 = disabledTitlesRaw09.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+            const updatedDisabledTitles = disabledTitles09.filter(title => title.toLowerCase() !== vf.title.toLowerCase()+"-");
+            localStorage.setItem('disabled', updatedDisabledTitles.join('\n'));
+            btnf.disabled = false; 
+            restoreBtn.remove(); 
+        });
+
+        btnf.appendChild(restoreBtn);
         
         
       });
