@@ -260,7 +260,7 @@
       line-height: 1;
       color: rgb(255, 255, 255);
       font-weight: 700;
-      right: 20px;
+      right: 30px;
       bottom: 10px;
       display: flex;
       justify-content: center;
@@ -802,10 +802,7 @@ function UpdateFunction() {
             deleteBtn.className = 'delete-button';
             deleteBtn.setAttribute('aria-label', `Удалить ${track.title}`);
 
-            const restoreBtn = document.createElement('button');
-            restoreBtn.textContent = '+';
-            restoreBtn.className = 'restore-button';
-            restoreBtn.setAttribute('aria-label', `Восстановить ${track.title}`);
+          
 
             deleteBtn.addEventListener('click', (event) => {
                 event.stopPropagation();
@@ -828,7 +825,6 @@ function UpdateFunction() {
             buttonContainer.style.display = 'flex';
             buttonContainer.style.gap = '10px';
             buttonContainer.appendChild(deleteBtn);
-            buttonContainer.appendChild(restoreBtn);
 
 
             trackContainer.appendChild(btn);
@@ -950,6 +946,23 @@ function UpdateFunction() {
                 const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
                 localStorage.setItem('disabled', btnfDisabled + '\n' + disabledTitles.join('\n'));
                 console.log(`Трек "${btnfDisabled}" отключен.`);
+
+                const restoreBtn89 = document.createElement('button');
+              restoreBtn89.textContent = '+';
+              restoreBtn89.className = 'restore-button';
+              restoreBtn89.setAttribute('aria-label', `Восстановить ${vf.title}`);
+              restoreBtn89.disabled = false; 
+
+              restoreBtn89.addEventListener('click', (event) => {
+                  event.preventDefault();
+                  const disabledTitlesRaw09 = localStorage.getItem('disabled') || '';
+            const disabledTitles09 = disabledTitlesRaw09.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+                  const updatedDisabledTitles = disabledTitles09.filter(title => title.toLowerCase() !== vf.title.toLowerCase());
+                  localStorage.setItem('disabled', updatedDisabledTitles.join('\n'));
+                  btnf.disabled = false; 
+                  restoreBtn89.remove(); 
+              })
+              buttonContainer.appendChild(restoreBtn89);
             });
 
             
@@ -1184,6 +1197,15 @@ function ABCUpdateFunction() {
 
     if (!albomMass) return;
 
+     const buttonContainer = document.createElement('div');
+     buttonContainer.style.display = 'flex';
+     buttonContainer.style.gap = '10px';
+
+     const trackContainer = document.createElement('div');
+            trackContainer.style.display = 'flex';
+            trackContainer.style.alignItems = 'center';
+            trackContainer.style.justifyContent = 'space-between';
+
     const albumDiv = document.createElement('div');
     albumDiv.style.marginBottom = '16px';
     albumDiv.style.display = 'flex';
@@ -1219,6 +1241,7 @@ function ABCUpdateFunction() {
     tracksContainer.className = 'tracks-container'; 
     tracksContainer.style.maxHeight = '0'; 
     tracksContainer.style.overflow = 'hidden';
+    
 
     albomMass.forEach(vf => {
       const btnf = document.createElement('button');
@@ -1266,7 +1289,7 @@ function ABCUpdateFunction() {
 
       const deleteBtn22 = document.createElement('button');
       deleteBtn22.textContent = '-';
-      deleteBtn22.className = 'delete-button12';
+      deleteBtn22.className = 'delete-button';
       deleteBtn22.setAttribute('aria-label', `Удалить ${albomMass.title}`);
 
       deleteBtn22.addEventListener('click', (event) => {
@@ -1300,12 +1323,15 @@ function ABCUpdateFunction() {
             console.log(disabledTitles3); 
         });
 
-        btnf.appendChild(restoreBtn);
+        buttonContainer.appendChild(restoreBtn);
         
         
       });
-      btnf.appendChild(deleteBtn22);
-      tracksContainer.appendChild(btnf);
+       buttonContainer.appendChild(deleteBtn22);
+
+       trackContainer.appendChild(btnf);
+       trackContainer.appendChild(buttonContainer);
+       tracksContainer.appendChild(trackContainer);
    } 
 );
   
