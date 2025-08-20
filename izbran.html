@@ -2241,12 +2241,7 @@ searchForm.addEventListener('submit', (event) => {
         const disabledTitlesRaw67 = localStorage.getItem('disabled') || '';
       const disabledTitles67 = disabledTitlesRaw67.split('\n').map(s => s.trim()).filter(s => s.length > 0);
       console.log(disabledTitles67)
-      if (disabledTitles67.map(title => title.toLowerCase()).includes(albom.title.toLowerCase())) {
-        btnf290.disabled = true;
-        console.log("Сработало")
-        deleteBtn2210.remove()
-        albomRow.appendChild(restoreBtn0)
-      }
+      
 
       
       
@@ -2255,6 +2250,13 @@ searchForm.addEventListener('submit', (event) => {
       albomRow.appendChild(btnf290)
      
       tracksContainer.appendChild(albomRow)
+
+      if (disabledTitles67.map(title => title.toLowerCase()).includes(albom.title.toLowerCase())) {
+        btnf290.disabled = true;
+        console.log("Сработало")
+        deleteBtn2210.remove()
+        albomRow.appendChild(restoreBtn0)
+      }
       
     })
         albomRowDate.appendChild(numBtnDate23)
@@ -2374,3 +2376,4 @@ UpdateFunction();
 
   </script>
 </body>
+</html>
