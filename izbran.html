@@ -2051,6 +2051,11 @@ searchForm.addEventListener('submit', (event) => {
     albumButton.style.width = '100%';
     albumButton.style.textAlign = 'left';
 
+    const numBtnDate23 = document.createElement('button');
+      numBtnDate23.className = 'num-btn-date';
+      const trackDate = track.titleDate.substring(3, 5)
+      numBtnDate23.textContent = track.titleDate.substring(0, 2) + ' ' + monthDay[trackDate] + "\n" + track.titleDate.substring(6, 10);
+
     albumButton.appendChild(titleText)
 
     const tracksContainer = document.createElement('div');
@@ -2063,6 +2068,7 @@ searchForm.addEventListener('submit', (event) => {
     track.album.forEach(albom => {
       const albomRow = document.createElement('div');
     albomRow.style.display = 'flex';
+    albomRow.style.gap = '8px';
 
       const numBtnDate = document.createElement('button');
       numBtnDate.className = 'num-btn-date';
