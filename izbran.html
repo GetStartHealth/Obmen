@@ -232,6 +232,8 @@
       color: rgb(255, 255, 255);
       font-weight: 700;
       cursor: pointer;
+
+      position: absolute;
   right: 60px;
   bottom: 10px;
     }
@@ -246,6 +248,8 @@
       color: rgb(255, 255, 255);
       font-weight: 700;
       cursor: pointer;
+
+      position: absolute;
   right: 60px;
   bottom: 10px;
     }
@@ -902,7 +906,6 @@ function UpdateFunction() {
 
 
         const restoreBtn = document.createElement('button');
-        restoreBtn.textContent = '+';
         restoreBtn.className = 'restore-button';
         restoreBtn.setAttribute('aria-label', `Восстановить ${vf.title}`);
         restoreBtn.disabled = false; 
