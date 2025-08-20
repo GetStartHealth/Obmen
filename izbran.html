@@ -901,6 +901,11 @@ function UpdateFunction() {
             deleteBtn22.textContent = '-';
             deleteBtn22.className = 'delete-button12';
             deleteBtn22.setAttribute('aria-label', `Удалить ${vf.title}`);
+
+              const buttonContainer = document.createElement('div');
+            buttonContainer.style.display = 'flex';
+            buttonContainer.style.gap = '10px';
+            
             const btnfDisabled = btnf.textContent;
             const disabledTitlesRaw = localStorage.getItem('disabled') || '';
             const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
@@ -944,9 +949,7 @@ function UpdateFunction() {
             });
 
 
-            const buttonContainer = document.createElement('div');
-            buttonContainer.style.display = 'flex';
-            buttonContainer.style.gap = '10px';
+          
             buttonContainer.appendChild(deleteBtn22);
 
             trackContainer.appendChild(btnf);
