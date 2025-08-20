@@ -215,7 +215,7 @@
   box-shadow: 0 5px 18px rgba(54, 62, 107, 0.7);
   transition: box-shadow 0.3s ease, transform 0.2s ease;
   user-select: none;
-  min-width: 230px;
+  min-width: 290px;
   max-width: 100%;
   white-space: nowrap; 
   overflow: hidden; 
@@ -256,20 +256,20 @@
 
 
     .delete-button12 {
-      background: #c25858;
-      border-radius: 50%;
-      width: 32px;
-      height: 32px;
-      font-size: 1.3rem;
-      line-height: 1;
-      color: rgb(255, 255, 255);
-      font-weight: 700;
-
-      position: absolute;
-  right: 20px;
-  bottom: 5px;
-    }
-
+    background: #c25858; 
+    border: 1px solid #fff; 
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    font-size: 1.3rem;
+    line-height: 1;
+    color: rgb(255, 255, 255);
+    font-weight: 700;
+    position: absolute;
+    right: 20px;
+    bottom: 10px;
+    z-index: 10;
+}
     .delete-button12:hover {
       transform: scale(1.1);
     }
@@ -2142,6 +2142,7 @@ searchForm.addEventListener('submit', (event) => {
       
       albomRow.appendChild(numBtnDate);
       albomRow.appendChild(btnf290)
+      albomRow.appendChild(deleteBtn221)
       tracksContainer.appendChild(albomRow)
       
     })
