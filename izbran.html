@@ -55,6 +55,18 @@
   overflow: hidden;
   transition: max-height 0.3s ease;
 }
+.track-container {
+  position: relative; 
+  display: flex;
+  align-items: center;
+}
+
+.delete-button, .restore-button {
+  position: absolute; 
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%); 
+}
 
 
 
@@ -231,8 +243,10 @@
       line-height: 1;
       color: rgb(255, 255, 255);
       font-weight: 700;
-  right: 60px;
-  bottom: 10px;
+  position: absolute; 
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%); 
     }
 
     .restore-button{
@@ -244,8 +258,11 @@
       line-height: 1;
       color: rgb(255, 255, 255);
       font-weight: 700;
-  right: 60px;
   bottom: 10px;
+  position: absolute; 
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%); 
     }
 
 
@@ -844,88 +861,61 @@ function UpdateFunction() {
     albumButton.appendChild(titleText);
 
     const tracksContainer = document.createElement('div');
-    tracksContainer.className = 'tracks-container'; 
+    trackContainer.className = 'track-container';
     tracksContainer.style.maxHeight = '0'; 
     tracksContainer.style.overflow = 'hidden';
     
 
     albomMass.album.forEach(vf => {
-      const btnf = document.createElement('button');
-      btnf.textContent = vf.title;
-      btnf.className = 'track-button';
-      btnf.title = `Воспроизвести ${vf.title}`;
-      btnf.setAttribute('aria-label', `Воспроизвести ${vf.title}`);
-      btnf.style.justifyContent = 'space-between';
+      albomMass.album.forEach(vf => {
+  const trackContainer = document.createElement('div');
+  trackContainer.className = 'track-container';
 
-      const disabledTitlesRaw = localStorage.getItem('disabled') || '';
-      const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-      console.log(disabledTitles)
-      if (disabledTitles.map(title => title.toLowerCase()).includes(vf.title.toLowerCase()+"-")) {
-        btnf.disabled = true;
-        console.log("Сработало")
+  const btnf = document.createElement('button');
+  btnf.textContent = vf.title;
+  btnf.className = 'track-button';
+  btnf.title = `Воспроизвести ${vf.title}`;
+  btnf.setAttribute('aria-label', `Воспроизвести ${vf.title}`);
 
-        const restoreBtn = document.createElement('button');
-        restoreBtn.className = 'restore-button';
-        restoreBtn.setAttribute('aria-label', `Восстановить ${vf.title}`);
-        restoreBtn.disabled = false; 
 
-        restoreBtn.addEventListener('click', (event) => {
-            event.preventDefault();
-            const disabledTitlesRaw09 = localStorage.getItem('disabled') || '';
-      const disabledTitles09 = disabledTitlesRaw09.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-            const updatedDisabledTitles = disabledTitles09.filter(title => title.toLowerCase() !== vf.title.toLowerCase()+"-");
-            localStorage.setItem('disabled', updatedDisabledTitles.join('\n'));
-            btnf.disabled = false; 
-            restoreBtn.remove(); 
-        });
+  const deleteBtn = document.createElement('button');
+  deleteBtn.textContent = '-';
+  deleteBtn.className = 'delete-button';
+  deleteBtn.setAttribute('aria-label', `Удалить ${vf.title}`);
 
-        btnf.appendChild(restoreBtn);
+  deleteBtn.addEventListener('click', (event) => {
+    event.stopPropagation(); 
+    btnf.disabled = true;
+    const btnfDisabled = btnf.textContent;
+    const disabledTitlesRaw = localStorage.getItem('disabled') || '';
+    const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+    localStorage.setItem('disabled', btnfDisabled + '\n' + disabledTitles.join('\n'));
+    console.log(`Трек "${btnfDisabled}" отключен.`); 
+  });
 
-      }
 
-      btnf.addEventListener('click', () => {
-        if (vf.url) {
-          audioPlayer.src = vf.url;
-          audioPlayer.play().catch(e => console.warn('Ошибка воспроизведения:', e));
-        }
-      });
+  const restoreBtn = document.createElement('button');
+  restoreBtn.className = 'restore-button';
+  restoreBtn.setAttribute('aria-label', `Восстановить ${vf.title}`);
+  restoreBtn.textContent = '+'; 
 
-      const deleteBtn22 = document.createElement('button');
-      deleteBtn22.textContent = '-';
-      deleteBtn22.className = 'delete-button12';
+  restoreBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    const disabledTitlesRaw = localStorage.getItem('disabled') || '';
+    const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+    const updatedDisabledTitles = disabledTitles.filter(title => title.toLowerCase() !== vf.title.toLowerCase() + "-");
+    localStorage.setItem('disabled', updatedDisabledTitles.join('\n'));
+    btnf.disabled = false; 
+    restoreBtn.remove(); 
+  });
 
-      deleteBtn22.addEventListener('click', (event) => {
-        event.stopPropagation(); 
-        btnf.disabled = true;
-        const btnfDisabled = btnf.textContent;
-        const disabledTitlesRaw = localStorage.getItem('disabled') || '';
-        const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-        localStorage.setItem('disabled', btnfDisabled + '\n' + disabledTitles.join('\n'));
-        console.log(`Трек "${btnfDisabled}" отключен.`); 
+  trackContainer.appendChild(btnf);
+  trackContainer.appendChild(deleteBtn);
+  trackContainer.appendChild(restoreBtn);
 
-        const restoreBtn = document.createElement('button');
-        restoreBtn.className = 'restore-button';
-        restoreBtn.setAttribute('aria-label', `Восстановить ${vf.title}`);
-        restoreBtn.disabled = false; 
-
-        restoreBtn.addEventListener('click', (event) => {
-            event.preventDefault();
-            const disabledTitlesRaw09 = localStorage.getItem('disabled') || '';
-      const disabledTitles09 = disabledTitlesRaw09.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-            const updatedDisabledTitles = disabledTitles09.filter(title => title.toLowerCase() !== vf.title.toLowerCase()+"-");
-            localStorage.setItem('disabled', updatedDisabledTitles.join('\n'));
-            btnf.disabled = false; 
-            restoreBtn.remove(); 
-        });
-
-        btnf.appendChild(restoreBtn);
-        
-        
-      });
-      btnf.appendChild(deleteBtn22);
-              
-
-      tracksContainer.appendChild(btnf);
+  tracksContainer.appendChild(trackContainer); 
+});
+  
    } 
 );
   
