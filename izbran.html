@@ -2117,9 +2117,9 @@ searchForm.addEventListener('submit', (event) => {
       const disabledTitles67 = disabledTitlesRaw67.split('\n').map(s => s.trim()).filter(s => s.length > 0);
       console.log(disabledTitles67)
       if (disabledTitles67.map(title => title.toLowerCase()).includes(albom.title.toLowerCase()+"-")) {
-        btnf.disabled = true;
+        btnf290.disabled = true;
         console.log("Сработало")
-        btnf.appendChild(restoreBtn0)
+        btnf290.appendChild(restoreBtn0)
       }
 
       const deleteBtn221 = document.createElement('button');
@@ -2129,16 +2129,18 @@ searchForm.addEventListener('submit', (event) => {
 
       deleteBtn221.addEventListener('click', (event) => {
         event.stopPropagation(); 
-        btnf2.disabled = true;
-        const btnfDisabled = btnf2.textContent;
+        btnf290.disabled = true;
+        const btnfDisabled = btnf290.textContent;
         const disabledTitlesRaw = localStorage.getItem('disabled') || '';
         const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
         localStorage.setItem('disabled', btnfDisabled + '\n' + disabledTitles.join('\n'));
         console.log(`Трек "${btnfDisabled}" отключен.`); 
-        btnf.appendChild(restoreBtn0)
+        btnf290.appendChild(restoreBtn0)
+
+
       });
 
-        
+    btnf290.appendChild(deleteBtn221)
       
       albomRow.appendChild(numBtnDate);
       albomRow.appendChild(btnf290)
