@@ -2049,6 +2049,25 @@ albumButton.addEventListener('click', createAlbumToggleHandler(albumButton, trac
 
 
 
+const deleteBtn2124 = document.createElement('button');
+    deleteBtn2124.textContent = '-';
+    deleteBtn2124.className = 'delete-button';
+    deleteBtn2124.setAttribute('aria-label', `Удалить ${track.title}`);
+
+    deleteBtn2124.addEventListener('click', () => {
+        const rawFilter = AlbomTitles.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+        const updatedFavorites = rawFilter.filter(fav => fav !== track.title);
+        localStorage.setItem('trekA', updatedFavorites.join('\n'));
+        console.log(`Альбом "${track.title}" удален из избранного.`); 
+        DateUpdateFunction();
+    });
+
+    albumButton.appendChild(deleteBtn2124)
+
+
+
+
+
     const tracksContainer = document.createElement('div');
     tracksContainer.className = 'tracks-container'; 
     tracksContainer.style.maxHeight = '0'; 
