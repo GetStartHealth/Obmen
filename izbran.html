@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -554,6 +555,7 @@ body {
     </form>  
       <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
       <button id="sort-button" class="small-button" aria-label="Сортировать по названию">А-Я</button>
+      <button id="sort-button-baze" class="small-button" aria-label="Сортировать по названию">Перемешать</button>
       <button id="sort-button-data" class="small-button" aria-label="Сортировать по датам">Дата</button>
     </div>
     <div id="albom-container" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
@@ -2146,7 +2148,6 @@ searchForm.addEventListener('submit', (event) => {
       const trackDate = albom.titleDate.substring(3, 5)
       numBtnDate.textContent = albom.titleDate.substring(0, 2) + ' ' + monthDay[trackDate] + "\n" + albom.titleDate.substring(6, 10);
 
-
       albomRow.appendChild(numBtnDate);
 
 
@@ -2169,32 +2170,15 @@ searchForm.addEventListener('submit', (event) => {
         }
       });
 
+      
+
       const restoreBtn0 = document.createElement('button');
         restoreBtn0.className = 'restore-button';
         restoreBtn0.setAttribute('aria-label', `Восстановить ${albom.title}`);
         restoreBtn0.disabled = false; 
         restoreBtn0.textContent = '+'; 
 
-        restoreBtn0.addEventListener('click', (event) => {
-          event.stopPropagation(); 
-          const disabledTitlesRaw0911 = localStorage.getItem('disabled') || '';
-      const disabledTitles0911 = disabledTitlesRaw0911.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-            const updatedDisabledTitles13 = disabledTitles0911.filter(title => title.toLowerCase() !== albom.title.toLowerCase());
-            localStorage.setItem('disabled', updatedDisabledTitles13.join('\n'));
-            btnf290.disabled = false;
-            restoreBtn0.remove()
-        })
-
-        const disabledTitlesRaw67 = localStorage.getItem('disabled') || '';
-      const disabledTitles67 = disabledTitlesRaw67.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-      console.log(disabledTitles67)
-      if (disabledTitles67.map(title => title.toLowerCase()).includes(albom.title.toLowerCase())) {
-        btnf290.disabled = true;
-        console.log("Сработало")
-        albomRow.appendChild(restoreBtn0)
-      }
-
-      const deleteBtn2210 = document.createElement('button');
+        const deleteBtn2210 = document.createElement('button');
       deleteBtn2210.textContent = '-';
       deleteBtn2210.className = 'delete-button';
       deleteBtn2210.setAttribute('aria-label', `Удалить ${albom.title}`);
@@ -2211,6 +2195,30 @@ searchForm.addEventListener('submit', (event) => {
 
 
       });
+
+        restoreBtn0.addEventListener('click', (event) => {
+          event.stopPropagation(); 
+          const disabledTitlesRaw0911 = localStorage.getItem('disabled') || '';
+      const disabledTitles0911 = disabledTitlesRaw0911.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+            const updatedDisabledTitles13 = disabledTitles0911.filter(title => title.toLowerCase() !== albom.title.toLowerCase());
+            localStorage.setItem('disabled', updatedDisabledTitles13.join('\n'));
+            btnf290.disabled = false;
+            restoreBtn0.remove()
+            deleteBtn2210.remove()
+        })
+
+        
+
+        const disabledTitlesRaw67 = localStorage.getItem('disabled') || '';
+      const disabledTitles67 = disabledTitlesRaw67.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+      console.log(disabledTitles67)
+      if (disabledTitles67.map(title => title.toLowerCase()).includes(albom.title.toLowerCase())) {
+        btnf290.disabled = true;
+        console.log("Сработало")
+        albomRow.appendChild(restoreBtn0)
+      }
+
+      
       
       
       albomRow.appendChild(deleteBtn2210)
@@ -2277,6 +2285,11 @@ searchForm.addEventListener('submit', (event) => {
    });
 
 });
+
+
+document.getElementById('sort-button-baze').addEventListener('click', (event) => {
+  UpdateFunction()
+})
 
 
 document.getElementById('sort-button-data').addEventListener('click', (event) => {
