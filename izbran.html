@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Избранные треки</title>
   <style>
-    body {
+body {
       margin: 0;
       background-color: #363E6B;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -1866,7 +1866,7 @@ tracksContainer.style.flexDirection = 'column';
           event.stopPropagation(); 
           const disabledTitlesRaw0911 = localStorage.getItem('disabled') || '';
       const disabledTitles0911 = disabledTitlesRaw0911.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-            const updatedDisabledTitles13 = disabledTitles0911.filter(title => title.toLowerCase() !== albom.title.toLowerCase()+"-");
+            const updatedDisabledTitles13 = disabledTitles0911.filter(title => title.toLowerCase() !== albom.title.toLowerCase());
             localStorage.setItem('disabled', updatedDisabledTitles13.join('\n'));
             btnf2.disabled = false;
             restoreBtn0.remove()
