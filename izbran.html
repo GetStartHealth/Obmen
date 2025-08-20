@@ -2061,6 +2061,9 @@ searchForm.addEventListener('submit', (event) => {
     track.album.sort((a, b) => new Date(b.titleDate) - new Date(a.titleDate));
 
     track.album.forEach(albom => {
+      const albomRow = document.createElement('div');
+    albomRow.style.display = 'flex';
+
       const numBtnDate = document.createElement('button');
       numBtnDate.className = 'num-btn-date';
       console.log(albom)
@@ -2078,8 +2081,9 @@ searchForm.addEventListener('submit', (event) => {
           audioPlayer.play().catch(e => console.warn('Ошибка воспроизведения:', e));
         }
       });
-      tracksContainer.appendChild(numBtnDate);
-      tracksContainer.appendChild(btnf290)
+      albomRow.appendChild(numBtnDate);
+      albomRow.appendChild(btnf290)
+      tracksContainer.appendChild(albomRow)
       
     })
 
