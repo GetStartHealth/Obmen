@@ -107,22 +107,17 @@ body {
     }
 
     .small-button80 {
-  flex: 0 0 auto;      
-  width: auto;         
-  min-width: 78px;     
+  width: 130px; 
   margin: 0 5px;
-  padding: 5px 8px;   
   background: #fff;
   color: #363E6B;
   border: 2.5px solid #363E6B;
-  border-radius: 8px;
+  border-radius: 16px;
+  padding: 10px 24px;
   font-weight: 700;
-  font-size: 0.85rem;
-  line-height: 1;      
+  font-size: 1rem;
+  height: 20px;
   cursor: pointer;
-  display: flex;      
-  align-items: center;  
-  justify-content: center; 
   box-shadow: 0 5px 18px rgba(54, 62, 107, 0.25);
   transition: box-shadow 0.3s ease, transform 0.2s ease, color 0.3s ease, border-color 0.3s ease;
   user-select: none;
@@ -876,7 +871,15 @@ function UpdateFunction() {
     }
 
     const albomTitlesRaw = localStorage.getItem('trekA') || '';
-    const AlbomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+    const AlbomTitles = albomTitlesRaw
+  .split('\n')
+  .map(s => s.trim())
+  .filter(s => s.length > 0)
+  .sort((a, b) => {
+    const indexA = albomsT.findIndex(item => item.title === a);
+    const indexB = albomsT.findIndex(item => item.title === b);
+    return indexA - indexB;
+  });
 
     AlbomTitles.forEach(albom => {
         const albomMass = albomsT.find(a => a.title === albom);
@@ -1018,6 +1021,14 @@ function UpdateFunction() {
         });
 
         albumButton.addEventListener('click', () => {
+            const elements = document.querySelectorAll('.album-title')
+            elements.forEach(element => {
+              if (element !== albumButton) {
+                const other = element.nextElementSibling
+                other.style.maxHeight === '0px'
+                element.setAttribute('aria-expanded', 'false');
+              }
+            })
             const isHidden = tracksContainer.style.maxHeight === '0px';
             tracksContainer.style.maxHeight = isHidden ? '1000px' : '0px';
             tracksContainer.style.transition = 'max-height 0.3s ease';
@@ -1277,6 +1288,15 @@ function ABCUpdateFunction() {
   
 
     albumButton.addEventListener('click', () => {
+      const elements = document.querySelectorAll('.album-title')
+            elements.forEach(element => {
+              if (element !== albumButton) {
+                const other = element.nextElementSibling
+                other.style.maxHeight === '0px'
+                element.setAttribute('aria-expanded', 'false');
+              }
+            })
+
       const isHidden = tracksContainer.style.maxHeight === '0px';
       tracksContainer.style.maxHeight = isHidden ? '1000px' : '0px';
       tracksContainer.style.transition = 'max-height 0.3s ease';
@@ -1509,6 +1529,15 @@ function DateUpdateFunction() {
   
 
     albumButton.addEventListener('click', () => {
+      const elements = document.querySelectorAll('.album-title')
+            elements.forEach(element => {
+              if (element !== albumButton) {
+                const other = element.nextElementSibling
+                other.style.maxHeight === '0px'
+                element.setAttribute('aria-expanded', 'false');
+              }
+            })
+
       const isHidden = tracksContainer.style.maxHeight === '0px';
       tracksContainer.style.maxHeight = isHidden ? '1000px' : '0px';
       tracksContainer.style.transition = 'max-height 0.3s ease';
@@ -1762,6 +1791,15 @@ searchForm.addEventListener('submit', (event) => {
     });
 
     albumButton.addEventListener('click', () => {
+      const elements = document.querySelectorAll('.album-title')
+            elements.forEach(element => {
+              if (element !== albumButton) {
+                const other = element.nextElementSibling
+                other.style.maxHeight === '0px'
+                element.setAttribute('aria-expanded', 'false');
+              }
+            })
+
         const isHidden = tracksContainer.style.maxHeight === '0px';
         tracksContainer.style.maxHeight = isHidden ? '1000px' : '0px';
         tracksContainer.style.transition = 'max-height 0.3s ease';
@@ -2031,6 +2069,15 @@ searchForm.addEventListener('submit', (event) => {
     albumButton.appendChild(albomRowDate)
 
     albumButton.addEventListener('click', () => {
+      const elements = document.querySelectorAll('.album-title')
+            elements.forEach(element => {
+              if (element !== albumButton) {
+                const other = element.nextElementSibling
+                other.style.maxHeight === '0px'
+                element.setAttribute('aria-expanded', 'false');
+              }
+            })
+
       const isHidden = tracksContainer.style.maxHeight === '0px';
       tracksContainer.style.maxHeight = isHidden ? '1000px' : '0px';
       tracksContainer.style.transition = 'max-height 0.3s ease';
@@ -2042,8 +2089,6 @@ searchForm.addEventListener('submit', (event) => {
 
       return albumDiv
     }
-
-
 
   document.getElementById('sort-button').addEventListener('click', (event) => {
    event.preventDefault();  
@@ -2080,7 +2125,6 @@ searchForm.addEventListener('submit', (event) => {
    });
 
 });
-
 
 document.getElementById('sort-button-baze').addEventListener('click', (event) => {
   UpdateFunction()
