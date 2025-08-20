@@ -1254,7 +1254,7 @@ function ABCUpdateFunction() {
         trackContainer.style.justifyContent = 'space-between';
         trackContainer.style.width = '100%'; 
         trackContainer.style.marginBottom = '8px';
-        
+
       const buttonContainer = document.createElement('div');
      buttonContainer.style.display = 'flex';
      buttonContainer.style.gap = '10px';
@@ -1587,7 +1587,7 @@ function DateUpdateFunction() {
 
       const deleteBtn22 = document.createElement('button');
       deleteBtn22.textContent = '-';
-      deleteBtn22.className = 'delete-button12';
+      deleteBtn22.className = 'delete-button';
       deleteBtn22.setAttribute('aria-label', `Удалить ${albomMass.title}`);
       
 
@@ -1612,7 +1612,7 @@ function DateUpdateFunction() {
           event.stopPropagation(); 
           const disabledTitlesRaw091 = localStorage.getItem('disabled') || '';
       const disabledTitles091 = disabledTitlesRaw091.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-            const updatedDisabledTitles1 = disabledTitles091.filter(title => title.toLowerCase() !== vf.title.toLowerCase()+"-");
+            const updatedDisabledTitles1 = disabledTitles091.filter(title => title.toLowerCase() !== vf.title.toLowerCase());
             localStorage.setItem('disabled', updatedDisabledTitles1.join('\n'));
             btnf.disabled = false; 
             restoreBtn.remove(); 
@@ -1634,7 +1634,7 @@ function DateUpdateFunction() {
 
     albumButton.addEventListener('click', () => {
       const isHidden = tracksContainer.style.maxHeight === '0px';
-      tracksContainer.style.maxHeight = isHidden ? '600px' : '0px';
+      tracksContainer.style.maxHeight = isHidden ? '1500px' : '0px';
       tracksContainer.style.transition = 'max-height 0.3s ease';
       albumButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
     });
@@ -2165,15 +2165,16 @@ searchForm.addEventListener('submit', (event) => {
       });
 
       const restoreBtn0 = document.createElement('button');
-        restoreBtn0.className = 'restore-button0909';
+        restoreBtn0.className = 'restore-button';
         restoreBtn0.setAttribute('aria-label', `Восстановить ${albom.title}`);
         restoreBtn0.disabled = false; 
+        restoreBtn0.textContent = '+'; 
 
         restoreBtn0.addEventListener('click', (event) => {
           event.stopPropagation(); 
           const disabledTitlesRaw0911 = localStorage.getItem('disabled') || '';
       const disabledTitles0911 = disabledTitlesRaw0911.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-            const updatedDisabledTitles13 = disabledTitles0911.filter(title => title.toLowerCase() !== albom.title.toLowerCase()+"-");
+            const updatedDisabledTitles13 = disabledTitles0911.filter(title => title.toLowerCase() !== albom.title.toLowerCase());
             localStorage.setItem('disabled', updatedDisabledTitles13.join('\n'));
             btnf290.disabled = false;
             restoreBtn0.remove()
@@ -2182,15 +2183,15 @@ searchForm.addEventListener('submit', (event) => {
         const disabledTitlesRaw67 = localStorage.getItem('disabled') || '';
       const disabledTitles67 = disabledTitlesRaw67.split('\n').map(s => s.trim()).filter(s => s.length > 0);
       console.log(disabledTitles67)
-      if (disabledTitles67.map(title => title.toLowerCase()).includes(albom.title.toLowerCase()+"-")) {
+      if (disabledTitles67.map(title => title.toLowerCase()).includes(albom.title.toLowerCase())) {
         btnf290.disabled = true;
         console.log("Сработало")
-        btnf290.appendChild(restoreBtn0)
+        albomRow.appendChild(restoreBtn0)
       }
 
       const deleteBtn2210 = document.createElement('button');
       deleteBtn2210.textContent = '-';
-      deleteBtn2210.className = 'delete-button217';
+      deleteBtn2210.className = 'delete-button';
       deleteBtn2210.setAttribute('aria-label', `Удалить ${albom.title}`);
 
       deleteBtn2210.addEventListener('click', (event) => {
@@ -2219,7 +2220,7 @@ searchForm.addEventListener('submit', (event) => {
 
     albumButton.addEventListener('click', () => {
       const isHidden = tracksContainer.style.maxHeight === '0px';
-      tracksContainer.style.maxHeight = isHidden ? '1000px' : '0px';
+      tracksContainer.style.maxHeight = isHidden ? '1500px' : '0px';
       tracksContainer.style.transition = 'max-height 0.3s ease';
       albumButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
     });
