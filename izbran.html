@@ -5,8 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Избранные треки</title>
-
-   <meta http-equiv="Content-Security-Policy" content="
+<meta http-equiv="Content-Security-Policy" content="
   default-src 'self';
   script-src 'self' 'unsafe-inline';
   style-src 'self' 'unsafe-inline';
@@ -15,7 +14,6 @@
   base-uri 'self';
   form-action 'self';
 ">
-
 
   <style>
 body {
@@ -920,6 +918,26 @@ body {
 const favoritesContainer = document.getElementById('favorites-container');
 const albomContainer = document.getElementById('albom-container');
 const audioPlayer = document.getElementById('audio-player');
+function createAlbumToggleHandler(albumButton, tracksContainer) {
+    return function() {
+
+        const allAlbums = document.querySelectorAll('.album-title');
+        allAlbums.forEach(element => {
+            if (element !== albumButton) {
+                const otherTracksContainer = element.nextElementSibling;
+                if (otherTracksContainer && otherTracksContainer.classList.contains('tracks-container')) {
+                    otherTracksContainer.style.maxHeight = '0px';
+                    element.setAttribute('aria-expanded', 'false');
+                }
+            }
+        });
+
+        const isHidden = tracksContainer.style.maxHeight === '0px' || tracksContainer.style.maxHeight === '';
+        tracksContainer.style.maxHeight = isHidden ? '1000px' : '0px';
+        tracksContainer.style.transition = 'max-height 0.3s ease';
+        albumButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+    };
+}
 
 function UpdateFunction() {
     favoritesContainer.innerHTML = '';
@@ -1131,20 +1149,9 @@ function UpdateFunction() {
             tracksContainer.appendChild(trackContainer);
         });
 
-        albumButton.addEventListener('click', () => {
-            const elements = document.querySelectorAll('.album-title')
-            elements.forEach(element => {
-              if (element !== albumButton) {
-                const other = element.nextElementSibling
-                other.style.maxHeight === '0px'
-                element.setAttribute('aria-expanded', 'false');
-              }
-            })
-            const isHidden = tracksContainer.style.maxHeight === '0px';
-            tracksContainer.style.maxHeight = isHidden ? '1000px' : '0px';
-            tracksContainer.style.transition = 'max-height 0.3s ease';
-            albumButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
-        });
+
+albumButton.addEventListener('click', createAlbumToggleHandler(albumButton, tracksContainer));
+
 
         albumDiv.appendChild(albumButton);
         albumDiv.appendChild(tracksContainer);
@@ -1398,21 +1405,8 @@ function ABCUpdateFunction() {
 );
 
 
-    albumButton.addEventListener('click', () => {
-      const elements = document.querySelectorAll('.album-title')
-            elements.forEach(element => {
-              if (element !== albumButton) {
-                const other = element.nextElementSibling
-                other.style.maxHeight === '0px'
-                element.setAttribute('aria-expanded', 'false');
-              }
-            })
+albumButton.addEventListener('click', createAlbumToggleHandler(albumButton, tracksContainer));
 
-      const isHidden = tracksContainer.style.maxHeight === '0px';
-      tracksContainer.style.maxHeight = isHidden ? '1000px' : '0px';
-      tracksContainer.style.transition = 'max-height 0.3s ease';
-      albumButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
-    });
 
     albumDiv.appendChild(albumButton);
     albumDiv.appendChild(tracksContainer);
@@ -1639,21 +1633,7 @@ function DateUpdateFunction() {
 );
 
 
-    albumButton.addEventListener('click', () => {
-      const elements = document.querySelectorAll('.album-title')
-            elements.forEach(element => {
-              if (element !== albumButton) {
-                const other = element.nextElementSibling
-                other.style.maxHeight === '0px'
-                element.setAttribute('aria-expanded', 'false');
-              }
-            })
-
-      const isHidden = tracksContainer.style.maxHeight === '0px';
-      tracksContainer.style.maxHeight = isHidden ? '1000px' : '0px';
-      tracksContainer.style.transition = 'max-height 0.3s ease';
-      albumButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
-    });
+albumButton.addEventListener('click', createAlbumToggleHandler(albumButton, tracksContainer));
 
     albumDiv.appendChild(albumButton);
     albumDiv.appendChild(tracksContainer);
@@ -1901,21 +1881,7 @@ searchForm.addEventListener('submit', (event) => {
         tracksContainer.appendChild(trackContainer);
     });
 
-    albumButton.addEventListener('click', () => {
-      const elements = document.querySelectorAll('.album-title')
-            elements.forEach(element => {
-              if (element !== albumButton) {
-                const other = element.nextElementSibling
-                other.style.maxHeight === '0px'
-                element.setAttribute('aria-expanded', 'false');
-              }
-            })
-
-        const isHidden = tracksContainer.style.maxHeight === '0px';
-        tracksContainer.style.maxHeight = isHidden ? '1000px' : '0px';
-        tracksContainer.style.transition = 'max-height 0.3s ease';
-        albumButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
-    });
+albumButton.addEventListener('click', createAlbumToggleHandler(albumButton, tracksContainer));
 
     albumDiv.append(albumButton);
     albumDiv.appendChild(tracksContainer);
@@ -2179,21 +2145,9 @@ searchForm.addEventListener('submit', (event) => {
     albomRowDate.appendChild(titleText)
     albumButton.appendChild(albomRowDate)
 
-    albumButton.addEventListener('click', () => {
-      const elements = document.querySelectorAll('.album-title')
-            elements.forEach(element => {
-              if (element !== albumButton) {
-                const other = element.nextElementSibling
-                other.style.maxHeight === '0px'
-                element.setAttribute('aria-expanded', 'false');
-              }
-            })
 
-      const isHidden = tracksContainer.style.maxHeight === '0px';
-      tracksContainer.style.maxHeight = isHidden ? '1000px' : '0px';
-      tracksContainer.style.transition = 'max-height 0.3s ease';
-      albumButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
-    });
+albumButton.addEventListener('click', createAlbumToggleHandler(albumButton, tracksContainer));
+
 
       albumDiv.appendChild(albumButton)
       albumDiv.appendChild(tracksContainer)
