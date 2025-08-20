@@ -878,6 +878,8 @@ function UpdateFunction() {
     return indexA - indexB;
   });
 
+  console.log(AlbomTitles)
+
     AlbomTitles.forEach(albom => {
         const albomMass = albomsT.find(a => a.title === albom);
         if (!albomMass) return;
