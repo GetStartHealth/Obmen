@@ -1565,6 +1565,12 @@ function DateUpdateFunction() {
         trackContainer.style.marginBottom = '8px';
 
     albomMass.album.forEach(vf => {
+
+      const buttonContainer = document.createElement('div');
+     buttonContainer.style.display = 'flex';
+     buttonContainer.style.gap = '10px';
+
+     
       const btnf = document.createElement('button');
       btnf.textContent = vf.title;
       btnf.className = 'track-button';
@@ -1586,9 +1592,7 @@ function DateUpdateFunction() {
       buttonContainer.appendChild(numBtnDate23)
 
 
-      const buttonContainer = document.createElement('div');
-     buttonContainer.style.display = 'flex';
-     buttonContainer.style.gap = '10px';
+      
 
       const disabledTitlesRaw = localStorage.getItem('disabled') || '';
       const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
