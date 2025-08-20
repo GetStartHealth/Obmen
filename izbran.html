@@ -6,44 +6,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Избранные треки</title>
   <style>
-body {
-  margin: 0;
-  background-color: #363E6B;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  display: flex;
-  justify-content: center;
-  padding: 40px 20px;
-  min-height: 100vh;
-  color: #fff;
-  user-select: none;
-}
+    body {
+      margin: 0;
+      background-color: #363E6B;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      display: flex;
+      justify-content: center;
+      padding: 40px 20px;
+      min-height: 100vh;
+      color: #fff;
+      user-select: none;
+    }
 
-#playlist-container {
-  background: #fff;
-  border-radius: 24px;
-  padding: 30px 30px 40px;
-  max-width: 620px;
-  width: 100%;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-  display: flex;
-  flex-direction: column;
-  color: #363E6B;
-  user-select: none;
-  box-sizing: border-box;
-}
+    #playlist-container {
+      background: #fff;
+      border-radius: 24px;
+      padding: 30px 30px 40px;
+      max-width: 620px;
+      width: 100%;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+      display: flex;
+      flex-direction: column;
+      color: #363E6B;
+      user-select: none;
+      box-sizing: border-box;
+    }
 
-#playlist-container h3 {
-  margin: 0 0 24px 10px;
-  font-weight: 700;
-  font-size: 2rem;
-  letter-spacing: 0.05em;
-  color: #363E6B;
-  text-shadow: none;
-}
+    #playlist-container h3 {
+      margin: 0 0 24px 10px;
+      font-weight: 700;
+      font-size: 2rem;
+      letter-spacing: 0.05em;
+      color: #363E6B;
+      text-shadow: none;
+    }
 
-.tracks-container {
+
+
+
+
+    .tracks-container {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -52,13 +56,153 @@ body {
   transition: max-height 0.3s ease;
 }
 
-.track-row {
-  display: flex; /* Используем flex для выравнивания элементов в строке */
-  align-items: center; /* Выравнивание по вертикали */
-  justify-content: space-between; /* Распределение между элементами */
+
+
+    .small-button {
+      align-self: flex-start;
+      margin-bottom: 20px;
+      background: #fff;
+      color: #363E6B;
+      border: 2.5px solid #363E6B;
+      border-radius: 16px;
+      padding: 10px 24px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 5px 18px rgba(54, 62, 107, 0.25);
+      transition: box-shadow 0.3s ease, transform 0.2s ease, color 0.3s ease, border-color 0.3s ease;
+      user-select: none;
+    }
+
+    .small-button:hover {
+      box-shadow: 0 9px 28px rgba(54, 62, 107, 0.5);
+      transform: translateY(-3px);
+      color: #2a3150;
+      border-color: #2a3150;
+    }
+
+    .small-button:active {
+      transform: translateY(0);
+      box-shadow: 0 5px 18px rgba(54, 62, 107, 0.25);
+    }
+
+
+    .small-button12 {
+      align-self: flex-start;
+      margin-bottom: 20px;
+      background: #fff;
+      color: #363E6B;
+      border: 2.5px solid #363E6B;
+      border-radius: 16px;
+      padding: 10px 24px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 5px 18px rgba(54, 62, 107, 0.25);
+      transition: box-shadow 0.3s ease, transform 0.2s ease, color 0.3s ease, border-color 0.3s ease;
+      user-select: none;
+    }
+
+    .small-button12:hover {
+      box-shadow: 0 9px 28px rgba(54, 62, 107, 0.5);
+      transform: translateY(-3px);
+      color: #2a3150;
+      border-color: #2a3150;
+    }
+
+    .small-button12:active {
+      transform: translateY(0);
+      box-shadow: 0 5px 18px rgba(54, 62, 107, 0.25);
+    }
+
+    #favorites-container {
+      overflow-y: auto;
+      max-height: 430px;
+      padding-right: 6px;
+      margin-bottom: 20px;
+      user-select: none;
+      display: flex;
+      margin-top: 80px;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    #favorites-container::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    #favorites-container::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    #favorites-container::-webkit-scrollbar-thumb {
+      background: #363E6B;
+      border-radius: 8px;
+    }
+
+    #favorites-container > div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    #albom-container {
+      overflow-y: auto;
+      max-height: 2000px;
+      padding-right: 6px;
+      margin-bottom: 10px;
+      user-select: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    #albom-container::-webkit-scrollbar {
+      width: 14px;
+    }
+
+    .highlight {
+    background-color: rgba(66, 153, 99, 0.7); 
+    border-left: 5px solid #2d4e2d; 
+    border-radius: 10px;
+    transition: background-color 0.5s ease, transform 0.5s ease; 
+    padding: 10px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
 }
 
-.track-button {
+    .track-button.highlight {
+    background-color: rgba(66, 153, 99, 0.7); 
+    border-left: 5px solid #2d4e2d; 
+    border-radius: 10px;
+    transition: background-color 0.5s ease, transform 0.5s ease; 
+    padding: 10px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+}
+
+.fade-out {
+    opacity: 0; 
+    transform: scale(0.95); 
+    transition: opacity 0.5s ease, transform 0.5s ease; 
+}
+
+
+    #albom-container::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    #albom-container::-webkit-scrollbar-thumb {
+      background: #363E6B;
+      border-radius: 8px;
+    }
+
+    #albom-container > div {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .track-button {
   background: #363E6B;
   border: none;
   border-radius: 16px;
@@ -73,61 +217,140 @@ body {
   user-select: none;
   min-width: 320px;
   max-width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
 }
 
-.delete-button,
-.restore-button {
-  background: #c25858; /* Цвет фона для кнопки удаления */
-  border-radius: 50%;
-  width: 36px; /* Ширина кнопки */
-  height: 36px; /* Высота кнопки */
-  font-size: 1.3rem; /* Размер шрифта */
-  color: rgb(255, 255, 255); /* Цвет текста */
-  font-weight: 700; /* Жирность текста */
-  cursor: pointer; /* Указатель при наведении */
-  display: flex; /* Используем flex для центрирования текста */
-  justify-content: center; /* Центрируем текст по горизонтали */
-  align-items: center; /* Центрируем текст по вертикали */
-  transition: transform 0.2s ease; /* Плавный переход при наведении */
-}
+    .restore-button0909{
+      background: #7db14d;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      font-size: 1.3rem;
+      line-height: 1;
+      color: rgb(255, 255, 255);
+      font-weight: 700;
+  right: 60px;
+  bottom: 10px;
+    }
 
-.delete-button:hover,
-.restore-button:hover {
-  transform: scale(1.1); /* Увеличение кнопок при наведении */
-}
+    .restore-button{
+      background: #7db14d;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      font-size: 1.3rem;
+      line-height: 1;
+      color: rgb(255, 255, 255);
+      font-weight: 700;
+  right: 60px;
+  bottom: 10px;
+    }
 
-.delete-button:active,
-.restore-button:active {
-  transform: scale(0.95); /* Уменьшение кнопок при нажатии */
-}
 
-#favorites-container {
-  overflow-y: auto;
-  max-height: 430px;
-  padding-right: 6px;
-  margin-bottom: 20px;
-  user-select: none;
-  display: flex;
-  margin-top: 80px;
-  flex-direction: column;
-  gap: 12px;
-}
+    
 
-#albom-container {
-  overflow-y: auto;
-  max-height: 2000px;
-  padding-right: 6px;
-  margin-bottom: 10px;
-  user-select: none;
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-}
+    .delete-button12 {
+    flex-shrink: 0;
+      background: #c25858;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      font-size: 1.2rem;
+      line-height: 1;
+      color: rgb(255, 255, 255);
+      font-weight: 700;
+      right: 10px;
+      bottom: 10px;  
 
-.album-title {
+}
+    .delete-button12:hover {
+      transform: scale(1.1);
+    }
+
+    .delete-button12:active {
+      transform: scale(0.95);
+    }
+
+    .track-button:hover:not(:disabled) {
+      box-shadow: 0 9px 28px rgba(54, 62, 107, 1);
+      transform: translateY(-3px);
+    }
+
+    .track-button:active:not(:disabled) {
+      transform: translateY(0);
+      box-shadow: 0 5px 18px rgba(54, 62, 107, 0.7);
+    }
+
+    .track-button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      box-shadow: none;
+      background: #ccc;
+      color: #666;
+    }
+
+    .delete-button {
+      flex-shrink: 0;
+      background: #c25858;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      font-size: 1.3rem;
+      line-height: 1;
+      color: rgb(255, 255, 255);
+      font-weight: 700;
+      right: 20px;
+      bottom: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .delete-button:hover {
+      transform: scale(1.1);
+    }
+
+    .delete-button:active {
+      transform: scale(0.95);
+    }
+
+
+    .delete-button217 {
+      flex-shrink: 0;
+      background: #c25858;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      font-size: 1.3rem;
+      line-height: 1;
+      color: rgb(255, 255, 255);
+      font-weight: 700;
+      right: 20px;
+      bottom: 5px;
+      justify-content: center;
+    }
+
+    .delete-button217:hover {
+      transform: scale(1.1);
+    }
+
+    .delete-button217:active {
+      transform: scale(0.95);
+    }
+
+    #audio-player {
+      width: 100%;
+      border-radius: 14px;
+      box-shadow: 0 6px 20px rgba(54, 62, 107, 0.3);
+      outline: none;
+      background-color: #fff;
+      height: 46px;
+      user-select: none;
+    }
+
+    .album-title {
   position: relative;
   background-color: #6570af;
   padding: 17px 55px 17px 22px;
@@ -143,9 +366,44 @@ body {
   transition: background-color 0.3s ease;
 }
 
+
+
+
+
+.num-btn-date {
+      flex-shrink: 0;
+      background: #363E6B;
+      border: none;
+      border-radius: 25%;
+      width: 58px;
+      height: 58px;
+      font-size: 0.80rem;
+      line-height: 1;
+      color: white;
+      font-weight: 1500;
+      cursor: pointer;
+      box-shadow: 0 5px 14px rgba(54, 62, 107, 0.7);
+      transition: box-shadow 0.3s ease, transform 0.2s ease;
+      user-select: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .num-btn-date:hover {
+      box-shadow: 0 8px 22px rgba(54, 62, 107, 0.9);
+      transform: scale(1.1);
+    }
+
+    .num-btn-date:active {
+      transform: scale(0.95);
+      box-shadow: 0 5px 14px rgba(54, 62, 107, 0.7);
+    }
+
 .album-title:hover {
   background-color: #4a5d9e;
 }
+
 
 .album-title .title-text {
   display: flex;
@@ -154,8 +412,26 @@ body {
   user-select: none;
 }
 
+
+.album-title .title-text::after {
+  content: '▼';
+  font-size: 0.8em;
+  margin-left: 8px;
+  color: white;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+  display: inline-block;
+  transform-origin: center;
+  transform: rotate(0deg);
+}
+
+.album-title[aria-expanded="true"] .title-text::after {
+  transform: rotate(180deg);
+}
+
+
 .album-title .delete-button {
-  position: absolute; /* Убираем абсолютное позиционирование */
+  position: absolute;
   right: 10px;
   top: 50%;
   transform: translateY(-50%);
@@ -174,6 +450,14 @@ body {
   transition: box-shadow 0.3s ease, transform 0.2s ease;
   user-select: none;
   z-index: 2;
+}
+
+.album-title .delete-button:hover {
+  transform: translateY(-50%) scale(1.1);
+}
+
+.album-title .delete-button:active {
+  transform: translateY(-50%) scale(0.95);
 }
 
 .searchL {
@@ -206,42 +490,41 @@ body {
   box-shadow: 0 0 8px rgba(74, 93, 158, 0.6);
 }
 
-@media (max-width: 640px) {
-  #playlist-container {
-    padding: 25px 20px 30px;
-  }
+    @media (max-width: 640px) {
+      #playlist-container {
+        padding: 25px 20px 30px;
+      }
 
-  #playlist-container h3 {
-    font-size: 1.6rem;
-  }
+      #playlist-container h3 {
+        font-size: 1.6rem;
+      }
 
-  #favorites-container {
-    max-height: 300px;
-  }
+      #favorites-container {
+        max-height: 300px;
+      }
 
-  .track-button {
-    font-size: 14px;
-    padding: 4px 8px;
-    min-width: 260px;
-    max-width: 290px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    flex-shrink: 0;
-    height: 55px;
-  }
+      .track-button {
+        font-size: 14px;
+        padding: 4px 8px;
+        min-width: 260px;
+        max-width: 290px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        flex-shrink: 0;
+        height: 55px;
+      }
 
-  .delete-button {
-    width: 32px;
-    height: 32px;
-    font-size: 1.3rem;
-  }
+      .delete-button {
+        width: 32px;
+        height: 32px;
+        font-size: 1.3rem;
+      }
 
-  #audio-player {
-    height: 40px;
-  }
-}
-
+      #audio-player {
+        height: 40px;
+      }
+    }
 </style>
 </head>
 
