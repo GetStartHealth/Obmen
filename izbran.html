@@ -2136,7 +2136,7 @@ searchForm.addEventListener('submit', (event) => {
     albomRow.style.display = 'flex';
     albomRow.style.gap = '16px';
 
-    albomRow.appendChild(numBtnDate);
+    
 
     
 
@@ -2145,6 +2145,9 @@ searchForm.addEventListener('submit', (event) => {
       console.log(albom)
       const trackDate = albom.titleDate.substring(3, 5)
       numBtnDate.textContent = albom.titleDate.substring(0, 2) + ' ' + monthDay[trackDate] + "\n" + albom.titleDate.substring(6, 10);
+
+
+      albomRow.appendChild(numBtnDate);
 
 
 
