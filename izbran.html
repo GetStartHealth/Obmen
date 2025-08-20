@@ -2060,9 +2060,7 @@ searchForm.addEventListener('submit', (event) => {
       const trackDate = track.titleDate.substring(3, 5)
       numBtnDate23.textContent = track.titleDate.substring(0, 2) + ' ' + monthDay[trackDate] + "\n" + track.titleDate.substring(6, 10);
 
-    albomRowDate.appendChild(numBtnDate23)
-    albomRowDate.appendChild(titleText)
-    albumButton.appendChild(albomRowDate)
+
 
     const tracksContainer = document.createElement('div');
     tracksContainer.className = 'tracks-container'; 
@@ -2093,11 +2091,15 @@ searchForm.addEventListener('submit', (event) => {
           audioPlayer.play().catch(e => console.warn('Ошибка воспроизведения:', e));
         }
       });
+      
       albomRow.appendChild(numBtnDate);
       albomRow.appendChild(btnf290)
       tracksContainer.appendChild(albomRow)
       
     })
+        albomRowDate.appendChild(numBtnDate23)
+    albomRowDate.appendChild(titleText)
+    albumButton.appendChild(albomRowDate)
 
     albumButton.addEventListener('click', () => {
       const isHidden = tracksContainer.style.maxHeight === '0px';
