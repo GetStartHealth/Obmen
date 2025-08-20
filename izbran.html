@@ -2160,6 +2160,7 @@ searchForm.addEventListener('submit', (event) => {
 document.getElementById('sort-button-data').addEventListener('click', (event) => {
    event.preventDefault();
    favoritesContainer.innerHTML = '';
+   albomContainer.innerHTML = '';
 
    const filteredUpdatedFavorites = [];
    const aTitlesRaw = localStorage.getItem('trek') || '';
