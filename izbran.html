@@ -106,11 +106,8 @@ body {
       box-shadow: 0 5px 18px rgba(54, 62, 107, 0.25);
     }
 
-
-
     .small-button80 {
-  width: 130; 
-  flex: 1; 
+  width: 130px; 
   margin: 0 5px;
   background: #fff;
   color: #363E6B;
@@ -119,6 +116,7 @@ body {
   padding: 10px 24px;
   font-weight: 700;
   font-size: 1rem;
+  height: 20px;
   cursor: pointer;
   box-shadow: 0 5px 18px rgba(54, 62, 107, 0.25);
   transition: box-shadow 0.3s ease, transform 0.2s ease, color 0.3s ease, border-color 0.3s ease;
@@ -1016,7 +1014,7 @@ function UpdateFunction() {
 
         albumButton.addEventListener('click', () => {
             const isHidden = tracksContainer.style.maxHeight === '0px';
-            tracksContainer.style.maxHeight = isHidden ? '1500px' : '0px';
+            tracksContainer.style.maxHeight = isHidden ? '1000px' : '0px';
             tracksContainer.style.transition = 'max-height 0.3s ease';
             albumButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
         });
@@ -1026,120 +1024,6 @@ function UpdateFunction() {
         albomContainer.appendChild(albumDiv);
     });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1389,7 +1273,7 @@ function ABCUpdateFunction() {
 
     albumButton.addEventListener('click', () => {
       const isHidden = tracksContainer.style.maxHeight === '0px';
-      tracksContainer.style.maxHeight = isHidden ? '600px' : '0px';
+      tracksContainer.style.maxHeight = isHidden ? '1000px' : '0px';
       tracksContainer.style.transition = 'max-height 0.3s ease';
       albumButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
     });
@@ -1399,61 +1283,6 @@ function ABCUpdateFunction() {
     albomContainer.appendChild(albumDiv);
   });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function DateUpdateFunction() {
   favoritesContainer.innerHTML = '';
@@ -1676,7 +1505,7 @@ function DateUpdateFunction() {
 
     albumButton.addEventListener('click', () => {
       const isHidden = tracksContainer.style.maxHeight === '0px';
-      tracksContainer.style.maxHeight = isHidden ? '1500px' : '0px';
+      tracksContainer.style.maxHeight = isHidden ? '1000px' : '0px';
       tracksContainer.style.transition = 'max-height 0.3s ease';
       albumButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
     });
@@ -1686,32 +1515,6 @@ function DateUpdateFunction() {
     albomContainer.appendChild(albumDiv);
   });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 const searchInput = document.querySelector('.searchL input[type="text"]');
 const searchForm = document.querySelector('.searchL');
@@ -1839,17 +1642,6 @@ searchForm.addEventListener('submit', (event) => {
       return row;
     }
 
-
-
-
-
-
-
-
-
-
-
-
   function ANumbercreateTrackRow(track) {
     const AlbomTitlesRaw = localStorage.getItem('trekA') || '';
     
@@ -1966,7 +1758,7 @@ searchForm.addEventListener('submit', (event) => {
 
     albumButton.addEventListener('click', () => {
         const isHidden = tracksContainer.style.maxHeight === '0px';
-        tracksContainer.style.maxHeight = isHidden ? '1500px' : '0px';
+        tracksContainer.style.maxHeight = isHidden ? '1000px' : '0px';
         tracksContainer.style.transition = 'max-height 0.3s ease';
         albumButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
     });
@@ -1976,24 +1768,6 @@ searchForm.addEventListener('submit', (event) => {
 
     return albumDiv;
 }
-
-
-
-
-
-
-
-
-
-
-
-        
-
-
-
-
-
-
 
   document.getElementById('sort-button').addEventListener('click', (event) => {
    event.preventDefault();  
@@ -2029,12 +1803,7 @@ searchForm.addEventListener('submit', (event) => {
        albomContainer.appendChild(AclearTrackRowToSort);
    });
 
-
-
-
-
   })
-
 
     function DateNumbercreateTrackRow(track) {
       const row = document.createElement('div');
@@ -2108,14 +1877,8 @@ searchForm.addEventListener('submit', (event) => {
 
 
     function DateAlbom(track) {
-
-
       const albomTitlesRaw = localStorage.getItem('trekA') || '';
    const AlbomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-
-
-  
-
   console.log('стоп')
 
 
@@ -2190,14 +1953,6 @@ searchForm.addEventListener('submit', (event) => {
 
       albomRow.appendChild(numBtnDate);
 
-
-
-
-
-
-
-      
-
       const btnf290 = document.createElement('button');
       btnf290.textContent = albom.title;
       btnf290.className = 'track-button';
@@ -2252,11 +2007,7 @@ searchForm.addEventListener('submit', (event) => {
         const disabledTitlesRaw67 = localStorage.getItem('disabled') || '';
       const disabledTitles67 = disabledTitlesRaw67.split('\n').map(s => s.trim()).filter(s => s.length > 0);
       console.log(disabledTitles67)
-      
-
-      
-      
-      
+   
       albomRow.appendChild(deleteBtn2210)
       albomRow.appendChild(btnf290)
      
@@ -2276,14 +2027,10 @@ searchForm.addEventListener('submit', (event) => {
 
     albumButton.addEventListener('click', () => {
       const isHidden = tracksContainer.style.maxHeight === '0px';
-      tracksContainer.style.maxHeight = isHidden ? '1500px' : '0px';
+      tracksContainer.style.maxHeight = isHidden ? '1-00px' : '0px';
       tracksContainer.style.transition = 'max-height 0.3s ease';
       albumButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
     });
-  
-      
-      
-
 
       albumDiv.appendChild(albumButton)
       albumDiv.appendChild(tracksContainer)
