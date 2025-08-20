@@ -1802,6 +1802,14 @@ searchForm.addEventListener('submit', (event) => {
     function ANumbercreateTrackRow(track) {
       const AlbomTitlesRaw = localStorage.getItem('trekA') || '';
       
+ const buttonContainer = document.createElement('div');
+     buttonContainer.style.display = 'flex';
+     buttonContainer.style.gap = '10px';
+
+     const trackContainer = document.createElement('div');
+            trackContainer.style.display = 'flex';
+            trackContainer.style.alignItems = 'center';
+            trackContainer.style.justifyContent = 'space-between';
 
       const albumDiv = document.createElement('div');
     albumDiv.style.marginBottom = '16px';
@@ -1909,9 +1917,11 @@ searchForm.addEventListener('submit', (event) => {
       });
 
      
-      btnf2.appendChild(deleteBtn221)
+       buttonContainer.appendChild(deleteBtn221);
 
-      tracksContainer.appendChild(btnf2)
+       trackContainer.appendChild(btnf2);
+       trackContainer.appendChild(buttonContainer);
+       tracksContainer.appendChild(trackContainer);
     })
 
  
