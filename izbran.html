@@ -231,6 +231,9 @@
       line-height: 1;
       color: rgb(255, 255, 255);
       font-weight: 700;
+      cursor: pointer;
+
+      position: absolute;
   right: 60px;
   bottom: 10px;
     }
@@ -244,7 +247,9 @@
       line-height: 1;
       color: rgb(255, 255, 255);
       font-weight: 700;
+      cursor: pointer;
 
+      position: absolute;
   right: 60px;
   bottom: 10px;
     }
@@ -256,12 +261,13 @@
       border-radius: 50%;
       width: 30px;
       height: 30px;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       line-height: 1;
       color: rgb(255, 255, 255);
       font-weight: 700;
-      right: 40px;
+      right: 10px;
       bottom: 10px;  
+
 }
     .delete-button12:hover {
       transform: scale(1.1);
@@ -328,7 +334,6 @@
       right: 20px;
       bottom: 5px;
       justify-content: center;
-      position: center;
     }
 
     .delete-button217:hover {
@@ -857,6 +862,7 @@ function UpdateFunction() {
       const disabledTitlesRaw = localStorage.getItem('disabled') || '';
       const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
       console.log(disabledTitles)
+      if (disabledTitles.map(title => title.toLowerCase()).includes(vf.title.toLowerCase()+"-")) {
         btnf.disabled = true;
         console.log("Сработало")
 
@@ -876,7 +882,7 @@ function UpdateFunction() {
         });
 
         btnf.appendChild(restoreBtn);
-  
+      }
 
       btnf.addEventListener('click', () => {
         if (vf.url) {
@@ -901,6 +907,7 @@ function UpdateFunction() {
 
 
         const restoreBtn = document.createElement('button');
+        restoreBtn.textContent = '+';
         restoreBtn.className = 'restore-button';
         restoreBtn.setAttribute('aria-label', `Восстановить ${vf.title}`);
         restoreBtn.disabled = false; 
