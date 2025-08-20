@@ -860,10 +860,6 @@ function UpdateFunction() {
             localStorage.setItem('disabled', updatedDisabledTitles.join('\n'));
             btnf.disabled = false; 
             restoreBtn.remove(); 
-            console.log(`Трек "${vf.title}" восстановлен.`); 
-            const disabledTitlesRaw3 = localStorage.getItem('disabled') || '';
-            const disabledTitles3 = disabledTitlesRaw3.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-            console.log(disabledTitles3); 
         });
 
         btnf.appendChild(restoreBtn);
@@ -2005,6 +2001,7 @@ searchForm.addEventListener('submit', (event) => {
 
     function DateAlbom(track) {
 
+
       const albomTitlesRaw = localStorage.getItem('trekA') || '';
    const AlbomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
@@ -2073,11 +2070,21 @@ searchForm.addEventListener('submit', (event) => {
     albomRow.style.display = 'flex';
     albomRow.style.gap = '16px';
 
+    
+
       const numBtnDate = document.createElement('button');
       numBtnDate.className = 'num-btn-date';
       console.log(albom)
       const trackDate = albom.titleDate.substring(3, 5)
       numBtnDate.textContent = albom.titleDate.substring(0, 2) + ' ' + monthDay[trackDate] + "\n" + albom.titleDate.substring(6, 10);
+
+
+
+
+
+
+
+      
 
       const btnf290 = document.createElement('button');
       btnf290.textContent = albom.title;
@@ -2090,6 +2097,48 @@ searchForm.addEventListener('submit', (event) => {
           audioPlayer.play().catch(e => console.warn('Ошибка воспроизведения:', e));
         }
       });
+
+      const restoreBtn0 = document.createElement('button');
+        restoreBtn0.className = 'restore-button0909';
+        restoreBtn0.setAttribute('aria-label', `Восстановить ${albom.title}`);
+        restoreBtn0.disabled = false; 
+
+        restoreBtn0.addEventListener('click', (event) => {
+          event.stopPropagation(); 
+          const disabledTitlesRaw0911 = localStorage.getItem('disabled') || '';
+      const disabledTitles0911 = disabledTitlesRaw0911.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+            const updatedDisabledTitles13 = disabledTitles0911.filter(title => title.toLowerCase() !== albom.title.toLowerCase()+"-");
+            localStorage.setItem('disabled', updatedDisabledTitles13.join('\n'));
+            btnf290.disabled = false;
+            restoreBtn0.remove()
+        })
+
+        const disabledTitlesRaw67 = localStorage.getItem('disabled') || '';
+      const disabledTitles67 = disabledTitlesRaw67.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+      console.log(disabledTitles67)
+      if (disabledTitles67.map(title => title.toLowerCase()).includes(albom.title.toLowerCase()+"-")) {
+        btnf.disabled = true;
+        console.log("Сработало")
+        btnf.appendChild(restoreBtn0)
+      }
+
+      const deleteBtn221 = document.createElement('button');
+      deleteBtn221.textContent = '-';
+      deleteBtn221.className = 'delete-button12';
+      deleteBtn221.setAttribute('aria-label', `Удалить ${albom.title}`);
+
+      deleteBtn221.addEventListener('click', (event) => {
+        event.stopPropagation(); 
+        btnf2.disabled = true;
+        const btnfDisabled = btnf2.textContent;
+        const disabledTitlesRaw = localStorage.getItem('disabled') || '';
+        const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+        localStorage.setItem('disabled', btnfDisabled + '\n' + disabledTitles.join('\n'));
+        console.log(`Трек "${btnfDisabled}" отключен.`); 
+        btnf.appendChild(restoreBtn0)
+      });
+
+        
       
       albomRow.appendChild(numBtnDate);
       albomRow.appendChild(btnf290)
