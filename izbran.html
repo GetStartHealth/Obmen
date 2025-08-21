@@ -1654,11 +1654,12 @@ function DateUpdateFunction() {
   const albomTitlesRaw = localStorage.getItem('trekA') || '';
   const AlbomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
-   AlbomTitles.sort((a, b) => {
-    const albomA = albomsT.find(a => a.title === a);
-    const albomB = albomsT.find(b => b.title === b);
-    return new Date(albomB.titleDate) - new Date(albomA.titleDate);
-  });
+   AlbomTitles.sort((titleA, titleB) => {
+  const albomA = albomsT.find(album => album.title === titleA);
+  const albomB = albomsT.find(album => album.title === titleB);
+  if (!albomA || !albomB) return 0;
+  return new Date(albomB.titleDate) - new Date(albomA.titleDate);
+});
 
 
 albumIndex = AlbomTitles.length
