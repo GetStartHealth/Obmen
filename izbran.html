@@ -605,7 +605,7 @@ body {
     <div id="favorites-container" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
     <audio id="audio-player" controls preload="none" controlsList="nodownload" aria-label="Аудиоплеер для избранных треков"></audio>
   </section>
- <script>
+<script>
     const albomsT = [
       {
       titleDate: '09.12.2025',title: '1 ТГК МУЗ-ЧАТ',
@@ -1530,7 +1530,7 @@ function DateUpdateFunction() {
       const updatedFavorites = rawFilter.filter(fav => fav !== albomMass.title);
       localStorage.setItem('trekA', updatedFavorites.join('\n'));
       console.log(`Альбом "${albomMass.title}" удален из избранного.`); 
-      UpdateFunction();
+      DateUpdateFunction();
     });
 
     const albumButton = document.createElement('button');
@@ -1578,6 +1578,7 @@ function DateUpdateFunction() {
   numBtnDate23.className = 'num-btn-date';
   const trackDate = vf.titleDate.substring(3, 5);
   numBtnDate23.textContent = vf.titleDate.substring(0, 2) + ' ' + monthDay[trackDate] + "\n" + vf.titleDate.substring(6, 10);
+  numBtnDateAlbum.style.marginRight = '10px';
 
   const btnf = document.createElement('button');
   btnf.textContent = vf.title;
@@ -1614,7 +1615,7 @@ function DateUpdateFunction() {
             event.preventDefault();
             const disabledTitlesRaw09 = localStorage.getItem('disabled') || '';
       const disabledTitles09 = disabledTitlesRaw09.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-            const updatedDisabledTitles = disabledTitles09.filter(title => title.toLowerCase() !== vf.title.toLowerCase()+"-");
+            const updatedDisabledTitles = disabledTitles09.filter(title => title.toLowerCase() !== vf.title.toLowerCase());
             localStorage.setItem('disabled', updatedDisabledTitles.join('\n'));
             btnf.disabled = false; 
             restoreBtn.remove(); 
