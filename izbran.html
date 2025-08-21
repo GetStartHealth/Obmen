@@ -2323,7 +2323,7 @@ const deleteBtn2124 = document.createElement('button');
 
     track.album.sort((a, b) => new Date(b.titleDate) - new Date(a.titleDate));
 
-    track.album.forEach(albom => {
+    track.album.forEach((albom, albomIndex) => {
       const albomRow = document.createElement('div');
     albomRow.style.display = 'flex';
     albomRow.style.gap = '16px';
@@ -2332,7 +2332,7 @@ const deleteBtn2124 = document.createElement('button');
 
 
     const trackNumberBtn = document.createElement('span');
-trackNumberBtn.textContent = `${albom.length - index}`;
+trackNumberBtn.textContent = `${track.album.length - albomIndex}`;
 trackNumberBtn.className = 'num-btn09';
 trackNumberBtn.style.marginRight = '10px';
 albomRow.appendChild(trackNumberBtn);
