@@ -44,6 +44,36 @@ body {
       box-sizing: border-box;
     }
 
+    .num-btn {
+      flex-shrink: 0;
+      background: #363E6B;
+      border: none;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      font-size: 1.1rem;
+      line-height: 1;
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 5px 14px rgba(54, 62, 107, 0.7);
+      transition: box-shadow 0.3s ease, transform 0.2s ease;
+      user-select: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .num-btn:hover {
+      box-shadow: 0 8px 22px rgba(54, 62, 107, 0.9);
+      transform: scale(1.1);
+    }
+
+    .num-btn:active {
+      transform: scale(0.95);
+      box-shadow: 0 5px 14px rgba(54, 62, 107, 0.7);
+    }
+
     #playlist-container h3 {
       margin: 0 0 24px 10px;
       font-weight: 700;
@@ -955,7 +985,7 @@ function UpdateFunction() {
         favoritesContainer.style.fontWeight = '600';
         favoritesContainer.style.userSelect = 'none';
     } else {
-        favoriteTracks.reverse().forEach((track, index) => {
+        favoriteTracks.forEach((track, index) => {
             const trackContainer = document.createElement('div');
             trackContainer.style.display = 'flex';
             trackContainer.style.alignItems = 'center';
@@ -970,8 +1000,8 @@ function UpdateFunction() {
 
             const numberBtn = document.createElement('button');
             numberBtn.className = 'num-btn';
-            numberBtn.textContent = index + 1;
-            numberBtn.style.marginRight = '20px'
+            numberBtn.textContent = favoriteTracks.length - index;
+            numberBtn.style.marginRight = '10px'
 
             const deleteBtn = document.createElement('button');
             deleteBtn.textContent = '-';
