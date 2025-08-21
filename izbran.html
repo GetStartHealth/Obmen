@@ -1015,9 +1015,10 @@ AlbomTitles.forEach((albom, index) => {
         titleText.textContent = albomMass.title;
 
         const albumNumber = document.createElement('span');
-  albumNumber.textContent = `${globalIndex--}.`;
+  albumNumber.textContent = `${globalIndex--}`;
   albumNumber.style.fontWeight = 'bold';
   albumNumber.className = 'num-btn'
+  albumNumber.style.marginRight = '10px'; 
 
         const deleteBtn2 = document.createElement('button');
         deleteBtn2.textContent = '-';
@@ -1056,7 +1057,7 @@ AlbomTitles.forEach((albom, index) => {
             trackContainer.style.marginBottom = '10px';
 
             const trackNumberBtn = document.createElement('span');
-trackNumberBtn.textContent = `${globalIndex--}.`;
+trackNumberBtn.textContent = `${globalIndex--}`;
 trackNumberBtn.className = 'num-btn';
 trackContainer.appendChild(trackNumberBtn);
 trackNumberBtn.style.marginRight = '10px'; 
