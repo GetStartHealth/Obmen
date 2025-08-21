@@ -664,7 +664,7 @@ body {
     <div id="favorites-container" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
     <audio id="audio-player" controls preload="none" controlsList="nodownload" aria-label="Аудиоплеер для избранных треков"></audio>
   </section>
-<script>
+ <script>
     const albomsT = [
       {
       titleDate: '09.12.2025',title: '1 ТГК МУЗ-ЧАТ',
@@ -2238,7 +2238,7 @@ albumButton.addEventListener('click', createAlbumToggleHandler(albumButton, trac
 
 
 
-    function DateAlbom(track) {
+    function DateAlbom(track, index, trackFull) {
       const albomTitlesRaw = localStorage.getItem('trekA') || '';
    const AlbomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
   console.log('стоп')
@@ -2270,6 +2270,12 @@ albumButton.addEventListener('click', createAlbumToggleHandler(albumButton, trac
     albumDiv.style.flexDirection = 'column';
 
 
+      const numberBtn = document.createElement('button');
+            numberBtn.className = 'num-btn';
+            numberBtn.textContent = trackFull.length - index;
+            numberBtn.style.marginRight = '5px'
+
+
       const titleText = document.createElement('span');
     titleText.className = 'title-text';
     titleText.textContent = track.title;
@@ -2283,6 +2289,7 @@ albumButton.addEventListener('click', createAlbumToggleHandler(albumButton, trac
     albumButton.setAttribute('aria-expanded', 'false');
     albumButton.style.width = '100%';
     albumButton.style.textAlign = 'left';
+    albumButton.appendChild(numberBtn)
 
     const numBtnDate23 = document.createElement('button');
       numBtnDate23.className = 'num-btn-date';
@@ -2320,6 +2327,17 @@ const deleteBtn2124 = document.createElement('button');
       const albomRow = document.createElement('div');
     albomRow.style.display = 'flex';
     albomRow.style.gap = '16px';
+
+
+
+
+    const trackNumberBtn = document.createElement('span');
+trackNumberBtn.textContent = `${track.album.length = index}`;
+trackNumberBtn.className = 'num-btn';
+trackNumberBtn.style.marginRight = '10px';
+albomRow.appendChild(trackNumberBtn);
+
+    
 
 
 
@@ -2414,6 +2432,9 @@ albumButton.addEventListener('click', createAlbumToggleHandler(albumButton, trac
 
       return albumDiv
     }
+
+
+
 
   document.getElementById('sort-button').addEventListener('click', (event) => {
    event.preventDefault();  
@@ -2523,8 +2544,8 @@ document.getElementById('sort-button-data').addEventListener('click', (event) =>
 
    AlbomfilteredUpdatedFavorites.sort((a, b) => new Date(b.titleDate) - new Date(a.titleDate));
 
-   AlbomfilteredUpdatedFavorites.forEach(filteredAlbom => {
-    tea = DateAlbom(filteredAlbom)
+   AlbomfilteredUpdatedFavorites.forEach((filteredAlbom, index) => {
+    tea = DateAlbom(filteredAlbom, index, AlbomfilteredUpdatedFavorites)
     albomContainer.appendChild(tea)
    })
 
