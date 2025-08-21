@@ -1538,7 +1538,7 @@ function DateUpdateFunction() {
           audioPlayer.play().catch(e => console.warn('Ошибка воспроизведения:', e));
         }
       });
-      numberBtn.appendChild(numberBtn)
+      favoriteTracks.appendChild(numberBtn)
 
       trackContainer.appendChild(numBtnDate)
       trackContainer.appendChild(deleteBtn);
@@ -1838,7 +1838,7 @@ searchForm.addEventListener('submit', (event) => {
 
 });
 
-  function NumbercreateTrackRow(track, index, totalTrack) {
+  function NumbercreateTrackRow(track) {
       const row = document.createElement('div');
       row.className = 'track-row';
       const favoriteTitlesRaw = localStorage.getItem('trek') || '';
@@ -1869,16 +1869,7 @@ searchForm.addEventListener('submit', (event) => {
         ABCUpdateFunction();
       });
 
-      const numberBtn = document.createElement('button');
-            numberBtn.className = 'num-btn';
-            numberBtn.textContent = totalTrack.length - index;
-            numberBtn.style.marginRight = '5px'
 
-      
-      
-
-
-      row.appendChild(numberBtn)
       row.appendChild(deleteBtn);
       row.appendChild(trackBtn);
 
@@ -2111,11 +2102,10 @@ albumButton.addEventListener('click', createAlbumToggleHandler(albumButton, trac
       numBtnDate.className = 'num-btn-date';
       const trackDate = track.date.substring(3, 5)
       numBtnDate.textContent = track.date.substring(0, 2) + ' ' + monthDay[trackDate] + "\n" + track.date.substring(6, 10);
-       row.appendChild(numberBtn);
+      row.appendChild(numberBtn)
       row.appendChild(numBtnDate);
-      
-      row.appendChild(trackBtn);
       row.appendChild(deleteBtn56);
+      row.appendChild(trackBtn);
 
       return row;
 
@@ -2314,7 +2304,7 @@ albumButton.addEventListener('click', createAlbumToggleHandler(albumButton, trac
      console.log(trackSort)
        const track = tracks.find(t => t.title === trackSort);
        console.log(track)
-       const clearTrackRowToSort = NumbercreateTrackRow(track, index, favoriteTitles);
+       const clearTrackRowToSort = NumbercreateTrackRow(track);
        favoritesContainer.appendChild(clearTrackRowToSort);
    });
 
