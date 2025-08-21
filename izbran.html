@@ -605,7 +605,7 @@ body {
     <div id="favorites-container" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
     <audio id="audio-player" controls preload="none" controlsList="nodownload" aria-label="Аудиоплеер для избранных треков"></audio>
   </section>
-<script>
+ <script>
     const albomsT = [
       {
       titleDate: '09.12.2025',title: '1 ТГК МУЗ-ЧАТ',
@@ -2270,9 +2270,36 @@ albumButton.addEventListener('click', createAlbumToggleHandler(albumButton, trac
 
 });
 
-document.getElementById('sort-button-baze').addEventListener('click', (event) => {
-  UpdateFunction()
-})
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+
+document.getElementById('sort-button-baze').addEventListener('click', () => {
+
+  const favoriteTitlesRaw = localStorage.getItem('trek') || '';
+  let favoriteTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+  shuffleArray(favoriteTitles);
+  localStorage.setItem('trek', favoriteTitles.join('\n'));
+
+
+  const albomTitlesRaw = localStorage.getItem('trekA') || '';
+  let albomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+  shuffleArray(albomTitles);
+  localStorage.setItem('trekA', albomTitles.join('\n'));
+
+
+  albomsBaze.forEach(album => {
+    shuffleArray(album.album);
+  });
+
+е
+  UpdateFunction();
+});
+
 
 
 document.getElementById('sort-button-data').addEventListener('click', (event) => {
