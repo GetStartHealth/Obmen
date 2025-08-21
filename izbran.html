@@ -971,13 +971,22 @@ function createAlbumToggleHandler(albumButton, tracksContainer) {
 function UpdateFunction() {
     favoritesContainer.innerHTML = '';
     albomContainer.innerHTML = '';
+    
+    let GLOABALS = 0
 
     const favoriteTitlesRaw = localStorage.getItem('trek') || '';
     const favoriteTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
+    
+
     const favoriteTracks = favoriteTitles
         .map(title => tracks.find(t => t.title === title))
         .filter(t => t && t.url);
+
+    const albomTitlesRaw = localStorage.getItem('trekA') || '';
+    const AlbomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0)
+
+    let globalIndex = favoriteTracks.length + AlbomTitles.length; 
 
     if (favoriteTracks.length === 0) {
         favoritesContainer.style.color = '#363E6B';
@@ -1000,7 +1009,7 @@ function UpdateFunction() {
 
             const numberBtn = document.createElement('button');
             numberBtn.className = 'num-btn';
-            numberBtn.textContent = favoriteTracks.length - index;
+            numberBtn.textContent = globalIndex--;
             numberBtn.style.marginRight = '5px'
 
             const deleteBtn = document.createElement('button');
@@ -1040,8 +1049,7 @@ function UpdateFunction() {
       }); 
     }
 
-    const albomTitlesRaw = localStorage.getItem('trekA') || '';
-    const AlbomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0)
+    
 
   console.log(AlbomTitles)
 
@@ -1059,8 +1067,9 @@ function UpdateFunction() {
         titleText.textContent = albomMass.title;
 
         const albumNumber = document.createElement('span');
-  albumNumber.textContent = `${AlbomTitles.length - index}.`;
+  albumNumber.textContent = `${globalIndex--}.`;
   albumNumber.style.fontWeight = 'bold';
+  albumNumber.className = 'num-btn'
 
         const deleteBtn2 = document.createElement('button');
         deleteBtn2.textContent = '-';
