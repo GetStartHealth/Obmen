@@ -2034,7 +2034,7 @@ albumButton.addEventListener('click', createAlbumToggleHandler(albumButton, trac
 
   })
 
-    function DateNumbercreateTrackRow(track) {
+    function DateNumbercreateTrackRow(track, index, totalTrack) {
       const row = document.createElement('div');
       row.className = 'track-row';
 
@@ -2059,6 +2059,8 @@ albumButton.addEventListener('click', createAlbumToggleHandler(albumButton, trac
 
 
       }
+
+      
 
       const trackBtn = document.createElement('button');
       trackBtn.className = 'track-button';
@@ -2086,6 +2088,12 @@ albumButton.addEventListener('click', createAlbumToggleHandler(albumButton, trac
         DateUpdateFunction();
       });
 
+      const numberBtn = document.createElement('button');
+            numberBtn.className = 'num-btn';
+            numberBtn.textContent = totalTrack.length - index;
+            numberBtn.style.marginRight = '5px'
+
+
 
 
 
@@ -2094,6 +2102,7 @@ albumButton.addEventListener('click', createAlbumToggleHandler(albumButton, trac
       numBtnDate.className = 'num-btn-date';
       const trackDate = track.date.substring(3, 5)
       numBtnDate.textContent = track.date.substring(0, 2) + ' ' + monthDay[trackDate] + "\n" + track.date.substring(6, 10);
+       row.appendChild(numberBtn);
       row.appendChild(numBtnDate);
       row.appendChild(deleteBtn56);
       row.appendChild(trackBtn);
@@ -2368,9 +2377,9 @@ document.getElementById('sort-button-data').addEventListener('click', (event) =>
 
    filteredUpdatedFavorites.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-   filteredUpdatedFavorites.forEach(favoritesTrek => {
+   filteredUpdatedFavorites.forEach((favoritesTrek, index) => {
       console.log(favoritesTrek)
-      veu = DateNumbercreateTrackRow(favoritesTrek)
+      veu = DateNumbercreateTrackRow(favoritesTrek, index, filteredUpdatedFavorites.length)
       favoritesContainer.appendChild(veu)
 
    })
