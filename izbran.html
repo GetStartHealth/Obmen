@@ -955,7 +955,7 @@ function UpdateFunction() {
         favoritesContainer.style.fontWeight = '600';
         favoritesContainer.style.userSelect = 'none';
     } else {
-        favoriteTracks.forEach(track => {
+        favoriteTracks.reverse().forEach((track, index) => {
             const trackContainer = document.createElement('div');
             trackContainer.style.display = 'flex';
             trackContainer.style.alignItems = 'center';
@@ -967,6 +967,11 @@ function UpdateFunction() {
             btn.disabled = !track.url;
             btn.title = `Воспроизвести ${track.title}`;
             btn.setAttribute('aria-label', `Воспроизвести ${track.title}`);
+
+            const numberBtn = document.createElement('button');
+            numberBtn.className = 'num-btn';
+            numberBtn.textContent = index + 1;
+            numberBtn.style.marginRight = '10px'
 
             const deleteBtn = document.createElement('button');
             deleteBtn.textContent = '-';
@@ -1001,7 +1006,7 @@ function UpdateFunction() {
             trackContainer.appendChild(btn);
             trackContainer.appendChild(buttonContainer);
             favoritesContainer.appendChild(trackContainer);
-        });
+      }); 
     }
 
     const albomTitlesRaw = localStorage.getItem('trekA') || '';
