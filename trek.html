@@ -764,7 +764,25 @@ function DateNumbercreateTrackRow(track, index) {
 
 
 
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
 
+
+
+
+document.getElementById('sort-button-baze').addEventListener('click', () => {
+
+  const favoriteTitlesRaw = localStorage.getItem('trek') || '';
+  let favoriteTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+  shuffleArray(favoriteTitles);
+  localStorage.setItem('trek', favoriteTitles.join('\n'));
+
+  UpdateFunction();
+});
 
 
 document.getElementById('sort-button-data').addEventListener('click', () => {
