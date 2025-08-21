@@ -665,7 +665,7 @@ body {
     <div id="favorites-container" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
     <audio id="audio-player" controls preload="none" controlsList="nodownload" aria-label="Аудиоплеер для избранных треков"></audio>
   </section>
- <script>
+<script>
     const albomsT = [
       {
       titleDate: '09.12.2025',title: '1 ТГК МУЗ-ЧАТ',
@@ -1016,14 +1016,9 @@ function UpdateFunction() {
     const albomTitlesRaw = localStorage.getItem('trekA') || '';
     const AlbomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0)
 
-    let totalAlbumTracks = 0;
-AlbomTitles.forEach(albom => {
-    const albomMass = albomsBaze.find(a => a.title === albom);
-    if (albomMass) totalAlbumTracks += albomMass.album.length;
-});
 
-let globalIndex = favoriteTracks.length + AlbomTitles.length + totalAlbumTracks;
-
+let favoriteIndex = favoriteTracks.length;
+let albumIndex = AlbomTitles.length;
 
 
 
@@ -1045,10 +1040,10 @@ AlbomTitles.forEach((albom, index) => {
         titleText.textContent = albomMass.title;
 
         const albumNumber = document.createElement('span');
-  albumNumber.textContent = `${globalIndex--}`;
+  albumNumber.textContent = `${albumIndex--}.`;
   albumNumber.style.fontWeight = 'bold';
-  albumNumber.className = 'num-btn09'
-  albumNumber.style.marginRight = '15px'; 
+  albumNumber.className = 'num-btn'
+  albumNumber.style.marginRight = '10px'; 
 
         const deleteBtn2 = document.createElement('button');
         deleteBtn2.textContent = '-';
@@ -1080,6 +1075,8 @@ AlbomTitles.forEach((albom, index) => {
         tracksContainer.style.overflow = 'hidden';
 
         albomMass.album.forEach(vf => {
+          let trackIndex = albomMass.album.length;
+
             const trackContainer = document.createElement('div');
             trackContainer.style.display = 'flex';
             trackContainer.style.alignItems = 'center';
@@ -1087,7 +1084,7 @@ AlbomTitles.forEach((albom, index) => {
             trackContainer.style.marginBottom = '10px';
 
             const trackNumberBtn = document.createElement('span');
-trackNumberBtn.textContent = `${globalIndex--}`;
+trackNumberBtn.textContent = `${trackIndex--}`;
 trackNumberBtn.className = 'num-btn';
 trackContainer.appendChild(trackNumberBtn);
 trackNumberBtn.style.marginRight = '10px'; 
@@ -1228,7 +1225,7 @@ albumButton.addEventListener('click', createAlbumToggleHandler(albumButton, trac
 
             const numberBtn = document.createElement('button');
             numberBtn.className = 'num-btn';
-            numberBtn.textContent = globalIndex--;
+            numberBtn.textContent = favoriteIndex--;
             numberBtn.style.marginRight = '5px'
 
             const deleteBtn = document.createElement('button');
@@ -2496,5 +2493,6 @@ document.getElementById('sort-button-data').addEventListener('click', (event) =>
 UpdateFunction();
 
   </script>
+</body>
 </body>
 </html>
