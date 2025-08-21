@@ -2402,7 +2402,9 @@ albomRow.appendChild(trackNumberBtn);
         const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
         localStorage.setItem('disabled', btnfDisabled + '\n' + disabledTitles.join('\n'));
         console.log(`Трек "${btnfDisabled}" отключен.`); 
+        deleteBtn2210.remove()
         albomRow.appendChild(restoreBtn0)
+        
 
 
       });
