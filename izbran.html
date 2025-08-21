@@ -1838,7 +1838,7 @@ searchForm.addEventListener('submit', (event) => {
 
 });
 
-  function NumbercreateTrackRow(track) {
+  function NumbercreateTrackRow(track, index, totalTrack) {
       const row = document.createElement('div');
       row.className = 'track-row';
       const favoriteTitlesRaw = localStorage.getItem('trek') || '';
@@ -1869,7 +1869,16 @@ searchForm.addEventListener('submit', (event) => {
         ABCUpdateFunction();
       });
 
+      const numberBtn = document.createElement('button');
+            numberBtn.className = 'num-btn';
+            numberBtn.textContent = totalTrack.length - index;
+            numberBtn.style.marginRight = '5px'
 
+      
+      
+
+
+      row.appendChild(numberBtn)
       row.appendChild(deleteBtn);
       row.appendChild(trackBtn);
 
@@ -2104,8 +2113,9 @@ albumButton.addEventListener('click', createAlbumToggleHandler(albumButton, trac
       numBtnDate.textContent = track.date.substring(0, 2) + ' ' + monthDay[trackDate] + "\n" + track.date.substring(6, 10);
        row.appendChild(numberBtn);
       row.appendChild(numBtnDate);
-      row.appendChild(deleteBtn56);
+      
       row.appendChild(trackBtn);
+      row.appendChild(deleteBtn56);
 
       return row;
 
@@ -2304,7 +2314,7 @@ albumButton.addEventListener('click', createAlbumToggleHandler(albumButton, trac
      console.log(trackSort)
        const track = tracks.find(t => t.title === trackSort);
        console.log(track)
-       const clearTrackRowToSort = NumbercreateTrackRow(track);
+       const clearTrackRowToSort = NumbercreateTrackRow(track, index, favoriteTitles);
        favoritesContainer.appendChild(clearTrackRowToSort);
    });
 
@@ -2379,7 +2389,7 @@ document.getElementById('sort-button-data').addEventListener('click', (event) =>
 
    filteredUpdatedFavorites.forEach((favoritesTrek, index) => {
       console.log(favoritesTrek)
-      veu = DateNumbercreateTrackRow(favoritesTrek, index, filteredUpdatedFavorites.length)
+      veu = DateNumbercreateTrackRow(favoritesTrek, index, filteredUpdatedFavorites)
       favoritesContainer.appendChild(veu)
 
    })
@@ -2410,4 +2420,5 @@ UpdateFunction();
 
   </script>
 </body>
+</html>
 </html>
