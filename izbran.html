@@ -1038,6 +1038,8 @@ AlbomTitles.forEach((albom, index) => {
         albumButton.style.width = '100%';
         albumButton.style.textAlign = 'left';
 
+        albumButton.appendChild(albumNumber)
+
         albumButton.appendChild(deleteBtn2);
         albumButton.appendChild(titleText);
 
@@ -1158,7 +1160,7 @@ trackContainer.appendChild(trackNumberBtn);
 albumButton.addEventListener('click', createAlbumToggleHandler(albumButton, tracksContainer));
 
 
-        albumDiv.appendChild(albumNumber)
+        
         albumDiv.appendChild(albumButton);
         albumDiv.appendChild(tracksContainer);
         albomContainer.appendChild(albumDiv);
