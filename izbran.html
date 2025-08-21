@@ -2495,6 +2495,7 @@ albumButton.addEventListener('click', createAlbumToggleHandler(albumButton, trac
 
 });
 
+
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -2503,27 +2504,22 @@ function shuffleArray(array) {
 }
 
 
+
+
 document.getElementById('sort-button-baze').addEventListener('click', () => {
 
-  const favoriteTitlesRaw = localStorage.getItem('trek') || '';
-  let favoriteTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-  shuffleArray(favoriteTitles);
-  localStorage.setItem('trek', favoriteTitles.join('\n'));
+  shuffleArray(tracksFive);
+  
 
+  buttonsContainer.innerHTML = '';
+  
 
-  const albomTitlesRaw = localStorage.getItem('trekA') || '';
-  let albomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-  shuffleArray(albomTitles);
-  localStorage.setItem('trekA', albomTitles.join('\n'));
-
-
-  albomsBaze.forEach(album => {
-    shuffleArray(album.album);
+  tracksFive.forEach((track, index) => {
+    const row = createTrackRow(track);
+    buttonsContainer.appendChild(row);
   });
-
-  UpdateFunction();
+  
 });
-
 
 
 document.getElementById('sort-button-data').addEventListener('click', (event) => {
