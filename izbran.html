@@ -1100,7 +1100,7 @@ trackContainer.appendChild(trackNumberBtn);
               restoreBtn89.addEventListener('click', (event) => {
                   event.preventDefault();
                   const disabledTitlesRaw09 = localStorage.getItem('disabled') || '';
-             const disabledTitles09 = disabledTitlesRaw09.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+            const disabledTitles09 = disabledTitlesRaw09.split('\n').map(s => s.trim()).filter(s => s.length > 0);
                   const updatedDisabledTitles = disabledTitles09.filter(title => title.toLowerCase() !== vf.title.toLowerCase());
                   localStorage.setItem('disabled', updatedDisabledTitles.join('\n'));
                   btnf.disabled = false; 
@@ -1114,10 +1114,6 @@ trackContainer.appendChild(trackNumberBtn);
             buttonContainer.appendChild(trackNumberBtn)
 
              buttonContainer.appendChild(restoreBtn89);
-      } else {
-        trackNumberBtn.textContent = `${globalIndex--}.`;
-        trackContainer.appendChild(trackNumberBtn);
-        trackContainer.appendChild(btnf);
       }
 
 
@@ -1153,6 +1149,7 @@ trackContainer.appendChild(trackNumberBtn);
 
             buttonContainer.appendChild(deleteBtn22);
     
+            trackContainer.appendChild(btnf);
             trackContainer.appendChild(buttonContainer);
             tracksContainer.appendChild(trackContainer);
         });
