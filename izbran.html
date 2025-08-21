@@ -665,6 +665,7 @@ body {
     <audio id="audio-player" controls preload="none" controlsList="nodownload" aria-label="Аудиоплеер для избранных треков"></audio>
   </section>
 <script>
+    <script>
     const albomsT = [
       {
       titleDate: '09.12.2025',title: '1 ТГК МУЗ-ЧАТ',
@@ -1668,6 +1669,7 @@ albumIndex = AlbomTitles.length
             albumNumber.style.fontWeight = 'bold';
             albumNumber.className = 'num-btn09'
             albumNumber.style.marginRight = '10px'; 
+          
 
     
     const albomMass = albomsT.find(a => a.title === albom);
@@ -1706,6 +1708,7 @@ albumIndex = AlbomTitles.length
     albumButton.setAttribute('aria-expanded', 'false');
     albumButton.style.width = '100%';
     albumButton.style.textAlign = 'left';
+    albumButton.appendChild(albumNumber)
 
      const numBtnDateAlbum = document.createElement('button');
       numBtnDateAlbum.className = 'num-btn-date';
@@ -2563,5 +2566,6 @@ document.getElementById('sort-button-data').addEventListener('click', (event) =>
 UpdateFunction();
 
   </script>
+
 </body>
 </html>
