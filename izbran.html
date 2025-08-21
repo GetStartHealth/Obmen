@@ -74,35 +74,6 @@ body {
       box-shadow: 0 5px 14px rgba(54, 62, 107, 0.7);
     }
 
-    .num-btn09 {
-      flex-shrink: 0;
-      background: #fff;
-      border: none;
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-      font-size: 1rem;
-      line-height: 1;
-      color: black;
-      font-weight: 700;
-      cursor: pointer;
-      transition: box-shadow 0.3s ease, transform 0.2s ease;
-      user-select: none;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .num-btn09:hover {
-      box-shadow: 0 8px 22px rgba(54, 62, 107, 0.9);
-      transform: scale(1.1);
-    }
-
-    .num-btn09:active {
-      transform: scale(0.95);
-      box-shadow: 0 5px 14px rgba(54, 62, 107, 0.7);
-    }
-
     #playlist-container h3 {
       margin: 0 0 24px 10px;
       font-weight: 700;
@@ -664,7 +635,7 @@ body {
     <div id="favorites-container" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
     <audio id="audio-player" controls preload="none" controlsList="nodownload" aria-label="Аудиоплеер для избранных треков"></audio>
   </section>
-<script>
+ <script>
     const albomsT = [
       {
       titleDate: '09.12.2025',title: '1 ТГК МУЗ-ЧАТ',
@@ -1039,10 +1010,10 @@ AlbomTitles.forEach((albom, index) => {
         titleText.textContent = albomMass.title;
 
         const albumNumber = document.createElement('span');
-  albumNumber.textContent = `${albumIndex--}`;
+  albumNumber.textContent = `${albumIndex--}.`;
   albumNumber.style.fontWeight = 'bold';
   albumNumber.className = 'num-btn09'
-  albumNumber.style.marginRight = '15px'; 
+  albumNumber.style.marginRight = '10px'; 
 
         const deleteBtn2 = document.createElement('button');
         deleteBtn2.textContent = '-';
@@ -1292,6 +1263,8 @@ function ABCUpdateFunction() {
   favoriteTracks.sort((a, b) => a.title.localeCompare(b.title));
   console.log(favoriteTracks)
 
+  let favoriteIndex = favoriteTracks.length;
+
 
 
   if (favoriteTracks.length === 0) {
@@ -1357,6 +1330,8 @@ function ABCUpdateFunction() {
   console.log(getUpdate)
   console.log('стоп')
 
+  let albumIndex = AlbomTitles.length;
+
 
 
 
@@ -1366,6 +1341,7 @@ function ABCUpdateFunction() {
     console.log(getUpdate[index])
     console.log('стоп')
     const albomMass = getUpdate[index].album.sort((a, b) => a.title.localeCompare(b.title))
+
     console.log(albomMass)
 
     if (getUpdate.length > index) {
@@ -1377,6 +1353,11 @@ function ABCUpdateFunction() {
     if (!albomMass) return;
 
 
+           const albumNumber = document.createElement('span');
+            albumNumber.textContent = `${albumIndex--}.`;
+            albumNumber.style.fontWeight = 'bold';
+            albumNumber.className = 'num-btn09'
+            albumNumber.style.marginRight = '10px'; 
 
      const trackContainer = document.createElement('div');
         trackContainer.style.display = 'flex'; 
@@ -1411,6 +1392,7 @@ function ABCUpdateFunction() {
     albumButton.setAttribute('aria-expanded', 'false');
     albumButton.style.width = '100%';
     albumButton.style.textAlign = 'left';
+    albumButton.appendChild(albumNumber)
 
     albumButton.appendChild(deleteBtn2);
     albumButton.appendChild(titleText);
@@ -1422,8 +1404,10 @@ function ABCUpdateFunction() {
     tracksContainer.style.display = 'flex'; 
     tracksContainer.style.flexDirection = 'column';
 
+    let trackIndexA = albomMass.length;
 
     albomMass.forEach(vf => {
+      
       const btnf = document.createElement('button');
       btnf.textContent = vf.title;
       btnf.className = 'track-button';
@@ -1440,6 +1424,12 @@ function ABCUpdateFunction() {
       const buttonContainer = document.createElement('div');
      buttonContainer.style.display = 'flex';
      buttonContainer.style.gap = '10px';
+
+     const trackNumberBtn = document.createElement('span');
+      trackNumberBtn.textContent = `${trackIndexA--}`;
+      trackNumberBtn.className = 'num-btn';
+      trackNumberBtn.style.marginRight = '10px';
+      trackContainer.appendChild(trackNumberBtn);
 
       const disabledTitlesRaw = localStorage.getItem('disabled') || '';
       const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
@@ -2496,6 +2486,5 @@ document.getElementById('sort-button-data').addEventListener('click', (event) =>
 UpdateFunction();
 
   </script>
-</body>
 </body>
 </html>
