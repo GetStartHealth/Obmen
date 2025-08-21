@@ -1059,7 +1059,7 @@ function UpdateFunction() {
         titleText.textContent = albomMass.title;
 
         const albumNumber = document.createElement('span');
-  albumNumber.textContent = `${index + 1}. `;
+  albumNumber.textContent = `${AlbomTitles.length - index}.`;
   albumNumber.style.fontWeight = 'bold';
 
         const deleteBtn2 = document.createElement('button');
@@ -1182,7 +1182,7 @@ function UpdateFunction() {
 
 
             buttonContainer.appendChild(deleteBtn22);
-
+    
             trackContainer.appendChild(btnf);
             trackContainer.appendChild(buttonContainer);
             tracksContainer.appendChild(trackContainer);
