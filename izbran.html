@@ -1045,7 +1045,7 @@ function UpdateFunction() {
 
   console.log(AlbomTitles)
 
-    AlbomTitles.forEach(albom => {
+    AlbomTitles.forEach((albom, index) => {
         const albomMass = albomsBaze.find(a => a.title === albom);
         if (!albomMass) return;
 
@@ -1057,6 +1057,10 @@ function UpdateFunction() {
         const titleText = document.createElement('span');
         titleText.className = 'title-text';
         titleText.textContent = albomMass.title;
+
+        const albumNumber = document.createElement('span');
+  albumNumber.textContent = `${index + 1}. `;
+  albumNumber.style.fontWeight = 'bold';
 
         const deleteBtn2 = document.createElement('button');
         deleteBtn2.textContent = '-';
@@ -1188,6 +1192,7 @@ function UpdateFunction() {
 albumButton.addEventListener('click', createAlbumToggleHandler(albumButton, tracksContainer));
 
 
+        albumDiv.appendChild(albumNumber)
         albumDiv.appendChild(albumButton);
         albumDiv.appendChild(tracksContainer);
         albomContainer.appendChild(albumDiv);
@@ -1258,8 +1263,9 @@ function ABCUpdateFunction() {
         }
       });
       trackContainer.appendChild(numberBtn)
-      trackContainer.appendChild(btn);
+
       trackContainer.appendChild(deleteBtn);
+      trackContainer.appendChild(btn);
       favoritesContainer.appendChild(trackContainer);
     });
   }
