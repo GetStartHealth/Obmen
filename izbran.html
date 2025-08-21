@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -1542,8 +1541,8 @@ function DateUpdateFunction() {
       trackContainer.appendChild(numberBtn)
 
       trackContainer.appendChild(numBtnDate)
-      trackContainer.appendChild(deleteBtn);
       trackContainer.appendChild(btn);
+      trackContainer.appendChild(deleteBtn);
       favoritesContainer.appendChild(trackContainer);
     });
   }
@@ -2105,8 +2104,8 @@ albumButton.addEventListener('click', createAlbumToggleHandler(albumButton, trac
       numBtnDate.textContent = track.date.substring(0, 2) + ' ' + monthDay[trackDate] + "\n" + track.date.substring(6, 10);
       row.appendChild(numberBtn)
       row.appendChild(numBtnDate);
-      row.appendChild(deleteBtn56);
       row.appendChild(trackBtn);
+      row.appendChild(deleteBtn56);
 
       return row;
 
