@@ -79,14 +79,13 @@ body {
       background: #fff;
       border: none;
       border-radius: 50%;
-      width: 36px;
-      height: 36px;
-      font-size: 1.1rem;
+      width: 30px;
+      height: 30px;
+      font-size: 1rem;
       line-height: 1;
       color: black;
       font-weight: 700;
       cursor: pointer;
-      box-shadow: 0 5px 14px rgba(54, 62, 107, 0.7);
       transition: box-shadow 0.3s ease, transform 0.2s ease;
       user-select: none;
       display: flex;
@@ -1040,10 +1039,10 @@ AlbomTitles.forEach((albom, index) => {
         titleText.textContent = albomMass.title;
 
         const albumNumber = document.createElement('span');
-  albumNumber.textContent = `${albumIndex--}.`;
+  albumNumber.textContent = `${albumIndex--}`;
   albumNumber.style.fontWeight = 'bold';
   albumNumber.className = 'num-btn09'
-  albumNumber.style.marginRight = '10px'; 
+  albumNumber.style.marginRight = '15px'; 
 
         const deleteBtn2 = document.createElement('button');
         deleteBtn2.textContent = '-';
