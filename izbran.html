@@ -664,7 +664,7 @@ body {
     <div id="favorites-container" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
     <audio id="audio-player" controls preload="none" controlsList="nodownload" aria-label="Аудиоплеер для избранных треков"></audio>
   </section>
- <script>
+<script>
     const albomsT = [
       {
       titleDate: '09.12.2025',title: '1 ТГК МУЗ-ЧАТ',
@@ -2271,7 +2271,7 @@ albumButton.addEventListener('click', createAlbumToggleHandler(albumButton, trac
 
 
       const numberBtn = document.createElement('button');
-            numberBtn.className = 'num-btn';
+            numberBtn.className = 'num-btn09';
             numberBtn.textContent = trackFull.length - index;
             numberBtn.style.marginRight = '5px'
 
@@ -2332,7 +2332,7 @@ const deleteBtn2124 = document.createElement('button');
 
 
     const trackNumberBtn = document.createElement('span');
-trackNumberBtn.textContent = `${track.album.length = index}`;
+trackNumberBtn.textContent = `${album.length - index}`;
 trackNumberBtn.className = 'num-btn';
 trackNumberBtn.style.marginRight = '10px';
 albomRow.appendChild(trackNumberBtn);
