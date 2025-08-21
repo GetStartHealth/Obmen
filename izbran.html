@@ -1059,6 +1059,7 @@ AlbomTitles.forEach((albom, index) => {
 trackNumberBtn.textContent = `${globalIndex--}.`;
 trackNumberBtn.className = 'num-btn';
 trackContainer.appendChild(trackNumberBtn);
+trackNumberBtn.style.marginRight = '10px'; 
 
             const btnf = document.createElement('button');
             btnf.textContent = vf.title;
@@ -1113,11 +1114,15 @@ trackContainer.appendChild(trackNumberBtn);
                   console.log(disabledTitles3); 
               } );
 
-            buttonContainer.appendChild(trackNumberBtn)
+             trackContainer.appendChild(trackNumberBtn);
+              trackContainer.appendChild(btnf);
+              buttonContainer.appendChild(restoreBtn89);
+      } else {
 
-             buttonContainer.appendChild(restoreBtn89);
-      }
-
+    trackContainer.appendChild(trackNumberBtn);
+    trackContainer.appendChild(btnf);
+}
+ 
 
             deleteBtn22.addEventListener('click', (event) => {
                 event.stopPropagation();
