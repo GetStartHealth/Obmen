@@ -664,7 +664,10 @@ body {
     <div id="favorites-container" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
     <audio id="audio-player" controls preload="none" controlsList="nodownload" aria-label="Аудиоплеер для избранных треков"></audio>
   </section>
-<script>
+
+  <script>
+
+    <script>
     const albomsT = [
       {
       titleDate: '09.12.2025',title: '1 ТГК МУЗ-ЧАТ',
@@ -1664,7 +1667,7 @@ function DateUpdateFunction() {
 albumIndex = AlbomTitles.length
   AlbomTitles.forEach(albom => {
     const albumNumber = document.createElement('span');
-            albumNumber.textContent = `${albumIndex--}.`;
+            albumNumber.textContent = `${albumIndex--}`;
             albumNumber.style.fontWeight = 'bold';
             albumNumber.className = 'num-btn09'
             albumNumber.style.marginRight = '10px'; 
@@ -1742,6 +1745,12 @@ albumIndex = AlbomTitles.length
   trackContainer.style.justifyContent = 'space-between';
   trackContainer.style.width = '100%'; 
   trackContainer.style.marginBottom = '8px';
+
+      const trackNumberBtn = document.createElement('span');
+trackNumberBtn.textContent = `${albomMass.album.length - albomIndex}`;
+trackNumberBtn.className = 'num-btn';
+trackNumberBtn.style.marginRight = '10px';
+trackContainer.appendChild(trackNumberBtn);
 
   
 
@@ -2563,6 +2572,8 @@ document.getElementById('sort-button-data').addEventListener('click', (event) =>
 });
 
 UpdateFunction();
+
+  </script>
 
   </script>
 
