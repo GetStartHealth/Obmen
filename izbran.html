@@ -1042,7 +1042,7 @@ AlbomTitles.forEach((albom, index) => {
         const albumNumber = document.createElement('span');
   albumNumber.textContent = `${albumIndex--}.`;
   albumNumber.style.fontWeight = 'bold';
-  albumNumber.className = 'num-btn'
+  albumNumber.className = 'num-btn09'
   albumNumber.style.marginRight = '10px'; 
 
         const deleteBtn2 = document.createElement('button');
@@ -1074,8 +1074,11 @@ AlbomTitles.forEach((albom, index) => {
         tracksContainer.style.maxHeight = '0';
         tracksContainer.style.overflow = 'hidden';
 
+
+
+let trackIndex = albomMass.album.length;
+
         albomMass.album.forEach(vf => {
-          let trackIndex = albomMass.album.length;
 
             const trackContainer = document.createElement('div');
             trackContainer.style.display = 'flex';
@@ -1086,8 +1089,9 @@ AlbomTitles.forEach((albom, index) => {
             const trackNumberBtn = document.createElement('span');
 trackNumberBtn.textContent = `${trackIndex--}`;
 trackNumberBtn.className = 'num-btn';
+trackNumberBtn.style.marginRight = '10px';
 trackContainer.appendChild(trackNumberBtn);
-trackNumberBtn.style.marginRight = '10px'; 
+ 
 
             const btnf = document.createElement('button');
             btnf.textContent = vf.title;
