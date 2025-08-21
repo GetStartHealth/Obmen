@@ -664,7 +664,7 @@ body {
     <div id="favorites-container" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
     <audio id="audio-player" controls preload="none" controlsList="nodownload" aria-label="Аудиоплеер для избранных треков"></audio>
   </section>
- <script>
+<script>
     const albomsT = [
       {
       titleDate: '09.12.2025',title: '1 ТГК МУЗ-ЧАТ',
@@ -1121,6 +1121,7 @@ trackContainer.appendChild(trackNumberBtn);
             if (disabledTitles.map(title => title.toLowerCase()).includes(vf.title.toLowerCase())) {
               trackContainer.appendChild(trackNumberBtn);
               trackContainer.appendChild(btnf);
+              deleteBtn22.remove()
 
               btnf.disabled = true;
               console.log("Сработало")
@@ -1186,6 +1187,9 @@ trackContainer.appendChild(trackNumberBtn);
 
 
             buttonContainer.appendChild(deleteBtn22);
+            if (disabledTitles.map(title => title.toLowerCase()).includes(vf.title.toLowerCase())) {
+              deleteBtn22.remove();
+            }
     
             trackContainer.appendChild(btnf);
             trackContainer.appendChild(buttonContainer);
@@ -1383,7 +1387,7 @@ function ABCUpdateFunction() {
 
 
            const albumNumber = document.createElement('span');
-            albumNumber.textContent = `${albumIndex--}`;
+            albumNumber.textContent = `${albumIndex--}.`;
             albumNumber.style.fontWeight = 'bold';
             albumNumber.className = 'num-btn09'
             albumNumber.style.marginRight = '10px'; 
@@ -2019,7 +2023,7 @@ row.appendChild(deleteBtn);
     const numberBtn = document.createElement('button');
             numberBtn.className = 'num-btn09';
             numberBtn.textContent = totalTrack.length - index;
-            numberBtn.style.marginRight = '10px'
+            numberBtn.style.marginRight = '5px'
 
     albumButton.appendChild(numberBtn)
     albumButton.appendChild(titleText);
