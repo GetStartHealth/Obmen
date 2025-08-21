@@ -1001,7 +1001,7 @@ function UpdateFunction() {
             const numberBtn = document.createElement('button');
             numberBtn.className = 'num-btn';
             numberBtn.textContent = favoriteTracks.length - index;
-            numberBtn.style.marginRight = '50px'
+            numberBtn.style.marginRight = '5px'
 
             const deleteBtn = document.createElement('button');
             deleteBtn.textContent = '-';
@@ -1219,7 +1219,7 @@ function ABCUpdateFunction() {
     favoritesContainer.style.fontWeight = '600';
     favoritesContainer.style.userSelect = 'none';
   } else {
-    favoriteTracks.forEach(track => {
+    favoriteTracks.forEach((track, index) => {
       const trackContainer = document.createElement('div');
       trackContainer.style.display = 'flex';
       trackContainer.style.alignItems = 'center';
@@ -1231,6 +1231,11 @@ function ABCUpdateFunction() {
       btn.disabled = !track.url;
       btn.title = `Воспроизвести ${track.title}`;
       btn.setAttribute('aria-label', `Воспроизвести ${track.title}`);
+
+      const numberBtn = document.createElement('button');
+            numberBtn.className = 'num-btn';
+            numberBtn.textContent = favoriteTracks.length - index;
+            numberBtn.style.marginRight = '5px'
 
       const deleteBtn = document.createElement('button');
       deleteBtn.textContent = '-';
@@ -1252,6 +1257,7 @@ function ABCUpdateFunction() {
           audioPlayer.play().catch(e => console.warn('Ошибка воспроизведения:', e));
         }
       });
+      trackContainer.appendChild(numberBtn)
 
       trackContainer.appendChild(deleteBtn);
       trackContainer.appendChild(btn);
@@ -1470,7 +1476,7 @@ function DateUpdateFunction() {
     favoritesContainer.style.fontWeight = '600';
     favoritesContainer.style.userSelect = 'none';
   } else {
-    favoriteTracks.forEach(track => {
+    favoriteTracks.forEach((track, index) => {
       const trackContainer = document.createElement('div');
       trackContainer.style.display = 'flex';
       trackContainer.style.alignItems = 'center';
@@ -1482,6 +1488,11 @@ function DateUpdateFunction() {
       btn.disabled = !track.url;
       btn.title = `Воспроизвести ${track.title}`;
       btn.setAttribute('aria-label', `Воспроизвести ${track.title}`);
+
+      const numberBtn = document.createElement('button');
+            numberBtn.className = 'num-btn';
+            numberBtn.textContent = favoriteTracks.length - index;
+            numberBtn.style.marginRight = '5px'
 
       monthDay = {
         '01': 'янв',
@@ -1527,6 +1538,7 @@ function DateUpdateFunction() {
           audioPlayer.play().catch(e => console.warn('Ошибка воспроизведения:', e));
         }
       });
+      favoriteTracks.appendChild(numberBtn)
 
       trackContainer.appendChild(numBtnDate)
       trackContainer.appendChild(deleteBtn);
