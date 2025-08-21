@@ -74,6 +74,36 @@ body {
       box-shadow: 0 5px 14px rgba(54, 62, 107, 0.7);
     }
 
+    .num-btn09 {
+      flex-shrink: 0;
+      background: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      font-size: 1.1rem;
+      line-height: 1;
+      color: black;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 5px 14px rgba(54, 62, 107, 0.7);
+      transition: box-shadow 0.3s ease, transform 0.2s ease;
+      user-select: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .num-btn09:hover {
+      box-shadow: 0 8px 22px rgba(54, 62, 107, 0.9);
+      transform: scale(1.1);
+    }
+
+    .num-btn09:active {
+      transform: scale(0.95);
+      box-shadow: 0 5px 14px rgba(54, 62, 107, 0.7);
+    }
+
     #playlist-container h3 {
       margin: 0 0 24px 10px;
       font-weight: 700;
@@ -1017,8 +1047,8 @@ AlbomTitles.forEach((albom, index) => {
         const albumNumber = document.createElement('span');
   albumNumber.textContent = `${globalIndex--}`;
   albumNumber.style.fontWeight = 'bold';
-  albumNumber.className = 'num-btn'
-  albumNumber.style.marginRight = '12.5px'; 
+  albumNumber.className = 'num-btn09'
+  albumNumber.style.marginRight = '15px'; 
 
         const deleteBtn2 = document.createElement('button');
         deleteBtn2.textContent = '-';
