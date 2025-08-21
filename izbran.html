@@ -1185,11 +1185,12 @@ trackContainer.appendChild(trackNumberBtn);
 
 
 
-
-            buttonContainer.appendChild(deleteBtn22);
             if (disabledTitles.map(title => title.toLowerCase()).includes(vf.title.toLowerCase())) {
               deleteBtn22.remove();
+            } else {
+                buttonContainer.appendChild(deleteBtn22);
             }
+    
     
             trackContainer.appendChild(btnf);
             trackContainer.appendChild(buttonContainer);
