@@ -2341,60 +2341,47 @@ const deleteBtn2124 = document.createElement('button');
 
     track.album.sort((a, b) => new Date(b.titleDate) - new Date(a.titleDate));
 
-    track.album.forEach((albom, albomIndex) => {
-      const albomRow = document.createElement('div');
+   track.album.forEach((albom, albomIndex) => {
+    const albomRow = document.createElement('div');
     albomRow.style.display = 'flex';
     albomRow.style.gap = '16px';
 
-
-
-
     const trackNumberBtn = document.createElement('span');
-trackNumberBtn.textContent = `${track.album.length - albomIndex}`;
-trackNumberBtn.className = 'num-btn';
-trackNumberBtn.style.marginRight = '10px';
-albomRow.appendChild(trackNumberBtn);
+    trackNumberBtn.textContent = `${track.album.length - albomIndex}`;
+    trackNumberBtn.className = 'num-btn';
+    trackNumberBtn.style.marginRight = '10px';
+    albomRow.appendChild(trackNumberBtn);
 
-    
+    const numBtnDate = document.createElement('button');
+    numBtnDate.className = 'num-btn-date';
+    const trackDate = albom.titleDate.substring(3, 5);
+    numBtnDate.textContent = albom.titleDate.substring(0, 2) + ' ' + monthDay[trackDate] + "\n" + albom.titleDate.substring(6, 10);
+    albomRow.appendChild(numBtnDate);
 
-
-
-
-
-      const numBtnDate = document.createElement('button');
-      numBtnDate.className = 'num-btn-date';
-      console.log(albom)
-      const trackDate = albom.titleDate.substring(3, 5)
-      numBtnDate.textContent = albom.titleDate.substring(0, 2) + ' ' + monthDay[trackDate] + "\n" + albom.titleDate.substring(6, 10);
-
-      albomRow.appendChild(numBtnDate);
-
-      const btnf290 = document.createElement('button');
-      btnf290.textContent = albom.title;
-      btnf290.className = 'track-button';
-      btnf290.title = `Воспроизвести ${albom.title}`;
-      btnf290.setAttribute('aria-label', `Воспроизвести ${albom.title}`);
-      btnf290.addEventListener('click', () => {
+    const btnf290 = document.createElement('button');
+    btnf290.textContent = albom.title;
+    btnf290.className = 'track-button';
+    btnf290.title = `Воспроизвести ${albom.title}`;
+    btnf290.setAttribute('aria-label', `Воспроизвести ${albom.title}`);
+    btnf290.addEventListener('click', () => {
         if (albom.url) {
-          audioPlayer.src = albom.url;
-          audioPlayer.play().catch(e => console.warn('Ошибка воспроизведения:', e));
+            audioPlayer.src = albom.url;
+            audioPlayer.play().catch(e => console.warn('Ошибка воспроизведения:', e));
         }
-      });
+    });
 
+    const restoreBtn0 = document.createElement('button');
+    restoreBtn0.className = 'restore-button';
+    restoreBtn0.setAttribute('aria-label', `Восстановить ${albom.title}`);
+    restoreBtn0.disabled = false; 
+    restoreBtn0.textContent = '+'; 
 
+    const deleteBtn2210 = document.createElement('button');
+    deleteBtn2210.textContent = '-';
+    deleteBtn2210.className = 'delete-button';
+    deleteBtn2210.setAttribute('aria-label', `Удалить ${albom.title}`);
 
-      const restoreBtn0 = document.createElement('button');
-        restoreBtn0.className = 'restore-button';
-        restoreBtn0.setAttribute('aria-label', `Восстановить ${albom.title}`);
-        restoreBtn0.disabled = false; 
-        restoreBtn0.textContent = '+'; 
-
-        const deleteBtn2210 = document.createElement('button');
-      deleteBtn2210.textContent = '-';
-      deleteBtn2210.className = 'delete-button';
-      deleteBtn2210.setAttribute('aria-label', `Удалить ${albom.title}`);
-
-      deleteBtn2210.addEventListener('click', (event) => {
+    deleteBtn2210.addEventListener('click', (event) => {
         event.stopPropagation(); 
         btnf290.disabled = true;
         const btnfDisabled = btnf290.textContent;
@@ -2402,55 +2389,43 @@ albomRow.appendChild(trackNumberBtn);
         const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
         localStorage.setItem('disabled', btnfDisabled + '\n' + disabledTitles.join('\n'));
         console.log(`Трек "${btnfDisabled}" отключен.`); 
-        deleteBtn2210.remove()
-        albomRow.appendChild(restoreBtn0)
-        
+        deleteBtn2210.remove();
+        albomRow.appendChild(restoreBtn0);
+    });
 
+    restoreBtn0.addEventListener('click', (event) => {
+        event.stopPropagation(); 
+        const disabledTitlesRaw0911 = localStorage.getItem('disabled') || '';
+        const disabledTitles0911 = disabledTitlesRaw0911.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+        const updatedDisabledTitles13 = disabledTitles0911.filter(title => title.toLowerCase() !== albom.title.toLowerCase());
+        localStorage.setItem('disabled', updatedDisabledTitles13.join('\n'));
+        btnf290.disabled = false;
+        albomRow.appendChild(deleteBtn2210);
+        restoreBtn0.remove();
+    });
 
-      });
+    const disabledTitlesRaw67 = localStorage.getItem('disabled') || '';
+    const disabledTitles67 = disabledTitlesRaw67.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+    console.log(disabledTitles67);
 
-        restoreBtn0.addEventListener('click', (event) => {
-          event.stopPropagation(); 
-          const disabledTitlesRaw0911 = localStorage.getItem('disabled') || '';
-      const disabledTitles0911 = disabledTitlesRaw0911.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-            const updatedDisabledTitles13 = disabledTitles0911.filter(title => title.toLowerCase() !== albom.title.toLowerCase());
-            localStorage.setItem('disabled', updatedDisabledTitles13.join('\n'));
-            btnf290.disabled = false;
-            albomRow.appendChild(deleteBtn2210)
-            restoreBtn0.remove()
-        })
-
-
-
-        const disabledTitlesRaw67 = localStorage.getItem('disabled') || '';
-      const disabledTitles67 = disabledTitlesRaw67.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-      console.log(disabledTitles67)
-
-      albomRow.appendChild(deleteBtn2210)
-      albomRow.appendChild(btnf290)
-
-      tracksContainer.appendChild(albomRow)
-
-      if (disabledTitles67.map(title => title.toLowerCase()).includes(albom.title.toLowerCase())) {
+    if (disabledTitles67.map(title => title.toLowerCase()).includes(albom.title.toLowerCase())) {
         btnf290.disabled = true;
-        console.log("Сработало")
-        deleteBtn2210.remove()
-        albomRow.appendChild(restoreBtn0)
-      }
+        console.log("Сработало");
+        albomRow.appendChild(restoreBtn0);
+    } else {
+        albomRow.appendChild(deleteBtn2210); 
+    }
 
-    })
-        albomRowDate.appendChild(numBtnDate23)
-    albomRowDate.appendChild(titleText)
-    albumButton.appendChild(albomRowDate)
-
+    albomRow.appendChild(btnf290);
+    tracksContainer.appendChild(albomRow);
+});
 
 albumButton.addEventListener('click', createAlbumToggleHandler(albumButton, tracksContainer));
 
+albumDiv.appendChild(albumButton);
+albumDiv.appendChild(tracksContainer);
 
-      albumDiv.appendChild(albumButton)
-      albumDiv.appendChild(tracksContainer)
-
-      return albumDiv
+return albumDiv;
     }
 
 
