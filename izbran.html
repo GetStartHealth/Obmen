@@ -666,7 +666,7 @@ body {
     <div id="favorites-container" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
     <audio id="audio-player" controls preload="none" controlsList="nodownload" aria-label="Аудиоплеер для избранных треков"></audio>
   </section>
- <script>
+<script>
     const albomsT = [
       {
       titleDate: '09.12.2025',title: '1 ТГК МУЗ-ЧАТ',
@@ -1041,7 +1041,7 @@ AlbomTitles.forEach((albom, index) => {
         titleText.textContent = albomMass.title;
 
         const albumNumber = document.createElement('span');
-  albumNumber.textContent = `${albumIndex--}`;
+  albumNumber.textContent = `${albumIndex--}.`;
   albumNumber.style.fontWeight = 'bold';
   albumNumber.className = 'num-btn09'
   albumNumber.style.marginRight = '10px'; 
@@ -1385,7 +1385,7 @@ function ABCUpdateFunction() {
 
 
            const albumNumber = document.createElement('span');
-            albumNumber.textContent = `${albumIndex--}`;
+            albumNumber.textContent = `${albumIndex--}.`;
             albumNumber.style.fontWeight = 'bold';
             albumNumber.className = 'num-btn09'
             albumNumber.style.marginRight = '10px'; 
@@ -1984,8 +1984,9 @@ row.appendChild(deleteBtn);
       return row;
     }
 
-  function ANumbercreateTrackRow(track) {
+  function ANumbercreateTrackRow(track ,index, totalTrack) {
     const AlbomTitlesRaw = localStorage.getItem('trekA') || '';
+    
 
 
 
@@ -2017,6 +2018,12 @@ row.appendChild(deleteBtn);
         ABCUpdateFunction();
     });
 
+    const numberBtn = document.createElement('button');
+            numberBtn.className = 'num-btn';
+            numberBtn.textContent = totalTrack.length - index;
+            numberBtn.style.marginRight = '5px'
+
+    albumButton.appendChild(numberBtn)
     albumButton.appendChild(titleText);
     albumButton.appendChild(deleteBtn212);
 
@@ -2424,11 +2431,11 @@ albumButton.addEventListener('click', createAlbumToggleHandler(albumButton, trac
    AlbomTitles.sort((a, b) => a.localeCompare(b));
    console.log(AlbomTitles)
 
-   AlbomTitles.forEach(AlbomSort => {
+   AlbomTitles.forEach((AlbomSort, index) => {
        console.log(AlbomSort)
        const AlbomTrack = albomsT.find(t => t.title === AlbomSort);
        console.log(AlbomTrack)
-       const AclearTrackRowToSort = ANumbercreateTrackRow(AlbomTrack);
+       const AclearTrackRowToSort = ANumbercreateTrackRow(AlbomTrack, index, AlbomTitles);
        console.log(AclearTrackRowToSort)
        albomContainer.appendChild(AclearTrackRowToSort);
    });
