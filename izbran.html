@@ -1258,9 +1258,8 @@ function ABCUpdateFunction() {
         }
       });
       trackContainer.appendChild(numberBtn)
-
-      trackContainer.appendChild(deleteBtn);
       trackContainer.appendChild(btn);
+      trackContainer.appendChild(deleteBtn);
       favoritesContainer.appendChild(trackContainer);
     });
   }
@@ -1838,7 +1837,7 @@ searchForm.addEventListener('submit', (event) => {
 
 });
 
-  function NumbercreateTrackRow(track) {
+  function NumbercreateTrackRow(track, index, totalTrack) {
       const row = document.createElement('div');
       row.className = 'track-row';
       const favoriteTitlesRaw = localStorage.getItem('trek') || '';
@@ -1869,9 +1868,15 @@ searchForm.addEventListener('submit', (event) => {
         ABCUpdateFunction();
       });
 
+      const numberBtn = document.createElement('button');
+            numberBtn.className = 'num-btn';
+            numberBtn.textContent = totalTrack.length - index;
+            numberBtn.style.marginRight = '5px'
 
-      row.appendChild(deleteBtn);
+
+      row.appendChild(numberBtn);
       row.appendChild(trackBtn);
+row.appendChild(deleteBtn);
 
       return row;
     }
@@ -2300,11 +2305,11 @@ albumButton.addEventListener('click', createAlbumToggleHandler(albumButton, trac
    favoriteTitles.sort((a, b) => a.localeCompare(b));
    console.log(favoriteTitles)
 
-   favoriteTitles.forEach((trackSort) => {
+   favoriteTitles.forEach((trackSort, index) => {
      console.log(trackSort)
        const track = tracks.find(t => t.title === trackSort);
        console.log(track)
-       const clearTrackRowToSort = NumbercreateTrackRow(track);
+       const clearTrackRowToSort = NumbercreateTrackRow(track, index, favoriteTitles);
        favoritesContainer.appendChild(clearTrackRowToSort);
    });
 
