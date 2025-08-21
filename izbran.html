@@ -605,8 +605,7 @@ body {
     <div id="favorites-container" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
     <audio id="audio-player" controls preload="none" controlsList="nodownload" aria-label="Аудиоплеер для избранных треков"></audio>
   </section>
-
- <script>
+<script>
     const albomsT = [
       {
       titleDate: '09.12.2025',title: '1 ТГК МУЗ-ЧАТ',
@@ -1540,13 +1539,14 @@ function DateUpdateFunction() {
     albumButton.style.width = '100%';
     albumButton.style.textAlign = 'left';
 
-     const numBtnDate23 = document.createElement('button');
-      numBtnDate23.className = 'num-btn-date';
+     const numBtnDateAlbum = document.createElement('button');
+      numBtnDateAlbum.className = 'num-btn-date';
       const trackDate = albomMass.titleDate.substring(3, 5)
-      numBtnDate23.textContent = albomMass.titleDate.substring(0, 2) + ' ' + monthDay[trackDate] + "\n" + albomMass.titleDate.substring(6, 10);
+      numBtnDateAlbum.textContent = albomMass.titleDate.substring(0, 2) + ' ' + monthDay[trackDate] + "\n" + albomMass.titleDate.substring(6, 10);
+      numBtnDateAlbum.style.marginBottom = '10px';
 
 
-    albumButton.appendChild(numBtnDate23)
+    albumButton.appendChild(numBtnDateAlbum)
     albumButton.appendChild(deleteBtn2);
     albumButton.appendChild(titleText);
 
@@ -1566,30 +1566,33 @@ function DateUpdateFunction() {
 
     albomMass.album.forEach(vf => {
 
-      const buttonContainer = document.createElement('div');
-     buttonContainer.style.display = 'flex';
-     buttonContainer.style.gap = '10px';
-
-     
-      const btnf = document.createElement('button');
-      btnf.textContent = vf.title;
-      btnf.className = 'track-button';
-      btnf.title = `Воспроизвести ${vf.title}`;
-      btnf.setAttribute('aria-label', `Воспроизвести ${vf.title}`);
-      
-
       const trackContainer = document.createElement('div');
-        trackContainer.style.display = 'flex'; 
-        trackContainer.style.alignItems = 'center';
-        trackContainer.style.justifyContent = 'space-between';
-        trackContainer.style.width = '100%'; 
-        trackContainer.style.marginBottom = '8px';
+  trackContainer.style.display = 'flex'; 
+  trackContainer.style.alignItems = 'center';
+  trackContainer.style.justifyContent = 'space-between';
+  trackContainer.style.width = '100%'; 
+  trackContainer.style.marginBottom = '8px';
 
-      const numBtnDate23 = document.createElement('button');
-      numBtnDate23.className = 'num-btn-date';
-      const trackDate = vf.titleDate.substring(3, 5)
-      numBtnDate23.textContent = vf.titleDate.substring(0, 2) + ' ' + monthDay[trackDate] + "\n" + vf.titleDate.substring(6, 10);
-      buttonContainer.appendChild(numBtnDate23)
+
+  const numBtnDate23 = document.createElement('button');
+  numBtnDate23.className = 'num-btn-date';
+  const trackDate = vf.titleDate.substring(3, 5);
+  numBtnDate23.textContent = vf.titleDate.substring(0, 2) + ' ' + monthDay[trackDate] + "\n" + vf.titleDate.substring(6, 10);
+
+  const btnf = document.createElement('button');
+  btnf.textContent = vf.title;
+  btnf.className = 'track-button';
+  btnf.title = `Воспроизвести ${vf.title}`;
+  btnf.setAttribute('aria-label', `Воспроизвести ${vf.title}`);
+
+   const buttonContainer = document.createElement('div');
+  buttonContainer.style.display = 'flex';
+  buttonContainer.style.gap = '10px';
+
+
+  trackContainer.appendChild(numBtnDate23);
+  trackContainer.appendChild(btnf);
+
 
 
       
