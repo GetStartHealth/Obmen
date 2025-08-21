@@ -30,37 +30,6 @@ body {
       user-select: none;
     }
 
-
-    .num-btn09 {
-      flex-shrink: 0;
-      background: #fff;
-      border: none;
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-      font-size: 1rem;
-      line-height: 1;
-      color: black;
-      font-weight: 700;
-      cursor: pointer;
-      transition: box-shadow 0.3s ease, transform 0.2s ease;
-      user-select: none;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .num-btn09:hover {
-      box-shadow: 0 8px 22px rgba(54, 62, 107, 0.9);
-      transform: scale(1.1);
-    }
-
-    .num-btn09:active {
-      transform: scale(0.95);
-      box-shadow: 0 5px 14px rgba(54, 62, 107, 0.7);
-    }
-
-
     #playlist-container {
       background: #fff;
       border-radius: 24px;
@@ -666,7 +635,7 @@ body {
     <div id="favorites-container" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
     <audio id="audio-player" controls preload="none" controlsList="nodownload" aria-label="Аудиоплеер для избранных треков"></audio>
   </section>
-<script>
+ <script>
     const albomsT = [
       {
       titleDate: '09.12.2025',title: '1 ТГК МУЗ-ЧАТ',
@@ -1041,7 +1010,7 @@ AlbomTitles.forEach((albom, index) => {
         titleText.textContent = albomMass.title;
 
         const albumNumber = document.createElement('span');
-  albumNumber.textContent = `${albumIndex--}.`;
+  albumNumber.textContent = `${albumIndex--}`;
   albumNumber.style.fontWeight = 'bold';
   albumNumber.className = 'num-btn09'
   albumNumber.style.marginRight = '10px'; 
@@ -2019,7 +1988,7 @@ row.appendChild(deleteBtn);
     });
 
     const numberBtn = document.createElement('button');
-            numberBtn.className = 'num-btn';
+            numberBtn.className = 'num-btn09';
             numberBtn.textContent = totalTrack.length - index;
             numberBtn.style.marginRight = '5px'
 
@@ -2036,6 +2005,7 @@ row.appendChild(deleteBtn);
 
     const der = track.album.sort((a, b) => a.title.localeCompare(b.title));
 
+    let trackIndex9 = track.album.length;
     der.forEach(albom => {
         const trackContainer = document.createElement('div');
         trackContainer.style.display = 'flex'; 
@@ -2047,6 +2017,12 @@ row.appendChild(deleteBtn);
         const buttonContainer = document.createElement('div');
     buttonContainer.style.display = 'flex';
     buttonContainer.style.gap = '10px';
+
+                const trackNumberBtn = document.createElement('span');
+trackNumberBtn.textContent = `${trackIndex9--}`;
+trackNumberBtn.className = 'num-btn';
+trackNumberBtn.style.marginRight = '10px';
+trackContainer.appendChild(trackNumberBtn);
 
         const restoreBtn0 = document.createElement('button');
         restoreBtn0.className = 'restore-button';
