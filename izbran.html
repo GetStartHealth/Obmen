@@ -1186,13 +1186,12 @@ trackContainer.appendChild(trackNumberBtn);
 
 
 
+
+            
             if (disabledTitles.map(title => title.toLowerCase()).includes(vf.title.toLowerCase())) {
               deleteBtn22.remove();
-            } else {
-                buttonContainer.appendChild(deleteBtn22);
-            }
-    
-    
+            } 
+            
             trackContainer.appendChild(btnf);
             trackContainer.appendChild(buttonContainer);
             tracksContainer.appendChild(trackContainer);
@@ -2495,7 +2494,6 @@ albumButton.addEventListener('click', createAlbumToggleHandler(albumButton, trac
 
 });
 
-
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -2504,22 +2502,27 @@ function shuffleArray(array) {
 }
 
 
-
-
 document.getElementById('sort-button-baze').addEventListener('click', () => {
 
-  shuffleArray(tracksFive);
-  
+  const favoriteTitlesRaw = localStorage.getItem('trek') || '';
+  let favoriteTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+  shuffleArray(favoriteTitles);
+  localStorage.setItem('trek', favoriteTitles.join('\n'));
 
-  buttonsContainer.innerHTML = '';
-  
 
-  tracksFive.forEach((track, index) => {
-    const row = createTrackRow(track);
-    buttonsContainer.appendChild(row);
+  const albomTitlesRaw = localStorage.getItem('trekA') || '';
+  let albomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+  shuffleArray(albomTitles);
+  localStorage.setItem('trekA', albomTitles.join('\n'));
+
+
+  albomsBaze.forEach(album => {
+    shuffleArray(album.album);
   });
-  
+
+  UpdateFunction();
 });
+
 
 
 document.getElementById('sort-button-data').addEventListener('click', (event) => {
