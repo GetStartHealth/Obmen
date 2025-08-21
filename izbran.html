@@ -605,7 +605,7 @@ body {
     <div id="favorites-container" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
     <audio id="audio-player" controls preload="none" controlsList="nodownload" aria-label="Аудиоплеер для избранных треков"></audio>
   </section>
-<script>
+ <script>
     const albomsT = [
       {
       titleDate: '09.12.2025',title: '1 ТГК МУЗ-ЧАТ',
@@ -1543,7 +1543,7 @@ function DateUpdateFunction() {
       numBtnDateAlbum.className = 'num-btn-date';
       const trackDate = albomMass.titleDate.substring(3, 5)
       numBtnDateAlbum.textContent = albomMass.titleDate.substring(0, 2) + ' ' + monthDay[trackDate] + "\n" + albomMass.titleDate.substring(6, 10);
-      numBtnDateAlbum.style.marginBottom = '10px';
+      numBtnDateAlbum.style.marginRight = '10px';
 
 
     albumButton.appendChild(numBtnDateAlbum)
@@ -1600,7 +1600,7 @@ function DateUpdateFunction() {
       const disabledTitlesRaw = localStorage.getItem('disabled') || '';
       const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
       console.log(disabledTitles)
-      if (disabledTitles.map(title => title.toLowerCase()).includes(vf.title.toLowerCase()+"-")) {
+      if (disabledTitles.map(title => title.toLowerCase()).includes(vf.title.toLowerCase())) {
         btnf.disabled = true;
         console.log("Сработало")
 
