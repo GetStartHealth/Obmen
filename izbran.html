@@ -1735,7 +1735,7 @@ albumIndex = AlbomTitles.length
         trackContainer.style.width = '100%'; 
         trackContainer.style.marginBottom = '8px';
 
-    albomMass.album.forEach(vf => {
+    albomMass.album.forEach((vf, index) => {
 
       const trackContainer = document.createElement('div');
   trackContainer.style.display = 'flex'; 
@@ -1745,7 +1745,7 @@ albumIndex = AlbomTitles.length
   trackContainer.style.marginBottom = '8px';
 
       const trackNumberBtn = document.createElement('span');
-trackNumberBtn.textContent = `${albomMass.album.length - albumIndex}`;
+trackNumberBtn.textContent = `${albomMass.album.length - index}`;
 trackNumberBtn.className = 'num-btn';
 trackNumberBtn.style.marginRight = '10px';
 trackContainer.appendChild(trackNumberBtn);
