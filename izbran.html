@@ -1426,6 +1426,7 @@ function DateUpdateFunction() {
 
 
   console.log(favoriteTracks)
+  favoriteTracks.sort((a, b) => new Date(b.date) - new Date(a.date));
 
   if (favoriteTracks.length === 0) {
     favoritesContainer.style.color = '#363E6B';
@@ -1501,10 +1502,18 @@ function DateUpdateFunction() {
   const albomTitlesRaw = localStorage.getItem('trekA') || '';
   const AlbomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
+   AlbomTitles.sort((a, b) => {
+    const albomA = albomsT.find(a => a.title === a);
+    const albomB = albomsT.find(b => b.title === b);
+    return new Date(albomB.titleDate) - new Date(albomA.titleDate);
+  });
+
 
 
   AlbomTitles.forEach(albom => {
+    
     const albomMass = albomsT.find(a => a.title === albom);
+     albomMass.album.sort((a, b) => new Date(b.titleDate) - new Date(a.titleDate));
     if (!albomMass) return;
 
     const albumDiv = document.createElement('div');
