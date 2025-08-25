@@ -787,10 +787,7 @@ function playTrack(index) {
       trackBtn.title = `Воспроизвести ${track.title}`;
       trackBtn.disabled = !track.url;
       trackBtn.onclick = () => {
-        if (track.url) {
-          audioPlayer.src = track.url;
-          audioPlayer.play();
-        }
+          playTrack(tracks.indexOf(track));
       };
 
       const numBtn = document.createElement('button');
