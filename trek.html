@@ -771,7 +771,7 @@ function playTrack(index) {
     }
 
     function createTrackRow(track) {
-      console.log(track)
+      
       const row = document.createElement('div');
       row.className = 'track-row';
 
@@ -788,6 +788,7 @@ function playTrack(index) {
       trackBtn.title = `Воспроизвести ${track.title}`;
       trackBtn.disabled = !track.url;
       trackBtn.onclick = () => {
+          console.log(track)
           playTrack(tracks.indexOf(track));
       };
 
@@ -999,8 +1000,8 @@ document.getElementById('sort-button-baze').addEventListener('click', () => {
   buttonsContainer.innerHTML = '';
   
 
-  tracksFive.forEach((track, index) => {
-    const row1 = createTrackRow(track, index);
+  tracksFive.forEach(track => {
+    const row1 = createTrackRow(track);
     buttonsContainer.appendChild(row1);
   });
   
