@@ -994,13 +994,13 @@ function shuffleArray(array) {
 
 document.getElementById('sort-button-baze').addEventListener('click', () => {
 
-  shuffleArray(tracksFive);
+  shuffleArray(tracks);
   
 
   buttonsContainer.innerHTML = '';
   
 
-  tracksFive.forEach(track => {
+  tracks.forEach(track => {
     const row1 = createTrackRow(track);
     buttonsContainer.appendChild(row1);
   });
