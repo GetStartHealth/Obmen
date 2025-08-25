@@ -1719,27 +1719,7 @@ function DateUpdateFunction() {
             numberBtn.textContent = favoriteTracks.length - index;
             numberBtn.style.marginRight = '5px'
 
-      monthDay = {
-        '01': 'янв',
-        '02': 'фев',
-        '03': 'мар',
-        '04': 'апр',
-        '05': 'май',
-        '06': 'июн',
-        '07': 'июл',
-        '08': 'авг',
-        '09': 'сен',
-        '10': 'окт',
-        '11': 'нояб',
-        '12': 'дек',
 
-
-      }
-
-      const numBtnDate = document.createElement('button');
-      numBtnDate.className = 'num-btn-date';
-      const trackDate = track.date.substring(3, 5)
-      numBtnDate.textContent = track.date.substring(0, 2) + ' ' + monthDay[trackDate] + "\n" + track.date.substring(6, 10);
 
       const deleteBtn = document.createElement('button');
       deleteBtn.textContent = '-';
@@ -1765,7 +1745,6 @@ function DateUpdateFunction() {
       });
       trackContainer.appendChild(numberBtn)
 
-      trackContainer.appendChild(numBtnDate)
       trackContainer.appendChild(btn);
       trackContainer.appendChild(deleteBtn);
       favoritesContainer.appendChild(trackContainer);
@@ -1831,14 +1810,8 @@ albumIndex = AlbomTitles.length
     albumButton.style.textAlign = 'left';
     albumButton.appendChild(albumNumber)
 
-     const numBtnDateAlbum = document.createElement('button');
-      numBtnDateAlbum.className = 'num-btn-date';
-      const trackDate = albomMass.titleDate.substring(3, 5)
-      numBtnDateAlbum.textContent = albomMass.titleDate.substring(0, 2) + ' ' + monthDay[trackDate] + "\n" + albomMass.titleDate.substring(6, 10);
-      numBtnDateAlbum.style.marginRight = '10px';
 
 
-    albumButton.appendChild(numBtnDateAlbum)
     albumButton.appendChild(deleteBtn2);
     albumButton.appendChild(titleText);
 
@@ -1874,8 +1847,6 @@ trackContainer.appendChild(trackNumberBtn);
   
 
 
-  const numBtnDate23 = document.createElement('button');
-  numBtnDate23.className = 'num-btn-date';
   const trackDate = vf.titleDate.substring(3, 5);
   numBtnDate23.textContent = vf.titleDate.substring(0, 2) + ' ' + monthDay[trackDate] + "\n" + vf.titleDate.substring(6, 10);
   numBtnDate23.style.marginRight = '10px';
@@ -1891,7 +1862,6 @@ trackContainer.appendChild(trackNumberBtn);
   buttonContainer.style.gap = '10px';
 
 
-  trackContainer.appendChild(numBtnDate23);
   trackContainer.appendChild(btnf);
 
 
@@ -2306,22 +2276,6 @@ albumButton.addEventListener('click', createAlbumToggleHandler(albumButton, trac
 
 
 
-      monthDay = {
-        '01': 'янв',
-        '02': 'фев',
-        '03': 'мар',
-        '04': 'апр',
-        '05': 'май',
-        '06': 'июн',
-        '07': 'июл',
-        '08': 'авг',
-        '09': 'сен',
-        '10': 'окт',
-        '11': 'нояб',
-        '12': 'дек',
-
-
-      }
 
       
 
@@ -2359,10 +2313,6 @@ albumButton.addEventListener('click', createAlbumToggleHandler(albumButton, trac
 
 
 
-
-
-      const numBtnDate = document.createElement('button');
-      numBtnDate.className = 'num-btn-date';
       const trackDate = track.date.substring(3, 5)
       numBtnDate.textContent = track.date.substring(0, 2) + ' ' + monthDay[trackDate] + "\n" + track.date.substring(6, 10);
       row.appendChild(numberBtn)
@@ -2430,10 +2380,6 @@ albumButton.addEventListener('click', createAlbumToggleHandler(albumButton, trac
     albumButton.style.textAlign = 'left';
     albumButton.appendChild(numberBtn)
 
-    const numBtnDate23 = document.createElement('button');
-      numBtnDate23.className = 'num-btn-date';
-      const trackDate = track.titleDate.substring(3, 5)
-      numBtnDate23.textContent = track.titleDate.substring(0, 2) + ' ' + monthDay[trackDate] + "\n" + track.titleDate.substring(6, 10);
 
 
 
@@ -2482,13 +2428,7 @@ albomRow.appendChild(trackNumberBtn);
 
 
 
-      const numBtnDate = document.createElement('button');
-      numBtnDate.className = 'num-btn-date';
-      console.log(albom)
-      const trackDate = albom.titleDate.substring(3, 5)
-      numBtnDate.textContent = albom.titleDate.substring(0, 2) + ' ' + monthDay[trackDate] + "\n" + albom.titleDate.substring(6, 10);
-
-      albomRow.appendChild(numBtnDate);
+     
 
       const btnf290 = document.createElement('button');
       btnf290.textContent = albom.title;
@@ -2561,7 +2501,6 @@ albomRow.appendChild(trackNumberBtn);
       }
 
     })
-        albomRowDate.appendChild(numBtnDate23)
     albomRowDate.appendChild(titleText)
     albumButton.appendChild(albomRowDate)
 
