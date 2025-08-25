@@ -734,6 +734,24 @@ const tracksFive = [
 
 ];
 
+currentTrackIndex = -1;
+
+function playTrack(index) {
+    currentTrackIndex = index;
+    const track = tracks[index];
+    audioPlayer.src = track.url;
+    audioPlayer.play().catch(error => {
+      console.error("Ошибка воспроизведения:", error);
+    });
+
+}
+
+
+audioPlayer.addEventListener('ended', () => {
+    playTrack(currentTrackIndex + 1); 
+});
+
+
 
 
 
@@ -851,10 +869,7 @@ const tracksFive = [
       trackBtn.title = `Воспроизвести ${track.title}`;
       trackBtn.disabled = !track.url;
       trackBtn.onclick = () => {
-        if (track.url) {
-          audioPlayer.src = track.url;
-          audioPlayer.play();
-        }
+          playTrack(tracks.indexOf(track));
       };
 
       const numBtn = document.createElement('button');
