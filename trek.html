@@ -747,9 +747,6 @@ function playTrack(index) {
 }
 
 
-audioPlayer.addEventListener('ended', () => {
-    playTrack(currentTrackIndex + 1); 
-});
 
 
 
@@ -1030,6 +1027,11 @@ document.getElementById('sort-button-data').addEventListener('click', () => {
 
 
 });
+
+audioPlayer.addEventListener('ended', () => {
+    playTrack(currentTrackIndex + 1); 
+});
+
 
 
 
