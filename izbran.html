@@ -2686,11 +2686,14 @@ audioPlayer.addEventListener('ended', () => {
     } else {
       const TitlesRaw = localStorage.getItem('trek') || '';
       const Titles = TitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-console.log(AboutTrackIndex)
       const currentTitle = tracks[AboutTrackIndex];
-      console.log(currentTitle.title)
-      const currentIndexInFavorites = Titles.indexOf(currentTitle);
+      const found = Titles.find(t => t === currentTitle);
+      console.log(found)
+      
+      const currentIndexInFavorites = Titles.indexOf(currentTitle.title);
+
       console.log(currentIndexInFavorites)
+
       const hel = Titles[currentIndexInFavorites + 1]
       const reMark = tracks.indexOf(hel)
 
