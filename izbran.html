@@ -1084,11 +1084,15 @@ body {
 ];
 
 
-currentTrackAlbomIndex = -1;
+let currentTrackIndex = { albumIndex: -1, trackIndex: -1 };
 
-    function playAlbomTrack(albumIndex, trackIndex) {
-    const track = tracks[albumIndex].album[trackIndex];
-    currentTrackAlbomIndex = { albumIndex, trackIndex };
+
+function playTrack(albumIndex, trackIndex) {
+  console.log(albumIndex)
+  console.log(trackIndex)
+    const track = albomsT[albumIndex].album[trackIndex];
+    console.log(track)
+    currentTrackIndex = { albumIndex, trackIndex };
     audioPlayer.src = track.url;
     audioPlayer.play().catch(error => {
         console.error("Ошибка воспроизведения:", error);
@@ -1221,6 +1225,8 @@ trackContainer.appendChild(trackNumberBtn);
             btnf.setAttribute('aria-label', `Воспроизвести ${vf.title}`);
 
             btnf.onclick = () => {
+              console.log(albomsT.indexOf(albomMass))
+              console.log(albomMass.album.indexOf(vf))
               playAlbomTrack(albomsBaze.indexOf(albomMass), albomMass.album.indexOf(vf));
             };
 
@@ -2631,7 +2637,7 @@ UpdateFunction();
 
 audioPlayer.addEventListener('ended', () => {
      const { albumIndex, trackIndex } = currentTrackIndex;
-    const currentAlbum = tracks[albumIndex].album;
+    const currentAlbum = albomsT[albumIndex].album;
     const nextTrackIndex = trackIndex + 1;
     if (nextTrackIndex < currentAlbum.length) {
       playTrack(albumIndex, nextTrackIndex)
