@@ -2655,7 +2655,7 @@ UpdateFunction();
 audioPlayer.addEventListener('ended', () => {
     const { albumIndex, trackIndex } = currentTrackIndex;
 
-    if (albumIndex) {
+    if (albumIndex !== -1) {
           const albomTitlesRaw = localStorage.getItem('trekA') || '';
           const AlbomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
