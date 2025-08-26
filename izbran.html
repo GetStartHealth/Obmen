@@ -2602,7 +2602,7 @@ document.getElementById('sort-button-baze').addEventListener('click', () => {
   localStorage.setItem('trekA', albomTitles.join('\n'));
 
 
-  albomsBaze.forEach(album => {
+  albomsT.forEach(album => {
     shuffleArray(album.album);
   });
 
@@ -2675,21 +2675,9 @@ audioPlayer.addEventListener('ended', () => {
 
     
  if (nextTrackIndex < currentAlbum.length) {
-        
         playAlbomTrack(albumIndex, nextTrackIndex);
     } else {
-        const nextAlbumIndexInFavorites = currentAlbumIndexInFavorites + 1;
-        if (nextAlbumIndexInFavorites < AlbomTitles.length) {
-          berOUT = AlbomTitles[nextAlbumIndexInFavorites]
-          const albomMassTo = albomsBaze.find(a => a.title === berOUT);
-          const merka = albomsBaze.indexOf(albomMassTo)
-          playAlbomTrack(merka, 0)
-        }    else {
-          const vera = AlbomTitles[0]
-          const albomMassTo1 = albomsBaze.find(a => a.title === vera);
-          const merka1 = albomsBaze.indexOf(albomMassTo)
-          playAlbomTrack(merka1, 0)
-        }  
+        audioPlayer.pause()
     }    
 }); 
 
