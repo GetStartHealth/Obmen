@@ -2640,22 +2640,28 @@ UpdateFunction();
 
 audioPlayer.addEventListener('ended', () => {
     const { albumIndex, trackIndex } = currentTrackIndex;
-    console.log(albumIndex)
-    console.log(trackIndex)
-    const currentAlbum = albomsBaze[albumIndex].album;
-    console.log(currentAlbum)
-    const nextTrackIndex = trackIndex + 1;
-    if (nextTrackIndex < currentAlbum.length) {
-      playAlbomTrack(albumIndex, nextTrackIndex)
-    } else {
-      if (albumIndex + 1 < albomsBaze.length) {
-        playAlbomTrack(albumIndex + 1, 0)
-    } else {
-      playAlbomTrack(0, 0);
-    }
+
+    const albomTitlesRaw = localStorage.getItem('trekA') || '';
+    const AlbomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+
+    const currentAlbumTitle = albomsBaze[albumIndex].title;
+    const currentAlbumIndexInFavorites = AlbomTitles.indexOf(currentAlbumTitle);
     
-  }
-})
+    const currentAlbum = albomsBaze[albumIndex].album;
+    const nextTrackIndex = trackIndex + 1;
+
+ if (nextTrackIndex < currentAlbum.length) {
+        playAlbomTrack(albumIndex, nextTrackIndex);
+    } else {
+        const nextAlbumIndexInFavorites = currentAlbumIndexInFavorites + 1;
+        if (nextAlbumIndexInFavorites < AlbomTitles.length) {
+          berOUT = AlbomTitles[nextAlbumIndexInFavorites]
+          const albomMassTo = albomsBaze.find(a => a.title === berOUT);
+          const merka = albomsBaze.indexOf(albomMassTo)
+          playAlbomTrack(merka, 0)
+        }      
+    }    
+}); 
 
 
   </script>
