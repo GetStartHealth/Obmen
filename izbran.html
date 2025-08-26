@@ -2655,22 +2655,30 @@ UpdateFunction();
 audioPlayer.addEventListener('ended', () => {
     const { albumIndex, trackIndex } = currentTrackIndex;
 
-    const albomTitlesRaw = localStorage.getItem('trekA') || '';
-    const AlbomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+    if (albumIndex) {
+          const albomTitlesRaw = localStorage.getItem('trekA') || '';
+          const AlbomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
-    const currentAlbumTitle = albomsBaze[albumIndex].title;
-    const currentAlbumIndexInFavorites = AlbomTitles.indexOf(currentAlbumTitle);
-    
-    const currentAlbum = albomsBaze[albumIndex].album;
-    const nextTrackIndex = trackIndex + 1;
+          const currentAlbumTitle = albomsBaze[albumIndex].title;
+          const currentAlbumIndexInFavorites = AlbomTitles.indexOf(currentAlbumTitle);
+          
+          const currentAlbum = albomsBaze[albumIndex].album;
+          const nextTrackIndex = trackIndex + 1;
 
-    
- if (nextTrackIndex < currentAlbum.length) {
-        playAlbomTrack(albumIndex, nextTrackIndex);
+          
+      if (nextTrackIndex < currentAlbum.length) {
+              playAlbomTrack(albumIndex, nextTrackIndex);
+          } else {
+              playAlbomTrack(albumIndex, 0)
+          }    
+      
     } else {
-        playAlbomTrack(albumIndex, 0)
-    }    
-}); 
+      console.log('вы воспроизводите трек')
+    }
+
+})
+
+
 
 
   </script>
