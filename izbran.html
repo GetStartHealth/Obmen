@@ -1087,10 +1087,10 @@ body {
 let currentTrackIndex = { albumIndex: -1, trackIndex: -1 };
 
 
-function playTrack(albumIndex, trackIndex) {
+function playAlbomTrack(albumIndex, trackIndex) {
   console.log(albumIndex)
   console.log(trackIndex)
-    const track = albomsT[albumIndex].album[trackIndex];
+    const track = albomsBaze[albumIndex].album[trackIndex];
     console.log(track)
     currentTrackIndex = { albumIndex, trackIndex };
     audioPlayer.src = track.url;
@@ -2640,7 +2640,7 @@ UpdateFunction();
 
 audioPlayer.addEventListener('ended', () => {
      const { albumIndex, trackIndex } = currentTrackIndex;
-    const currentAlbum = albomsT[albumIndex].album;
+    const currentAlbum = albomsBaze[albumIndex].album;
     const nextTrackIndex = trackIndex + 1;
     if (nextTrackIndex < currentAlbum.length) {
       playTrack(albumIndex, nextTrackIndex)
