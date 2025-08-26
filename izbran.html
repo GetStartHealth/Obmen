@@ -2673,7 +2673,12 @@ audioPlayer.addEventListener('ended', () => {
           const albomMassTo = albomsBaze.find(a => a.title === berOUT);
           const merka = albomsBaze.indexOf(albomMassTo)
           playAlbomTrack(merka, 0)
-        }      
+        }    else {
+          const vera = AlbomTitles[0]
+          const albomMassTo1 = albomsBaze.find(a => a.title === vera);
+          const merka1 = albomsBaze.indexOf(albomMassTo)
+          playAlbomTrack(merka1, 0)
+        }  
     }    
 }); 
 
