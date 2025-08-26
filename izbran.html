@@ -2688,7 +2688,7 @@ audioPlayer.addEventListener('ended', () => {
       
     } else {
       const TitlesRaw = localStorage.getItem('trek') || '';
-      const Titles = TitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+      let Titles = TitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
       if (isSortedAlphabetically) {
             Titles.sort((a, b) => a.localeCompare(b));
