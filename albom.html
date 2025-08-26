@@ -704,9 +704,16 @@ audioPlayer.addEventListener('ended', () => {
     } else {
       if (albumIndex + 1 < tracks.length) {
         const nextAlbumTracks = document.querySelectorAll('.album-tracks')[albumIndex + 1];
+        const nextAlbumTracksNone = document.querySelectorAll('.album-tracks');
             if (nextAlbumTracks) {
                 nextAlbumTracks.style.display = 'block';
             }
+        nextAlbumTracksNone.forEach(NoneTrackAlbum => {
+          if (NoneTrackAlbum !== nextAlbumTracks) {
+            NoneTrackAlbum.style.display = 'none'
+          }
+      })
+        
         playTrack(albumIndex + 1, 0)
       } else {
         const nextAlbumTracksZero = document.querySelectorAll('.album-tracks')[0];
