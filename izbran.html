@@ -1088,16 +1088,28 @@ let currentTrackIndex = { albumIndex: -1, trackIndex: -1 };
 
 
 function playAlbomTrack(albumIndex, trackIndex) {
-  console.log(albumIndex)
-  console.log(trackIndex)
-    const track = albomsBaze[albumIndex].album[trackIndex];
-    console.log(track)
+    const album = albomsBaze[albumIndex];
+    let track = album.album[trackIndex];
+
+    const disabledTitlesRaw = localStorage.getItem('disabled') || '';
+    const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+
+    while (disabledTitles.map(title => title.toLowerCase()).includes(track.title.toLowerCase())) {
+        trackIndex++;
+        if (trackIndex >= album.album.length) {
+            console.warn("Все треки в альбоме заблокированы.");
+            return;
+        }
+        track = album.album[trackIndex];
+    }
+
     currentTrackIndex = { albumIndex, trackIndex };
     audioPlayer.src = track.url;
     audioPlayer.play().catch(error => {
         console.error("Ошибка воспроизведения:", error);
     });
 }
+
 
 const favoritesContainer = document.getElementById('favorites-container');
 const albomContainer = document.getElementById('albom-container');
@@ -2652,6 +2664,7 @@ audioPlayer.addEventListener('ended', () => {
 
     
  if (nextTrackIndex < currentAlbum.length) {
+        
         playAlbomTrack(albumIndex, nextTrackIndex);
     } else {
         const nextAlbumIndexInFavorites = currentAlbumIndexInFavorites + 1;
