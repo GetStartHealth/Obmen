@@ -2646,8 +2646,15 @@ audioPlayer.addEventListener('ended', () => {
     console.log(currentAlbum)
     const nextTrackIndex = trackIndex + 1;
     if (nextTrackIndex < currentAlbum.length) {
-      playAlbomTrack(albumIndex, nextTrackIndex)
+      playTrack(albumIndex, nextTrackIndex)
+    } else {
+      if (albumIndex + 1 < albomsBaze.length) {
+        playAlbomTrack(albumIndex + 1, 0)
+    } else {
+      playAlbomTrack(0, 0);
     }
+    
+  }
 })
 
 
