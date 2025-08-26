@@ -2640,42 +2640,37 @@ UpdateFunction();
 
 audioPlayer.addEventListener('ended', () => {
     const { albumIndex, trackIndex } = currentTrackIndex;
-    
+
     const albomTitlesRaw = localStorage.getItem('trekA') || '';
     const AlbomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
     
-    const currentAlbumTitle = albomsBaze[albumIndex].title;
-    const currentAlbumIndexInFavorites = AlbomTitles.indexOf(currentAlbumTitle);
-    
-    let nextAlbumIndex = albumIndex;
     let nextTrackIndex = trackIndex + 1;
-    
+    let nextAlbumIndex = albumIndex;
 
     while (true) {
-        const album = albomsBaze[nextAlbumIndex].album;
-        
+        const currentAlbum = albomsBaze[nextAlbumIndex].album;
 
-        while (nextTrackIndex < album.length) {
-            if (!album[nextTrackIndex].blocked) {
+
+        while (nextTrackIndex < currentAlbum.length) {
+            if (!currentAlbum[nextTrackIndex].blocked) {
                 playAlbomTrack(nextAlbumIndex, nextTrackIndex);
                 return;
             }
             nextTrackIndex++;
         }
-        
 
-        const nextAlbumIndexInFavorites = AlbomTitles.indexOf(albomsBaze[nextAlbumIndex].title) + 1;
-        if (nextAlbumIndexInFavorites >= AlbomTitles.length) break;
-        
-        const nextAlbumTitle = AlbomTitles[nextAlbumIndexInFavorites];
-        nextAlbumIndex = albomsBaze.findIndex(a => a.title === nextAlbumTitle);
-        nextTrackIndex = 0;
-        
-        if (nextAlbumIndex === -1) break;
+        nextAlbumIndex++;
+        if (nextAlbumIndex >= AlbomTitles.length) {
+
+            audioPlayer.pause();
+            return;
+        }
+
+        const nextAlbumTitle = AlbomTitles[nextAlbumIndex];
+        nextTrackIndex = 0; 
     }
-    
-    audioPlayer.pause();
 });
+
 
 
   </script>
