@@ -2684,7 +2684,17 @@ audioPlayer.addEventListener('ended', () => {
           }    
       
     } else {
-      playTrack(AboutTrackIndex + 1)
+      const TitlesRaw = localStorage.getItem('trek') || '';
+      const Titles = TitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+
+      const currentTitle = tracks[AboutTrackIndex].title;
+      const currentIndexInFavorites = Titles.indexOf(currentTitle);
+      const hel = Titles[currentIndexInFavorites + 1]
+      const reMark = tracks.indexOf(hel)
+
+
+
+      playTrack(reMark)
     }
 
 })
