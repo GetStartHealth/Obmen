@@ -2596,43 +2596,60 @@ function shuffleArray(array) {
 document.getElementById('sort-button-baze').addEventListener('click', () => {
 
     const favoriteTitlesRaw = localStorage.getItem('trek') || '';
-    let favoriteTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-    
     const albomTitlesRaw = localStorage.getItem('trekA') || '';
-    let albomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+    
+    sessionStorage.setItem('originalTrek', favoriteTitlesRaw);
+    sessionStorage.setItem('originalTrekA', albomTitlesRaw);
+    sessionStorage.setItem('originalAlbomsBaze', JSON.stringify(albomsBaze));
     
 
+    let favoriteTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
     shuffleArray(favoriteTitles);
+    localStorage.setItem('trek', favoriteTitles.join('\n'));
     
 
+    let albomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
     shuffleArray(albomTitles);
-    
+    localStorage.setItem('trekA', albomTitles.join('\n'));
 
-    const shuffledAlbomsBaze = [...albomsBaze];
-    shuffledAlbomsBaze.forEach(album => {
+    albomsBaze.forEach(album => {
         shuffleArray(album.album);
     });
     
 
-    localStorage.setItem('trek', favoriteTitles.join('\n'));
-    localStorage.setItem('trekA', albomTitles.join('\n'));
-    
-
-    const originalAlbomsBaze = [...albomsBaze];
-    albomsBaze.forEach((album, index) => {
-        album.album = [...shuffledAlbomsBaze[index].album];
-    });
-
-
-    window.addEventListener('beforeunload', function() {
-        localStorage.setItem('trek', favoriteTitlesRaw);
-        localStorage.setItem('trekA', albomTitlesRaw);
-        albomsBaze.forEach((album, index) => {
-            album.album = [...originalAlbomsBaze[index].album];
-        });
-    });
+    UpdateFunction();
 });
 
+
+window.addEventListener('load', function() {
+    const originalTrek = sessionStorage.getItem('originalTrek');
+    const originalTrekA = sessionStorage.getItem('originalTrekA');
+    const originalAlbomsBazeJson = sessionStorage.getItem('originalAlbomsBaze');
+    
+    if (originalTrek) {
+        localStorage.setItem('trek', originalTrek);
+    }
+    
+    if (originalTrekA) {
+        localStorage.setItem('trekA', originalTrekA);
+    }
+    
+    if (originalAlbomsBazeJson) {
+        const originalAlbomsBaze = JSON.parse(originalAlbomsBazeJson);
+
+        originalAlbomsBaze.forEach((originalAlbum, index) => {
+            if (albomsBaze[index]) {
+                albomsBaze[index].album = [...originalAlbum.album];
+            }
+        });
+    }
+
+    sessionStorage.removeItem('originalTrek');
+    sessionStorage.removeItem('originalTrekA');
+    sessionStorage.removeItem('originalAlbomsBaze');
+
+    UpdateFunction();
+});
 
 
 
