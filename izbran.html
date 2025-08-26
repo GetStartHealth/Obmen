@@ -2700,9 +2700,11 @@ audioPlayer.addEventListener('ended', () => {
 
       const reMark = tracks.indexOf(found)
 
-
-
-      playTrack(reMark)
+      if (reMark < Titles.length) {
+        playTrack(reMark)
+      } else {
+        playTrack(0)
+      }
     }
 
 })
