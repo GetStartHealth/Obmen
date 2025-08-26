@@ -2618,6 +2618,9 @@ document.getElementById('sort-button-data').addEventListener('click', (event) =>
    favoritesContainer.innerHTML = '';
    albomContainer.innerHTML = '';
 
+   isSortedAlphabetically = false;
+  isSortedByDate = true;
+
    const filteredUpdatedFavorites = [];
    const aTitlesRaw = localStorage.getItem('trek') || '';
    const ATitles = aTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
@@ -2689,6 +2692,12 @@ audioPlayer.addEventListener('ended', () => {
 
       if (isSortedAlphabetically) {
             Titles.sort((a, b) => a.localeCompare(b));
+      } 
+
+      if (isSortedByDate) {
+        const tracksDates = Titles.map(title => tracks.find(t => t.title === title));
+        tracksDates.sort((a, b) => new Date(b.date) - new Date(a.date));
+        Titles = tracksDates.map(t => t.title)
       }
       
       
