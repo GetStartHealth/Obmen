@@ -1096,11 +1096,21 @@ function playAlbomTrack(albumIndex, trackIndex) {
 
     while (disabledTitles.map(title => title.toLowerCase()).includes(track.title.toLowerCase())) {
         trackIndex++;
+
         if (trackIndex >= album.album.length) {
-            console.warn("Все треки в альбоме заблокированы.");
-            return;
+
+            albumIndex++;
+            trackIndex = 0;     
+
+            if (albumIndex >= albomsBaze.length) {
+                console.warn("Все треки в альбомах заблокированы.");
+                return;
+            }
+            album = albomsBaze[albumIndex];
+            track = album.album[trackIndex]; 
+        } else {
+          track = album.album[trackIndex]
         }
-        track = album.album[trackIndex];
     }
 
     currentTrackIndex = { albumIndex, trackIndex };
