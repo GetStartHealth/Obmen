@@ -2217,12 +2217,9 @@ trackContainer.appendChild(trackNumberBtn);
         btnf2.className = 'track-button';
         btnf2.title = `Воспроизвести ${albom.title}`;
         btnf2.setAttribute('aria-label', `Воспроизвести ${albom.title}`);
-        btnf2.addEventListener('click', () => {
-            if (albom.url) {
-                audioPlayer.src = albom.url;
-                audioPlayer.play().catch(e => console.warn('Ошибка воспроизведения:', e));
-            }
-        });
+        btnf2.onclick = () => {
+          playAlbomTrack(albomsT.indexOf(track), track.album.indexOf(albom));
+       };
 
         
 
