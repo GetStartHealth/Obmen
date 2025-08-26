@@ -1096,7 +1096,7 @@ function playTrack(index) {
       console.error("Ошибка воспроизведения:", error);
     });
 
-  currentTrackIndex = { albumIndex: -1, trackIndex: index }
+    currentTrackIndex = { albumIndex: -1, trackIndex: index }
 
 }
 
@@ -1774,7 +1774,7 @@ function DateUpdateFunction() {
         DateUpdateFunction();
       });
 
-      btn.onclick = () => {
+     btn.onclick = () => {
           playTrack(tracks.indexOf(track));
       };
       trackContainer.appendChild(numberBtn)
@@ -1929,12 +1929,14 @@ trackContainer.appendChild(trackNumberBtn);
         buttonContainer.appendChild(restoreBtn);
       }
 
-      btnf.addEventListener('click', () => {
-        if (vf.url) {
-          audioPlayer.src = vf.url;
-          audioPlayer.play().catch(e => console.warn('Ошибка воспроизведения:', e));
-        }
-      });
+      btnf.onclick = () => {
+    
+    const albumIndex = albomsT.indexOf(albomMass);
+    const trackIndex = albomMass.album.indexOf(vf);
+    console.log("Album", albumIndex);
+    console.log("Track", trackIndex);
+    playAlbomTrack(albumIndex, trackIndex);
+};
 
       const deleteBtn22 = document.createElement('button');
       deleteBtn22.textContent = '-';
@@ -2460,6 +2462,7 @@ albomRow.appendChild(trackNumberBtn);
       btnf290.title = `Воспроизвести ${albom.title}`;
       btnf290.setAttribute('aria-label', `Воспроизвести ${albom.title}`);
        btnf290.onclick = () => {
+    
     const albumIndex = albomsT.indexOf(track);
     const trackIndex = track.album.indexOf(albom);
     console.log("Album", albumIndex);
@@ -2592,24 +2595,44 @@ function shuffleArray(array) {
 
 document.getElementById('sort-button-baze').addEventListener('click', () => {
 
-  const favoriteTitlesRaw = localStorage.getItem('trek') || '';
-  let favoriteTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-  shuffleArray(favoriteTitles);
-  localStorage.setItem('trek', favoriteTitles.join('\n'));
+    const favoriteTitlesRaw = localStorage.getItem('trek') || '';
+    let favoriteTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+    
+    const albomTitlesRaw = localStorage.getItem('trekA') || '';
+    let albomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+    
+
+    shuffleArray(favoriteTitles);
+    
+
+    shuffleArray(albomTitles);
+    
+
+    const shuffledAlbomsBaze = [...albomsBaze];
+    shuffledAlbomsBaze.forEach(album => {
+        shuffleArray(album.album);
+    });
+    
+
+    localStorage.setItem('trek', favoriteTitles.join('\n'));
+    localStorage.setItem('trekA', albomTitles.join('\n'));
+    
+
+    const originalAlbomsBaze = [...albomsBaze];
+    albomsBaze.forEach((album, index) => {
+        album.album = [...shuffledAlbomsBaze[index].album];
+    });
 
 
-  const albomTitlesRaw = localStorage.getItem('trekA') || '';
-  let albomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-  shuffleArray(albomTitles);
-  localStorage.setItem('trekA', albomTitles.join('\n'));
-
-
-  albomsBaze.forEach(album => {
-    shuffleArray(album.album);
-  });
-
-  UpdateFunction();
+    window.addEventListener('beforeunload', function() {
+        localStorage.setItem('trek', favoriteTitlesRaw);
+        localStorage.setItem('trekA', albomTitlesRaw);
+        albomsBaze.forEach((album, index) => {
+            album.album = [...originalAlbomsBaze[index].album];
+        });
+    });
 });
+
 
 
 
