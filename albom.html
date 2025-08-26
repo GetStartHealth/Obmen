@@ -523,15 +523,15 @@
 
     currentTrackIndex = -1;
 
-    function playTrack(index) {
-        currentTrackIndex = index;
-        const track = tracks[index];
-        audioPlayer.src = track.url;
-        audioPlayer.play().catch(error => {
-          console.error("Ошибка воспроизведения:", error);
-        });
+    function playTrack(albumIndex, trackIndex) {
+    const track = tracks[albumIndex].album[trackIndex];
+    currentTrackIndex = { albumIndex, trackIndex };
+    audioPlayer.src = track.url;
+    audioPlayer.play().catch(error => {
+        console.error("Ошибка воспроизведения:", error);
+    });
+}
 
-    }
 
     const buttonsContainer = document.getElementById('buttons-container');
     const audioPlayer = document.getElementById('audio-player');
@@ -613,8 +613,8 @@
           trackBtn.title = `Воспроизвести ${song.title}`;
           trackBtn.disabled = !song.url;
           trackBtn.onclick = () => {
-             playTrack(tracks.indexOf(song));
-          };
+    playTrack(tracks.indexOf(track), track.album.indexOf(song));
+};
           
           trackRow.appendChild(addBtn);
           trackRow.appendChild(trackBtn);
@@ -696,11 +696,25 @@ searchForm.addEventListener('submit', (event) => {
 });
 
 audioPlayer.addEventListener('ended', () => {
-    const nextTrackIndex = currentTrackIndex + 1;
-    if (nextTrackIndex < tracks.length) {
-        playTrack(nextTrackIndex);
+     const { albumIndex, trackIndex } = currentTrackIndex;
+    const currentAlbum = tracks[albumIndex].album;
+    const nextTrackIndex = trackIndex + 1;
+    if (nextTrackIndex < currentAlbum.length) {
+      playTrack(albumIndex, nextTrackIndex)
     } else {
-        playTrack(0); 
+      if (albumIndex + 1 < tracks.length) {
+        const nextAlbumTracks = document.querySelectorAll('.album-tracks')[albumIndex + 1];
+            if (nextAlbumTracks) {
+                nextAlbumTracks.style.display = 'block';
+            }
+        playTrack(albumIndex + 1, 0)
+      } else {
+        const nextAlbumTracksZero = document.querySelectorAll('.album-tracks')[0];
+            if (nextAlbumTracksZero) {
+                nextAlbumTracksZero.style.display = 'block';
+            }
+            playTrack(0, 0);
+        }
     }
 });
 
