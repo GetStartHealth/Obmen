@@ -2687,9 +2687,11 @@ audioPlayer.addEventListener('ended', () => {
       const TitlesRaw = localStorage.getItem('trek') || '';
       const Titles = TitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
       const currentTitle = tracks[AboutTrackIndex];
-      const found = Titles.find(t => t === currentTitle);
+      console.log(Titles)
+      console.log(currentTitle.title)
+      const found = Titles.find(t => t === currentTitle.title);
       console.log(found)
-      
+
       const currentIndexInFavorites = Titles.indexOf(currentTitle.title);
 
       console.log(currentIndexInFavorites)
