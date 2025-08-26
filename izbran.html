@@ -1225,10 +1225,12 @@ trackContainer.appendChild(trackNumberBtn);
             btnf.setAttribute('aria-label', `Воспроизвести ${vf.title}`);
 
             btnf.onclick = () => {
-              console.log(albomsT.indexOf(albomMass))
-              console.log(albomMass.album.indexOf(vf))
-              playAlbomTrack(albomsBaze.indexOf(albomMass), albomMass.album.indexOf(vf));
-            };
+    const albumIndex = albomsT.indexOf(albomMass);
+    const trackIndex = albomMass.album.indexOf(vf);
+    console.log("Album", albumIndex);
+    console.log("Track", trackIndex);
+    playAlbomTrack(albumIndex, trackIndex);
+};
 
             const deleteBtn22 = document.createElement('button');
             deleteBtn22.textContent = '-';
