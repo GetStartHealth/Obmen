@@ -521,6 +521,18 @@
       
       ];
 
+    currentTrackIndex = -1;
+
+    function playTrack(index) {
+        currentTrackIndex = index;
+        const track = tracks[index];
+        audioPlayer.src = track.url;
+        audioPlayer.play().catch(error => {
+          console.error("Ошибка воспроизведения:", error);
+        });
+
+    }
+
     const buttonsContainer = document.getElementById('buttons-container');
     const audioPlayer = document.getElementById('audio-player');
 
@@ -601,11 +613,7 @@
           trackBtn.title = `Воспроизвести ${song.title}`;
           trackBtn.disabled = !song.url;
           trackBtn.onclick = () => {
-            if (song.url) {
-              audioPlayer.src = song.url;
-              audioPlayer.play();
-            }
-            
+             playTrack(tracks.indexOf(song));
           };
           
           trackRow.appendChild(addBtn);
@@ -685,6 +693,15 @@ searchForm.addEventListener('submit', (event) => {
       }
     });
   }
+});
+
+audioPlayer.addEventListener('ended', () => {
+    const nextTrackIndex = currentTrackIndex + 1;
+    if (nextTrackIndex < tracks.length) {
+        playTrack(nextTrackIndex);
+    } else {
+        playTrack(0); 
+    }
 });
 
 
