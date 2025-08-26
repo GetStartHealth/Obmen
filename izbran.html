@@ -2646,7 +2646,7 @@ audioPlayer.addEventListener('ended', () => {
     console.log(currentAlbum)
     const nextTrackIndex = trackIndex + 1;
     if (nextTrackIndex < currentAlbum.length) {
-      playTrack(albumIndex, nextTrackIndex)
+      playAlbomTrack(albumIndex, nextTrackIndex)
     } else {
       if (albumIndex + 1 < albomsBaze.length) {
         playAlbomTrack(albumIndex + 1, 0)
