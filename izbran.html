@@ -1108,7 +1108,9 @@ function playAlbomTrack(albumIndex, trackIndex) {
             }
             album = albomsBaze[albumIndex];
             track = album.album[trackIndex]; 
-        } 
+        } else {
+          track = album.album[trackIndex]
+        }
     }
 
     currentTrackIndex = { albumIndex, trackIndex };
@@ -1117,6 +1119,7 @@ function playAlbomTrack(albumIndex, trackIndex) {
         console.error("Ошибка воспроизведения:", error);
     });
 }
+
 
 
 const favoritesContainer = document.getElementById('favorites-container');
@@ -2694,5 +2697,3 @@ audioPlayer.addEventListener('ended', () => {
   </script>
 </body>
 </html>
-
-
