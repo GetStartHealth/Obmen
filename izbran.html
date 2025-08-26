@@ -2640,28 +2640,42 @@ UpdateFunction();
 
 audioPlayer.addEventListener('ended', () => {
     const { albumIndex, trackIndex } = currentTrackIndex;
-
+    
     const albomTitlesRaw = localStorage.getItem('trekA') || '';
     const AlbomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-
+    
     const currentAlbumTitle = albomsBaze[albumIndex].title;
     const currentAlbumIndexInFavorites = AlbomTitles.indexOf(currentAlbumTitle);
     
-    const currentAlbum = albomsBaze[albumIndex].album;
-    const nextTrackIndex = trackIndex + 1;
+    let nextAlbumIndex = albumIndex;
+    let nextTrackIndex = trackIndex + 1;
+    
 
- if (nextTrackIndex < currentAlbum.length) {
-        playAlbomTrack(albumIndex, nextTrackIndex);
-    } else {
-        const nextAlbumIndexInFavorites = currentAlbumIndexInFavorites + 1;
-        if (nextAlbumIndexInFavorites < AlbomTitles.length) {
-          berOUT = AlbomTitles[nextAlbumIndexInFavorites]
-          const albomMassTo = albomsBaze.find(a => a.title === berOUT);
-          const merka = albomsBaze.indexOf(albomMassTo)
-          playAlbomTrack(merka, 0)
-        }      
-    }    
-}); 
+    while (true) {
+        const album = albomsBaze[nextAlbumIndex].album;
+        
+
+        while (nextTrackIndex < album.length) {
+            if (!album[nextTrackIndex].blocked) {
+                playAlbomTrack(nextAlbumIndex, nextTrackIndex);
+                return;
+            }
+            nextTrackIndex++;
+        }
+        
+
+        const nextAlbumIndexInFavorites = AlbomTitles.indexOf(albomsBaze[nextAlbumIndex].title) + 1;
+        if (nextAlbumIndexInFavorites >= AlbomTitles.length) break;
+        
+        const nextAlbumTitle = AlbomTitles[nextAlbumIndexInFavorites];
+        nextAlbumIndex = albomsBaze.findIndex(a => a.title === nextAlbumTitle);
+        nextTrackIndex = 0;
+        
+        if (nextAlbumIndex === -1) break;
+    }
+    
+    audioPlayer.pause();
+});
 
 
   </script>
