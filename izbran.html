@@ -2575,7 +2575,7 @@ albumButton.addEventListener('click', createAlbumToggleHandler(albumButton, trac
 
    AlbomTitles.forEach((AlbomSort, index) => {
        console.log(AlbomSort)
-       const AlbomTrack = albomsT.find(t => t.title === AlbomSort);
+       const AlbomTrack = albomsBaze.find(t => t.title === AlbomSort);
        console.log(AlbomTrack)
        const AclearTrackRowToSort = ANumbercreateTrackRow(AlbomTrack, index, AlbomTitles);
        console.log(AclearTrackRowToSort)
