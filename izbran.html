@@ -1098,16 +1098,7 @@ function playAlbomTrack(albumIndex, trackIndex) {
         trackIndex++;
 
         if (trackIndex >= album.album.length) {
-
-            albumIndex++;
-            trackIndex = 0;     
-
-            if (albumIndex >= albomsBaze.length) {
-                console.warn("Все треки в альбомах заблокированы.");
-                return;
-            }
-            album = albomsBaze[albumIndex];
-            track = album.album[trackIndex]; 
+            trackIndex = 0; 
         } else {
           track = album.album[trackIndex]
         }
@@ -2602,7 +2593,7 @@ document.getElementById('sort-button-baze').addEventListener('click', () => {
   localStorage.setItem('trekA', albomTitles.join('\n'));
 
 
-  albomsT.forEach(album => {
+  albomsBaze.forEach(album => {
     shuffleArray(album.album);
   });
 
