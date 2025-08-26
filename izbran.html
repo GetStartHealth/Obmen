@@ -2684,7 +2684,7 @@ audioPlayer.addEventListener('ended', () => {
           }    
       
     } else {
-      const TitlesRaw = localStorage.getItem('trek') || '';
+     const TitlesRaw = localStorage.getItem('trek') || '';
       const Titles = TitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
       const currentTitle = tracks[AboutTrackIndex];
 
@@ -2700,7 +2700,7 @@ audioPlayer.addEventListener('ended', () => {
 
       const reMark = tracks.indexOf(found)
 
-      if (reMark < Titles.length) {
+      if (found !== 'undefined') {
         playTrack(reMark)
       } else {
         playTrack(0)
