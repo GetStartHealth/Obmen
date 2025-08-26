@@ -2695,7 +2695,10 @@ audioPlayer.addEventListener('ended', () => {
       const hel = Titles[currentIndexInFavorites + 1]
 
       console.log(hel)
-      const reMark = tracks.indexOf(hel)
+
+      const found = tracks.find(t => t.title === hel);
+
+      const reMark = tracks.indexOf(found)
 
 
 
