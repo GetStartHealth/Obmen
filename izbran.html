@@ -2700,7 +2700,7 @@ audioPlayer.addEventListener('ended', () => {
 
       const reMark = tracks.indexOf(found)
 
-      if (hel !== 'undefined') {
+      if (typeof hel !== 'undefined') {
         playTrack(reMark)
       } else {
         playTrack(0)
