@@ -1225,6 +1225,7 @@ trackContainer.appendChild(trackNumberBtn);
             btnf.setAttribute('aria-label', `Воспроизвести ${vf.title}`);
 
             btnf.onclick = () => {
+              console.log(albomMass)
     const albumIndex = albomsT.indexOf(albomMass);
     const trackIndex = albomMass.album.indexOf(vf);
     console.log("Album", albumIndex);
