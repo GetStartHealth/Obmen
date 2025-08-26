@@ -1084,6 +1084,20 @@ body {
 ];
 
 
+
+AboutTrackIndex = -1;
+
+function playTrack(index) {
+    AboutTrackIndex = index;
+    const track = tracks[index];
+    audioPlayer.src = track.url;
+    audioPlayer.play().catch(error => {
+      console.error("Ошибка воспроизведения:", error);
+    });
+
+}
+
+
 let currentTrackIndex = { albumIndex: -1, trackIndex: -1 };
 
 
@@ -1396,12 +1410,9 @@ albumButton.addEventListener('click', createAlbumToggleHandler(albumButton, trac
                 UpdateFunction();
             });
 
-            btn.addEventListener('click', () => {
-                if (track.url) {
-                    audioPlayer.src = track.url;
-                    audioPlayer.play().catch(e => console.warn('Ошибка воспроизведения:', e));
-                }
-            });
+            btn.onclick = () => {
+               playTrack(tracks.indexOf(track));
+            };
 
 
             const buttonContainer = document.createElement('div');
@@ -2673,7 +2684,7 @@ audioPlayer.addEventListener('ended', () => {
           }    
       
     } else {
-      console.log('вы воспроизводите трек')
+      playTrack(AboutTrackIndex + 1)
     }
 
 })
