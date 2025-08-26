@@ -2639,7 +2639,15 @@ document.getElementById('sort-button-data').addEventListener('click', (event) =>
 UpdateFunction();
 
 audioPlayer.addEventListener('ended', () => {
-        console.log('Текущий воспроизводимый смысл', currentTrackIndex)
+    const { albumIndex, trackIndex } = currentTrackIndex;
+    console.log(albumIndex)
+    console.log(trackIndex)
+    const currentAlbum = albomsBaze[albumIndex].album;
+    console.log(currentAlbum)
+    const nextTrackIndex = trackIndex + 1;
+    if (nextTrackIndex < currentAlbum.length) {
+      playAlbomTrack(albumIndex, nextTrackIndex)
+    }
 })
 
 
