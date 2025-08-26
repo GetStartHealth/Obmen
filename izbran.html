@@ -2436,7 +2436,7 @@ const deleteBtn2124 = document.createElement('button');
     track.album.forEach((albom, albomIndex) => {
       const albomRow = document.createElement('div');
     albomRow.style.display = 'flex';
-    albomRow.style.gap = '16px';
+    albomRow.style.gap = '16px'
 
 
 
@@ -2461,7 +2461,6 @@ albomRow.appendChild(trackNumberBtn);
       btnf290.title = `Воспроизвести ${albom.title}`;
       btnf290.setAttribute('aria-label', `Воспроизвести ${albom.title}`);
        btnf290.onclick = () => {
-              console.log(albomMass)
     const albumIndex = albomsBaze.indexOf(track);
     const trackIndex = track.album.indexOf(albom);
     console.log("Album", albumIndex);
