@@ -1774,12 +1774,9 @@ function DateUpdateFunction() {
         DateUpdateFunction();
       });
 
-      btn.addEventListener('click', () => {
-        if (track.url) {
-          audioPlayer.src = track.url;
-          audioPlayer.play().catch(e => console.warn('Ошибка воспроизведения:', e));
-        }
-      });
+      btn.onclick = () => {
+          playTrack(tracks.indexOf(track));
+      };
       trackContainer.appendChild(numberBtn)
 
       trackContainer.appendChild(btn);
