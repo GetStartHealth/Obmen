@@ -2592,14 +2592,13 @@ function shuffleArray(array) {
 
 document.getElementById('sort-button-baze').addEventListener('click', () => {
 
+    shuffleArray(albomsBaze); 
+
     albomsBaze.forEach(album => {
         shuffleArray(album.album); 
     });
 
-
-    const favoriteTitlesRaw = localStorage.getItem('trek') || '';
-    let favoriteTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-    shuffleArray(favoriteTitles);
+    shuffleArray(tracks)
 
 
     UpdateFunction(); 
