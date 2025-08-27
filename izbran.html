@@ -2898,64 +2898,58 @@ audioPlayer.addEventListener('ended', () => {
     const { albumIndex, trackIndex } = currentTrackIndex;
 
     if (albumIndex !== -1) {
-          const albomTitlesRaw = localStorage.getItem('trekA') || '';
-          const AlbomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+        const albomTitlesRaw = localStorage.getItem('trekA') || '';
+        const AlbomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
-          const currentAlbumTitle = albomsBaze[albumIndex].title;
-          const currentAlbumIndexInFavorites = AlbomTitles.indexOf(currentAlbumTitle);
-          
-          const currentAlbum = albomsBaze[albumIndex].album;
-          const nextTrackIndex = trackIndex + 1;
+        const currentAlbumTitle = albomsBaze[albumIndex].title;
+        const currentAlbumIndexInFavorites = AlbomTitles.indexOf(currentAlbumTitle);
+        
+        const currentAlbum = albomsBaze[albumIndex].album;
+        const nextTrackIndex = trackIndex + 1;
 
-          
-      if (nextTrackIndex < currentAlbum.length) {
-              playAlbomTrack(albumIndex, nextTrackIndex);
-          } else {
-              playAlbomTrack(albumIndex, 0)
-          }    
-      
+        if (nextTrackIndex < currentAlbum.length) {
+            playAlbomTrack(albumIndex, nextTrackIndex);
+        } else {
+            playAlbomTrack(albumIndex, 0)
+        }    
     } else {
-      const TitlesRaw = localStorage.getItem('trek') || '';
-      let Titles = TitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+        const TitlesRaw = localStorage.getItem('trek') || '';
+        let Titles = TitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
-      if (isSortedAlphabetically) {
+        if (isSortedAlphabetically) {
             Titles.sort((a, b) => a.localeCompare(b));
-      } 
+        } 
 
-      if (isSortedByDate) {
-        const tracksDates = Titles.map(title => tracks.find(t => t.title === title));
-        tracksDates.sort((a, b) => new Date(b.date) - new Date(a.date));
-        Titles = tracksDates.map(t => t.title)
-      }
-      
-      
-      const currentTitle = tracks[AboutTrackIndex];
+        if (isSortedByDate) {
+            const tracksDates = Titles.map(title => tracks.find(t => t.title === title));
+            tracksDates.sort((a, b) => new Date(b.date) - new Date(a.date));
+            Titles = tracksDates.map(t => t.title);
+        }
+        
+        const currentTitle = tracks[AboutTrackIndex].title;
+        
+        const currentIndexInFavorites = Titles.indexOf(currentTitle);
 
-      const currentIndexInFavorites = Titles.indexOf(currentTitle.title);
+        const nextIndex = (currentIndexInFavorites + 1) % Titles.length;
+        const nextTitle = Titles[nextIndex];
 
-      console.log(currentIndexInFavorites)
 
-      const hel = Titles[currentIndexInFavorites + 1]
+        const nextTrack = tracks.find(t => t.title === nextTitle);
+        
+        if (nextTrack) {
+            const nextTrackIndex = tracks.indexOf(nextTrack);
+            playTrack(nextTrackIndex);
+        } else {
 
-      console.log(hel)
-
-      const found = tracks.find(t => t.title === hel);
-
-      const reMark = tracks.indexOf(found)
-
-      const ger = Titles[0]
-      const foundGer = tracks.find(t => t.title === ger);
-      const reMarkGer = tracks.indexOf(foundGer)
-
-      if (typeof hel !== 'undefined') {
-        playTrack(reMark)
-      } else {
-        console.log('undefiend')
-        playTrack(reMarkGer)
-      }
+            const firstTitle = Titles[0];
+            const firstTrack = tracks.find(t => t.title === firstTitle);
+            if (firstTrack) {
+                const firstTrackIndex = tracks.indexOf(firstTrack);
+                playTrack(firstTrackIndex);
+            }
+        }
     }
-
-})
+});
 
 
 
