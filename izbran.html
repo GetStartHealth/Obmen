@@ -2612,13 +2612,15 @@ document.getElementById('sort-button-baze').addEventListener('click', () => {
     const favoriteTitlesRaw = localStorage.getItem('trek') || '';
     const favoriteTitles1 = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
-    const favoriteTitles = shuffleArray(favoriteTitles1)
+    
 
     
 
-    const favoriteTracks = favoriteTitles
+    const favoriteTracks = favoriteTitles1
         .map(title => tracks.find(t => t.title === title))
         .filter(t => t && t.url);
+
+    const favoriteTitles = shuffleArray(favoriteTracks)
 
     const albomTitlesRaw = localStorage.getItem('trekA') || '';
     const AlbomTitles1 = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0)
