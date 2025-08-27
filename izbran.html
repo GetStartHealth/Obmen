@@ -2715,9 +2715,10 @@ shuffledFavorites = shuffleArray(favoriteTitles);
         tracksContainer.style.overflow = 'hidden';
 
 
-        shuffleArray(shuffledAlbumTracks);
+        const shuffledAlbumTracksList = shuffleArray([...albomMass.album]);
+shuffledAlbumTracks[albom] = shuffledAlbumTracksList;
         
-        let trackIndex = shuffledAlbumTracks.length;
+        let trackIndex = shuffledAlbumTracksList.length;
 
         shuffledAlbumTracksList.forEach(vf => {
             const trackContainer = document.createElement('div');
