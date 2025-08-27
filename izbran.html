@@ -2636,7 +2636,7 @@ document.getElementById('sort-button-baze').addEventListener('click', () => {
 
 shuffledFavorites = shuffleArray(favoriteTitles);
     
-    const favoriteTracks = favoriteTitles
+    const favoriteTracks = shuffledFavorites
         .map(title => tracks.find(t => t.title === title))
         .filter(t => t && t.url);
 
