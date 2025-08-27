@@ -2634,7 +2634,7 @@ document.getElementById('sort-button-baze').addEventListener('click', () => {
     const favoriteTitlesRaw = localStorage.getItem('trek') || '';
     const favoriteTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
-  // Проверяем, что favoriteTitles является массивом и перемешиваем
+    // Проверяем, что favoriteTitles является массивом и перемешиваем
     if (Array.isArray(favoriteTitles)) {
         shuffledFavorites = shuffleArray(favoriteTitles);
     } else {
@@ -2642,8 +2642,6 @@ document.getElementById('sort-button-baze').addEventListener('click', () => {
         shuffledFavorites = []; // Устанавливаем пустой массив
     }
 
-shuffledFavorites = shuffleArray(favoriteTitles);
-    
     const favoriteTracks = shuffledFavorites
         .map(title => tracks.find(t => t.title === title))
         .filter(t => t && t.url);
@@ -2651,26 +2649,19 @@ shuffledFavorites = shuffleArray(favoriteTitles);
     const albomTitlesRaw = localStorage.getItem('trekA') || '';
     const AlbomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
-
-
-
     shuffledAlbums = shuffleArray(AlbomTitles);
     shuffledAlbumTracks = {};
   
-    
-
-
-
     let favoriteIndex = favoriteTracks.length;
     let albumIndex = AlbomTitles.length;
 
-    shuffledAlbums.forEach((albom, index) => {
+    shuffledAlbums.forEach((albom) => {
         const albomMass = albomsBaze.find(a => a.title === albom);
         if (!albomMass) return;
 
-      const shuffledAlbumTracksList = shuffleArray([...albomMass.album]);
-        shuffledAlbumTracks[albom] = shuffledAlbumTracksList
-
+        // Перемешиваем треки альбома
+        const shuffledAlbumTracksList = shuffleArray([...albomMass.album]);
+        shuffledAlbumTracks[albom] = shuffledAlbumTracksList;
 
         const albumDiv = document.createElement('div');
         albumDiv.style.marginBottom = '16px';
@@ -2714,10 +2705,6 @@ shuffledFavorites = shuffleArray(favoriteTitles);
         tracksContainer.style.maxHeight = '0';
         tracksContainer.style.overflow = 'hidden';
 
-
-        const shuffledAlbumTracksList = shuffleArray([...albomMass.album]);
-shuffledAlbumTracks[albom] = shuffledAlbumTracksList;
-        
         let trackIndex = shuffledAlbumTracksList.length;
 
         shuffledAlbumTracksList.forEach(vf => {
@@ -2875,6 +2862,7 @@ shuffledAlbumTracks[albom] = shuffledAlbumTracksList;
         });
     }
 });
+
 
 
 
