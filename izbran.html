@@ -915,7 +915,7 @@ body {
       ];
 
 
-let peremesh = false;
+
 
 
 
@@ -2609,24 +2609,23 @@ document.getElementById('sort-button-baze').addEventListener('click', () => {
     const favoriteTitlesRaw = localStorage.getItem('trek') || '';
     const favoriteTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
-
-    shuffledTracks = shuffleArray(favoriteTitles);
-    peremesh = true; 
+    // Перемешиваем треки
+    shuffleArray(favoriteTitles);
     
-    const favoriteTracks = shuffledTracks
+    const favoriteTracks = favoriteTitles
         .map(title => tracks.find(t => t.title === title))
         .filter(t => t && t.url);
 
     const albomTitlesRaw = localStorage.getItem('trekA') || '';
     const AlbomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
-
-    shuffledAlbums = shuffleArray(AlbomTitles);
+    // Перемешиваем альбомы
+    shuffleArray(AlbomTitles);
 
     let favoriteIndex = favoriteTracks.length;
     let albumIndex = AlbomTitles.length;
 
-
+    // Отображаем перемешанные альбомы
     AlbomTitles.forEach((albom, index) => {
         const albomMass = albomsBaze.find(a => a.title === albom);
         if (!albomMass) return;
@@ -2778,7 +2777,7 @@ document.getElementById('sort-button-baze').addEventListener('click', () => {
         albomContainer.appendChild(albumDiv);
     });
 
-
+    // Отображаем перемешанные треки
     if (favoriteTracks.length === 0) {
         favoritesContainer.style.color = '#363E6B';
         favoritesContainer.style.padding = '10px';
@@ -2899,7 +2898,6 @@ audioPlayer.addEventListener('ended', () => {
     const { albumIndex, trackIndex } = currentTrackIndex;
 
     if (albumIndex !== -1) {
-        // Логика для альбомов
         const albomTitlesRaw = localStorage.getItem('trekA') || '';
         const AlbomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
@@ -2915,26 +2913,28 @@ audioPlayer.addEventListener('ended', () => {
             playAlbomTrack(albumIndex, 0)
         }    
     } else {
-        // Логика для отдельных треков
         const TitlesRaw = localStorage.getItem('trek') || '';
         let Titles = TitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
-        // Используем перемешанный порядок, если активирован флаг
-        if (peremesh) {
-            Titles = [...shuffledTracks];
-        } else if (isSortedAlphabetically) {
+
+        if (isSortedAlphabetically) {
             Titles.sort((a, b) => a.localeCompare(b));
-        } else if (isSortedByDate) {
+        } 
+
+        if (isSortedByDate) {
             const tracksDates = Titles.map(title => tracks.find(t => t.title === title));
             tracksDates.sort((a, b) => new Date(b.date) - new Date(a.date));
             Titles = tracksDates.map(t => t.title);
         }
         
+
         const currentTitle = tracks[AboutTrackIndex].title;
+        
         const currentIndexInFavorites = Titles.indexOf(currentTitle);
 
         const nextIndex = (currentIndexInFavorites + 1) % Titles.length;
         const nextTitle = Titles[nextIndex];
+
 
         const nextTrack = tracks.find(t => t.title === nextTitle);
         
@@ -2942,6 +2942,7 @@ audioPlayer.addEventListener('ended', () => {
             const nextTrackIndex = tracks.indexOf(nextTrack);
             playTrack(nextTrackIndex);
         } else {
+
             const firstTitle = Titles[0];
             const firstTrack = tracks.find(t => t.title === firstTitle);
             if (firstTrack) {
@@ -2951,7 +2952,6 @@ audioPlayer.addEventListener('ended', () => {
         }
     }
 });
-
 
 
 
