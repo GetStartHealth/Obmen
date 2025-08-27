@@ -1089,7 +1089,7 @@ let shuffledAlbumTracks = {}
 ];
 
 
-peremesh = false;
+let peremesh = false;
 
 let isSortedAlphabetically = false;
 let isSortedByDate = false;
@@ -1332,6 +1332,15 @@ trackContainer.appendChild(trackNumberBtn);
                   const disabledTitles3 = disabledTitlesRaw3.split('\n').map(s => s.trim()).filter(s => s.length > 0);
                   console.log(disabledTitles3); 
                   buttonContainer.appendChild(deleteBtn22)
+
+                 if (isSortedAlphabetically) {
+            ABCUpdateFunction();
+        } else if (isSortedByDate) {
+            DateUpdateFunction();
+        } else {
+            UpdateFunction();
+        }
+                
               } );
 
              trackContainer.appendChild(trackNumberBtn);
@@ -1369,6 +1378,15 @@ trackContainer.appendChild(trackNumberBtn);
                   localStorage.setItem('disabled', updatedDisabledTitles.join('\n'));
                   btnf.disabled = false; 
                   restoreBtn89.remove(); 
+
+                 if (isSortedAlphabetically) {
+            ABCUpdateFunction();
+        } else if (isSortedByDate) {
+            DateUpdateFunction();
+        } else {
+            UpdateFunction();
+        }
+                
               })
               buttonContainer.appendChild(restoreBtn89);
             });
@@ -1721,6 +1739,15 @@ function ABCUpdateFunction() {
             const disabledTitlesRaw3 = localStorage.getItem('disabled') || '';
             const disabledTitles3 = disabledTitlesRaw3.split('\n').map(s => s.trim()).filter(s => s.length > 0);
             console.log(disabledTitles3); 
+
+           if (isSortedAlphabetically) {
+            ABCUpdateFunction();
+        } else if (isSortedByDate) {
+            DateUpdateFunction();
+        } else {
+            UpdateFunction();
+        }
+          
         });
 
         buttonContainer.appendChild(restoreBtn);
@@ -1952,6 +1979,15 @@ trackContainer.appendChild(trackNumberBtn);
             const disabledTitlesRaw3 = localStorage.getItem('disabled') || '';
             const disabledTitles3 = disabledTitlesRaw3.split('\n').map(s => s.trim()).filter(s => s.length > 0);
             console.log(disabledTitles3); 
+
+           if (isSortedAlphabetically) {
+            ABCUpdateFunction();
+        } else if (isSortedByDate) {
+            DateUpdateFunction();
+        } else {
+            UpdateFunction();
+        }
+          
         });
 
         buttonContainer.appendChild(restoreBtn);
@@ -2238,6 +2274,15 @@ trackContainer.appendChild(trackNumberBtn);
             localStorage.setItem('disabled', updatedDisabledTitles13.join('\n'));
             btnf2.disabled = false;
             restoreBtn0.remove();
+
+           if (isSortedAlphabetically) {
+            ABCUpdateFunction();
+        } else if (isSortedByDate) {
+            DateUpdateFunction();
+        } else {
+            UpdateFunction();
+        }
+          
         });
 
         const btnf2 = document.createElement('button');
@@ -2537,6 +2582,14 @@ albomRow.appendChild(trackNumberBtn);
             btnf290.disabled = false;
             albomRow.appendChild(deleteBtn2210)
             restoreBtn0.remove()
+
+          if (isSortedAlphabetically) {
+            ABCUpdateFunction();
+        } else if (isSortedByDate) {
+            DateUpdateFunction();
+        } else {
+            UpdateFunction();
+        }
         })
 
 
@@ -2581,6 +2634,7 @@ albumButton.addEventListener('click', createAlbumToggleHandler(albumButton, trac
 
    isSortedAlphabetically = true;
   isSortedByDate = false;
+    peremesh = false;
 
    favoritesContainer.innerHTML = '';
    const favoriteTitlesRaw = localStorage.getItem('trek') || '';
@@ -2631,6 +2685,8 @@ function shuffleArray(array) {
 
 document.getElementById('sort-button-baze').addEventListener('click', () => {
     peremesh = true;
+  isSortedAlphabetically = false;
+  isSortedByDate = false;
 
     favoritesContainer.innerHTML = '';
     albomContainer.innerHTML = '';
@@ -2884,6 +2940,7 @@ document.getElementById('sort-button-data').addEventListener('click', (event) =>
 
    isSortedAlphabetically = false;
   isSortedByDate = true;
+  peremesh = false;
 
    const filteredUpdatedFavorites = [];
    const aTitlesRaw = localStorage.getItem('trek') || '';
