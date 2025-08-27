@@ -730,21 +730,14 @@ audioPlayer.addEventListener('ended', () => {
 
     if (currentHighlightedElement) {
         currentHighlightedElement.classList.remove('highlight');
-        currentHighlightedElement = null;
+      let foundElement = null;
     }
+  
 
     if (nextTrackIndex < currentAlbum.length) {
       playTrack(albumIndex, nextTrackIndex)
     } else {
       playTrack(albumIndex, 0)
-    }
-});
-
-
-audioPlayer.addEventListener('pause', () => {
-    if (currentHighlightedElement) {
-        currentHighlightedElement.classList.remove('highlight');
-        currentHighlightedElement = null;
     }
 });
 
