@@ -525,6 +525,9 @@
     let currentHighlightedElement = null;
 
     function playTrack(albumIndex, trackIndex) {
+
+
+      
     const track = tracks[albumIndex].album[trackIndex];
     currentTrackIndex = { albumIndex, trackIndex };
     audioPlayer.src = track.url;
@@ -532,20 +535,28 @@
         console.error("Ошибка воспроизведения:", error);
     });
 
-    if (currentHighlightedElement) {
-        currentHighlightedElement.classList.remove('highlight');
+     const albumTracksContainers = document.querySelectorAll('.album-tracks');
+    
+
+    let foundElement = null;
+    
+    albumTracksContainers.forEach(container => {
+        const trackRows = container.querySelectorAll('.track-row');
+        trackRows.forEach(row => {
+            const trackButton = row.querySelector('.local-track-button');
+            if (trackButton && trackButton.textContent === track.title) {
+                foundElement = row;
+            }
+        });
+    });
+
+    if (foundElement) {
+        foundElement.classList.add('highlight');
+        currentHighlightedElement = foundElement;
+
+        foundElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
-    const trackElements = Array.from(buttonsContainer.children);
-    const currentTrackElement = trackElements.find(el => 
-        el.querySelector('.local-track-button').textContent === track.title
-    );
-
-    if (currentTrackElement) {
-      currentTrackElement.classList.add('highlight');
-      currentHighlightedElement = currentTrackElement;
-      currentHighlightedElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
 
 }
 
@@ -721,11 +732,19 @@ audioPlayer.addEventListener('ended', () => {
         currentHighlightedElement.classList.remove('highlight');
         currentHighlightedElement = null;
     }
-    
+
     if (nextTrackIndex < currentAlbum.length) {
       playTrack(albumIndex, nextTrackIndex)
     } else {
       playTrack(albumIndex, 0)
+    }
+});
+
+
+audioPlayer.addEventListener('pause', () => {
+    if (currentHighlightedElement) {
+        currentHighlightedElement.classList.remove('highlight');
+        currentHighlightedElement = null;
     }
 });
 
