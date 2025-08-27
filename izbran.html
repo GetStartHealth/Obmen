@@ -656,7 +656,6 @@ body {
     <audio id="audio-player" controls preload="none" controlsList="nodownload" aria-label="Аудиоплеер для избранных треков"></audio>
   </section>
  <script>
-   localStorage.clear()
    let shuffledFavorites = [];
 let shuffledAlbums = [];
 let shuffledAlbumTracks = {}
@@ -2300,11 +2299,11 @@ albumButton.addEventListener('click', createAlbumToggleHandler(albumButton, trac
    favoriteTitles.sort((a, b) => a.localeCompare(b));
    console.log(favoriteTitles)
 
-   favoriteTitles.forEach((trackSort) => {
+   favoriteTitles.forEach((trackSort, index) => {
      console.log(trackSort)
        const track = tracks.find(t => t.title === trackSort);
        console.log(track)
-       const clearTrackRowToSort = NumbercreateTrackRow(track);
+       const clearTrackRowToSort = NumbercreateTrackRow(track, index, favoriteTitles);
        favoritesContainer.appendChild(clearTrackRowToSort);
    });
 
@@ -2316,11 +2315,15 @@ albumButton.addEventListener('click', createAlbumToggleHandler(albumButton, trac
    AlbomTitles.sort((a, b) => a.localeCompare(b));
    console.log(AlbomTitles)
 
-   AlbomTitles.forEach(AlbomSort => {
+    const albumObjects = AlbomTitles.map(title => albomsBaze.find(a => a.title === title)).filter(a => a);
+
+   albumObjects.sort((a, b) => a.title.localeCompare(b.title));
+
+   AlbomTitles.forEach((AlbomSort, index) => {
        console.log(AlbomSort)
        const AlbomTrack = albomsT.find(t => t.title === AlbomSort);
        console.log(AlbomTrack)
-       const AclearTrackRowToSort = ANumbercreateTrackRow(AlbomTrack);
+       const AclearTrackRowToSort = ANumbercreateTrackRow(AlbomTrack , index, albumObjects);
        console.log(AclearTrackRowToSort)
        albomContainer.appendChild(AclearTrackRowToSort);
    });
