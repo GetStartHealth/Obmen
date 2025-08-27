@@ -702,34 +702,7 @@ audioPlayer.addEventListener('ended', () => {
     if (nextTrackIndex < currentAlbum.length) {
       playTrack(albumIndex, nextTrackIndex)
     } else {
-      if (albumIndex + 1 < tracks.length) {
-        const nextAlbumTracks = document.querySelectorAll('.album-tracks')[albumIndex + 1];
-        const nextAlbumTracksNone = document.querySelectorAll('.album-tracks');
-            if (nextAlbumTracks) {
-                nextAlbumTracks.style.display = 'block';
-            }
-        nextAlbumTracksNone.forEach(NoneTrackAlbum => {
-          if (NoneTrackAlbum !== nextAlbumTracks) {
-            NoneTrackAlbum.style.display = 'none'
-          }
-      })
-        
-        playTrack(albumIndex + 1, 0)
-      } else {
-        const nextAlbumTracksZero = document.querySelectorAll('.album-tracks')[0];
-        const nextAlbumTracksNone = document.querySelectorAll('.album-tracks');
-            if (nextAlbumTracksZero) {
-                nextAlbumTracksZero.style.display = 'block';
-            }
-
-            nextAlbumTracksNone.forEach(NoneTrackAlbumZero => {
-          if (NoneTrackAlbumZero !== nextAlbumTracksZero) {
-            NoneTrackAlbumZero.style.display = 'none'
-          }
-      })
-
-            playTrack(0, 0);
-        }
+      playTrack(albumIndex, 0)
     }
 });
 
