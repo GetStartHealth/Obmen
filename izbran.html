@@ -1106,26 +1106,36 @@ let currentTrackIndex = { albumIndex: -1, trackIndex: -1 };
 
 function playAlbomTrack(albumIndex, trackIndex) {
     const album = albomsBaze[albumIndex];
+
+    if (!album || !album.album) {
+        console.error("Альбом не найден или не содержит треков.");
+        return;
+    }
+
     let track = album.album[trackIndex];
 
     const disabledTitlesRaw = localStorage.getItem('disabled') || '';
     const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
-    while (disabledTitles.map(title => title.toLowerCase()).includes(track.title.toLowerCase())) {
+    while (track && disabledTitles.map(title => title.toLowerCase()).includes(track.title.toLowerCase())) {
         trackIndex++;
 
         if (trackIndex >= album.album.length) {
             trackIndex = 0; 
-        } else {
-          track = album.album[trackIndex]
         }
+
+        track = album.album[trackIndex];
     }
 
-    currentTrackIndex = { albumIndex, trackIndex };
-    audioPlayer.src = track.url;
-    audioPlayer.play().catch(error => {
-        console.error("Ошибка воспроизведения:", error);
-    });
+    if (track) {
+        currentTrackIndex = { albumIndex, trackIndex };
+        audioPlayer.src = track.url;
+        audioPlayer.play().catch(error => {
+            console.error("Ошибка воспроизведения:", error);
+        });
+    } else {
+        console.error("Трек не найден для воспроизведения.");
+    }
 }
 
 
@@ -2719,7 +2729,7 @@ audioPlayer.addEventListener('ended', () => {
           const nextTrackIndex = trackIndex + 1;
 
           
-      if (nextTrackIndex <= currentAlbum.length) {
+      if (nextTrackIndex < currentAlbum.length) {
               playAlbomTrack(albumIndex, nextTrackIndex);
           } else {
               playAlbomTrack(albumIndex, 0)
