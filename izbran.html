@@ -1085,11 +1085,6 @@ body {
 
 peremesh = false;
 
-
-let shuffledFavorites = [];
-let shuffledAlbums = [];
-
-
 let isSortedAlphabetically = false;
 let isSortedByDate = false;
 
@@ -2613,10 +2608,6 @@ document.getElementById('sort-button-baze').addEventListener('click', () => {
 
     peremesh = true;
 
-
-    
-
-
     favoritesContainer.innerHTML = '';
     albomContainer.innerHTML = '';
     
@@ -2635,12 +2626,6 @@ document.getElementById('sort-button-baze').addEventListener('click', () => {
 
 
     shuffleArray(AlbomTitles);
-
-  shuffledFavorites = [...favoriteTitles];
-    shuffleArray(shuffledFavorites);
-    
-    shuffledAlbums = [...AlbomTitles];
-    shuffleArray(shuffledAlbums);
 
     let favoriteIndex = favoriteTracks.length;
     let albumIndex = AlbomTitles.length;
@@ -2913,53 +2898,6 @@ document.getElementById('sort-button-data').addEventListener('click', (event) =>
 
 UpdateFunction();
 
-
-function handleShuffledAlbumPlayback(albumIndex, trackIndex) {
-    const currentAlbum = albomsBaze[albumIndex];
-    
-    if (!currentAlbum || !currentAlbum.album) {
-        console.error("Альбом не найден или не содержит треков.");
-        return;
-    }
-
-    const shuffledTracks = [...currentAlbum.album];
-    shuffleArray(shuffledTracks); 
-
-    const currentTrack = shuffledTracks[trackIndex];
-
-
-    const nextTrackIndex = (trackIndex + 1) % shuffledTracks.length;
-
-
-    if (nextTrackIndex < shuffledTracks.length) {
-        const nextTrack = shuffledTracks[nextTrackIndex];
-        const nextTrackIndexInOriginalAlbum = currentAlbum.album.indexOf(nextTrack);
-        playAlbomTrack(albumIndex, nextTrackIndexInOriginalAlbum);
-    } else {
-        playAlbomTrack(albumIndex, 0); 
-    }
-}
-
-
-
-function handleShuffledPlayback() {
-    if (currentTrackIndex.albumIndex !== -1) {
-        handleAlbumPlayback();
-    } else {
-        const currentTitle = tracks[AboutTrackIndex].title;
-        const currentIndex = shuffledFavorites.indexOf(currentTitle);
-        const nextIndex = (currentIndex + 1) % shuffledFavorites.length;
-        const nextTitle = shuffledFavorites[nextIndex];
-        
-        const nextTrack = tracks.find(t => t.title === nextTitle);
-        if (nextTrack) {
-            const nextTrackIndex = tracks.indexOf(nextTrack);
-            playTrack(nextTrackIndex);
-        }
-    }
-}
-
-
 audioPlayer.addEventListener('ended', () => {
     const { albumIndex, trackIndex } = currentTrackIndex;
 
@@ -2992,10 +2930,7 @@ audioPlayer.addEventListener('ended', () => {
             tracksDates.sort((a, b) => new Date(b.date) - new Date(a.date));
             Titles = tracksDates.map(t => t.title);
         }
-
-        if (peremesh) {
-          handleShuffledPlayback();
-        }
+        
         
 
         const currentTitle = tracks[AboutTrackIndex].title;
