@@ -395,7 +395,7 @@
       <button id="sort-button-baze" class="small-button80" aria-label="Сортировать по названию">Перемешать</button>
       <button id="sort-button-data" class="small-button80" aria-label="Сортировать по датам">Дата</button>
     </div>
-    <button class="small-button" style="margin-top: 5px;" onclick="location.href='index.html'" aria-label="Перейти в меню">Меню</button>
+    <button class="small-button" style="margin-top: 5px;" onclick="location.href='casg.html'" aria-label="Перейти в меню">Меню</button>
     <div id="buttons-container" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
     <audio id="audio-player" controls preload="none" controlsList="nodownload" aria-label="Аудиоплеер для треков"></audio>
   </section>
@@ -573,6 +573,7 @@ function playTrack(index) {
     currentTrackIndex = index;
     const track = tracks[index];
     audioPlayer.src = track.url;
+    track.classList.add('highlight')
     audioPlayer.play().catch(error => {
       console.error("Ошибка воспроизведения:", error);
     });
