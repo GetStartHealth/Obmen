@@ -1081,7 +1081,11 @@ body {
 
 
     
+
 ];
+
+let LOCALA = []
+let ALBOMLOCALA = []
 
 peremesh = false;
 
@@ -1097,6 +1101,11 @@ function playTrack(index) {
     audioPlayer.play().catch(error => {
       console.error("Ошибка воспроизведения:", error);
     });
+
+    if (peremesh && shuffledTracks.length > 0) {
+        const currentTitle = track.title;
+        currentShuffledIndex = shuffledTracks.indexOf(currentTitle);
+    }
 
     currentTrackIndex = { albumIndex: -1, trackIndex: index }
 
@@ -2604,6 +2613,8 @@ function shuffleArray(array) {
 }
 
 
+
+
 document.getElementById('sort-button-baze').addEventListener('click', () => {
 
     peremesh = true;
@@ -2626,6 +2637,11 @@ document.getElementById('sort-button-baze').addEventListener('click', () => {
 
 
     shuffleArray(AlbomTitles);
+
+    LOCALA.push(favoriteTitles)
+    ALBOMLOCALA.push(AlbomTitles)
+
+
 
     let favoriteIndex = favoriteTracks.length;
     let albumIndex = AlbomTitles.length;
@@ -2900,6 +2916,11 @@ UpdateFunction();
 
 audioPlayer.addEventListener('ended', () => {
     const { albumIndex, trackIndex } = currentTrackIndex;
+
+    if (peremesh) {
+      console.log(LOCALA)
+      console.log(ALBOMLOCALA)
+    }
 
     if (albumIndex !== -1) {
         const albomTitlesRaw = localStorage.getItem('trekA') || '';
