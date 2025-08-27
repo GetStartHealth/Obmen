@@ -2614,11 +2614,7 @@ document.getElementById('sort-button-baze').addEventListener('click', () => {
     peremesh = true;
 
 
-    shuffledFavorites = [...favoriteTitles];
-    shuffleArray(shuffledFavorites);
     
-    shuffledAlbums = [...AlbomTitles];
-    shuffleArray(shuffledAlbums);
 
 
     favoritesContainer.innerHTML = '';
@@ -2639,6 +2635,12 @@ document.getElementById('sort-button-baze').addEventListener('click', () => {
 
 
     shuffleArray(AlbomTitles);
+
+  shuffledFavorites = [...favoriteTitles];
+    shuffleArray(shuffledFavorites);
+    
+    shuffledAlbums = [...AlbomTitles];
+    shuffleArray(shuffledAlbums);
 
     let favoriteIndex = favoriteTracks.length;
     let albumIndex = AlbomTitles.length;
