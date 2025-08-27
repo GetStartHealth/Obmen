@@ -2610,7 +2610,7 @@ document.getElementById('sort-button-baze').addEventListener('click', () => {
     let GLOABALS = 0
 
     const favoriteTitlesRaw = localStorage.getItem('trek') || '';
-    const favoriteTitles1 = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+    const favoriteTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
     
 
@@ -2620,12 +2620,9 @@ document.getElementById('sort-button-baze').addEventListener('click', () => {
         .map(title => tracks.find(t => t.title === title))
         .filter(t => t && t.url);
 
-    const favoriteTitles = shuffleArray(favoriteTracks)
 
     const albomTitlesRaw = localStorage.getItem('trekA') || '';
-    const AlbomTitles1 = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0)
-
-    const AlbomTitles = shuffleArray(AlbomTitles1)
+    const AlbomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0)
 
 
 let favoriteIndex = favoriteTracks.length;
