@@ -1084,9 +1084,6 @@ body {
 
 ];
 
- let shuffledFavorites = [];
-    let shuffledAlbums = [];
-    let shuffledAlbumTracks = {}; 
 
 peremesh = false;
 
@@ -2619,7 +2616,9 @@ function shuffleArray(array) {
 }
 
 
-
+let shuffledFavorites = [];
+let shuffledAlbums = [];
+let shuffledAlbumTracks = {}
 
 document.getElementById('sort-button-baze').addEventListener('click', () => {
     peremesh = true;
