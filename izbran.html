@@ -2719,7 +2719,7 @@ audioPlayer.addEventListener('ended', () => {
           const nextTrackIndex = trackIndex + 1;
 
           
-      if (nextTrackIndex < currentAlbum.length) {
+      if (nextTrackIndex <= currentAlbum.length) {
               playAlbomTrack(albumIndex, nextTrackIndex);
           } else {
               playAlbomTrack(albumIndex, 0)
