@@ -2634,6 +2634,14 @@ document.getElementById('sort-button-baze').addEventListener('click', () => {
     const favoriteTitlesRaw = localStorage.getItem('trek') || '';
     const favoriteTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
+  // Проверяем, что favoriteTitles является массивом и перемешиваем
+    if (Array.isArray(favoriteTitles)) {
+        shuffledFavorites = shuffleArray(favoriteTitles);
+    } else {
+        console.error("favoriteTitles не является массивом:", favoriteTitles);
+        shuffledFavorites = []; // Устанавливаем пустой массив
+    }
+
 shuffledFavorites = shuffleArray(favoriteTitles);
     
     const favoriteTracks = shuffledFavorites
