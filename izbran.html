@@ -2653,11 +2653,13 @@ shuffledFavorites = [...favoriteTitles];
     let favoriteIndex = favoriteTracks.length;
     let albumIndex = AlbomTitles.length;
 
+  shuffledAlbumTracks = {};
+
     shuffledAlbums.forEach((albom, index) => {
         const albomMass = albomsBaze.find(a => a.title === albom);
         if (!albomMass) return;
 
-shuffledAlbumTracks = {};
+
 
         const shuffledAlbumTracksList = [...albomMass.album];
         shuffleArray(shuffledAlbumTracksList);
