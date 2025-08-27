@@ -522,6 +522,7 @@
       ];
 
     currentTrackIndex = -1;
+    let currentHighlightedElement = null;
 
     function playTrack(albumIndex, trackIndex) {
     const track = tracks[albumIndex].album[trackIndex];
@@ -530,6 +531,22 @@
     audioPlayer.play().catch(error => {
         console.error("Ошибка воспроизведения:", error);
     });
+
+    if (currentHighlightedElement) {
+        currentHighlightedElement.classList.remove('highlight');
+    }
+
+    const trackElements = Array.from(buttonsContainer.children);
+    const currentTrackElement = trackElements.find(el => 
+        el.querySelector('.local-track-button').textContent === track.title
+    );
+
+    if (currentTrackElement) {
+      currentTrackElement.classList.add('highlight');
+      currentHighlightedElement = currentTrackElement;
+      currentHighlightedElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
 }
 
 
@@ -699,6 +716,12 @@ audioPlayer.addEventListener('ended', () => {
      const { albumIndex, trackIndex } = currentTrackIndex;
     const currentAlbum = tracks[albumIndex].album;
     const nextTrackIndex = trackIndex + 1;
+
+    if (currentHighlightedElement) {
+        currentHighlightedElement.classList.remove('highlight');
+        currentHighlightedElement = null;
+    }
+    
     if (nextTrackIndex < currentAlbum.length) {
       playTrack(albumIndex, nextTrackIndex)
     } else {
