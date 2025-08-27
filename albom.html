@@ -526,6 +526,10 @@
 
     function playTrack(albumIndex, trackIndex) {
 
+      if (currentHighlightedElement) {
+        currentHighlightedElement.classList.remove('highlight');
+    }
+
 
       
     const track = tracks[albumIndex].album[trackIndex];
