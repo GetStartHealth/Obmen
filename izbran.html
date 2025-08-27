@@ -1513,7 +1513,7 @@ function ABCUpdateFunction() {
   const AlbomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
   get = []
   AlbomTitles.forEach(trackBearReat => {
-    const derA = albomsT.find(a => a.title === trackBearReat);
+    const derA = albomsBaze.find(a => a.title === trackBearReat);
     get.push(derA)
   })
   const getUpdate = get.sort((a, b) => a.title.localeCompare(b.title))
