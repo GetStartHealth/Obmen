@@ -2630,8 +2630,8 @@ document.getElementById('sort-button-baze').addEventListener('click', () => {
     const favoriteTitlesRaw = localStorage.getItem('trek') || '';
     const favoriteTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
-
-    shuffleArray(favoriteTitles);
+shuffledFavorites = [...favoriteTitles];
+    shuffleArray(shuffledFavorites);
     
     const favoriteTracks = favoriteTitles
         .map(title => tracks.find(t => t.title === title))
@@ -2641,7 +2641,7 @@ document.getElementById('sort-button-baze').addEventListener('click', () => {
     const AlbomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
 
-    shuffleArray(AlbomTitles);
+
 
     shuffledAlbums = [...AlbomTitles];
     shuffleArray(shuffledAlbums);
