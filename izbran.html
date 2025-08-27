@@ -2613,11 +2613,14 @@ albumButton.addEventListener('click', createAlbumToggleHandler(albumButton, trac
 });
 
 function shuffleArray(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
 }
+
 
 
 
@@ -2631,8 +2634,7 @@ document.getElementById('sort-button-baze').addEventListener('click', () => {
     const favoriteTitlesRaw = localStorage.getItem('trek') || '';
     const favoriteTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
-shuffledFavorites = [...favoriteTitles];
-    shuffleArray(shuffledFavorites);
+shuffledFavorites = shuffleArray(favoriteTitles);
     
     const favoriteTracks = favoriteTitles
         .map(title => tracks.find(t => t.title === title))
@@ -2644,9 +2646,8 @@ shuffledFavorites = [...favoriteTitles];
 
 
 
-    shuffledAlbums = [...AlbomTitles];
-    shuffleArray(shuffledAlbums);
-
+    shuffledAlbums = shuffleArray(AlbomTitles);
+    shuffledAlbumTracks = {};
   
     
 
@@ -2655,20 +2656,12 @@ shuffledFavorites = [...favoriteTitles];
     let favoriteIndex = favoriteTracks.length;
     let albumIndex = AlbomTitles.length;
 
-  shuffledAlbumTracks = {};
-
     shuffledAlbums.forEach((albom, index) => {
         const albomMass = albomsBaze.find(a => a.title === albom);
         if (!albomMass) return;
 
-      const shuffledAlbumTracks = [...albomMass.album];
-
-
-
-        const shuffledAlbumTracksList = [...albomMass.album];
-        shuffleArray(shuffledAlbumTracksList);
-        shuffledAlbumTracks[albom] = shuffledAlbumTracksList;
-
+      const shuffledAlbumTracksList = shuffleArray([...albomMass.album]);
+        shuffledAlbumTracks[albom] = shuffledAlbumTracksList
 
 
         const albumDiv = document.createElement('div');
@@ -2936,62 +2929,56 @@ document.getElementById('sort-button-data').addEventListener('click', (event) =>
 
 UpdateFunction();
 
- audioPlayer.addEventListener('ended', () => {
-        const { albumIndex, trackIndex } = currentTrackIndex;
+audioPlayer.addEventListener('ended', () => {
+    const { albumIndex, trackIndex } = currentTrackIndex;
 
-        if (albumIndex !== -1) {
-            // Воспроизведение треков из альбома
-            const album = albomsBaze[albumIndex];
-            let trackList = album.album;
-            
-            // Используем перемешанные треки, если включено перемешивание
-            if (peremesh && shuffledAlbumTracks[album.title]) {
-                trackList = shuffledAlbumTracks[album.title];
-            }
-            
-            const nextTrackIndex = (trackIndex + 1) % trackList.length;
-            playAlbomTrack(albumIndex, nextTrackIndex);
+    if (albumIndex !== -1) {
+        // Воспроизведение треков из альбома
+        const album = albomsBaze[albumIndex];
+        let trackList = album.album;
+        
+        // Используем перемешанные треки если включено
+        if (peremesh && shuffledAlbumTracks[album.title]) {
+            trackList = shuffledAlbumTracks[album.title];
+        }
+        
+        const nextTrackIndex = (trackIndex + 1) % trackList.length;
+        playAlbomTrack(albumIndex, nextTrackIndex);
+    } else {
+        // Воспроизведение треков из избранного
+        let trackList = [];
+        
+        if (peremesh && shuffledFavorites.length > 0) {
+            // Используем перемешанный список
+            trackList = shuffledFavorites.map(title => 
+                tracks.find(t => t.title === title)
+            ).filter(t => t);
         } else {
-            // Воспроизведение треков из избранного
-            let Titles = [];
+            const TitlesRaw = localStorage.getItem('trek') || '';
+            const Titles = TitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+            trackList = Titles.map(title => 
+                tracks.find(t => t.title === title)
+            ).filter(t => t);
             
-            if (peremesh && shuffledFavorites.length > 0) {
-                // Используем перемешанный список
-                Titles = shuffledFavorites;
-            } else {
-                const TitlesRaw = localStorage.getItem('trek') || '';
-                Titles = TitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-                
-                if (isSortedAlphabetically) {
-                    Titles.sort((a, b) => a.localeCompare(b));
-                } 
-
-                if (isSortedByDate) {
-                    const tracksDates = Titles.map(title => tracks.find(t => t.title === title));
-                    tracksDates.sort((a, b) => new Date(b.date) - new Date(a.date));
-                    Titles = tracksDates.map(t => t.title);
-                }
-            }
-            
-            const currentTitle = tracks[AboutTrackIndex].title;
-            const currentIndexInFavorites = Titles.indexOf(currentTitle);
-            const nextIndex = (currentIndexInFavorites + 1) % Titles.length;
-            const nextTitle = Titles[nextIndex];
-            const nextTrack = tracks.find(t => t.title === nextTitle);
-            
-            if (nextTrack) {
-                const nextTrackIndex = tracks.indexOf(nextTrack);
-                playTrack(nextTrackIndex);
-            } else {
-                const firstTitle = Titles[0];
-                const firstTrack = tracks.find(t => t.title === firstTitle);
-                if (firstTrack) {
-                    const firstTrackIndex = tracks.indexOf(firstTrack);
-                    playTrack(firstTrackIndex);
-                }
+            if (isSortedAlphabetically) {
+                trackList.sort((a, b) => a.title.localeCompare(b.title));
+            } 
+            if (isSortedByDate) {
+                trackList.sort((a, b) => new Date(b.date) - new Date(a.date));
             }
         }
-    });
+        
+        const currentTrack = tracks[AboutTrackIndex];
+        const currentIndex = trackList.findIndex(t => t.title === currentTrack.title);
+        const nextIndex = (currentIndex + 1) % trackList.length;
+        
+        if (trackList[nextIndex]) {
+            const nextTrackIndex = tracks.findIndex(t => t.title === trackList[nextIndex].title);
+            playTrack(nextTrackIndex);
+        }
+    }
+});
+
 
 
 
