@@ -2661,6 +2661,8 @@ shuffledFavorites = [...favoriteTitles];
         const albomMass = albomsBaze.find(a => a.title === albom);
         if (!albomMass) return;
 
+      const shuffledAlbumTracks = [...albomMass.album];
+
 
 
         const shuffledAlbumTracksList = [...albomMass.album];
