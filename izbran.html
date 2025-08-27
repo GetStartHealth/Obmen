@@ -656,6 +656,10 @@ body {
     <audio id="audio-player" controls preload="none" controlsList="nodownload" aria-label="Аудиоплеер для избранных треков"></audio>
   </section>
  <script>
+   let shuffledFavorites = [];
+let shuffledAlbums = [];
+let shuffledAlbumTracks = {}
+   
     const albomsT = [
       {
       titleDate: '09.12.2025',title: '1 ТГК МУЗ-ЧАТ',
@@ -2616,9 +2620,7 @@ function shuffleArray(array) {
 }
 
 
-let shuffledFavorites = [];
-let shuffledAlbums = [];
-let shuffledAlbumTracks = {}
+
 
 document.getElementById('sort-button-baze').addEventListener('click', () => {
     peremesh = true;
