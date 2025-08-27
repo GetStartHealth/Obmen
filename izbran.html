@@ -2462,7 +2462,7 @@ albomRow.appendChild(trackNumberBtn);
       btnf290.setAttribute('aria-label', `Воспроизвести ${albom.title}`);
        btnf290.onclick = () => {
     
-    const albumIndex = albomsT.indexOf(track);
+    const albumIndex = albomsBaze.indexOf(track);
     const trackIndex = track.album.indexOf(albom);
     console.log("Album", albumIndex);
     console.log("Track", trackIndex);
@@ -2688,7 +2688,7 @@ document.getElementById('sort-button-data').addEventListener('click', (event) =>
    const AlbomTitles = AlbomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
    AlbomTitles.forEach(trackBearA => {
-      const foundAlbom = albomsT.find(t => t.title === trackBearA);
+      const foundAlbom = albomsBaze.find(t => t.title === trackBearA);
       if (foundAlbom) {
           AlbomfilteredUpdatedFavorites.push(foundAlbom);
       }
