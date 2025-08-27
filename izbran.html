@@ -2604,59 +2604,299 @@ function shuffleArray(array) {
 
 document.getElementById('sort-button-baze').addEventListener('click', () => {
 
+    favoritesContainer.innerHTML = '';
+    albomContainer.innerHTML = '';
+    
+    let GLOABALS = 0
+
     const favoriteTitlesRaw = localStorage.getItem('trek') || '';
+    const favoriteTitles1 = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+
+    const favoriteTitles = shuffleArray(favoriteTitles1)
+
+    
+
+    const favoriteTracks = favoriteTitles
+        .map(title => tracks.find(t => t.title === title))
+        .filter(t => t && t.url);
+
     const albomTitlesRaw = localStorage.getItem('trekA') || '';
-    
-    sessionStorage.setItem('originalTrek', favoriteTitlesRaw);
-    sessionStorage.setItem('originalTrekA', albomTitlesRaw);
-    sessionStorage.setItem('originalAlbomsBaze', JSON.stringify(albomsBaze));
-    
+    const AlbomTitles1 = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0)
 
-    let favoriteTitles = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-    shuffleArray(favoriteTitles);
-    localStorage.setItem('trek', favoriteTitles.join('\n'));
+    const AlbomTitles = shuffleArray(AlbomTitles1)
+
+
+let favoriteIndex = favoriteTracks.length;
+let albumIndex = AlbomTitles.length;
+
+
+
+
+
+
+
+AlbomTitles.forEach((albom, index) => {
+        const albomMass = albomsBaze.find(a => a.title === albom);
+        if (!albomMass) return;
+
+        const albumDiv = document.createElement('div');
+        albumDiv.style.marginBottom = '16px';
+        albumDiv.style.display = 'flex';
+        albumDiv.style.flexDirection = 'column';
+
+        const titleText = document.createElement('span');
+        titleText.className = 'title-text';
+        titleText.textContent = albomMass.title;
+
+        const albumNumber = document.createElement('span');
+  albumNumber.textContent = `${albumIndex--}`;
+  albumNumber.style.fontWeight = 'bold';
+  albumNumber.className = 'num-btn09'
+  albumNumber.style.marginRight = '10px'; 
+
+        const deleteBtn2 = document.createElement('button');
+        deleteBtn2.textContent = '-';
+        deleteBtn2.className = 'delete-button';
+        deleteBtn2.setAttribute('aria-label', `Удалить ${albomMass.title}`);
+
+        deleteBtn2.addEventListener('click', () => {
+            const rawFilter = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+            const updatedFavorites = rawFilter.filter(fav => fav !== albomMass.title);
+            localStorage.setItem('trekA', updatedFavorites.join('\n'));
+            console.log(`Альбом "${albomMass.title}" удален из избранного.`);
+            UpdateFunction();
+        });
+
+        const albumButton = document.createElement('button');
+        albumButton.className = 'album-title';
+        albumButton.setAttribute('aria-expanded', 'false');
+        albumButton.style.width = '100%';
+        albumButton.style.textAlign = 'left';
+
+        albumButton.appendChild(albumNumber)
+
+        albumButton.appendChild(deleteBtn2);
+        albumButton.appendChild(titleText);
+
+        const tracksContainer = document.createElement('div');
+        tracksContainer.className = 'tracks-container';
+        tracksContainer.style.maxHeight = '0';
+        tracksContainer.style.overflow = 'hidden';
+
+
+
+let trackIndex = albomMass.album.length;
+
+        albomMass.album.forEach(vf => {
+
+            const trackContainer = document.createElement('div');
+            trackContainer.style.display = 'flex';
+            trackContainer.style.alignItems = 'center';
+            trackContainer.style.justifyContent = 'space-between';
+            trackContainer.style.marginBottom = '10px';
+
+            const trackNumberBtn = document.createElement('span');
+trackNumberBtn.textContent = `${trackIndex--}`;
+trackNumberBtn.className = 'num-btn';
+trackNumberBtn.style.marginRight = '10px';
+trackContainer.appendChild(trackNumberBtn);
+ 
+
+            const btnf = document.createElement('button');
+            btnf.textContent = vf.title;
+            btnf.className = 'track-button';
+            btnf.title = `Воспроизвести ${vf.title}`;
+            btnf.setAttribute('aria-label', `Воспроизвести ${vf.title}`);
+
+            btnf.onclick = () => {
+              console.log(albomMass)
+    const albumIndex = albomsBaze.indexOf(albomMass);
+    const trackIndex = albomMass.album.indexOf(vf);
+    console.log("Album", albumIndex);
+    console.log("Track", trackIndex);
+    playAlbomTrack(albumIndex, trackIndex);
+};
+
+            const deleteBtn22 = document.createElement('button');
+            deleteBtn22.textContent = '-';
+            deleteBtn22.className = 'delete-button12';
+            deleteBtn22.setAttribute('aria-label', `Удалить ${vf.title}`);
+
+              const buttonContainer = document.createElement('div');
+            buttonContainer.style.display = 'flex';
+            buttonContainer.style.gap = '10px';
+
+            const btnfDisabled = btnf.textContent;
+            const disabledTitlesRaw = localStorage.getItem('disabled') || '';
+            const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+
+            if (disabledTitles.map(title => title.toLowerCase()).includes(vf.title.toLowerCase())) {
+              trackContainer.appendChild(trackNumberBtn);
+              trackContainer.appendChild(btnf);
+              deleteBtn22.remove()
+
+              btnf.disabled = true;
+              console.log("Сработало")
+
+              const restoreBtn89 = document.createElement('button');
+              restoreBtn89.textContent = '+';
+              restoreBtn89.className = 'restore-button';
+              restoreBtn89.setAttribute('aria-label', `Восстановить ${vf.title}`);
+              restoreBtn89.disabled = false; 
+
+              restoreBtn89.addEventListener('click', (event) => {
+                  event.preventDefault();
+                  const disabledTitlesRaw09 = localStorage.getItem('disabled') || '';
+            const disabledTitles09 = disabledTitlesRaw09.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+                  const updatedDisabledTitles = disabledTitles09.filter(title => title.toLowerCase() !== vf.title.toLowerCase());
+                  localStorage.setItem('disabled', updatedDisabledTitles.join('\n'));
+                  btnf.disabled = false; 
+                  restoreBtn89.remove(); 
+                  console.log(`Трек "${vf.title}" восстановлен.`); 
+                  const disabledTitlesRaw3 = localStorage.getItem('disabled') || '';
+                  const disabledTitles3 = disabledTitlesRaw3.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+                  console.log(disabledTitles3); 
+                  buttonContainer.appendChild(deleteBtn22)
+              } );
+
+             trackContainer.appendChild(trackNumberBtn);
+              trackContainer.appendChild(btnf);
+              buttonContainer.appendChild(restoreBtn89);
+      } else {
     
+              buttonContainer.appendChild(deleteBtn22);
 
-    let albomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-    shuffleArray(albomTitles);
-    localStorage.setItem('trekA', albomTitles.join('\n'));
+    trackContainer.appendChild(trackNumberBtn);
+    trackContainer.appendChild(btnf);
+}
+ 
 
-    albomsBaze.forEach(album => {
-        shuffleArray(album.album);
+            deleteBtn22.addEventListener('click', (event) => {
+                event.stopPropagation();
+                btnf.disabled = true; 
+                const btnfDisabled = btnf.textContent;
+                const disabledTitlesRaw = localStorage.getItem('disabled') || '';
+                const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+                localStorage.setItem('disabled', btnfDisabled + '\n' + disabledTitles.join('\n'));
+                console.log(`Трек "${btnfDisabled}" отключен.`);
+
+                const restoreBtn89 = document.createElement('button');
+              restoreBtn89.textContent = '+';
+              restoreBtn89.className = 'restore-button';
+              restoreBtn89.setAttribute('aria-label', `Восстановить ${vf.title}`);
+              restoreBtn89.disabled = false; 
+
+              restoreBtn89.addEventListener('click', (event) => {
+                  event.preventDefault();
+                  const disabledTitlesRaw09 = localStorage.getItem('disabled') || '';
+            const disabledTitles09 = disabledTitlesRaw09.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+                  const updatedDisabledTitles = disabledTitles09.filter(title => title.toLowerCase() !== vf.title.toLowerCase());
+                  localStorage.setItem('disabled', updatedDisabledTitles.join('\n'));
+                  btnf.disabled = false; 
+                  restoreBtn89.remove(); 
+              })
+              buttonContainer.appendChild(restoreBtn89);
+            });
+
+
+
+
+            
+            if (disabledTitles.map(title => title.toLowerCase()).includes(vf.title.toLowerCase())) {
+              deleteBtn22.remove();
+            } 
+            
+            trackContainer.appendChild(btnf);
+            trackContainer.appendChild(buttonContainer);
+            tracksContainer.appendChild(trackContainer);
+        });
+
+
+albumButton.addEventListener('click', createAlbumToggleHandler(albumButton, tracksContainer));
+
+
+        
+        albumDiv.appendChild(albumButton);
+        albumDiv.appendChild(tracksContainer);
+        albomContainer.appendChild(albumDiv);
     });
+
+
+
+
+
+
+    if (favoriteTracks.length === 0) {
+        favoritesContainer.style.color = '#363E6B';
+        favoritesContainer.style.padding = '10px';
+        favoritesContainer.style.fontWeight = '600';
+        favoritesContainer.style.userSelect = 'none';
+    } else {
+        favoriteTracks.forEach((track, index) => {
+            const trackContainer = document.createElement('div');
+            trackContainer.style.display = 'flex';
+            trackContainer.style.alignItems = 'center';
+            trackContainer.style.justifyContent = 'space-between';
+
+            const btn = document.createElement('button');
+            btn.textContent = track.title;
+            btn.className = 'track-button';
+            btn.disabled = !track.url;
+            btn.title = `Воспроизвести ${track.title}`;
+            btn.setAttribute('aria-label', `Воспроизвести ${track.title}`);
+
+            const numberBtn = document.createElement('button');
+            numberBtn.className = 'num-btn';
+            numberBtn.textContent = favoriteIndex--;
+            numberBtn.style.marginRight = '5px'
+
+            const deleteBtn = document.createElement('button');
+            deleteBtn.textContent = '-';
+            deleteBtn.className = 'delete-button';
+            deleteBtn.setAttribute('aria-label', `Удалить ${track.title}`);
+
+
+
+            deleteBtn.addEventListener('click', (event) => {
+                event.stopPropagation();
+                const rawFilter = favoriteTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+                const updatedFavorites = rawFilter.filter(fav => fav !== track.title);
+                localStorage.setItem('trek', updatedFavorites.join('\n'));
+                console.log(`Трек "${track.title}" удален из избранного.`);
+                UpdateFunction();
+            });
+
+            btn.onclick = () => {
+               playTrack(tracks.indexOf(track));
+            };
+
+
+            const buttonContainer = document.createElement('div');
+            buttonContainer.style.display = 'flex';
+            buttonContainer.style.gap = '10px';
+            buttonContainer.appendChild(deleteBtn);
+
+            trackContainer.appendChild(numberBtn)
+
+            trackContainer.appendChild(btn);
+            trackContainer.appendChild(buttonContainer);
+            favoritesContainer.appendChild(trackContainer);
+      }); 
+    }
+
     
 
-    UpdateFunction();
-});
+  console.log(AlbomTitles)
+
+
+}
+
+
+    
+);
 
 
 window.addEventListener('load', function() {
-    const originalTrek = sessionStorage.getItem('originalTrek');
-    const originalTrekA = sessionStorage.getItem('originalTrekA');
-    const originalAlbomsBazeJson = sessionStorage.getItem('originalAlbomsBaze');
-    
-    if (originalTrek) {
-        localStorage.setItem('trek', originalTrek);
-    }
-    
-    if (originalTrekA) {
-        localStorage.setItem('trekA', originalTrekA);
-    }
-    
-    if (originalAlbomsBazeJson) {
-        const originalAlbomsBaze = JSON.parse(originalAlbomsBazeJson);
-
-        originalAlbomsBaze.forEach((originalAlbum, index) => {
-            if (albomsBaze[index]) {
-                albomsBaze[index].album = [...originalAlbum.album];
-            }
-        });
-    }
-
-    sessionStorage.removeItem('originalTrek');
-    sessionStorage.removeItem('originalTrekA');
-    sessionStorage.removeItem('originalAlbomsBaze');
-
     UpdateFunction();
 });
 
