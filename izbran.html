@@ -1789,8 +1789,8 @@ function DateUpdateFunction() {
   const AlbomTitles = albomTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
 
    AlbomTitles.sort((titleA, titleB) => {
-  const albomA = albomsT.find(album => album.title === titleA);
-  const albomB = albomsT.find(album => album.title === titleB);
+  const albomA = albomsBaze.find(album => album.title === titleA);
+  const albomB = albomsBaze.find(album => album.title === titleB);
   if (!albomA || !albomB) return 0;
   return new Date(albomB.titleDate) - new Date(albomA.titleDate);
 });
@@ -1806,7 +1806,7 @@ albumIndex = AlbomTitles.length
           
 
     
-    const albomMass = albomsT.find(a => a.title === albom);
+    const albomMass = albomsBaze.find(a => a.title === albom);
      albomMass.album.sort((a, b) => new Date(b.titleDate) - new Date(a.titleDate));
     if (!albomMass) return;
     
@@ -1931,7 +1931,7 @@ trackContainer.appendChild(trackNumberBtn);
 
       btnf.onclick = () => {
     
-    const albumIndex = albomsT.indexOf(albomMass);
+    const albumIndex = albomsBaze.indexOf(albomMass);
     const trackIndex = albomMass.album.indexOf(vf);
     console.log("Album", albumIndex);
     console.log("Track", trackIndex);
