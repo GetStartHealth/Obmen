@@ -395,7 +395,7 @@
       <button id="sort-button-baze" class="small-button80" aria-label="Сортировать по названию">Перемешать</button>
       <button id="sort-button-data" class="small-button80" aria-label="Сортировать по датам">Дата</button>
     </div>
-    <button class="small-button" style="margin-top: 5px;" onclick="location.href='cash.html'" aria-label="Перейти в меню">Меню</button>
+    <button class="small-button" style="margin-top: 5px;" onclick="location.href='casg.html'" aria-label="Перейти в меню">Меню</button>
     <div id="buttons-container" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
     <audio id="audio-player" controls preload="none" controlsList="nodownload" aria-label="Аудиоплеер для треков"></audio>
   </section>
@@ -565,15 +565,30 @@
     
 ];
 
-
+let currentHighlightedElement = null;
 
 currentTrackIndex = -1;
 
 function playTrack(index) {
+
+  if (currentHighlightedElement) {
+        currentHighlightedElement.classList.remove('highlight');
+    }
+
     currentTrackIndex = index;
     const track = tracks[index];
     audioPlayer.src = track.url;
-    track.classList.add('highlight')
+    
+    const trackElements = Array.from(buttonsContainer.children);
+    const currentTrackElement = trackElements.find(el => 
+        el.querySelector('.local-track-button').textContent === track.title
+    );
+
+    if (currentTrackElement) {
+      currentTrackElement.classList.add('highlight');
+      currentHighlightedElement = currentTrackElement;
+    }
+
     audioPlayer.play().catch(error => {
       console.error("Ошибка воспроизведения:", error);
     });
@@ -860,6 +875,12 @@ document.getElementById('sort-button-data').addEventListener('click', () => {
 
 audioPlayer.addEventListener('ended', () => {
     const nextTrackIndex = currentTrackIndex + 1;
+
+    if (currentHighlightedElement) {
+        currentHighlightedElement.classList.remove('highlight');
+        currentHighlightedElement = null;
+    }
+
     if (nextTrackIndex < tracks.length) {
         playTrack(nextTrackIndex);
     } else {
