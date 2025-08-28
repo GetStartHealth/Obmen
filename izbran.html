@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+x<!DOCTYPE html>
 <html lang="ru">
 
 <head>
@@ -1185,15 +1185,21 @@ let currentTrackIndex = { albumIndex: -1, trackIndex: -1 };
 
             const albumElements = Array.from(albomContainer.querySelectorAll('.album-title'));
         const albumElement = albumElements[albumIndex];
+        console.log(albumElement, 'Альбомный элемент')
 
         if (albumElement) {
             const tracksContainer = albumElement.nextElementSibling;
             const trackButtons = Array.from(tracksContainer.querySelectorAll('.track-button'));
+            console.log(trackButtons, 'Кнопки треков')
+
 
             const currentTrackButton = trackButtons[trackIndex];
+            console.log(currentTrackButton, 'Нужный элемент')
+
                 
                 if (currentTrackButton) {
                     currentTrackButton.classList.add('highlight');
+                    console.log('Добавили')
                     currentHighlightedElement = currentTrackButton;
 
                     currentTrackButton.scrollIntoView({ behavior: 'smooth', block: 'center' });
