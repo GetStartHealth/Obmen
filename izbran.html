@@ -2253,6 +2253,7 @@ trackContainer.appendChild(trackNumberBtn);
             localStorage.setItem('disabled', updatedDisabledTitles13.join('\n'));
             btnf2.disabled = false;
             restoreBtn0.remove();
+            
 
          
           
@@ -2283,6 +2284,7 @@ trackContainer.appendChild(trackNumberBtn);
         deleteBtn221.className = 'delete-button';
         deleteBtn221.setAttribute('aria-label', `Удалить ${albom.title}`);
 
+        let bfb = false;
         deleteBtn221.addEventListener('click', (event) => {
             event.stopPropagation(); 
             btnf2.disabled = true;
@@ -2292,9 +2294,15 @@ trackContainer.appendChild(trackNumberBtn);
             localStorage.setItem('disabled', btnfDisabled + '\n' + disabledTitles.join('\n'));
             console.log(`Трек "${btnfDisabled}" отключен.`); 
             buttonContainer.appendChild(restoreBtn0);
+            deleteBtn221.remove()
+            bfb = true;
         });
 
+      if (bfb) {
+        deleteBtn221.remove()
+      } else {
         buttonContainer.appendChild(deleteBtn221);
+      }
         trackContainer.appendChild(btnf2);
         trackContainer.appendChild(buttonContainer);
         tracksContainer.appendChild(trackContainer);
