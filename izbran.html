@@ -2241,6 +2241,11 @@ trackContainer.appendChild(trackNumberBtn);
 
       let bfb = false;
 
+      const deleteBtn221 = document.createElement('button');
+        deleteBtn221.textContent = '-';
+        deleteBtn221.className = 'delete-button';
+        deleteBtn221.setAttribute('aria-label', `Удалить ${albom.title}`);
+
         const restoreBtn0 = document.createElement('button');
         restoreBtn0.className = 'restore-button';
         restoreBtn0.setAttribute('aria-label', `Восстановить ${albom.title}`);
@@ -2256,6 +2261,7 @@ trackContainer.appendChild(trackNumberBtn);
             btnf2.disabled = false;
             restoreBtn0.remove();
             bfb = false;
+          buttonContainer.appendChild(deleteBtn221);
             
 
          
@@ -2282,10 +2288,7 @@ trackContainer.appendChild(trackNumberBtn);
             buttonContainer.appendChild(restoreBtn0);
         }
 
-        const deleteBtn221 = document.createElement('button');
-        deleteBtn221.textContent = '-';
-        deleteBtn221.className = 'delete-button';
-        deleteBtn221.setAttribute('aria-label', `Удалить ${albom.title}`);
+        
 
         
         deleteBtn221.addEventListener('click', (event) => {
