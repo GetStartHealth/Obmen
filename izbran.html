@@ -1096,7 +1096,20 @@ let isSortedByDate = false;
 
 AboutTrackIndex = -1;
 
+let currentHighlightedElement = null;
+
 function playTrack(index) {
+
+  if (currentHighlightedElement) {
+        currentHighlightedElement.classList.remove('highlight');
+    }
+
+
+    
+
+
+
+
         AboutTrackIndex = index;
         const track = tracks[index];
         audioPlayer.src = track.url;
@@ -1110,6 +1123,17 @@ function playTrack(index) {
         }
 
         currentTrackIndex = { albumIndex: -1, trackIndex: index }
+
+        const trackElements = Array.from(favoritesContainer.children);
+        const currentTrackElement = trackElements.find(el => 
+            el.querySelector('.track-button').textContent === track.title
+        );
+
+        if (currentTrackElement) {
+          currentTrackElement.classList.add('highlight');
+          currentHighlightedElement = currentTrackElement;
+        }
+
     }
 
 
@@ -2965,6 +2989,11 @@ UpdateFunction();
 
 audioPlayer.addEventListener('ended', () => {
     const { albumIndex, trackIndex } = currentTrackIndex;
+
+    if (currentHighlightedElement) {
+        currentHighlightedElement.classList.remove('highlight');
+        currentHighlightedElement = null;
+    }
 
     if (albumIndex !== -1) {
         // Воспроизведение треков из альбома
