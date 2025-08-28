@@ -1333,13 +1333,7 @@ trackContainer.appendChild(trackNumberBtn);
                   console.log(disabledTitles3); 
                   buttonContainer.appendChild(deleteBtn22)
 
-                 if (isSortedAlphabetically) {
-            ABCUpdateFunction();
-        } else if (isSortedByDate) {
-            DateUpdateFunction();
-        } else {
-            UpdateFunction();
-        }
+          
                 
               } );
 
@@ -1363,6 +1357,7 @@ trackContainer.appendChild(trackNumberBtn);
                 const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
                 localStorage.setItem('disabled', btnfDisabled + '\n' + disabledTitles.join('\n'));
                 console.log(`Трек "${btnfDisabled}" отключен.`);
+              deleteBtn22.remove();
 
                 const restoreBtn89 = document.createElement('button');
               restoreBtn89.textContent = '+';
@@ -1379,15 +1374,10 @@ trackContainer.appendChild(trackNumberBtn);
                   btnf.disabled = false; 
                   restoreBtn89.remove(); 
 
-                 if (isSortedAlphabetically) {
-            ABCUpdateFunction();
-        } else if (isSortedByDate) {
-            DateUpdateFunction();
-        } else {
-            UpdateFunction();
-        }
+      
                 
               })
+              
               buttonContainer.appendChild(restoreBtn89);
             });
 
@@ -1740,13 +1730,7 @@ function ABCUpdateFunction() {
             const disabledTitles3 = disabledTitlesRaw3.split('\n').map(s => s.trim()).filter(s => s.length > 0);
             console.log(disabledTitles3); 
 
-           if (isSortedAlphabetically) {
-            ABCUpdateFunction();
-        } else if (isSortedByDate) {
-            DateUpdateFunction();
-        } else {
-            UpdateFunction();
-        }
+    
           
         });
 
@@ -1980,13 +1964,7 @@ trackContainer.appendChild(trackNumberBtn);
             const disabledTitles3 = disabledTitlesRaw3.split('\n').map(s => s.trim()).filter(s => s.length > 0);
             console.log(disabledTitles3); 
 
-           if (isSortedAlphabetically) {
-            ABCUpdateFunction();
-        } else if (isSortedByDate) {
-            DateUpdateFunction();
-        } else {
-            UpdateFunction();
-        }
+        
           
         });
 
@@ -2275,13 +2253,7 @@ trackContainer.appendChild(trackNumberBtn);
             btnf2.disabled = false;
             restoreBtn0.remove();
 
-           if (isSortedAlphabetically) {
-            ABCUpdateFunction();
-        } else if (isSortedByDate) {
-            DateUpdateFunction();
-        } else {
-            UpdateFunction();
-        }
+         
           
         });
 
@@ -2583,13 +2555,7 @@ albomRow.appendChild(trackNumberBtn);
             albomRow.appendChild(deleteBtn2210)
             restoreBtn0.remove()
 
-          if (isSortedAlphabetically) {
-            ABCUpdateFunction();
-        } else if (isSortedByDate) {
-            DateUpdateFunction();
-        } else {
-            UpdateFunction();
-        }
+    
         })
 
 
