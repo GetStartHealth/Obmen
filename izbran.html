@@ -1101,7 +1101,7 @@ let currentHighlightedElement = null;
 function playTrack(index) {
 
   if (currentHighlightedElement) {
-        currentHighlightedElement.classList.remove('highlight');
+        currentHighlightedElement.classList.remove('.track-button.highlight');
     }
 
 
@@ -1130,7 +1130,7 @@ function playTrack(index) {
         );
 
         if (currentTrackElement) {
-          currentTrackElement.classList.add('highlight');
+          currentTrackElement.classList.add('.track-button.highlight');
           currentHighlightedElement = currentTrackElement;
         }
 
@@ -1148,7 +1148,7 @@ let currentTrackIndex = { albumIndex: -1, trackIndex: -1 };
             return;
         }
 
-        // Используем перемешанные треки, если включено перемешивание
+
         let trackList = album.album;
         if (peremesh && shuffledAlbumTracks[album.title]) {
             trackList = shuffledAlbumTracks[album.title];
@@ -2991,7 +2991,7 @@ audioPlayer.addEventListener('ended', () => {
     const { albumIndex, trackIndex } = currentTrackIndex;
 
     if (currentHighlightedElement) {
-        currentHighlightedElement.classList.remove('highlight');
+        currentHighlightedElement.classList.remove('.track-button.highlight');
         currentHighlightedElement = null;
     }
 
