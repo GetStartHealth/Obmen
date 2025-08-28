@@ -1101,7 +1101,7 @@ let currentHighlightedElement = null;
 function playTrack(index) {
 
   if (currentHighlightedElement) {
-        currentHighlightedElement.classList.remove('track-button.highlight');
+        currentHighlightedElement.classList.remove('highlight');
     }
 
 
@@ -1130,7 +1130,7 @@ function playTrack(index) {
         );
 
         if (currentTrackElement) {
-          currentTrackElement.classList.add('track-button.highlight');
+          currentTrackElement.classList.add('highlight');
           currentHighlightedElement = currentTrackElement;
         }
 
@@ -1170,14 +1170,41 @@ let currentTrackIndex = { albumIndex: -1, trackIndex: -1 };
         }
 
         if (track) {
+
+          if (currentHighlightedElement) {
+            currentHighlightedElement.classList.remove('highlight');
+        }
+
             currentTrackIndex = { albumIndex, trackIndex };
             audioPlayer.src = track.url;
             audioPlayer.play().catch(error => {
                 console.error("Ошибка воспроизведения:", error);
             });
+
+
+            const albumElements = Array.from(albomContainer.querySelectorAll('.album-title'));
+        const albumElement = albumElements[albumIndex];
+
+        if (albumElement) {
+            const tracksContainer = albumElement.nextElementSibling;
+            const trackButtons = Array.from(tracksContainer.querySelectorAll('.track-button'));
+
+            const currentTrackButton = trackButtons[trackIndex];
+                
+                if (currentTrackButton) {
+                    currentTrackButton.classList.add('highlight');
+                    currentHighlightedElement = currentTrackButton;
+
+                    currentTrackButton.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+
+        }
         } else {
             console.error("Трек не найден для воспроизведения.");
         }
+
+
+         
     }
 
 
@@ -2991,7 +3018,7 @@ audioPlayer.addEventListener('ended', () => {
     const { albumIndex, trackIndex } = currentTrackIndex;
 
     if (currentHighlightedElement) {
-        currentHighlightedElement.classList.remove('track-button.highlight');
+        currentHighlightedElement.classList.remove('highlight');
         currentHighlightedElement = null;
     }
 
