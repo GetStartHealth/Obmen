@@ -1142,79 +1142,87 @@ let currentTrackIndex = { albumIndex: -1, trackIndex: -1 };
 
 
  function playAlbomTrack(albumIndex, trackIndex) {
-        const album = albomsBaze[albumIndex];
+    const album = albomsBaze[albumIndex];
 
-        if (!album || !album.album) {
-            console.error("Альбом не найден или не содержит треков.");
-            return;
+    if (!album || !album.album) {
+        console.error("Альбом не найден или не содержит треков.");
+        return;
+    }
+
+    let trackList = album.album;
+    if (peremesh && shuffledAlbumTracks[album.title]) {
+        trackList = shuffledAlbumTracks[album.title];
+    } else if (isSortedAlphabetically) {
+        trackList = [...album.album].sort((a, b) => a.title.localeCompare(b.title));
+    } else if (isSortedByDate) {
+        trackList = [...album.album].sort((a, b) => new Date(b.titleDate) - new Date(a.titleDate));
+    }
+
+    let track = trackList[trackIndex];
+
+    const disabledTitlesRaw = localStorage.getItem('disabled') || '';
+    const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+
+    while (track && disabledTitles.map(title => title.toLowerCase()).includes(track.title.toLowerCase())) {
+        trackIndex++;
+
+        if (trackIndex >= trackList.length) {
+            trackIndex = 0; 
         }
 
+        track = trackList[trackIndex];
+    }
 
-        let trackList = album.album;
-        if (peremesh && shuffledAlbumTracks[album.title]) {
-            trackList = shuffledAlbumTracks[album.title];
-        }
-
-        let track = trackList[trackIndex];
-
-        const disabledTitlesRaw = localStorage.getItem('disabled') || '';
-        const disabledTitles = disabledTitlesRaw.split('\n').map(s => s.trim()).filter(s => s.length > 0);
-
-        while (track && disabledTitles.map(title => title.toLowerCase()).includes(track.title.toLowerCase())) {
-            trackIndex++;
-
-            if (trackIndex >= trackList.length) {
-                trackIndex = 0; 
-            }
-
-            track = trackList[trackIndex];
-        }
-
-        if (track) {
-
-          if (currentHighlightedElement) {
+    if (track) {
+        if (currentHighlightedElement) {
             currentHighlightedElement.classList.remove('highlight');
         }
 
-            currentTrackIndex = { albumIndex, trackIndex };
-            audioPlayer.src = track.url;
-            audioPlayer.play().catch(error => {
-                console.error("Ошибка воспроизведения:", error);
-            });
+        currentTrackIndex = { albumIndex, trackIndex };
+        audioPlayer.src = track.url;
+        audioPlayer.play().catch(error => {
+            console.error("Ошибка воспроизведения:", error);
+        });
 
-
-            const albumElements = Array.from(albomContainer.querySelectorAll('.album-title'));
-        const albumElement = albumElements[albumIndex];
-          console.log(albumIndex)
-          console.log(albumElements)
-        console.log(albumElement, 'Альбомный элемент')
+        const albumElements = Array.from(albomContainer.querySelectorAll('.album-title'));
+        let albumElement = null;
+        
+        for (let i = 0; i < albumElements.length; i++) {
+            const titleElement = albumElements[i].querySelector('.title-text');
+            if (titleElement && titleElement.textContent === album.title) {
+                albumElement = albumElements[i];
+                break;
+            }
+        }
 
         if (albumElement) {
+
             const tracksContainer = albumElement.nextElementSibling;
+            if (tracksContainer && (tracksContainer.style.maxHeight === '0px' || tracksContainer.style.maxHeight === '')) {
+                albumElement.click();
+            }
+
             const trackButtons = Array.from(tracksContainer.querySelectorAll('.track-button'));
-            console.log(trackButtons, 'Кнопки треков')
-
-
-            const currentTrackButton = trackButtons[trackIndex];
-            console.log(currentTrackButton, 'Нужный элемент')
-
-                
-                if (currentTrackButton) {
-                    currentTrackButton.classList.add('highlight');
-                    console.log('Добавили')
-                    currentHighlightedElement = currentTrackButton;
-
-                    currentTrackButton.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            let trackButton = null;
+            
+            for (let i = 0; i < trackButtons.length; i++) {
+                if (trackButtons[i].textContent === track.title) {
+                    trackButton = trackButtons[i];
+                    break;
                 }
+            }
 
+            if (trackButton) {
+                trackButton.classList.add('highlight');
+                currentHighlightedElement = trackButton;
+                trackButton.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
         }
-        } else {
-            console.error("Трек не найден для воспроизведения.");
-        }
-
-
-         
+    } else {
+        console.error("Трек не найден для воспроизведения.");
     }
+}
+
 
 
 
