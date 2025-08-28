@@ -2239,6 +2239,8 @@ trackNumberBtn.className = 'num-btn';
 trackNumberBtn.style.marginRight = '10px';
 trackContainer.appendChild(trackNumberBtn);
 
+      let bfb = false;
+
         const restoreBtn0 = document.createElement('button');
         restoreBtn0.className = 'restore-button';
         restoreBtn0.setAttribute('aria-label', `Восстановить ${albom.title}`);
@@ -2253,6 +2255,7 @@ trackContainer.appendChild(trackNumberBtn);
             localStorage.setItem('disabled', updatedDisabledTitles13.join('\n'));
             btnf2.disabled = false;
             restoreBtn0.remove();
+            bfb = false;
             
 
          
@@ -2284,7 +2287,7 @@ trackContainer.appendChild(trackNumberBtn);
         deleteBtn221.className = 'delete-button';
         deleteBtn221.setAttribute('aria-label', `Удалить ${albom.title}`);
 
-        let bfb = false;
+        
         deleteBtn221.addEventListener('click', (event) => {
             event.stopPropagation(); 
             btnf2.disabled = true;
