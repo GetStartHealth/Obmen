@@ -1101,7 +1101,7 @@ let currentHighlightedElement = null;
 function playTrack(index) {
 
   if (currentHighlightedElement) {
-        currentHighlightedElement.classList.remove('.track-button.highlight');
+        currentHighlightedElement.classList.remove('track-button.highlight');
     }
 
 
@@ -1130,7 +1130,7 @@ function playTrack(index) {
         );
 
         if (currentTrackElement) {
-          currentTrackElement.classList.add('.track-button.highlight');
+          currentTrackElement.classList.add('track-button.highlight');
           currentHighlightedElement = currentTrackElement;
         }
 
@@ -2991,7 +2991,7 @@ audioPlayer.addEventListener('ended', () => {
     const { albumIndex, trackIndex } = currentTrackIndex;
 
     if (currentHighlightedElement) {
-        currentHighlightedElement.classList.remove('.track-button.highlight');
+        currentHighlightedElement.classList.remove('track-button.highlight');
         currentHighlightedElement = null;
     }
 
