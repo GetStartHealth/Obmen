@@ -230,17 +230,19 @@ async function cacheUrlsSequentially(cache, urls) {
 }
 
 self.addEventListener('install', (event) => {
+  console.log('[SW] Install');
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll([
+    caches.open(CACHE_NAME).then(async (cache) => {
+      await cache.addAll([
         "/Obmen/izbran.html",
         "/Obmen/index.html",
         "/Obmen/cash.html",
         "/Obmen/script.js",
-      ]).then(() => {
-        return cacheUrlsSequentially(cache, urlsToCache.filter(url => !url.startsWith('/Obmen/')));
-      });
-    }).then(() => self.skipWaiting())
+      ]);
+      await cacheUrlsSequentially(cache, urlsToCache.filter(url => !url.startsWith('/Obmen/')));
+    }).then(() => {
+      return self.skipWaiting();
+    })
   );
 });
 
@@ -262,16 +264,19 @@ self.addEventListener('fetch', (event) => {
 
 
 self.addEventListener('activate', (event) => {
+  console.log('[SW] Activate');
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames.map((cacheName) => {
           if (cacheName !== CACHE_NAME) {
-            console.log('Удаление старого кэша:', cacheName);
+            console.log('[SW] Удаление старого кэша:', cacheName);
             return caches.delete(cacheName);
           }
         })
       );
+    }).then(() => {
+      return self.clients.claim(); 
     })
   );
 });
