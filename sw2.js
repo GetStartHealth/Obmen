@@ -1,5 +1,17 @@
 const CACHE_NAME = 'audio-cache-v1';
-  const AUDIO_URLS = [
+
+
+function encodeURL(url) {
+  try {
+    const u = new URL(url);
+    u.pathname = encodeURI(u.pathname);
+    return u.toString();
+  } catch (e) {
+    return url; 
+  }
+}
+
+  const RAW_AUDIO_URLS = [
   "https://nextjs-boilerplate-i6pd.vercel.app/Пионеры%20(1).mp3",
   "https://nextjs-boilerplate-i6pd.vercel.app/День%20библиотек.mp3",
   "https://nextjs-boilerplate-i6pd.vercel.app/Русская%20душа%20-%20Пограничники.mp3",
@@ -136,6 +148,8 @@ const STATIC_ASSETS = [
   '/Obmen/cash.html',
 ];
 
+const AUDIO_URLS = RAW_AUDIO_URLS.map(encodeURL);
+
 self.addEventListener('install', (event) => {
   console.log('[SW] Install event started');
   event.waitUntil(
@@ -194,5 +208,3 @@ self.addEventListener('fetch', (event) => {
     })
   );
 });
-
-
