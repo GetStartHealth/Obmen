@@ -129,54 +129,54 @@ const CACHE_NAME = 'audio-cache-v1';
 ];
 
 
-const uniqueAudioUrls = [...new Set(AUDIO_URLS)];
-
-
-
-
 const STATIC_ASSETS = [
   '/Obmen/index.html',
-  '/Obmen/script.js', 
+  '/Obmen/script.js',
   '/Obmen/izbran.html',
-  '/Obmen/cash.html' ,
+  '/Obmen/cash.html',
 ];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return Promise.all([
-        cache.addAll(uniqueAudioUrls),  
-        cache.addAll(STATIC_ASSETS)    
-      ]);
-    })
-  );
-});
-
-self.addEventListener('install', (event) => {
-  event.waitUntil(
     caches.open(CACHE_NAME).then(async (cache) => {
-      try {
-        for (const url of uniqueAudioUrls) {
-          try {
-            await cache.add(url);
-          } catch (err) {
-            console.error('Failed to cache audio:', url, err);
-          }
+      for (const url of AUDIO_URLS) {
+        try {
+          await cache.add(url);
+          console.log('Cached audio:', url);
+        } catch (err) {
+          console.error('Failed to cache audio:', url, err);
         }
-        for (const url of STATIC_ASSETS) {
-          try {
-            await cache.add(url);
-          } catch (err) {
-            console.error('Failed to cache static asset:', url, err);
-          }
+      }
+      for (const url of STATIC_ASSETS) {
+        try {
+          await cache.add(url);
+          console.log('Cached static asset:', url);
+        } catch (err) {
+          console.error('Failed to cache static asset:', url, err);
         }
-      } catch (err) {
-        console.error('Cache open failed:', err);
       }
     })
   );
 });
 
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys().then(keys =>
+      Promise.all(
+        keys.filter(key => key !== CACHE_NAME)
+            .map(key => caches.delete(key))
+      )
+    )
+  );
+});
+
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    caches.match(event.request).then(cachedResponse => {
+      return cachedResponse || fetch(event.request);
+    })
+  );
+});
 
 
 
