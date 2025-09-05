@@ -128,33 +128,48 @@ const AUDIO_URLS = [
   "https://nextjs-boil-delta.vercel.app/Русская душа - Я не ханжа.MP3",
 ];
 
+
 const uniqueAudioUrls = [...new Set(AUDIO_URLS)];
+
+
+const STATIC_ASSETS = [
+  '/',
+  '/script.js', 
+  '/izbran.html' 
+];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(uniqueAudioUrls);
+      return Promise.all([
+        cache.addAll(uniqueAudioUrls),  
+        cache.addAll(STATIC_ASSETS)    
+      ]);
     })
   );
 });
 
 self.addEventListener('fetch', (event) => {
-  if (event.request.url.includes('.mp3')) {
+  if (event.request.url.includes('.mp3') || event.request.url.includes('.html') || event.request.url.includes('.js')) {
     event.respondWith(
       caches.match(event.request).then((response) => {
         if (response) {
-          return response;
+          return response;  
         }
-        return fetch(event.request).then((response) => {
-          if (!response || response.status !== 200 || response.type !== 'basic') {
+        return fetch(event.request)
+          .then((response) => {
+            if (!response || response.status !== 200 || response.type !== 'basic') {
+              return response;
+            }
+            const responseToCache = response.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(event.request, responseToCache);
+            });
             return response;
-          }
-          const responseToCache = response.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, responseToCache);
+          })
+          .catch(() => {
+            return caches.match(event.request);
           });
-          return response;
-        });
       })
     );
   }
