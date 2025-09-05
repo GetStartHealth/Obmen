@@ -480,7 +480,7 @@ function playTrack(index) {
 
         AboutTrackIndex = index;
         const track = tracks[index];
-       audioPlayer.src = track.url;
+       audioPlayer.src = getRelativePath(track.url);
 
         audioPlayer.play().catch(error => {
         console.error("Ошибка воспроизведения:", error);
