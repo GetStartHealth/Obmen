@@ -6,7 +6,7 @@ let shuffledAlbumTracks = {}
       {
       titleDate: '09.12.2025',title: '1 ТГК МУЗ-ЧАТ',
       album: [
-          { titleDate: '09.12.2011', title: 'Городской маршрут', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/Русская%20душа%20-%20Городской%20маршрут.mp3' },
+          { titleDate: '09.12.2011', title: 'Городской маршрут.', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/Русская%20душа%20-%20Городской%20маршрут.mp3' },
           { titleDate: '09.12.2012', title: 'Неважно', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/tagmp3_2.-Русская-душа---Неважно.mp3' },
           { titleDate: '09.12.2012', title: 'Здесь лапы у eли', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/tagmp3_3.-Русская-душа---Здесь-лапы-у-ели.mp3' },
           { titleDate: '09.12.2023', title: 'Булгаков', url: 'https://nextjs-boilerplate-lemon-pi-53.vercel.app/tagmp3_4.-Русская-душа---Булгаков.mp3' },
