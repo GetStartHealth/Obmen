@@ -152,7 +152,8 @@ self.addEventListener('install', (event) => {
       return cache.addAll([
         "/Obmen/izbran.html",
         "/Obmen/index.html",
-        "/Obmen/cash.html"
+        "/Obmen/cash.html",
+        "/Obmen/script.js",
       ]).then(() => {
         return cacheUrlsSequentially(cache, urlsToCache.filter(url => !url.startsWith('/Obmen/')));
       });
