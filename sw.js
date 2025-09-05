@@ -134,15 +134,26 @@ const urlsToCache = [
 ];
 
 
+async function cacheUrlsSequentially(cache, urls) {
+  for (const url of urls) {
+    try {
+      await cache.add(url);
+      console.log(`Успешно закэширован: ${url}`);
+    } catch (error) {
+      console.error(`Ошибка при кэшировании ${url}:`, error);
+    }
+  }
+}
+
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then((cache) => {
-        console.log('Кэширование ресурсов...');
-        return cache.addAll(urlsToCache);
-      })
+    caches.open(CACHE_NAME).then((cache) => {
+      console.log('Начинаю последовательное кэширование...');
+      return cacheUrlsSequentially(cache, urlsToCache);
+    }).then(() => self.skipWaiting())
   );
 });
+
 
 
 self.addEventListener('fetch', (event) => {
@@ -153,12 +164,7 @@ self.addEventListener('fetch', (event) => {
           console.log('Ресурс найден в кэше:', event.request.url);
           return response;  
         }
-        return fetch(event.request).catch(() => {
-          return new Response('Оффлайн и ресурс не найден в кэше', {
-            status: 503,
-            statusText: 'Service Unavailable'
-          });
-        });
+        return fetch(event.request);  
       })
   );
 });
