@@ -131,11 +131,15 @@ const AUDIO_URLS = [
 
 const uniqueAudioUrls = [...new Set(AUDIO_URLS)];
 
+alert('Проверка связи')
+
 
 const STATIC_ASSETS = [
   '/',
   '/script.js', 
-  '/izbran.html' 
+  '/izbran.html',
+  '/cash.html' ,
+  '/index.html' ,
 ];
 
 self.addEventListener('install', (event) => {
