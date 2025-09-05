@@ -4,7 +4,6 @@ const CACHE_NAME = 'audio-cache-v1';
 function encodeURL(url) {
   try {
     const u = new URL(url);
-    // Разбиваем путь на части и кодируем каждую отдельно
     u.pathname = u.pathname.split('/').map(segment => encodeURIComponent(segment)).join('/');
     return u.toString();
   } catch (e) {
@@ -222,18 +221,14 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  console.log('[SW] Fetch event for:', event.request.url);
+  const encodedUrl = encodeURL(event.request.url);
   event.respondWith(
-    caches.match(event.request).then(cachedResponse => {
+    caches.match(encodedUrl).then(cachedResponse => {
       if (cachedResponse) {
-        console.log('[SW] Serving from cache:', event.request.url);
         return cachedResponse;
       }
-      console.log('[SW] Not found in cache, fetching from network:', event.request.url);
-      return fetch(event.request).catch(err => {
-        console.error('[SW] Fetch failed:', event.request.url, err);
-        throw err;
-      });
+      return fetch(event.request);
     })
   );
 });
+
