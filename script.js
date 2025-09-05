@@ -446,6 +446,7 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/Obmen/sw2.js')
       .then((registration) => {
         console.log('Service Worker зарегистрирован:', registration);
+        alert('Service')
       })
       .catch((error) => {
         console.log('Ошибка регистрации Service Worker:', error);
