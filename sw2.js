@@ -176,7 +176,16 @@ const STATIC_ASSETS = [
   '/Obmen/cash.html',
 ];
 
-const AUDIO_URLS = RAW_AUDIO_URLS.map(encodeURL);
+const AUDIO_URLS = RAW_AUDIO_URLS.map(url => {
+  try {
+    const u = new URL(url);
+    u.pathname = decodeURIComponent(u.pathname);
+    u.pathname = u.pathname.split('/').map(segment => encodeURIComponent(segment)).join('/');
+    return u.toString();
+  } catch (e) {
+    return url;
+  }
+});
 
 self.addEventListener('install', (event) => {
   console.log('[SW] Install event started');
@@ -221,13 +230,29 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  const encodedUrl = encodeURL(event.request.url);
+  console.log('[SW] Fetch event for:', event.request.url);
+  const encodedUrl = (() => {
+    try {
+      const u = new URL(event.request.url);
+      u.pathname = decodeURIComponent(u.pathname);
+      u.pathname = u.pathname.split('/').map(segment => encodeURIComponent(segment)).join('/');
+      return u.toString();
+    } catch {
+      return event.request.url;
+    }
+  })();
+
   event.respondWith(
     caches.match(encodedUrl).then(cachedResponse => {
       if (cachedResponse) {
+        console.log('[SW] Serving from cache:', encodedUrl);
         return cachedResponse;
       }
-      return fetch(event.request);
+      console.log('[SW] Not found in cache, fetching from network:', event.request.url);
+      return fetch(event.request).catch(err => {
+        console.error('[SW] Fetch failed:', event.request.url, err);
+        throw err;
+      });
     })
   );
 });
