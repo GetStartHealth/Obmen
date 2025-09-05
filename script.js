@@ -430,6 +430,14 @@ let shuffledAlbumTracks = {}
 
 ];
 
+function getRelativePath(fullUrl) {
+    try {
+        const urlObj = new URL(fullUrl);
+        return urlObj.pathname + urlObj.search + urlObj.hash;
+    } catch {
+        return fullUrl; 
+    }
+}
 
 let peremesh = false;
 
@@ -472,7 +480,8 @@ function playTrack(index) {
 
         AboutTrackIndex = index;
         const track = tracks[index];
-        audioPlayer.src = track.url;
+       audioPlayer.src = getRelativePath(track.url);
+
         audioPlayer.play().catch(error => {
         console.error("Ошибка воспроизведения:", error);
         if (error.name === 'NotAllowedError') {
