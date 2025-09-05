@@ -135,11 +135,11 @@ const uniqueAudioUrls = [...new Set(AUDIO_URLS)];
 
 
 const STATIC_ASSETS = [
-  '/',
-  '/script.js', 
-  '/izbran.html',
-  '/cash.html' ,
-  '/index.html' ,
+  '/Obmen/index.html',
+  '/Obmen/script.js', 
+  '/Obmen/izbran.html',
+  '/Obmen/cash.html' ,
+  '/Obmen/index.html' ,
 ];
 
 self.addEventListener('install', (event) => {
