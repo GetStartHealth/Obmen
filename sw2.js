@@ -4,12 +4,14 @@ const CACHE_NAME = 'audio-cache-v1';
 function encodeURL(url) {
   try {
     const u = new URL(url);
-    u.pathname = encodeURI(u.pathname);
+    // Разбиваем путь на части и кодируем каждую отдельно
+    u.pathname = u.pathname.split('/').map(segment => encodeURIComponent(segment)).join('/');
     return u.toString();
   } catch (e) {
     return url; 
   }
 }
+
 
 const RAW_AUDIO_URLS = [
   "https://nextjs-boilerplate-i6pd.vercel.app/Пионеры (1).mp3",
