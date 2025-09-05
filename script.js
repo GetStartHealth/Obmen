@@ -1163,18 +1163,14 @@ let tracks = [
 
 
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/Obmen/sw.js').then(reg => {
-    reg.onupdatefound = () => {
-      const newWorker = reg.installing;
-      newWorker.onstatechange = () => {
-        if (newWorker.state === 'activated') {
-          console.log('Новый SW активирован. Перезагрузка страницы...');
-          window.location.reload();
-        }
-      };
-    };
-  }).catch(error => {
-    console.error('Ошибка регистрации SW:', error);
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js') 
+      .then((registration) => {
+        console.log('SW зарегистрирован:', registration);
+      })
+      .catch((error) => {
+        console.log('Ошибка регистрации SW:', error);
+      });
   });
 }
 
