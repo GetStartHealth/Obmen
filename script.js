@@ -457,8 +457,6 @@ if ('serviceWorker' in navigator) {
 function playTrack(index) {
 
 
-    audioPlayer.pause();
-    audioPlayer.currentTime = 0; 
 
    
 
