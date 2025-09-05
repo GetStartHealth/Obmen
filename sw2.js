@@ -153,31 +153,31 @@ self.addEventListener('install', (event) => {
   );
 });
 
-self.addEventListener('fetch', (event) => {
-  if (event.request.url.includes('.mp3') || event.request.url.includes('.html') || event.request.url.includes('.js')) {
-    event.respondWith(
-      caches.match(event.request).then((response) => {
-        if (response) {
-          return response;  
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(async (cache) => {
+      try {
+        for (const url of uniqueAudioUrls) {
+          try {
+            await cache.add(url);
+          } catch (err) {
+            console.error('Failed to cache audio:', url, err);
+          }
         }
-        return fetch(event.request)
-          .then((response) => {
-            if (!response || response.status !== 200 || response.type !== 'basic') {
-              return response;
-            }
-            const responseToCache = response.clone();
-            caches.open(CACHE_NAME).then((cache) => {
-              cache.put(event.request, responseToCache);
-            });
-            return response;
-          })
-          .catch(() => {
-            return caches.match(event.request);
-          });
-      })
-    );
-  }
+        for (const url of STATIC_ASSETS) {
+          try {
+            await cache.add(url);
+          } catch (err) {
+            console.error('Failed to cache static asset:', url, err);
+          }
+        }
+      } catch (err) {
+        console.error('Cache open failed:', err);
+      }
+    })
+  );
 });
+
 
 
 
