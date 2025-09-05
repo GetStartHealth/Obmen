@@ -430,15 +430,6 @@ let shuffledAlbumTracks = {}
 
 ];
 
-function getRelativePath(fullUrl) {
-    try {
-        const urlObj = new URL(fullUrl);
-        return urlObj.pathname + urlObj.search + urlObj.hash;
-    } catch {
-        return fullUrl; 
-    }
-}
-
 let peremesh = false;
 
 let isSortedAlphabetically = false;
@@ -480,7 +471,7 @@ function playTrack(index) {
 
         AboutTrackIndex = index;
         const track = tracks[index];
-       audioPlayer.src = getRelativePath(track.url);
+       audioPlayer.src = track.url;
 
         audioPlayer.play().catch(error => {
         console.error("Ошибка воспроизведения:", error);
