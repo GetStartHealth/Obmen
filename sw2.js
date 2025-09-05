@@ -186,8 +186,11 @@ self.addEventListener('fetch', (event) => {
         console.log('[SW] Serving from cache:', event.request.url);
         return cachedResponse;
       }
-      console.log('[SW] Fetching from network:', event.request.url);
-      return fetch(event.request);
+      console.log('[SW] Not found in cache, fetching from network:', event.request.url);
+      return fetch(event.request).catch(err => {
+        console.error('[SW] Fetch failed:', event.request.url, err);
+        throw err;
+      });
     })
   );
 });
