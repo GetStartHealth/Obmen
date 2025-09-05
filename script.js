@@ -266,10 +266,15 @@ let shuffledAlbumTracks = {}
 
 
 function encodeURL(url) {
-  const u = new URL(url);
-  u.pathname = encodeURI(u.pathname);
-  return u.toString();
+  try {
+    const u = new URL(url);
+    u.pathname = u.pathname.split('/').map(segment => encodeURIComponent(segment)).join('/');
+    return u.toString();
+  } catch (e) {
+    return url; 
+  }
 }
+
 
 const tracks = [
   { date: '09.09.2014', titleNumber: '1', title: 'Богеме Ивлеевой', url: encodeURL('https://nextjs-boilerplate-i6pd.vercel.app/Русская%20душа%20-%20Богеме%20Ивлеевой%20(5).mp3') },
