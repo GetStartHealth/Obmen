@@ -426,7 +426,19 @@ const tracks = [
   { date: '09.01.2024', titleNumber: '146', title: 'Cтроителям', url: encodeURL('https://nextjs-boil-delta.vercel.app/Русская душа - Строителям.mp3') },
   { date: '09.01.2024', titleNumber: '147', title: 'Эх, от тюрьмы и от сумы не зарекайся', url: encodeURL('https://nextjs-boil-delta.vercel.app/Русская душа - Эх, от тюрьмы и от сумы не зарекайся (1).mp3') },
   { date: '09.01.2024', titleNumber: '148', title: 'Я не ханжа', url: encodeURL('https://nextjs-boil-delta.vercel.app/Русская душа - Я не ханжа.MP3') }
-];
+].map(track => ({
+  ...track,
+  url: (() => {
+    try {
+      const u = new URL(track.url);
+      u.pathname = decodeURIComponent(u.pathname);
+      u.pathname = u.pathname.split('/').map(segment => encodeURIComponent(segment)).join('/');
+      return u.toString();
+    } catch {
+      return track.url;
+    }
+  })()
+}));
 
 
 function getRelativePath(fullUrl) {
