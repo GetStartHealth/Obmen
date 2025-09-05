@@ -457,10 +457,9 @@ if ('serviceWorker' in navigator) {
 function playTrack(index) {
 
 
-   if (!audioPlayer.paused) {
     audioPlayer.pause();
     audioPlayer.currentTime = 0; 
-  }
+
    
 
   if (currentHighlightedElement) {
@@ -477,8 +476,11 @@ function playTrack(index) {
         const track = tracks[index];
         audioPlayer.src = track.url;
         audioPlayer.play().catch(error => {
-          console.error("Ошибка воспроизведения:", error);
-        });
+        console.error("Ошибка воспроизведения:", error);
+        if (error.name === 'NotAllowedError') {
+            console.log('Автопроигрывание заблокировано браузером. Нажмите на плеер для воспроизведения.');
+        }
+    });
 
         if (peremesh && shuffledFavorites.length > 0) {
             const currentTitle = track.title;
