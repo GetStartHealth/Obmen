@@ -131,7 +131,7 @@ const AUDIO_URLS = [
 
 const uniqueAudioUrls = [...new Set(AUDIO_URLS)];
 
-alert('Проверка связи')
+
 
 
 const STATIC_ASSETS = [
