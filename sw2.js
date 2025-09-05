@@ -137,29 +137,35 @@ const STATIC_ASSETS = [
 ];
 
 self.addEventListener('install', (event) => {
+  console.log('[SW] Install event started');
   event.waitUntil(
     caches.open(CACHE_NAME).then(async (cache) => {
+      console.log('[SW] Caching audio files...');
       for (const url of AUDIO_URLS) {
         try {
           await cache.add(url);
-          console.log('Cached audio:', url);
+          console.log('[SW] Cached audio:', url);
         } catch (err) {
-          console.error('Failed to cache audio:', url, err);
+          console.error('[SW] Failed to cache audio:', url, err);
         }
       }
+      console.log('[SW] Caching static assets...');
       for (const url of STATIC_ASSETS) {
         try {
           await cache.add(url);
-          console.log('Cached static asset:', url);
+          console.log('[SW] Cached static asset:', url);
         } catch (err) {
-          console.error('Failed to cache static asset:', url, err);
+          console.error('[SW] Failed to cache static asset:', url, err);
         }
       }
     })
   );
+  self.skipWaiting(); 
+  console.log('[SW] Install event completed');
 });
 
 self.addEventListener('activate', (event) => {
+  console.log('[SW] Activate event started');
   event.waitUntil(
     caches.keys().then(keys =>
       Promise.all(
@@ -168,15 +174,22 @@ self.addEventListener('activate', (event) => {
       )
     )
   );
+  self.clients.claim(); 
+  console.log('[SW] Activate event completed');
 });
 
 self.addEventListener('fetch', (event) => {
+  console.log('[SW] Fetch event for:', event.request.url);
   event.respondWith(
     caches.match(event.request).then(cachedResponse => {
-      return cachedResponse || fetch(event.request);
+      if (cachedResponse) {
+        console.log('[SW] Serving from cache:', event.request.url);
+        return cachedResponse;
+      }
+      console.log('[SW] Fetching from network:', event.request.url);
+      return fetch(event.request);
     })
   );
 });
-
 
 
