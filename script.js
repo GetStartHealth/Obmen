@@ -440,6 +440,20 @@ AboutTrackIndex = -1;
 
 let currentHighlightedElement = null;
 
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then((registration) => {
+        console.log('Service Worker зарегистрирован:', registration);
+      })
+      .catch((error) => {
+        console.log('Ошибка регистрации Service Worker:', error);
+      });
+  });
+}
+
+
 function playTrack(index) {
 
   if (currentHighlightedElement) {
