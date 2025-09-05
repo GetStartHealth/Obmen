@@ -153,7 +153,12 @@ self.addEventListener('fetch', (event) => {
           console.log('Ресурс найден в кэше:', event.request.url);
           return response;  
         }
-        return fetch(event.request);  
+        return fetch(event.request).catch(() => {
+          return new Response('Оффлайн и ресурс не найден в кэше', {
+            status: 503,
+            statusText: 'Service Unavailable'
+          });
+        });
       })
   );
 });
