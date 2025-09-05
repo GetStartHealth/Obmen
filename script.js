@@ -456,6 +456,13 @@ if ('serviceWorker' in navigator) {
 
 function playTrack(index) {
 
+
+   if (!audioPlayer.paused) {
+    audioPlayer.pause();
+    audioPlayer.currentTime = 0; 
+  }
+   
+
   if (currentHighlightedElement) {
         currentHighlightedElement.classList.remove('highlight');
     }
