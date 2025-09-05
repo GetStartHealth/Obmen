@@ -1,11 +1,6 @@
 const CACHE_NAME = 'music-player-cache-v1';
 const urlsToCache = [
 
-
-  "Obmen/izbran.html",
- "Obmen/index.html",
- "Obmen/cash.html",
-
   "https://nextjs-boilerplate-i6pd.vercel.app/Русская душа - Богеме Ивлеевой (5).mp3",
 "https://nextjs-boilerplate-i6pd.vercel.app/Русская_душа_Я_музыкант,_я_делаю_рок,.mp3",
 "https://nextjs-boilerplate-i6pd.vercel.app/В_голове_с_утра_забота__едит_повар_на_ра-_1_-_1_.mp3",
@@ -154,11 +149,17 @@ async function cacheUrlsSequentially(cache, urls) {
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log('Начинаю последовательное кэширование...');
-      return cacheUrlsSequentially(cache, urlsToCache);
+      return cache.addAll([
+        "/Obmen/izbran.html",
+        "/Obmen/index.html",
+        "/Obmen/cash.html"
+      ]).then(() => {
+        return cacheUrlsSequentially(cache, urlsToCache.filter(url => !url.startsWith('/Obmen/')));
+      });
     }).then(() => self.skipWaiting())
   );
 });
+
 
 
 
