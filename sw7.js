@@ -263,20 +263,17 @@ self.addEventListener('fetch', (event) => {
 });
 
 
-self.addEventListener('activate', (event) => {
-  console.log('[SW] Activate');
+self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
+    caches.keys().then(cacheNames => {
       return Promise.all(
-        cacheNames.map((cacheName) => {
+        cacheNames.map(cacheName => {
           if (cacheName !== CACHE_NAME) {
-            console.log('[SW] Удаление старого кэша:', cacheName);
+            alert("удаление");
             return caches.delete(cacheName);
           }
         })
       );
-    }).then(() => {
-      return self.clients.claim(); 
-    })
+    }).then(() => self.clients.claim())
   );
 });
